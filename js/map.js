@@ -128,7 +128,7 @@ const map = new maplibregl.Map({
         paint: { 'raster-opacity': 0.7 }
       },
 
-      // Curve 10m (visibili solo da zoom 12+, source-layer PMTiles)
+      // Curve 10m — linee sottili, visibili da zoom 12
       {
         id: 'contours-10m-layer',
         type: 'line',
@@ -137,13 +137,13 @@ const map = new maplibregl.Map({
         layout: { visibility: 'none' },
         paint: {
           'line-color': '#fcd34d',
-          'line-width': 0.6,
-          'line-opacity': ['interpolate', ['linear'], ['zoom'], 12, 0, 13, 0.7, 15, 0.9]
+          'line-width': ['interpolate', ['linear'], ['zoom'], 12, 0.5, 15, 0.8, 16, 1.0],
+          'line-opacity': ['interpolate', ['linear'], ['zoom'], 12, 0, 13, 0.6, 15, 0.85]
         },
         minzoom: 12
       },
 
-      // Curve 50m (principali, sempre visibili quando attive)
+      // Curve 50m — linee principali, sempre visibili quando attive
       {
         id: 'contours-50m-layer',
         type: 'line',
@@ -152,12 +152,37 @@ const map = new maplibregl.Map({
         layout: { visibility: 'none' },
         paint: {
           'line-color': '#f59e0b',
-          'line-width': ['interpolate', ['linear'], ['zoom'], 8, 0.8, 12, 1.2, 15, 1.8],
-          'line-opacity': 0.85
+          'line-width': ['interpolate', ['linear'], ['zoom'], 8, 0.8, 12, 1.4, 15, 2.0],
+          'line-opacity': 0.9
         }
       },
 
-      // Etichette quota curve 50m (visibili da zoom 13)
+      // Etichette quota curve 10m (da zoom 14, spaziatura ridotta)
+      {
+        id: 'contours-10m-labels',
+        type: 'symbol',
+        source: 'contours',
+        'source-layer': 'contours_10m',
+        layout: {
+          visibility: 'none',
+          'symbol-placement': 'line',
+          'symbol-spacing': 400,
+          'text-field': ['concat', ['to-string', ['get', 'elevation']], ' m'],
+          'text-size': 9,
+          'text-font': ['Open Sans Regular'],
+          'text-offset': [0, -0.25],
+          'text-max-angle': 30,
+          'text-keep-upright': true
+        },
+        paint: {
+          'text-color': '#fcd34d',
+          'text-halo-color': 'rgba(0,0,0,0.7)',
+          'text-halo-width': 1.5
+        },
+        minzoom: 14
+      },
+
+      // Etichette quota curve 50m (da zoom 11, più frequenti e grandi)
       {
         id: 'contours-50m-labels',
         type: 'symbol',
@@ -166,17 +191,20 @@ const map = new maplibregl.Map({
         layout: {
           visibility: 'none',
           'symbol-placement': 'line',
-          'text-field': ['concat', ['to-string', ['get', 'elevation']], 'm'],
-          'text-size': 10,
-          'text-font': ['Open Sans Regular'],
-          'text-offset': [0, -0.3]
+          'symbol-spacing': 300,
+          'text-field': ['concat', ['to-string', ['get', 'elevation']], ' m'],
+          'text-size': ['interpolate', ['linear'], ['zoom'], 11, 10, 14, 12],
+          'text-font': ['Open Sans Bold'],
+          'text-offset': [0, -0.3],
+          'text-max-angle': 30,
+          'text-keep-upright': true
         },
         paint: {
           'text-color': '#f59e0b',
-          'text-halo-color': 'rgba(0,0,0,0.6)',
-          'text-halo-width': 1.5
+          'text-halo-color': 'rgba(0,0,0,0.7)',
+          'text-halo-width': 2
         },
-        minzoom: 13
+        minzoom: 11
       }
     ]
   },
@@ -297,7 +325,7 @@ document.getElementById('btn-now').addEventListener('click', () => {
 document.getElementById('toggle-contour').addEventListener('change', function () {
   contourActive = this.checked;
   const vis = contourActive ? 'visible' : 'none';
-  ['contours-10m-layer', 'contours-50m-layer', 'contours-50m-labels'].forEach(id => {
+  ['contours-10m-layer', 'contours-50m-layer', 'contours-10m-labels', 'contours-50m-labels'].forEach(id => {
     map.setLayoutProperty(id, 'visibility', vis);
   });
   document.getElementById('legend-contour').classList.toggle('visible', contourActive);
@@ -348,5 +376,7 @@ map.on('click', function (e) {
 });
 
 // Cursore pointer sulle curve
-map.on('mouseenter', 'contours-50m-layer', () => { map.getCanvas().style.cursor = 'crosshair'; });
-map.on('mouseleave', 'contours-50m-layer', () => { map.getCanvas().style.cursor = ''; });
+['contours-50m-layer', 'contours-10m-layer'].forEach(id => {
+  map.on('mouseenter', id, () => { map.getCanvas().style.cursor = 'crosshair'; });
+  map.on('mouseleave', id, () => { map.getCanvas().style.cursor = ''; });
+});
