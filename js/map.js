@@ -1,6 +1,6 @@
-// ── PMTiles protocol ──────────────────────────────────────────────────────
+// ── PMTiles protocol (MapLibre 5.x / tilev4 API) ──────────────────────────
 const pmtilesProtocol = new pmtiles.Protocol();
-maplibregl.addProtocol('pmtiles', pmtilesProtocol.tile.bind(pmtilesProtocol));
+maplibregl.addProtocol('pmtiles', pmtilesProtocol.tilev4.bind(pmtilesProtocol));
 
 // ── Costanti ──────────────────────────────────────────────────────────────
 const CENTER  = [13.348027, 38.136896];
