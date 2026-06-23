@@ -149,6 +149,9 @@
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "bottom-right");
     map.addControl(new maplibregl.ScaleControl({ unit: "metric" }), "bottom-left");
 
+    // ── Error logging (remove after debug) ───────────────────────────────────
+    map.on("error", (e) => console.error("[MapLibre error]", e.error || e));
+
     // ── Load sources + layers ─────────────────────────────────────────────────
     map.on("load", () => {
 
@@ -163,16 +166,7 @@
       });
 
       map.setTerrain({ source: "terrain-dem", exaggeration: 1.5 });
-
-      // Sky (adds atmospheric haze in 3D)
-      map.setSky({
-        "sky-color": "#a8c8f0",
-        "sky-horizon-blend": 0.5,
-        "horizon-color": "#d0e8f8",
-        "horizon-fog-blend": 0.5,
-        "fog-color": "#e8f4fc",
-        "fog-ground-blend": 0.9,
-      });
+      console.log("[DTM] setTerrain called", map.getTerrain());
 
       // Hillshade raster
       map.addSource("hillshade-src", {
