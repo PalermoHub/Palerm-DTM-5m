@@ -129,14 +129,14 @@ body {
 
 .tb-btn.active,
 .tb-btn.tb-toggle.on {
-  background: #ff9900;
-  color: #fff;
-  box-shadow: 0 2px 6px rgba(255, 153, 0, 0.45);
+  background: rgba(255, 153, 0, 0.08);
+  color: #e07800;
+  box-shadow: none;
 }
 
 .tb-btn.tb-3d.active {
-  background: #e07800;
-  color: #fff;
+  background: rgba(255, 153, 0, 0.08);
+  color: #e07800;
 }
 
 /* Basemap group radio */
