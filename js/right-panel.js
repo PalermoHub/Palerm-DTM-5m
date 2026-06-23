@@ -16,143 +16,24 @@
           'verticalmente per oltre un chilometro.'
         );
 
-        var canvasId = 'rp-c-elev';
-
-        // Crea la card della ring chart ad anello
-        var card = document.createElement('div');
-        card.className = 'ring-card';
-
-        // Intestazione card
-        var cardHeader = document.createElement('div');
-        cardHeader.className = 'ring-card-header';
-        cardHeader.textContent = 'Distribuzione classi';
-        card.appendChild(cardHeader);
-
-        // Container grafico
-        var chartContainer = document.createElement('div');
-        chartContainer.className = 'ring-chart-container';
-
-        var canvas = document.createElement('canvas');
-        canvas.id = canvasId;
-        chartContainer.appendChild(canvas);
-
-        // Testo centrale all'anello
-        var centerText = document.createElement('div');
-        centerText.className = 'ring-chart-center';
-
-        var centerVal = document.createElement('div');
-        centerVal.className = 'ring-chart-center-val';
-        centerVal.textContent = '158.9';
-
-        var centerLabel = document.createElement('div');
-        centerLabel.className = 'ring-chart-center-label';
-        centerLabel.textContent = 'km²';
-
-        centerText.appendChild(centerVal);
-        centerText.appendChild(centerLabel);
-        chartContainer.appendChild(centerText);
-
-        card.appendChild(chartContainer);
-
-        // Lista legenda
-        var legendList = document.createElement('div');
-        legendList.className = 'ring-legend-list';
-
-        var legendData = [
-          { label: '0–50 m  costiera e pianura', val: '56.6', pct: '35.6%', color: '#00cb9b' },
-          { label: '50–200 m  bassa collina', val: '53.9', pct: '33.9%', color: '#00ef2f' },
-          { label: '200–500 m  media collina', val: '30.5', pct: '19.2%', color: '#e2ff00' },
-          { label: '500–800 m  alta collina', val: '14.9', pct: '9.4%', color: '#fe7f01' },
-          { label: '800–1051 m  montagna', val: '2.9', pct: '1.8%', color: '#505050' }
-        ];
-
-        legendData.forEach(function (item) {
-          var itemEl = document.createElement('div');
-          itemEl.className = 'ring-legend-item';
-
-          var dot = document.createElement('div');
-          dot.className = 'ring-legend-dot';
-          dot.style.backgroundColor = item.color;
-          itemEl.appendChild(dot);
-
-          var label = document.createElement('div');
-          label.className = 'ring-legend-label';
-          label.textContent = item.label;
-          itemEl.appendChild(label);
-
-          var barWrap = document.createElement('div');
-          barWrap.className = 'ring-legend-bar-wrap';
-
-          var barFill = document.createElement('div');
-          barFill.className = 'ring-legend-bar-fill';
-          barFill.style.backgroundColor = item.color;
-          var pctVal = parseFloat(item.pct);
-          barFill.style.width = pctVal + '%';
-
-          var knob = document.createElement('div');
-          knob.className = 'ring-legend-bar-knob';
-          knob.style.backgroundColor = item.color;
-          barFill.appendChild(knob);
-
-          barWrap.appendChild(barFill);
-          itemEl.appendChild(barWrap);
-
-          var val = document.createElement('div');
-          val.className = 'ring-legend-val';
-          val.textContent = item.val;
-          itemEl.appendChild(val);
-
-          var pct = document.createElement('div');
-          pct.className = 'ring-legend-pct';
-          pct.textContent = item.pct;
-          itemEl.appendChild(pct);
-
-          legendList.appendChild(itemEl);
+        appendRingCard(el, {
+          canvasId: 'rp-c-elev',
+          title: 'Distribuzione classi',
+          centerVal: '158.9',
+          centerLabel: 'km²',
+          legendData: [
+            { chartLabel: '0–50m', label: '0–50 m  costiera e pianura', val: '56.6', pct: 35.6, color: '#00cb9b' },
+            { chartLabel: '50–200m', label: '50–200 m  bassa collina', val: '53.9', pct: 33.9, color: '#00ef2f' },
+            { chartLabel: '200–500m', label: '200–500 m  media collina', val: '30.5', pct: 19.2, color: '#e2ff00' },
+            { chartLabel: '500–800m', label: '500–800 m  alta collina', val: '14.9', pct: 9.4, color: '#fe7f01' },
+            { chartLabel: '800–1051m', label: '800–1051 m  montagna', val: '2.9', pct: 1.8, color: '#505050' }
+          ],
+          summaries: [
+            { val: '158.9', label: 'km² area' },
+            { val: '183', label: 'm media' },
+            { val: '1.050', label: 'm max' }
+          ]
         });
-
-        card.appendChild(legendList);
-
-        // Separatore
-        var divider = document.createElement('div');
-        divider.className = 'ring-card-divider';
-        card.appendChild(divider);
-
-        // Righe di sintesi
-        var summaryRow = document.createElement('div');
-        summaryRow.className = 'ring-summary-row';
-
-        var summaries = [
-          { val: '158.9', label: 'km² area' },
-          { val: '183', label: 'm media' },
-          { val: '1.050', label: 'm max' }
-        ];
-
-        summaries.forEach(function (s) {
-          var sumItem = document.createElement('div');
-          sumItem.className = 'ring-summary-item';
-
-          var sVal = document.createElement('span');
-          sVal.className = 'ring-summary-val';
-          sVal.textContent = s.val;
-
-          var sLabel = document.createElement('span');
-          sLabel.className = 'ring-summary-label';
-          sLabel.textContent = s.label;
-
-          sumItem.appendChild(sVal);
-          sumItem.appendChild(sLabel);
-          summaryRow.appendChild(sumItem);
-        });
-
-        card.appendChild(summaryRow);
-        el.appendChild(card);
-
-        // Inizializza il grafico ad anello (ring)
-        initChart(canvasId, 'ring',
-          ['0–50m', '50–200m', '200–500m', '500–800m', '800–1051m'],
-          [35.6, 33.9, 19.2, 9.4, 1.8],
-          ['#00cb9b', '#00ef2f', '#e2ff00', '#fe7f01', '#505050']
-        );
       }
     },
 
@@ -167,21 +48,24 @@
           'Pendenza media <strong>11,4°</strong> con deviazione standard 13,6°. ' +
           'Oltre la metà del territorio è pianeggiante, ma quasi <strong>un terzo supera i 15°</strong>.'
         );
-        appendSectionTitle(el, 'Classi di pendenza');
-        var canvasId = 'rp-c-slope';
-        appendChart(el, canvasId);
-        appendTable(el, ['Classe', '%'], [
-          ['0–5°  pianura', '52,8%', 'hl'],
-          ['5–15°  moderata', '16,4%', ''],
-          ['15–30°  acclive', '18,5%', ''],
-          ['30–45°  molto acclive', '10,3%', 'hl-warn'],
-          ['>45°  subverticale', '2,1%', 'hl-warn']
-        ]);
-        initChart(canvasId, 'doughnut',
-          ['0–5° pianura', '5–15° mod.', '15–30° acclive', '30–45° molto acclive', '>45° subvert.'],
-          [52.8, 16.4, 18.5, 10.3, 2.1],
-          ['#43a047', '#8bc34a', '#ffeb3b', '#ff9800', '#f44336']
-        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-slope',
+          title: 'Classi di pendenza',
+          centerVal: '11,4°',
+          centerLabel: 'media',
+          legendData: [
+            { chartLabel: '0–5° pianura', label: '0–5°  pianura', pct: 52.8, color: '#43a047' },
+            { chartLabel: '5–15° mod.', label: '5–15°  moderata', pct: 16.4, color: '#8bc34a' },
+            { chartLabel: '15–30° acclive', label: '15–30°  acclive', pct: 18.5, color: '#ffeb3b' },
+            { chartLabel: '30–45° molto acclive', label: '30–45°  molto acclive', pct: 10.3, color: '#ff9800' },
+            { chartLabel: '>45° subvert.', label: '>45°  subverticale', pct: 2.1, color: '#f44336' }
+          ],
+          summaries: [
+            { val: '158.9', label: 'km² area' },
+            { val: '11,4°', label: 'pendenza media' },
+            { val: '13,6°', label: 'dev. standard' }
+          ]
+        });
       }
     },
 
@@ -230,21 +114,19 @@
           '<strong>creste (33%)</strong>. Le pianure vere sono pochissime. ' +
           'Valli e depressioni (<strong>6,4%</strong>) concentrano il deflusso idrico.'
         );
-        appendSectionTitle(el, 'Unità geomorfologiche');
-        var canvasId = 'rp-c-geomorph';
-        appendChart(el, canvasId);
-        appendTable(el, ['Classe', 'Descrizione', '%'], [
-          ['1', 'Pianure e fondovalle', '0,2%'],
-          ['3', 'Versanti regolari', '60,1%'],
-          ['4', 'Creste e dorsali', '33,3%'],
-          ['7', 'Valli e impluvii', '3,3%'],
-          ['8', 'Depressioni chiuse', '3,1%']
-        ]);
-        initChart(canvasId, 'bar',
-          ['Pianure', 'Versanti', 'Creste', 'Valli', 'Depressioni'],
-          [0.2, 60.1, 33.3, 3.3, 3.1],
-          ['#4fc3f7', '#7986cb', '#ce93d8', '#80cbc4', '#ffb74d']
-        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-geomorph',
+          title: 'Unità geomorfologiche',
+          centerVal: '158.9',
+          centerLabel: 'km²',
+          legendData: [
+            { chartLabel: 'Pianure', label: '1 - Pianure e fondovalle', pct: 0.2, color: '#4fc3f7' },
+            { chartLabel: 'Versanti', label: '3 - Versanti regolari', pct: 60.1, color: '#7986cb' },
+            { chartLabel: 'Creste', label: '4 - Creste e dorsali', pct: 33.3, color: '#ce93d8' },
+            { chartLabel: 'Valli', label: '7 - Valli e impluvii', pct: 3.3, color: '#80cbc4' },
+            { chartLabel: 'Depressioni', label: '8 - Depressioni chiuse', pct: 3.1, color: '#ffb74d' }
+          ]
+        });
       }
     },
 
@@ -259,21 +141,19 @@
           'Scala 1–5 (stabile→instabile). Più della metà del territorio è in classe 1 (aree pianeggianti). ' +
           'Ma quasi il <strong>31% ricade in classi 3–4–5</strong>: dato da considerare nella pianificazione.'
         );
-        appendSectionTitle(el, 'Classi di stabilità');
-        var canvasId = 'rp-c-stab';
-        appendChart(el, canvasId);
-        appendTable(el, ['Classe', 'Significato', '%'], [
-          ['1', 'Molto stabile', '52,6%'],
-          ['2', 'Stabile', '16,3%'],
-          ['3', 'Mod. instabile', '12,1%'],
-          ['4', 'Instabile', '12,4%'],
-          ['5', 'Molto instabile', '6,3%']
-        ]);
-        initChart(canvasId, 'doughnut',
-          ['Molto stabile', 'Stabile', 'Mod. instabile', 'Instabile', 'Molto instabile'],
-          [52.6, 16.3, 12.1, 12.4, 6.3],
-          ['#2e7d32', '#66bb6a', '#ffee58', '#ffa726', '#ef5350']
-        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-stab',
+          title: 'Classi di stabilità',
+          centerVal: '30.8',
+          centerLabel: '% rischio',
+          legendData: [
+            { chartLabel: 'Molto stabile', label: '1 - Molto stabile', pct: 52.6, color: '#2e7d32' },
+            { chartLabel: 'Stabile', label: '2 - Stabile', pct: 16.3, color: '#66bb6a' },
+            { chartLabel: 'Mod. instabile', label: '3 - Mod. instabile', pct: 12.1, color: '#ffee58' },
+            { chartLabel: 'Instabile', label: '4 - Instabile', pct: 12.4, color: '#ffa726' },
+            { chartLabel: 'Molto instabile', label: '5 - Molto instabile', pct: 6.3, color: '#ef5350' }
+          ]
+        });
       }
     },
 
@@ -289,21 +169,19 @@
           'ha caratteristiche favorevoli. Il <strong>28,7% ricade in classi 4–5</strong>: ' +
           'edificazione fisicamente problematica.'
         );
-        appendSectionTitle(el, 'Classi di costruibilità');
-        var canvasId = 'rp-c-build';
-        appendChart(el, canvasId);
-        appendTable(el, ['Classe', 'Significato', '%'], [
-          ['1', 'Ottima — pianeggiante e stabile', '47,3%'],
-          ['2', 'Buona', '14,1%'],
-          ['3', 'Moderata — alcune limitazioni', '9,9%'],
-          ['4', 'Difficile', '16,4%'],
-          ['5', 'Non idonea', '12,3%']
-        ]);
-        initChart(canvasId, 'doughnut',
-          ['Ottima', 'Buona', 'Moderata', 'Difficile', 'Non idonea'],
-          [47.3, 14.1, 9.9, 16.4, 12.3],
-          ['#1565c0', '#42a5f5', '#ffcc02', '#ff7043', '#b71c1c']
-        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-build',
+          title: 'Classi di costruibilità',
+          centerVal: '47.3',
+          centerLabel: '% ottima',
+          legendData: [
+            { chartLabel: 'Ottima', label: '1 - Ottima (pianura)', pct: 47.3, color: '#1565c0' },
+            { chartLabel: 'Buona', label: '2 - Buona', pct: 14.1, color: '#42a5f5' },
+            { chartLabel: 'Moderata', label: '3 - Moderata', pct: 9.9, color: '#ffcc02' },
+            { chartLabel: 'Difficile', label: '4 - Difficile', pct: 16.4, color: '#ff7043' },
+            { chartLabel: 'Non idonea', label: '5 - Non idonea', pct: 12.3, color: '#b71c1c' }
+          ]
+        });
       }
     },
 
@@ -462,6 +340,127 @@
     });
     tbl.appendChild(tbody);
     parent.appendChild(tbl);
+  }
+
+  function appendRingCard(parent, opts) {
+    var card = document.createElement('div');
+    card.className = 'ring-card';
+
+    if (opts.title) {
+      var cardHeader = document.createElement('div');
+      cardHeader.className = 'ring-card-header';
+      cardHeader.textContent = opts.title;
+      card.appendChild(cardHeader);
+    }
+
+    var chartContainer = document.createElement('div');
+    chartContainer.className = 'ring-chart-container';
+
+    var canvas = document.createElement('canvas');
+    canvas.id = opts.canvasId;
+    chartContainer.appendChild(canvas);
+
+    var centerText = document.createElement('div');
+    centerText.className = 'ring-chart-center';
+    var centerVal = document.createElement('div');
+    centerVal.className = 'ring-chart-center-val';
+    centerVal.textContent = opts.centerVal;
+    var centerLabel = document.createElement('div');
+    centerLabel.className = 'ring-chart-center-label';
+    centerLabel.textContent = opts.centerLabel;
+    centerText.appendChild(centerVal);
+    centerText.appendChild(centerLabel);
+    chartContainer.appendChild(centerText);
+
+    card.appendChild(chartContainer);
+
+    var legendList = document.createElement('div');
+    legendList.className = 'ring-legend-list';
+
+    var chartLabels = [];
+    var chartData = [];
+    var chartColors = [];
+
+    opts.legendData.forEach(function (item) {
+      chartLabels.push(item.chartLabel || item.label);
+      chartData.push(item.pct);
+      chartColors.push(item.color);
+
+      var itemEl = document.createElement('div');
+      itemEl.className = 'ring-legend-item';
+
+      var dot = document.createElement('div');
+      dot.className = 'ring-legend-dot';
+      dot.style.backgroundColor = item.color;
+      itemEl.appendChild(dot);
+
+      var label = document.createElement('div');
+      label.className = 'ring-legend-label';
+      label.textContent = item.label;
+      itemEl.appendChild(label);
+
+      var barWrap = document.createElement('div');
+      barWrap.className = 'ring-legend-bar-wrap';
+
+      var barFill = document.createElement('div');
+      barFill.className = 'ring-legend-bar-fill';
+      barFill.style.backgroundColor = item.color;
+      barFill.style.width = item.pct + '%';
+
+      var knob = document.createElement('div');
+      knob.className = 'ring-legend-bar-knob';
+      knob.style.backgroundColor = item.color;
+      barFill.appendChild(knob);
+
+      barWrap.appendChild(barFill);
+      itemEl.appendChild(barWrap);
+
+      var val = document.createElement('div');
+      val.className = 'ring-legend-val';
+      val.textContent = item.val !== undefined ? item.val : (158.9 * item.pct / 100).toFixed(1);
+      itemEl.appendChild(val);
+
+      var pct = document.createElement('div');
+      pct.className = 'ring-legend-pct';
+      pct.textContent = item.pct + '%';
+      itemEl.appendChild(pct);
+
+      legendList.appendChild(itemEl);
+    });
+
+    card.appendChild(legendList);
+
+    if (opts.summaries && opts.summaries.length > 0) {
+      var divider = document.createElement('div');
+      divider.className = 'ring-card-divider';
+      card.appendChild(divider);
+
+      var summaryRow = document.createElement('div');
+      summaryRow.className = 'ring-summary-row';
+
+      opts.summaries.forEach(function (s) {
+        var sumItem = document.createElement('div');
+        sumItem.className = 'ring-summary-item';
+
+        var sVal = document.createElement('span');
+        sVal.className = 'ring-summary-val';
+        sVal.textContent = s.val;
+
+        var sLabel = document.createElement('span');
+        sLabel.className = 'ring-summary-label';
+        sLabel.textContent = s.label;
+
+        sumItem.appendChild(sVal);
+        sumItem.appendChild(sLabel);
+        summaryRow.appendChild(sumItem);
+      });
+
+      card.appendChild(summaryRow);
+    }
+
+    parent.appendChild(card);
+
+    initChart(opts.canvasId, 'ring', chartLabels, chartData, chartColors);
   }
 
   // ── Chart.js helpers ────────────────────────────────────────────────────
