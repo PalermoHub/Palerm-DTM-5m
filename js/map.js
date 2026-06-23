@@ -453,15 +453,27 @@ function closePanels(except) {
   });
 }
 
+// Toggle semplice on/off ombreggiatura
+document.getElementById('tb-shadow-toggle').addEventListener('click', function () {
+  this.classList.toggle('on');
+  shadowActive = this.classList.contains('on');
+  map.setLayoutProperty('hillshade-layer', 'visibility', shadowActive ? 'visible' : 'none');
+  // Se si spegne l'ombreggiatura chiudi anche il pannello impostazioni
+  if (!shadowActive) {
+    document.getElementById('tb-panel-shadow').style.display = 'none';
+    document.getElementById('tb-shadow').classList.remove('on');
+  }
+});
+
+// Pulsante impostazioni ombreggiatura (apre/chiude pannello)
 document.getElementById('tb-shadow').addEventListener('click', function () {
+  // Non fare nulla se l'ombreggiatura è spenta
+  if (!shadowActive) return;
   const panel = document.getElementById('tb-panel-shadow');
   const open = panel.style.display === 'none';
   closePanels(open ? 'tb-panel-shadow' : null);
   panel.style.display = open ? 'flex' : 'none';
-  if (!open) return;
-  shadowActive = true;
-  this.classList.add('on');
-  map.setLayoutProperty('hillshade-layer', 'visibility', 'visible');
+  this.classList.toggle('on', open);
 });
 
 document.getElementById('tbp-shadow-intensity').addEventListener('input', function () {
@@ -640,19 +652,6 @@ map.on('mouseleave', 'griglia-circles', () => {
   grigliaPop.remove();
 });
 
-// ── Toggle mappa elevazione ───────────────────────────────────────────
-document.getElementById('toggle-elevation').addEventListener('change', function () {
-  const vis = this.checked ? 'visible' : 'none';
-  map.setLayoutProperty('elevation-layer', 'visibility', vis);
-  document.getElementById('elevation-opacity-row').style.display = this.checked ? 'block' : 'none';
-  document.getElementById('legend-elevation').classList.toggle('visible', this.checked);
-});
-
-document.getElementById('elevation-opacity-slider').addEventListener('input', function () {
-  const val = parseFloat(this.value);
-  document.getElementById('elevation-opacity-val').textContent = val.toFixed(2);
-  map.setPaintProperty('elevation-layer', 'raster-opacity', val);
-});
 
 
 

@@ -95,8 +95,16 @@
     </svg>
   </button>
 
-  <!-- Ombreggiatura -->
-  <button class="tb-btn tb-toggle on" id="tb-shadow" title="Ombreggiatura rilievo">
+  <!-- Toggle on/off ombreggiatura -->
+  <button class="tb-btn tb-toggle on" id="tb-shadow-toggle" title="Attiva/disattiva ombreggiatura">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="none">
+      <path d="M12 3a9 9 0 1 0 0 18A9 9 0 0 0 12 3z" fill="currentColor" opacity="0.25"/>
+      <path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor"/>
+    </svg>
+  </button>
+
+  <!-- Impostazioni ombreggiatura -->
+  <button class="tb-btn tb-toggle on" id="tb-shadow" title="Impostazioni ombreggiatura">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
       <circle cx="12" cy="12" r="4"/>
       <line x1="12" y1="2" x2="12" y2="5"/>
@@ -145,27 +153,6 @@
 
 </div><!-- /map-toolbar-wrap -->
 
-<div id="controls">
-  <h2>🗻 Palermo DTM 5m</h2>
-
-  <div class="section-label">Analisi elevazione</div>
-
-  <div class="toggle-row">
-    <label for="toggle-elevation"><span class="icon">🎨</span> Mappa elevazione</label>
-    <label class="switch">
-      <input type="checkbox" id="toggle-elevation" checked />
-      <span class="slider"></span>
-    </label>
-  </div>
-  <div class="slider-row" id="elevation-opacity-row">
-    <label>
-      <span>Opacità</span>
-      <span id="elevation-opacity-val">0.70</span>
-    </label>
-    <input type="range" id="elevation-opacity-slider" min="0.1" max="1" step="0.05" value="0.70" />
-  </div>
-
-</div>
 
 <!-- ═══ LEGENDE MAPPA ═══ -->
 <div id="map-legends">
@@ -522,6 +509,105 @@
   </div><!-- /panel-body -->
 </div><!-- /info-panel -->
 
+<!-- ═══ PANNELLO ANALISI DESTRA ═══ -->
+<div id="rp-wrap">
+
+  <button id="rp-toggle" title="Analisi DTM — apri/chiudi">
+    <svg id="rp-toggle-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+  </button>
+
+  <div id="right-panel">
+
+    <!-- ── Vista 1: Galleria analisi ── -->
+    <div id="rp-gallery" class="rp-view">
+      <div class="rp-panel-header">
+        <div class="rp-panel-title">Analisi territorio</div>
+        <div class="rp-panel-sub">DTM 5m · Palermo</div>
+      </div>
+      <div class="rp-cards">
+
+        <div class="rp-card" data-analysis="elevation">
+          <div class="rp-card-line" style="background:#00cb9b;"></div>
+          <div class="rp-card-title">Mappa Elevazione</div>
+          <div class="rp-card-sub">Altimetria 0 – 1050 m</div>
+        </div>
+
+        <div class="rp-card" data-analysis="slope">
+          <div class="rp-card-line" style="background:#ff9800;"></div>
+          <div class="rp-card-title">Pendenze</div>
+          <div class="rp-card-sub">Media 11,4°</div>
+        </div>
+
+        <div class="rp-card" data-analysis="aspect">
+          <div class="rp-card-line" style="background:#4fc3f7;"></div>
+          <div class="rp-card-title">Esposizione</div>
+          <div class="rp-card-sub">Prevalente NE</div>
+        </div>
+
+        <div class="rp-card" data-analysis="geomorph">
+          <div class="rp-card-line" style="background:#7986cb;"></div>
+          <div class="rp-card-title">Geomorfologia</div>
+          <div class="rp-card-sub">Versanti 60%</div>
+        </div>
+
+        <div class="rp-card" data-analysis="stability">
+          <div class="rp-card-line" style="background:#ef5350;"></div>
+          <div class="rp-card-title">Stabilità</div>
+          <div class="rp-card-sub">~31% a rischio</div>
+        </div>
+
+        <div class="rp-card" data-analysis="build">
+          <div class="rp-card-line" style="background:#1565c0;"></div>
+          <div class="rp-card-title">Costruibilità</div>
+          <div class="rp-card-sub">47,3% ottima</div>
+        </div>
+
+        <div class="rp-card" data-analysis="solar">
+          <div class="rp-card-line" style="background:#ffb300;"></div>
+          <div class="rp-card-title">Radiazione solare</div>
+          <div class="rp-card-sub">SRI medio 0,59</div>
+        </div>
+
+        <div class="rp-card" data-analysis="rugosity">
+          <div class="rp-card-line" style="background:#546e7a;"></div>
+          <div class="rp-card-title">Rugosità (TRI)</div>
+          <div class="rp-card-sub">Media 3,05</div>
+        </div>
+
+      </div><!-- /rp-cards -->
+    </div><!-- /rp-gallery -->
+
+    <!-- ── Vista 2: Dettaglio analisi ── -->
+    <div id="rp-detail" class="rp-view" style="display:none;">
+
+      <div class="rp-detail-topbar">
+        <button id="rp-back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Galleria
+        </button>
+        <div class="rp-detail-name-wrap">
+          <span id="rp-detail-icon">🎨</span>
+          <span id="rp-detail-name">Elevazione</span>
+        </div>
+      </div>
+
+      <div id="rp-opacity-bar" class="rp-opacity-bar">
+        <span class="rp-opacity-label">Opacità layer</span>
+        <input type="range" id="rp-opacity" min="0.1" max="1" step="0.05" value="0.70"/>
+        <span id="rp-opacity-val">0.70</span>
+      </div>
+
+      <div id="rp-detail-body">
+        <!-- contenuto renderizzato via JS -->
+      </div>
+
+    </div><!-- /rp-detail -->
+
+  </div><!-- /right-panel -->
+</div><!-- /rp-wrap -->
+
 <script src="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js"
         integrity="sha384-GfxBM9x46BaAFxtCq39Fxir8fNZ4VDnwgfi6Kzi5/F1tAFsm0amuuV8kd+Pxzuf/"
         crossorigin="anonymous"></script>
@@ -530,5 +616,6 @@
         crossorigin="anonymous"></script>
 <script src="js/map.js"></script>
 <script src="js/panel.js"></script>
+<script src="js/right-panel.js"></script>
 </body>
 </html>
