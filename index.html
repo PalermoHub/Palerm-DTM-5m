@@ -9,7 +9,13 @@
         crossorigin="anonymous" />
 		    <link rel="shortcut icon" href="img/favicon.ico"/> 
 	<link rel="icon" href="img/favicon.png" type="image/png"/> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&display=swap">
   <link rel="stylesheet" href="css/map.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"
+          integrity="sha384-JUh163oCRItcbPme8pYnROHQMC6fNKTBWtRG3I3I0erJkzNgL7uxKlNwcrcFKeqF"
+          crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -159,6 +165,326 @@
   DTM 5m · Palermo · <a href="https://github.com/coseerobe/palermo_dtm_5m" target="_blank" rel="noopener noreferrer">GitHub</a>
 </div>
 
+<!-- ═══ BOTTOM INFO PANEL ═══ -->
+<div id="info-panel">
+
+  <div id="panel-handle" onclick="panelToggle()">
+    <span id="panel-arrow">▲</span>
+    <span id="panel-handle-label">📊 Analisi territorio · Palermo DTM 5m</span>
+  </div>
+
+  <div id="panel-body">
+
+    <nav id="panel-nav">
+      <button class="ptab active" data-tab="analisi">📊 Analisi DTM</button>
+      <button class="ptab" data-tab="credits">ℹ️ Credits</button>
+      <button class="ptab" data-tab="mappa">🗺️ Mappa</button>
+    </nav>
+
+    <!-- Tab: Analisi -->
+    <div id="tab-analisi" class="tab-pane active">
+
+      <p class="analysis-intro">
+        Un <strong>Modello Digitale del Terreno</strong> (DTM) è una griglia di quote: ogni cella di 5×5 metri
+        contiene l'altitudine di quel punto del suolo. Da questa semplice griglia di numeri si ricava una quantità
+        sorprendente di informazioni sul territorio — pendenze, esposizioni, rischio di frana, idoneità edificatoria,
+        quantità di luce solare ricevuta. Il DTM di Palermo copre l'intero territorio comunale con una risoluzione
+        di 5 metri su <strong>~6,4 milioni di pixel validi</strong>.
+      </p>
+
+      <!-- PROFILO ALTIMETRICO -->
+      <div class="analysis-section">
+        <h3>Il profilo altimetrico della città</h3>
+        <p>
+          Palermo è una città che sale velocemente dal mare verso le colline e poi le montagne che la circondano.
+          <strong>Il punto più alto raggiunge 1.050 m</strong> (Monte Cuccio / Pizzuta), mentre la quota media del
+          territorio è di circa <strong>183 m</strong> sul livello del mare. Quasi il 70% della superficie si trova
+          sotto i 200 m, ma il territorio si estende verticalmente per oltre un chilometro — una varietà notevole
+          per una città di pianura costiera.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Fascia altimetrica</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>0–50 m (zona costiera e pianura)</td><td class="hl">35,6%</td></tr>
+              <tr><td>50–200 m (bassa collina)</td><td>33,9%</td></tr>
+              <tr><td>200–500 m (media collina)</td><td>19,2%</td></tr>
+              <tr><td>500–800 m (alta collina)</td><td>9,4%</td></tr>
+              <tr><td>800–1.051 m (montagna)</td><td>1,8%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-elevation"></canvas></div>
+        </div>
+      </div>
+
+      <!-- PENDENZE -->
+      <div class="analysis-section">
+        <h3>Le pendenze: dove il terreno è piatto e dove è ripido</h3>
+        <p>
+          La pendenza è forse il dato più immediato per capire un territorio. A Palermo la distribuzione è molto
+          eterogenea: più della metà del territorio è sostanzialmente pianeggiante — la Conca d'Oro, le aree
+          costiere, le valli interne. Ma quasi <strong>un terzo supera i 15°</strong>, e il 12% è fortemente
+          acclive. La pendenza media è <strong>11,4°</strong>, con una deviazione standard di 13,6°: segno che
+          il paesaggio è molto vario.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe di pendenza</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>0–5° — pianura / quasi orizzontale</td><td class="hl">52,8%</td></tr>
+              <tr><td>5–15° — pendenza moderata</td><td>16,4%</td></tr>
+              <tr><td>15–30° — acclive</td><td>18,5%</td></tr>
+              <tr><td>30–45° — molto acclive</td><td class="hl-warn">10,3%</td></tr>
+              <tr><td>&gt;45° — pareti subverticali</td><td class="hl-warn">2,1%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-slope"></canvas></div>
+        </div>
+      </div>
+
+      <!-- ESPOSIZIONE -->
+      <div class="analysis-section">
+        <h3>Come si orienta il terreno: l'esposizione</h3>
+        <p>
+          L'esposizione (o aspetto) indica verso quale direzione guarda un versante. Influenza la quantità di sole
+          ricevuta, il rischio di siccità, la vegetazione — e, in una città, anche il microclima degli spazi pubblici.
+          I versanti dominano verso <strong>Nord-Est (18,9%)</strong>: coerente con la posizione di Palermo, aperta
+          sul Mar Tirreno a nord, con i rilievi che scendono verso il litorale. I versanti esposti a sud e sud-ovest
+          sono i meno rappresentati — i pendii "al sole" delle colline interne, spesso più aridi.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Esposizione</th><th>%</th></tr></thead>
+            <tbody>
+              <tr><td>Pianura (nessuna esposizione netta)</td><td>15,9%</td></tr>
+              <tr><td>Nord</td><td>14,6%</td></tr>
+              <tr><td>Nord-Est ← prevalente</td><td class="hl">18,9%</td></tr>
+              <tr><td>Est</td><td>15,0%</td></tr>
+              <tr><td>Sud-Est</td><td>10,5%</td></tr>
+              <tr><td>Sud</td><td>6,6%</td></tr>
+              <tr><td>Sud-Ovest</td><td>4,7%</td></tr>
+              <tr><td>Ovest</td><td>5,1%</td></tr>
+              <tr><td>Nord-Ovest</td><td>8,8%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-aspect"></canvas></div>
+        </div>
+      </div>
+
+      <!-- GEOMORFOLOGIA -->
+      <div class="analysis-section">
+        <h3>Come si classifica il paesaggio: la geomorfologia</h3>
+        <p>
+          Analizzando la forma del terreno (curvatura, rugosità, TPI), il territorio è stato classificato in
+          grandi unità geomorfologiche. Il paesaggio di Palermo è dominato dai <strong>versanti (60%)</strong>
+          e dalle <strong>creste (33%)</strong>: un territorio prevalentemente collinare e montano, con poche
+          pianure vere. Le valli e le depressioni, sebbene piccole in percentuale, sono importanti perché
+          concentrano il deflusso delle acque.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe</th><th>Descrizione</th><th>%</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Pianure e fondovalle</td><td>0,2%</td></tr>
+              <tr><td>3</td><td>Versanti regolari</td><td class="hl">60,1%</td></tr>
+              <tr><td>4</td><td>Creste e dorsali</td><td>33,3%</td></tr>
+              <tr><td>7</td><td>Valli e impluvii</td><td>3,3%</td></tr>
+              <tr><td>8</td><td>Depressioni chiuse</td><td>3,1%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-geomorph"></canvas></div>
+        </div>
+      </div>
+
+      <!-- STABILITÀ -->
+      <div class="analysis-section">
+        <h3>Stabilità dei versanti: dove il suolo è a rischio</h3>
+        <p>
+          La stabilità dei versanti è calcolata combinando pendenza, curvatura, esposizione e morfologia.
+          La scala va da 1 (molto stabile) a 5 (molto instabile). Più della metà del territorio è in
+          classe 1 — le aree pianeggianti o a bassa pendenza. Ma quasi <strong>il 31% del territorio</strong>
+          ricade in classi 3-4-5: aree dove pendenza, forma e caratteristiche morfologiche aumentano il
+          rischio di instabilità. Un dato che merita attenzione nella pianificazione urbanistica.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe</th><th>Significato</th><th>%</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Molto stabile</td><td class="hl">52,6%</td></tr>
+              <tr><td>2</td><td>Stabile</td><td>16,3%</td></tr>
+              <tr><td>3</td><td>Moderatamente instabile</td><td>12,1%</td></tr>
+              <tr><td>4</td><td>Instabile</td><td class="hl-warn">12,4%</td></tr>
+              <tr><td>5</td><td>Molto instabile</td><td class="hl-warn">6,3%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-stability"></canvas></div>
+        </div>
+      </div>
+
+      <!-- COSTRUIBILITÀ -->
+      <div class="analysis-section">
+        <h3>Costruibilità: dove si può edificare (in base alla morfologia)</h3>
+        <p>
+          L'indice di costruibilità morfologica è una stima basata esclusivamente sulla forma del terreno —
+          non include vincoli legali o urbanistici, ma fornisce una base oggettiva per valutare l'idoneità
+          di un'area. Quasi la metà del territorio ha caratteristiche morfologiche favorevoli all'edificazione.
+          Tuttavia, il <strong>28,7% ricade in classi 4–5</strong>: aree dove la pendenza, l'instabilità o
+          la morfologia rendono l'edificazione problematica dal punto di vista fisico.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe</th><th>Significato</th><th>%</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Ottima — terreno pianeggiante e stabile</td><td class="hl">47,3%</td></tr>
+              <tr><td>2</td><td>Buona</td><td>14,1%</td></tr>
+              <tr><td>3</td><td>Moderata — alcune limitazioni</td><td>9,9%</td></tr>
+              <tr><td>4</td><td>Difficile</td><td class="hl-warn">16,4%</td></tr>
+              <tr><td>5</td><td>Non idonea</td><td class="hl-warn">12,3%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-build"></canvas></div>
+        </div>
+      </div>
+
+      <!-- LUCE SOLARE -->
+      <div class="analysis-section">
+        <h3>La luce solare: l'indice di radiazione solare</h3>
+        <p>
+          L'Indice di Radiazione Solare (SRI) misura quanto sole riceve mediamente una cella nel corso
+          dell'anno, normalizzato tra 0 (nessuna luce) e 1 (massima esposizione). Il valore medio per
+          Palermo è <strong>0,59</strong> — abbastanza alto, coerente con la latitudine e il clima mediterraneo.
+          I versanti nord e nord-est, pur essendo i più estesi, ricevono meno luce rispetto ai versanti
+          meridionali. Questo dato è rilevante per studi energetici (potenziale fotovoltaico), agricoltura
+          (colture eliofile), e comfort urbano.
+        </p>
+      </div>
+
+      <!-- RUGOSITÀ -->
+      <div class="analysis-section">
+        <h3>Rugosità e irregolarità del terreno</h3>
+        <p>
+          Il <strong>TRI (Terrain Ruggedness Index)</strong> misura la variazione media di quota rispetto
+          alle celle vicine. La media di <strong>3,05</strong> è relativamente bassa, ma con punte fino a
+          <strong>369</strong> nelle zone di cresta più frastagliate — un ulteriore segnale della forte
+          variabilità del paesaggio. Il <strong>Roughness</strong> (rugosità assoluta) conferma: media
+          3,04 con massimi di 280, concentrati sulle pareti rocciose dei rilievi.
+        </p>
+      </div>
+
+      <!-- SINTESI -->
+      <div class="analysis-section">
+        <h3>In sintesi</h3>
+        <p>
+          Palermo è una città di contrasti fisici: mezza pianura, mezza montagna. La Conca d'Oro e le aree
+          costiere offrono terreni stabili e facilmente edificabili, mentre le colline e i rilievi del Parco
+          della Favorita e dei Monti di Palermo presentano condizioni morfologiche che richiedono maggiore
+          attenzione nella progettazione e nella pianificazione del territorio.
+        </p>
+        <table class="data-table">
+          <thead><tr><th>Indicatore</th><th>Valore chiave</th></tr></thead>
+          <tbody>
+            <tr><td>Quota massima</td><td class="hl">1.050 m (Monte Cuccio)</td></tr>
+            <tr><td>Quota media</td><td>183 m s.l.m.</td></tr>
+            <tr><td>Pendenza media</td><td>11,4°</td></tr>
+            <tr><td>Area pianeggiante (&lt;5°)</td><td class="hl">52,8%</td></tr>
+            <tr><td>Area acclive (&gt;15°)</td><td class="hl-warn">30,6%</td></tr>
+            <tr><td>Esposizione prevalente</td><td>Nord-Est (18,9%)</td></tr>
+            <tr><td>Versanti instabili (cl. 3–5)</td><td class="hl-warn">~31%</td></tr>
+            <tr><td>Costruibilità difficile (cl. 4–5)</td><td class="hl-warn">~28,7%</td></tr>
+            <tr><td>Indice solare medio (SRI)</td><td>0,59 / 1,00</td></tr>
+            <tr><td>TRI medio</td><td>3,05</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:14px; font-size:11px; color:#6878a8;">
+          Elaborazione su DTM 5m — territorio del Comune di Palermo — giugno 2026.<br>
+          Fonte dati: <a href="https://zenodo.org/records/18872933" target="_blank" rel="noopener noreferrer" style="color:#5878b8;">zenodo.org/records/18872933</a> — HR-DTM-5m Italia.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Tab: Credits -->
+    <div id="tab-credits" class="tab-pane">
+      <div class="credits-grid">
+
+        <div class="credits-section">
+          <h3>📡 Dati</h3>
+          <div class="credit-item">
+            <span class="ci-icon">🏔️</span>
+            <div>
+              <strong>DTM 5m — HR-DTM-5m Italia</strong>
+              5m Resolution Digital Terrain Model for Italy<br>
+              <a href="https://zenodo.org/records/18872933" target="_blank" rel="noopener noreferrer">zenodo.org/records/18872933</a>
+            </div>
+          </div>
+          <div class="credit-item">
+            <span class="ci-icon">🗺️</span>
+            <div>
+              <strong>Carta Tecnica Regionale (CTR)</strong>
+              Regione Siciliana — scala 1:2.000
+            </div>
+          </div>
+          <div class="credit-item">
+            <span class="ci-icon">🛰️</span>
+            <div>
+              <strong>Immagini satellitari</strong>
+              Google Satellite · Esri WorldImagery · OpenStreetMap contributors
+            </div>
+          </div>
+        </div>
+
+        <div class="credits-section">
+          <h3>🛠️ Strumenti</h3>
+          <div class="credit-item"><span class="ci-icon">🟢</span><div><strong>QGIS 3.x / GRASS GIS</strong> — Elaborazione raster e classificazione morfologica</div></div>
+          <div class="credit-item"><span class="ci-icon">🐍</span><div><strong>PyQGIS (headless)</strong> — Automazione su 18 layer, ~6,4M pixel</div></div>
+          <div class="credit-item"><span class="ci-icon">📦</span><div><strong>GDAL / OGR</strong> — Conversione formati e statistiche raster</div></div>
+          <div class="credit-item"><span class="ci-icon">🗺️</span><div><strong>MapLibre GL JS 5.x</strong> — Visualizzazione web 3D interattiva</div></div>
+          <div class="credit-item"><span class="ci-icon">⚡</span><div><strong>PMTiles</strong> — Distribuzione curve di livello (10m + 50m)</div></div>
+          <div class="credit-item"><span class="ci-icon">📊</span><div><strong>Chart.js 4.x</strong> — Grafici analisi morfologica</div></div>
+          <div class="credit-item"><span class="ci-icon">✂️</span><div><strong>Tippecanoe</strong> — Generazione tiles vettoriali PMTiles</div></div>
+        </div>
+
+        <div class="credits-section">
+          <h3>👤 Progetto</h3>
+          <div class="credit-item">
+            <span class="ci-icon">🐙</span>
+            <div>
+              <strong>coseerobe / palermo_dtm_5m</strong><br>
+              <a href="https://github.com/coseerobe/palermo_dtm_5m" target="_blank" rel="noopener noreferrer">github.com/coseerobe/palermo_dtm_5m</a>
+            </div>
+          </div>
+          <div class="credit-item">
+            <span class="ci-icon">🌐</span>
+            <div>
+              <strong>Tiles hosting</strong><br>
+              <a href="https://palermohub.github.io" target="_blank" rel="noopener noreferrer">palermohub.github.io</a>
+            </div>
+          </div>
+          <div class="credit-item">
+            <span class="ci-icon">📅</span>
+            <div>Elaborazione: giugno 2026 · Comune di Palermo</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tab: Mappa (in costruzione) -->
+    <div id="tab-mappa" class="tab-pane">
+      <div class="wip-container">
+        <div class="wip-icon">🚧</div>
+        <div class="wip-title">In costruzione</div>
+        <div class="wip-text">
+          Questa sezione è in fase di sviluppo.<br>
+          Presto disponibile una mappa tematica interattiva con i dati dell'analisi DTM morfologica.
+        </div>
+        <div class="wip-badge">Coming soon</div>
+      </div>
+    </div>
+
+  </div><!-- /panel-body -->
+</div><!-- /info-panel -->
+
 <script src="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js"
         integrity="sha384-GfxBM9x46BaAFxtCq39Fxir8fNZ4VDnwgfi6Kzi5/F1tAFsm0amuuV8kd+Pxzuf/"
         crossorigin="anonymous"></script>
@@ -166,5 +492,6 @@
         integrity="sha384-QfbOCebHNw8pQiPAOd2IFee2v2A5VYZxBk0+JGZ5H+3mfzVIp6zsQNkTsfGJot93"
         crossorigin="anonymous"></script>
 <script src="js/map.js"></script>
+<script src="js/panel.js"></script>
 </body>
 </html>
