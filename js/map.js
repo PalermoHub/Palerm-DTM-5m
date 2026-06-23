@@ -101,6 +101,7 @@ const map = new maplibregl.Map({
         tileSize: 256,
         minzoom: 8,
         maxzoom: 15,
+        scheme: 'tms',
         attribution: 'Analisi elevazione: DTM HRDTM5m@italia'
       }
     },
