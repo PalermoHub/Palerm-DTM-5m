@@ -48,6 +48,35 @@
     <input type="range" id="ctr-opacity-slider" min="0.1" max="1" step="0.05" value="0.7" />
   </div>
 
+  <div class="section-label">Analisi elevazione</div>
+
+  <div class="toggle-row">
+    <label for="toggle-elevation"><span class="icon">🎨</span> Mappa elevazione</label>
+    <label class="switch">
+      <input type="checkbox" id="toggle-elevation" />
+      <span class="slider"></span>
+    </label>
+  </div>
+  <div class="slider-row" id="elevation-opacity-row" style="display:none;">
+    <label>
+      <span>Opacità</span>
+      <span id="elevation-opacity-val">0.70</span>
+    </label>
+    <input type="range" id="elevation-opacity-slider" min="0.1" max="1" step="0.05" value="0.70" />
+  </div>
+  <div class="legend" id="legend-elevation">
+    <div class="legend-item"><div class="legend-box" style="background:#00bfbf;"></div><span>≤ 0 m</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#00cb9b;"></div><span>0 – 50 m</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#00d777;"></div><span>50 – 100 m</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#00ef2f;"></div><span>100 – 200 m</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#22ff00;"></div><span>200 – 300 m</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#82ff00;"></div><span>300 – 400 m</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#e2ff00;"></div><span>400 – 500 m</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#ffdd00;"></div><span>500 – 600 m</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#fe7f01;"></div><span>600 – 800 m</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#141414;"></div><span>&gt; 800 m</span></div>
+  </div>
+
   <div class="section-label">Curve di livello</div>
 
   <div class="toggle-row">

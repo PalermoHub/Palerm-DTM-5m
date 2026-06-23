@@ -94,6 +94,14 @@ const map = new maplibregl.Map({
         type: 'vector',
         url: 'pmtiles://https://palermohub.github.io/Palerm-DTM-5m/docs/tiles/contours.pmtiles',
         attribution: 'Curve di livello: DTM HRDTM5m@italia'
+      },
+      'elevation-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/elevazione/{z}/{x}/{y}.png`],
+        tileSize: 256,
+        minzoom: 8,
+        maxzoom: 15,
+        attribution: 'Analisi elevazione: DTM HRDTM5m@italia'
       }
     },
     layers: [
@@ -118,6 +126,15 @@ const map = new maplibregl.Map({
 
       // Basemap raster — SOPRA hillshade, con opacità per far trasparire il rilievo
       { id: 'basemap-layer', type: 'raster', source: 'basemap', paint: { 'raster-opacity': 0.85 } },
+
+      // Mappa elevazione colorata — analisi DTM, disattiva di default
+      {
+        id: 'elevation-layer',
+        type: 'raster',
+        source: 'elevation-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 0.70 }
+      },
 
       // Overlay CTR — disattivo di default, si sovrappone alla basemap attiva
       {
@@ -331,6 +348,20 @@ document.getElementById('toggle-contour').addEventListener('change', function ()
     map.setLayoutProperty(id, 'visibility', vis);
   });
   document.getElementById('legend-contour').classList.toggle('visible', contourActive);
+});
+
+// ── Toggle mappa elevazione ───────────────────────────────────────────
+document.getElementById('toggle-elevation').addEventListener('change', function () {
+  const vis = this.checked ? 'visible' : 'none';
+  map.setLayoutProperty('elevation-layer', 'visibility', vis);
+  document.getElementById('elevation-opacity-row').style.display = this.checked ? 'block' : 'none';
+  document.getElementById('legend-elevation').classList.toggle('visible', this.checked);
+});
+
+document.getElementById('elevation-opacity-slider').addEventListener('input', function () {
+  const val = parseFloat(this.value);
+  document.getElementById('elevation-opacity-val').textContent = val.toFixed(2);
+  map.setPaintProperty('elevation-layer', 'raster-opacity', val);
 });
 
 // ── Toggle overlay CTR ────────────────────────────────────────────────────

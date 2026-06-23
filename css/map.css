@@ -146,6 +146,14 @@ input:checked + .slider::before { transform: translateX(18px); background: #fff;
   border-radius: 1px;
 }
 
+.legend-box {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
 /* Info box */
 #info {
   position: absolute;
