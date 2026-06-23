@@ -1,75 +1,89 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DTM 3D — Palermo</title>
-  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
-          integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
-          crossorigin="anonymous"></script>
-  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet"
-        integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V"
-        crossorigin="anonymous">
-  <script src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"
-          integrity="sha384-QfbOCebHNw8pQiPAOd2IFee2v2A5VYZxBk0+JGZ5H+3mfzVIp6zsQNkTsfGJot93"
-          crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="css/dtm.css"/>
-	<link rel="shortcut icon" href="img/favicon.ico"/>
-    <link rel="icon" href="img/favicon.png" type="image/png"/>		  
-  
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palermo DTM 5m — MapLibre 3D</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css"
+        integrity="sha384-Nq6PQ+9vJPvw7U/VfDELyrWoGQMsy0gi6QShhaSrGzkpF5KkM40csg2leky+YMTd"
+        crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/map.css" />
 </head>
 <body>
-  <div id="map"></div>
 
-  <div id="panel">
-    <h1>DTM 3D — Palermo <span class="badge">5 m</span></h1>
+<div id="map"></div>
 
-    <!-- Terrain 3D -->
-    <div class="row">
-      <input type="checkbox" id="chk-terrain" checked>
-      <label for="chk-terrain">Terreno 3D</label>
-    </div>
+<div id="controls">
+  <h2>🗻 Palermo DTM 5m</h2>
 
-    <!-- Exaggeration -->
-    <div class="row">
-      <label for="sl-exag">Esagerazione</label>
-      <input type="range" id="sl-exag" min="1" max="6" step="0.1" value="1.5">
-      <span class="val" id="val-exag">1.5×</span>
-    </div>
-
-    <hr>
-
-    <!-- Hillshade -->
-    <div class="row">
-      <input type="checkbox" id="chk-hs" checked>
-      <label for="chk-hs">Hillshade</label>
-    </div>
-    <div class="row">
-      <label for="sl-hs">Opacità HS</label>
-      <input type="range" id="sl-hs" min="0" max="1" step="0.05" value="0.55">
-      <span class="val" id="val-hs">0.55</span>
-    </div>
-
-    <hr>
-
-    <!-- Contours -->
-    <div class="row">
-      <input type="checkbox" id="chk-cnt" checked>
-      <label for="chk-cnt">Curve di livello</label>
-    </div>
-    <div class="row">
-      <label for="sl-cnt">Opacità curve</label>
-      <input type="range" id="sl-cnt" min="0" max="1" step="0.05" value="0.7">
-      <span class="val" id="val-cnt">0.70</span>
-    </div>
-
-    <hr>
-
-    <!-- Pitch toggle -->
-    <button id="pitch-btn">Vista: 3D ↔ Pianta</button>
+  <div class="section-label">Cartografia di base</div>
+  <div class="radio-group">
+    <label class="radio-row">
+      <input type="radio" name="basemap" value="osm" checked /> OpenStreetMap
+    </label>
+    <label class="radio-row">
+      <input type="radio" name="basemap" value="satellite" /> Google Satellite
+    </label>
+    <label class="radio-row">
+      <input type="radio" name="basemap" value="esri" /> Esri WorldImagery
+    </label>
   </div>
 
-<script src="js/dtm.js"></script>
+  <div class="section-label">Terreno & rilievo</div>
+
+  <div class="toggle-row">
+    <label for="toggle-terrain"><span class="icon">🏔️</span> Modello 3D terreno</label>
+    <label class="switch">
+      <input type="checkbox" id="toggle-terrain" />
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="slider-row" id="exaggeration-row" style="display:none;">
+    <label>
+      <span>Esagerazione verticale</span>
+      <span id="exag-val">1.5×</span>
+    </label>
+    <input type="range" id="exag-slider" min="1" max="5" step="0.1" value="1.5" />
+  </div>
+
+  <div class="toggle-row">
+    <label for="toggle-shadow"><span class="icon">🌤️</span> Ombreggiatura rilievo</label>
+    <label class="switch">
+      <input type="checkbox" id="toggle-shadow" />
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="section-label">Curve di livello</div>
+
+  <div class="toggle-row">
+    <label for="toggle-contour"><span class="icon">📏</span> Mostra curve</label>
+    <label class="switch">
+      <input type="checkbox" id="toggle-contour" />
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="legend" id="legend-contour">
+    <div class="legend-item">
+      <div class="legend-line" style="background:#f59e0b; height:2px;"></div>
+      <span>Curve principali (50m)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-line" style="background:#fcd34d; height:1px;"></div>
+      <span>Curve secondarie (10m) — zoom ≥13</span>
+    </div>
+  </div>
+</div>
+
+<div id="info">
+  DTM 5m · Palermo · <a href="https://github.com/coseerobe/palermo_dtm_5m" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js"
+        integrity="sha384-GfxBM9x46BaAFxtCq39Fxir8fNZ4VDnwgfi6Kzi5/F1tAFsm0amuuV8kd+Pxzuf/"
+        crossorigin="anonymous"></script>
+<script src="js/map.js"></script>
 </body>
 </html>
