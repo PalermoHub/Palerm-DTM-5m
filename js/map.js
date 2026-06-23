@@ -97,7 +97,9 @@ const map = new maplibregl.Map({
       },
       'griglia-dtm': {
         type: 'vector',
-        url: `pmtiles://${BASE_URL}docs/tiles/griglia.pmtiles`,
+        tiles: [`${BASE_URL}docs/tiles/griglia_pbf/{z}/{x}/{y}.pbf`],
+        minzoom: 8,
+        maxzoom: 15,
         attribution: 'Analisi DTM: HRDTM5m@italia'
       },
       'elevation-raster': {
@@ -133,41 +135,12 @@ const map = new maplibregl.Map({
       // Basemap raster — SOPRA hillshade, con opacità per far trasparire il rilievo
       { id: 'basemap-layer', type: 'raster', source: 'basemap', paint: { 'raster-opacity': 0.85 } },
 
-      // Griglia analisi DTM 50m — punti vettoriali interrogabili
-      {
-        id: 'griglia-circles',
-        type: 'circle',
-        source: 'griglia-dtm',
-        'source-layer': 'griglia',
-        layout: { visibility: 'none' },
-        minzoom: 10,
-        paint: {
-          'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 2, 13, 4, 15, 6],
-          'circle-color': [
-            'interpolate', ['linear'], ['get', 'quota'],
-            0,   '#00bfbf',
-            50,  '#00cb9b',
-            100, '#00d777',
-            200, '#00ef2f',
-            300, '#22ff00',
-            400, '#82ff00',
-            500, '#e2ff00',
-            600, '#ffdd00',
-            800, '#fe7f01',
-            1010,'#141414'
-          ],
-          'circle-stroke-color': 'rgba(0,0,0,0.3)',
-          'circle-stroke-width': 0.5,
-          'circle-opacity': 0.85
-        }
-      },
-
       // Mappa elevazione colorata — analisi DTM, disattiva di default
       {
         id: 'elevation-layer',
         type: 'raster',
         source: 'elevation-raster',
-        layout: { visibility: 'none' },
+        layout: { visibility: 'visible' },
         paint: { 'raster-opacity': 0.70 }
       },
 
@@ -178,6 +151,22 @@ const map = new maplibregl.Map({
         source: 'ctr2k',
         layout: { visibility: 'none' },
         paint: { 'raster-opacity': 0.7 }
+      },
+
+      // Griglia analisi DTM 50m — punti vettoriali interrogabili (sopra tutti i raster)
+      {
+        id: 'griglia-circles',
+        type: 'circle',
+        source: 'griglia-dtm',
+        'source-layer': 'griglia',
+        layout: { visibility: 'visible' },
+        minzoom: 8,
+        paint: {
+          'circle-radius': ['interpolate', ['linear'], ['zoom'], 8, 4, 11, 6, 13, 8, 15, 12],
+          'circle-color': 'transparent',
+          'circle-stroke-width': 0,
+          'circle-opacity': 0
+        }
       },
 
       // Curve 10m — linee sottili, visibili da zoom 12
@@ -396,17 +385,18 @@ const grigliaPop = new maplibregl.Popup({ closeButton: false, closeOnClick: fals
 map.on('mouseenter', 'griglia-circles', (e) => {
   map.getCanvas().style.cursor = 'pointer';
   const p = e.features[0].properties;
+  const n = (v, d=1) => v != null ? Number(v).toFixed(d) : '—';
   const rows = [
-    ['Quota',        `${p.quota?.toFixed(1)} m s.l.m.`],
-    ['Pendenza',     `${p.slope_deg?.toFixed(1)}° (${p.slope_pct?.toFixed(1)}%)`],
-    ['Esposizione',  p.aspetto_nome],
-    ['Geomorfologia',p.geomorf_nome],
-    ['Stabilità',    p.stabilita_nome],
-    ['Costruibilità',p.costr_nome],
-    ['TRI',          p.tri?.toFixed(3)],
-    ['TPI',          p.tpi?.toFixed(3)],
-    ['Hillshade',    p.hillshade],
-    ['SRI',          p.sri?.toFixed(3)],
+    ['Quota',        `${n(p.quota)} m s.l.m.`],
+    ['Pendenza',     `${n(p.slope_deg)}° (${n(p.slope_pct)}%)`],
+    ['Esposizione',  p.aspetto_nome || '—'],
+    ['Geomorfologia',p.geomorf_nome || '—'],
+    ['Stabilità',    p.stabilita_nome || '—'],
+    ['Costruibilità',p.costr_nome || '—'],
+    ['TRI',          n(p.tri, 3)],
+    ['TPI',          n(p.tpi, 3)],
+    ['Hillshade',    n(p.hillshade, 0)],
+    ['SRI',          n(p.sri, 3)],
   ];
 
   const wrap = document.createElement('div');
