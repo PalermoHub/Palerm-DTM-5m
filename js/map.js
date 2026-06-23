@@ -1,3 +1,7 @@
+// ── PMTiles protocol ──────────────────────────────────────────────────────
+const pmtilesProtocol = new pmtiles.Protocol();
+maplibregl.addProtocol('pmtiles', pmtilesProtocol.tile.bind(pmtilesProtocol));
+
 // ── Costanti ──────────────────────────────────────────────────────────────
 const CENTER  = [13.348027, 38.136896];
 const ZOOM    = 11;
@@ -33,7 +37,7 @@ const BASEMAPS = {
     tileSize: 256,
     attribution: '© OpenStreetMap contributors',
     attributionNode: makeAttribNode('© OpenStreetMap contributors', 'https://www.openstreetmap.org/copyright'),
-    maxzoom: 19,
+    maxzoom: 18,
     opacity: 0.85
   },
   satellite: {
@@ -47,7 +51,7 @@ const BASEMAPS = {
     tileSize: 256,
     attribution: '© Google',
     attributionNode: makeAttribNode('© Google', null),
-    maxzoom: 21,
+    maxzoom: 18,
     opacity: 1.0
   },
   esri: {
@@ -56,7 +60,7 @@ const BASEMAPS = {
     tileSize: 256,
     attribution: '© Esri, Maxar, Earthstar Geographics',
     attributionNode: makeAttribNode('© Esri, Maxar, Earthstar Geographics', null),
-    maxzoom: 19,
+    maxzoom: 18,
     opacity: 1.0
   },
 };
@@ -74,7 +78,7 @@ const map = new maplibregl.Map({
         type: 'raster',
         tiles: ['https://siciliahub.github.io/Tiles/ctr_pa_2k/{z}/{x}/{y}.png'],
         tileSize: 256,
-        maxzoom: 19,
+        maxzoom: 18,
         attribution: 'CTC - Carta tecnica comunale 2k – 2006'
       },
       'terrain-dem': {
@@ -86,13 +90,10 @@ const map = new maplibregl.Map({
         maxzoom: 15,
         attribution: 'DTM: HRDTM5m@italia'
       },
-      contours_50m: {
-        type: 'geojson',
-        data: `${BASE_URL}docs/geojson/contours_50m.geojson`
-      },
-      contours_10m: {
-        type: 'geojson',
-        data: `${BASE_URL}docs/geojson/contours_10m.geojson`
+      contours: {
+        type: 'vector',
+        url: `pmtiles://${BASE_URL}docs/tiles/contours.pmtiles`,
+        attribution: 'Curve di livello: DTM HRDTM5m@italia'
       }
     },
     layers: [
@@ -127,11 +128,12 @@ const map = new maplibregl.Map({
         paint: { 'raster-opacity': 0.7 }
       },
 
-      // Curve 10m (visibili solo da zoom 13)
+      // Curve 10m (visibili solo da zoom 12+, source-layer PMTiles)
       {
         id: 'contours-10m-layer',
         type: 'line',
-        source: 'contours_10m',
+        source: 'contours',
+        'source-layer': 'contours_10m',
         layout: { visibility: 'none' },
         paint: {
           'line-color': '#fcd34d',
@@ -145,7 +147,8 @@ const map = new maplibregl.Map({
       {
         id: 'contours-50m-layer',
         type: 'line',
-        source: 'contours_50m',
+        source: 'contours',
+        'source-layer': 'contours_50m',
         layout: { visibility: 'none' },
         paint: {
           'line-color': '#f59e0b',
@@ -158,7 +161,8 @@ const map = new maplibregl.Map({
       {
         id: 'contours-50m-labels',
         type: 'symbol',
-        source: 'contours_50m',
+        source: 'contours',
+        'source-layer': 'contours_50m',
         layout: {
           visibility: 'none',
           'symbol-placement': 'line',
