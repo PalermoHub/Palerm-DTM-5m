@@ -741,7 +741,7 @@ body {
 /* Toggle button laterale — centrato, 40×80px */
 #rp-toggle {
   width: 20px;
-  height: 80px;
+  height: 60px;
   align-self: center;
   flex-shrink: 0;
   background: rgba(255, 255, 255, 0.97);
