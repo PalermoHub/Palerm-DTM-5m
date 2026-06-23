@@ -39,7 +39,24 @@
       });
 
       map.setTerrain({ source: "terrain-dem", exaggeration: 1.5 });
-      console.log("[DTM] setTerrain called", map.getTerrain());
+
+      // Sky layer per aspetto realistico e per coprire l'orizzonte
+      map.addLayer({
+        id: "sky",
+        type: "sky",
+        paint: {
+          "sky-type": "atmosphere",
+          "sky-atmosphere-sun": [0.0, 90.0],
+          "sky-atmosphere-sun-intensity": 15,
+        },
+      });
+
+      // Fog nasconde i boundary artifacts del DTM ai bordi della vista
+      map.setFog({
+        range: [0.5, 10],
+        color: "rgba(240,240,250,0.9)",
+        "horizon-blend": 0.1,
+      });
 
       // Hillshade raster
       map.addSource("hillshade-src", {
@@ -75,7 +92,7 @@
         source: "contours-src",
         "source-layer": "contours",
         filter: ["==", ["get", "major"], 0],
-        minzoom: 12,
+        minzoom: 13,
         paint: {
           "line-color": "#6b4226",
           "line-width": ["interpolate", ["linear"], ["zoom"], 12, 0.4, 16, 0.9],
@@ -89,7 +106,7 @@
         source: "contours-src",
         "source-layer": "contours",
         filter: ["==", ["get", "major"], 1],
-        minzoom: 10,
+        minzoom: 11,
         paint: {
           "line-color": "#6b4226",
           "line-width": ["interpolate", ["linear"], ["zoom"], 10, 0.8, 16, 2.0],
