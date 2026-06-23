@@ -15,17 +15,140 @@
           'Quasi il <strong>70% della superficie</strong> si trova sotto i 200 m, ma il territorio si estende ' +
           'verticalmente per oltre un chilometro.'
         );
-        appendSectionTitle(el, 'Distribuzione per fascia');
+
         var canvasId = 'rp-c-elev';
-        appendChart(el, canvasId);
-        appendTable(el, ['Fascia altimetrica', '%'], [
-          ['0–50 m  costiera e pianura', '35,6%', 'hl'],
-          ['50–200 m  bassa collina', '33,9%', ''],
-          ['200–500 m  media collina', '19,2%', ''],
-          ['500–800 m  alta collina', '9,4%', ''],
-          ['800–1051 m  montagna', '1,8%', '']
-        ]);
-        initChart(canvasId, 'bar',
+
+        // Crea la card della ring chart ad anello
+        var card = document.createElement('div');
+        card.className = 'ring-card';
+
+        // Intestazione card
+        var cardHeader = document.createElement('div');
+        cardHeader.className = 'ring-card-header';
+        cardHeader.textContent = 'Distribuzione classi';
+        card.appendChild(cardHeader);
+
+        // Container grafico
+        var chartContainer = document.createElement('div');
+        chartContainer.className = 'ring-chart-container';
+
+        var canvas = document.createElement('canvas');
+        canvas.id = canvasId;
+        chartContainer.appendChild(canvas);
+
+        // Testo centrale all'anello
+        var centerText = document.createElement('div');
+        centerText.className = 'ring-chart-center';
+
+        var centerVal = document.createElement('div');
+        centerVal.className = 'ring-chart-center-val';
+        centerVal.textContent = '158.9';
+
+        var centerLabel = document.createElement('div');
+        centerLabel.className = 'ring-chart-center-label';
+        centerLabel.textContent = 'km²';
+
+        centerText.appendChild(centerVal);
+        centerText.appendChild(centerLabel);
+        chartContainer.appendChild(centerText);
+
+        card.appendChild(chartContainer);
+
+        // Lista legenda
+        var legendList = document.createElement('div');
+        legendList.className = 'ring-legend-list';
+
+        var legendData = [
+          { label: '0–50 m  costiera e pianura', val: '56.6', pct: '35.6%', color: '#00cb9b' },
+          { label: '50–200 m  bassa collina', val: '53.9', pct: '33.9%', color: '#00ef2f' },
+          { label: '200–500 m  media collina', val: '30.5', pct: '19.2%', color: '#e2ff00' },
+          { label: '500–800 m  alta collina', val: '14.9', pct: '9.4%', color: '#fe7f01' },
+          { label: '800–1051 m  montagna', val: '2.9', pct: '1.8%', color: '#505050' }
+        ];
+
+        legendData.forEach(function (item) {
+          var itemEl = document.createElement('div');
+          itemEl.className = 'ring-legend-item';
+
+          var dot = document.createElement('div');
+          dot.className = 'ring-legend-dot';
+          dot.style.backgroundColor = item.color;
+          itemEl.appendChild(dot);
+
+          var label = document.createElement('div');
+          label.className = 'ring-legend-label';
+          label.textContent = item.label;
+          itemEl.appendChild(label);
+
+          var barWrap = document.createElement('div');
+          barWrap.className = 'ring-legend-bar-wrap';
+
+          var barFill = document.createElement('div');
+          barFill.className = 'ring-legend-bar-fill';
+          barFill.style.backgroundColor = item.color;
+          var pctVal = parseFloat(item.pct);
+          barFill.style.width = pctVal + '%';
+
+          var knob = document.createElement('div');
+          knob.className = 'ring-legend-bar-knob';
+          knob.style.backgroundColor = item.color;
+          barFill.appendChild(knob);
+
+          barWrap.appendChild(barFill);
+          itemEl.appendChild(barWrap);
+
+          var val = document.createElement('div');
+          val.className = 'ring-legend-val';
+          val.textContent = item.val;
+          itemEl.appendChild(val);
+
+          var pct = document.createElement('div');
+          pct.className = 'ring-legend-pct';
+          pct.textContent = item.pct;
+          itemEl.appendChild(pct);
+
+          legendList.appendChild(itemEl);
+        });
+
+        card.appendChild(legendList);
+
+        // Separatore
+        var divider = document.createElement('div');
+        divider.className = 'ring-card-divider';
+        card.appendChild(divider);
+
+        // Righe di sintesi
+        var summaryRow = document.createElement('div');
+        summaryRow.className = 'ring-summary-row';
+
+        var summaries = [
+          { val: '158.9', label: 'km² area' },
+          { val: '183', label: 'm media' },
+          { val: '1.050', label: 'm max' }
+        ];
+
+        summaries.forEach(function (s) {
+          var sumItem = document.createElement('div');
+          sumItem.className = 'ring-summary-item';
+
+          var sVal = document.createElement('span');
+          sVal.className = 'ring-summary-val';
+          sVal.textContent = s.val;
+
+          var sLabel = document.createElement('span');
+          sLabel.className = 'ring-summary-label';
+          sLabel.textContent = s.label;
+
+          sumItem.appendChild(sVal);
+          sumItem.appendChild(sLabel);
+          summaryRow.appendChild(sumItem);
+        });
+
+        card.appendChild(summaryRow);
+        el.appendChild(card);
+
+        // Inizializza il grafico ad anello (ring)
+        initChart(canvasId, 'ring',
           ['0–50m', '50–200m', '200–500m', '500–800m', '800–1051m'],
           [35.6, 33.9, 19.2, 9.4, 1.8],
           ['#00cb9b', '#00ef2f', '#e2ff00', '#fe7f01', '#505050']
@@ -346,7 +469,13 @@
 
   function initChart(canvasId, type, labels, data, colors) {
     var canvas = document.getElementById(canvasId);
-    if (!canvas || chartInstances[canvasId]) return;
+    if (!canvas) return;
+
+    // Se esiste già un'istanza per questo canvasId, la distruggiamo per poterla ricreare
+    if (chartInstances[canvasId]) {
+      chartInstances[canvasId].destroy();
+      delete chartInstances[canvasId];
+    }
 
     var defaultColors = [
       '#2458c8', '#e07800', '#1a7a40', '#b84010', '#7986cb',
@@ -381,6 +510,22 @@
         cutout: '55%',
         plugins: {
           legend: { display: true, position: 'bottom', labels: { color: '#3a4e78', font: { size: 9, family: "'Titillium Web', sans-serif" }, boxWidth: 10, padding: 5 } },
+          tooltip: { callbacks: { label: function (c) { return ' ' + c.raw + '%'; } } }
+        }
+      };
+      chartInstances[canvasId] = new Chart(canvas, {
+        type: 'doughnut',
+        data: { labels: labels, datasets: [{ data: data, backgroundColor: bgColors, borderWidth: 0 }] },
+        options: opts
+      });
+
+    } else if (type === 'ring') {
+      opts = {
+        responsive: true,
+        maintainAspectRatio: true,
+        cutout: '72%',
+        plugins: {
+          legend: { display: false },
           tooltip: { callbacks: { label: function (c) { return ' ' + c.raw + '%'; } } }
         }
       };
