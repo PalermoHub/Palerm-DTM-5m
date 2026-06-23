@@ -95,6 +95,11 @@ const map = new maplibregl.Map({
         url: 'pmtiles://https://palermohub.github.io/Palerm-DTM-5m/docs/tiles/contours.pmtiles',
         attribution: 'Curve di livello: DTM HRDTM5m@italia'
       },
+      'griglia-dtm': {
+        type: 'vector',
+        url: `pmtiles://${BASE_URL}docs/tiles/griglia.pmtiles`,
+        attribution: 'Analisi DTM: HRDTM5m@italia'
+      },
       'elevation-raster': {
         type: 'raster',
         tiles: [`${BASE_URL}docs/tiles/elevazione/{z}/{x}/{y}.png`],
@@ -127,6 +132,35 @@ const map = new maplibregl.Map({
 
       // Basemap raster — SOPRA hillshade, con opacità per far trasparire il rilievo
       { id: 'basemap-layer', type: 'raster', source: 'basemap', paint: { 'raster-opacity': 0.85 } },
+
+      // Griglia analisi DTM 50m — punti vettoriali interrogabili
+      {
+        id: 'griglia-circles',
+        type: 'circle',
+        source: 'griglia-dtm',
+        'source-layer': 'griglia',
+        layout: { visibility: 'none' },
+        minzoom: 10,
+        paint: {
+          'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 2, 13, 4, 15, 6],
+          'circle-color': [
+            'interpolate', ['linear'], ['get', 'quota'],
+            0,   '#00bfbf',
+            50,  '#00cb9b',
+            100, '#00d777',
+            200, '#00ef2f',
+            300, '#22ff00',
+            400, '#82ff00',
+            500, '#e2ff00',
+            600, '#ffdd00',
+            800, '#fe7f01',
+            1010,'#141414'
+          ],
+          'circle-stroke-color': 'rgba(0,0,0,0.3)',
+          'circle-stroke-width': 0.5,
+          'circle-opacity': 0.85
+        }
+      },
 
       // Mappa elevazione colorata — analisi DTM, disattiva di default
       {
@@ -349,6 +383,56 @@ document.getElementById('toggle-contour').addEventListener('change', function ()
     map.setLayoutProperty(id, 'visibility', vis);
   });
   document.getElementById('legend-contour').classList.toggle('visible', contourActive);
+});
+
+// ── Toggle griglia analisi DTM ────────────────────────────────────────
+document.getElementById('toggle-griglia').addEventListener('change', function () {
+  map.setLayoutProperty('griglia-circles', 'visibility', this.checked ? 'visible' : 'none');
+});
+
+// Popup griglia — hover
+const grigliaPop = new maplibregl.Popup({ closeButton: false, closeOnClick: false, maxWidth: '280px' });
+
+map.on('mouseenter', 'griglia-circles', (e) => {
+  map.getCanvas().style.cursor = 'pointer';
+  const p = e.features[0].properties;
+  const rows = [
+    ['Quota',        `${p.quota?.toFixed(1)} m s.l.m.`],
+    ['Pendenza',     `${p.slope_deg?.toFixed(1)}° (${p.slope_pct?.toFixed(1)}%)`],
+    ['Esposizione',  p.aspetto_nome],
+    ['Geomorfologia',p.geomorf_nome],
+    ['Stabilità',    p.stabilita_nome],
+    ['Costruibilità',p.costr_nome],
+    ['TRI',          p.tri?.toFixed(3)],
+    ['TPI',          p.tpi?.toFixed(3)],
+    ['Hillshade',    p.hillshade],
+    ['SRI',          p.sri?.toFixed(3)],
+  ];
+
+  const wrap = document.createElement('div');
+  wrap.className = 'griglia-popup';
+  const title = document.createElement('strong');
+  title.textContent = '📍 Punto analisi DTM';
+  wrap.appendChild(title);
+  const table = document.createElement('table');
+  rows.forEach(([k, v]) => {
+    const tr = document.createElement('tr');
+    const td1 = document.createElement('td');
+    td1.textContent = k;
+    const td2 = document.createElement('td');
+    td2.textContent = v ?? '—';
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    table.appendChild(tr);
+  });
+  wrap.appendChild(table);
+
+  grigliaPop.setLngLat(e.lngLat).setDOMContent(wrap).addTo(map);
+});
+
+map.on('mouseleave', 'griglia-circles', () => {
+  map.getCanvas().style.cursor = '';
+  grigliaPop.remove();
 });
 
 // ── Toggle mappa elevazione ───────────────────────────────────────────
