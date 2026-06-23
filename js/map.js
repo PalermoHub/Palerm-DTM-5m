@@ -71,7 +71,7 @@ const map = new maplibregl.Map({
   hash: true,
   style: {
     version: 8,
-    glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+    glyphs: 'https://fonts.openmaptiles.org/{fontstack}/{range}.pbf',
     sources: {
       basemap: BASEMAPS.osm,
       'ctr2k': {
@@ -92,7 +92,7 @@ const map = new maplibregl.Map({
       },
       contours: {
         type: 'vector',
-        url: `pmtiles://${BASE_URL}docs/tiles/contours.pmtiles`,
+        url: 'pmtiles://https://palermohub.github.io/Palerm-DTM-5m/docs/tiles/contours.pmtiles',
         attribution: 'Curve di livello: DTM HRDTM5m@italia'
       }
     },
@@ -168,7 +168,7 @@ const map = new maplibregl.Map({
           'symbol-placement': 'line',
           'symbol-spacing': 400,
           'text-field': ['concat', ['to-string', ['get', 'elevation']], ' m'],
-          'text-size': 9,
+          'text-size': 11,
           'text-font': ['Open Sans Regular'],
           'text-offset': [0, 0],
           'text-max-angle': 30,
@@ -193,7 +193,7 @@ const map = new maplibregl.Map({
           'symbol-placement': 'line',
           'symbol-spacing': 300,
           'text-field': ['concat', ['to-string', ['get', 'elevation']], ' m'],
-          'text-size': ['interpolate', ['linear'], ['zoom'], 11, 10, 14, 12],
+          'text-size': ['interpolate', ['linear'], ['zoom'], 11, 12, 14, 15],
           'text-font': ['Open Sans Bold'],
           'text-offset': [0, 0],
           'text-max-angle': 30,
