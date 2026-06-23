@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DTM 3D — Palermo</title>
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
+          integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
+          crossorigin="anonymous"></script>
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet"
+        integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V"
+        crossorigin="anonymous">
+  <script src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"
+          integrity="sha384-QfbOCebHNw8pQiPAOd2IFee2v2A5VYZxBk0+JGZ5H+3mfzVIp6zsQNkTsfGJot93"
+          crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: system-ui, sans-serif; }
+    #map { position: absolute; inset: 0; }
+
+    #panel {
+      position: absolute;
+      top: 10px; right: 10px;
+      width: 260px;
+      background: rgba(10,10,20,0.85);
+      color: #e8e8f0;
+      border-radius: 8px;
+      padding: 14px 16px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 12px rgba(0,0,0,.5);
+      z-index: 10;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    #panel h1 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: .03em;
+      color: #fff;
+    }
+
+    .row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .row label { flex: 1; cursor: pointer; user-select: none; }
+    .row input[type=range] { flex: 0 0 90px; accent-color: #6eb5ff; }
+    .row input[type=checkbox] { width: 15px; height: 15px; accent-color: #6eb5ff; cursor: pointer; }
+    .val { min-width: 28px; text-align: right; color: #aad4ff; font-variant-numeric: tabular-nums; }
+
+    hr { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 10px 0; }
+
+    #pitch-btn {
+      width: 100%;
+      padding: 7px 0;
+      background: #2a4a7a;
+      color: #d0e8ff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+      margin-top: 4px;
+      transition: background .15s;
+    }
+    #pitch-btn:hover { background: #3a6ab0; }
+
+    .badge {
+      display: inline-block;
+      background: rgba(110,181,255,.15);
+      border: 1px solid rgba(110,181,255,.3);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 11px;
+      color: #9ac8ff;
+      margin-left: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <div id="panel">
+    <h1>DTM 3D — Palermo <span class="badge">5 m</span></h1>
+
+    <!-- Terrain 3D -->
+    <div class="row">
+      <input type="checkbox" id="chk-terrain" checked>
+      <label for="chk-terrain">Terreno 3D</label>
+    </div>
+
+    <!-- Exaggeration -->
+    <div class="row">
+      <label for="sl-exag">Esagerazione</label>
+      <input type="range" id="sl-exag" min="1" max="6" step="0.1" value="1.5">
+      <span class="val" id="val-exag">1.5×</span>
+    </div>
+
+    <hr>
+
+    <!-- Hillshade -->
+    <div class="row">
+      <input type="checkbox" id="chk-hs" checked>
+      <label for="chk-hs">Hillshade</label>
+    </div>
+    <div class="row">
+      <label for="sl-hs">Opacità HS</label>
+      <input type="range" id="sl-hs" min="0" max="1" step="0.05" value="0.55">
+      <span class="val" id="val-hs">0.55</span>
+    </div>
+
+    <hr>
+
+    <!-- Contours -->
+    <div class="row">
+      <input type="checkbox" id="chk-cnt" checked>
+      <label for="chk-cnt">Curve di livello</label>
+    </div>
+    <div class="row">
+      <label for="sl-cnt">Opacità curve</label>
+      <input type="range" id="sl-cnt" min="0" max="1" step="0.05" value="0.7">
+      <span class="val" id="val-cnt">0.70</span>
+    </div>
+
+    <hr>
+
+    <!-- Pitch toggle -->
+    <button id="pitch-btn">Vista: 3D ↔ Pianta</button>
+  </div>
+
+  <script>
+  (function () {
+    // ── PMTiles protocol ──────────────────────────────────────────────────────
+    const p = new pmtiles.Protocol();
+    maplibregl.addProtocol("pmtiles", p.tile);
+
+    // Absolute URL for tiles dir — works locally and on GitHub Pages
+    const TILES = new URL("tiles", location.href).href;
+
+    // ── Map init ──────────────────────────────────────────────────────────────
+    const map = new maplibregl.Map({
+      container: "map",
+      style: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
+      center: [13.35, 38.12],
+      zoom: 10,
+      pitch: 45,
+      bearing: -10,
+      maxPitch: 85,
+      hash: true,
+    });
+
+    map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "bottom-right");
+    map.addControl(new maplibregl.ScaleControl({ unit: "metric" }), "bottom-left");
+
+    // ── Load sources + layers ─────────────────────────────────────────────────
+    map.on("load", () => {
+
+      // Terrain RGB source (Terrarium, 512 px tiles)
+      map.addSource("terrain-dem", {
+        type: "raster-dem",
+        url: `pmtiles://${TILES}/terrain.pmtiles`,
+        tileSize: 512,
+        encoding: "terrarium",
+        minzoom: 9,
+        maxzoom: 14,
+      });
+
+      map.setTerrain({ source: "terrain-dem", exaggeration: 1.5 });
+
+      // Sky (adds atmospheric haze in 3D)
+      map.setSky({
+        "sky-color": "#a8c8f0",
+        "sky-horizon-blend": 0.5,
+        "horizon-color": "#d0e8f8",
+        "horizon-fog-blend": 0.5,
+        "fog-color": "#e8f4fc",
+        "fog-ground-blend": 0.9,
+      });
+
+      // Hillshade raster
+      map.addSource("hillshade-src", {
+        type: "raster",
+        url: `pmtiles://${TILES}/hillshade.pmtiles`,
+        tileSize: 512,
+        minzoom: 9,
+        maxzoom: 14,
+      });
+
+      map.addLayer({
+        id: "hillshade",
+        type: "raster",
+        source: "hillshade-src",
+        paint: {
+          "raster-opacity": 0.55,
+          "raster-opacity-transition": { duration: 300 },
+          "raster-resampling": "linear",
+        },
+      });
+
+      // Contour lines (vector PMTiles, source-layer: contours)
+      map.addSource("contours-src", {
+        type: "vector",
+        url: `pmtiles://${TILES}/contours.pmtiles`,
+        minzoom: 10,
+        maxzoom: 16,
+      });
+
+      map.addLayer({
+        id: "contours-minor",
+        type: "line",
+        source: "contours-src",
+        "source-layer": "contours",
+        filter: ["==", ["get", "major"], 0],
+        minzoom: 12,
+        paint: {
+          "line-color": "#6b4226",
+          "line-width": ["interpolate", ["linear"], ["zoom"], 12, 0.4, 16, 0.9],
+          "line-opacity": 0.7,
+        },
+      });
+
+      map.addLayer({
+        id: "contours-major",
+        type: "line",
+        source: "contours-src",
+        "source-layer": "contours",
+        filter: ["==", ["get", "major"], 1],
+        minzoom: 10,
+        paint: {
+          "line-color": "#6b4226",
+          "line-width": ["interpolate", ["linear"], ["zoom"], 10, 0.8, 16, 2.0],
+          "line-opacity": 0.7,
+        },
+      });
+
+      map.addLayer({
+        id: "contours-label",
+        type: "symbol",
+        source: "contours-src",
+        "source-layer": "contours",
+        filter: ["==", ["get", "major"], 1],
+        minzoom: 12,
+        layout: {
+          "symbol-placement": "line",
+          "text-field": ["concat", ["to-string", ["get", "elev"]], " m"],
+          "text-size": 10,
+          "text-font": ["Noto Sans Regular"],
+          "text-offset": [0, 0.2],
+        },
+        paint: {
+          "text-color": "#5a3010",
+          "text-halo-color": "rgba(255,255,255,0.7)",
+          "text-halo-width": 1.5,
+        },
+      });
+    });
+
+    // ── Controls wiring ───────────────────────────────────────────────────────
+    function onReady(fn) {
+      if (map.isStyleLoaded()) fn();
+      else map.once("load", fn);
+    }
+
+    // Terrain toggle
+    document.getElementById("chk-terrain").addEventListener("change", e => {
+      onReady(() => {
+        if (e.target.checked) {
+          map.setTerrain({ source: "terrain-dem", exaggeration: +slExag.value });
+        } else {
+          map.setTerrain(null);
+        }
+      });
+    });
+
+    // Exaggeration
+    const slExag = document.getElementById("sl-exag");
+    const valExag = document.getElementById("val-exag");
+    slExag.addEventListener("input", () => {
+      const v = +slExag.value;
+      valExag.textContent = v.toFixed(1) + "×";
+      onReady(() => {
+        const t = map.getTerrain();
+        if (t) map.setTerrain({ ...t, exaggeration: v });
+      });
+    });
+
+    // Hillshade toggle
+    document.getElementById("chk-hs").addEventListener("change", e => {
+      onReady(() => map.setLayoutProperty("hillshade", "visibility", e.target.checked ? "visible" : "none"));
+    });
+
+    // Hillshade opacity
+    const slHs = document.getElementById("sl-hs");
+    const valHs = document.getElementById("val-hs");
+    slHs.addEventListener("input", () => {
+      const v = +slHs.value;
+      valHs.textContent = v.toFixed(2);
+      onReady(() => map.setPaintProperty("hillshade", "raster-opacity", v));
+    });
+
+    // Contours toggle
+    document.getElementById("chk-cnt").addEventListener("change", e => {
+      const vis = e.target.checked ? "visible" : "none";
+      onReady(() => {
+        ["contours-minor", "contours-major", "contours-label"].forEach(id =>
+          map.setLayoutProperty(id, "visibility", vis)
+        );
+      });
+    });
+
+    // Contours opacity
+    const slCnt = document.getElementById("sl-cnt");
+    const valCnt = document.getElementById("val-cnt");
+    slCnt.addEventListener("input", () => {
+      const v = +slCnt.value;
+      valCnt.textContent = v.toFixed(2);
+      onReady(() => {
+        map.setPaintProperty("contours-minor", "line-opacity", v);
+        map.setPaintProperty("contours-major", "line-opacity", v);
+        map.setPaintProperty("contours-label", "text-opacity", v);
+      });
+    });
+
+    // Pitch toggle 3D ↔ top-down
+    let in3d = true;
+    document.getElementById("pitch-btn").addEventListener("click", () => {
+      in3d = !in3d;
+      map.easeTo({ pitch: in3d ? 45 : 0, bearing: in3d ? -10 : 0, duration: 600 });
+    });
+  })();
+  </script>
+</body>
+</html>
