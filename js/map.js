@@ -3,9 +3,9 @@ const pmtilesProtocol = new pmtiles.Protocol();
 maplibregl.addProtocol('pmtiles', pmtilesProtocol.tilev4.bind(pmtilesProtocol));
 
 // ── Costanti ──────────────────────────────────────────────────────────────
-const CENTER  = [13.348027, 38.136896];
-const ZOOM    = 11;
-const BOUNDS  = [13.241342, 38.048415, 13.454712, 38.225377];
+const CENTER  = [13.32, 38.1026];
+const ZOOM    = 11.51;
+const BOUNDS  = [13.20, 38.01, 13.50, 38.26];
 
 // Base URL assoluta: risolve correttamente sia in locale (http.server)
 // che su GitHub Pages, sia in sottocartella che in radice.
@@ -214,11 +214,11 @@ const map = new maplibregl.Map({
   },
   center: CENTER,
   zoom: ZOOM,
-  pitch: 0,
-  bearing: 0,
+  pitch: 23,
+  bearing: -120.3,
   maxBounds: [
-    [BOUNDS[0] - 0.5, BOUNDS[1] - 0.5],
-    [BOUNDS[2] + 0.5, BOUNDS[3] + 0.5]
+    [BOUNDS[0], BOUNDS[1]],
+    [BOUNDS[2], BOUNDS[3]]
   ]
 });
 
@@ -260,7 +260,6 @@ function applyHillshade() {
 
 // ── Attivazione automatica al caricamento ─────────────────────────────────
 map.on('load', () => {
-  map.easeTo({ pitch: 45, duration: 800 });
   applyHillshade();
 });
 
