@@ -1,6 +1,6 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body { font-family: 'Segoe UI', system-ui, sans-serif; background: #1a1a2e; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: #ffffff; }
 
 #map { position: absolute; inset: 0; }
 
@@ -160,6 +160,24 @@ input:checked + .slider::before { transform: translateX(18px); background: #fff;
   font-size: 11px;
   color: #8090b0;
 }
+
+/* Pulsante piccolo (es. "Ora locale") */
+.btn-small {
+  display: block;
+  width: 100%;
+  margin: 4px 0 8px;
+  padding: 5px 10px;
+  background: rgba(104, 136, 255, 0.15);
+  border: 1px solid rgba(104, 136, 255, 0.35);
+  border-radius: 6px;
+  color: #a0aeff;
+  font-size: 11px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s;
+}
+
+.btn-small:hover { background: rgba(104, 136, 255, 0.28); }
 
 /* MapLibre attrib */
 .maplibregl-ctrl-attrib { font-size: 10px !important; }
