@@ -136,7 +136,7 @@ const map = new maplibregl.Map({
         'source-layer': 'contours_10m',
         layout: { visibility: 'none' },
         paint: {
-          'line-color': '#fcd34d',
+          'line-color': '#dc2626',
           'line-width': ['interpolate', ['linear'], ['zoom'], 12, 0.5, 15, 0.8, 16, 1.0],
           'line-opacity': ['interpolate', ['linear'], ['zoom'], 12, 0, 13, 0.6, 15, 0.85]
         },
@@ -151,7 +151,7 @@ const map = new maplibregl.Map({
         'source-layer': 'contours_50m',
         layout: { visibility: 'none' },
         paint: {
-          'line-color': '#f59e0b',
+          'line-color': '#8b0000',
           'line-width': ['interpolate', ['linear'], ['zoom'], 8, 0.8, 12, 1.4, 15, 2.0],
           'line-opacity': 0.9
         }
@@ -170,14 +170,14 @@ const map = new maplibregl.Map({
           'text-field': ['concat', ['to-string', ['get', 'elevation']], ' m'],
           'text-size': 9,
           'text-font': ['Open Sans Regular'],
-          'text-offset': [0, -0.25],
+          'text-offset': [0, 0],
           'text-max-angle': 30,
           'text-keep-upright': true
         },
         paint: {
-          'text-color': '#fcd34d',
-          'text-halo-color': 'rgba(0,0,0,0.7)',
-          'text-halo-width': 1.5
+          'text-color': '#dc2626',
+          'text-halo-color': '#ffffff',
+          'text-halo-width': 2
         },
         minzoom: 14
       },
@@ -195,18 +195,22 @@ const map = new maplibregl.Map({
           'text-field': ['concat', ['to-string', ['get', 'elevation']], ' m'],
           'text-size': ['interpolate', ['linear'], ['zoom'], 11, 10, 14, 12],
           'text-font': ['Open Sans Bold'],
-          'text-offset': [0, -0.3],
+          'text-offset': [0, 0],
           'text-max-angle': 30,
           'text-keep-upright': true
         },
         paint: {
-          'text-color': '#f59e0b',
-          'text-halo-color': 'rgba(0,0,0,0.7)',
+          'text-color': '#8b0000',
+          'text-halo-color': '#ffffff',
           'text-halo-width': 2
         },
         minzoom: 11
       }
-    ]
+    ],
+    terrain: {
+      source: 'terrain-dem',
+      exaggeration: 1.5
+    }
   },
   center: CENTER,
   zoom: ZOOM,
@@ -256,7 +260,6 @@ function applyHillshade() {
 
 // ── Attivazione automatica al caricamento ─────────────────────────────────
 map.on('load', () => {
-  map.setTerrain({ source: 'terrain-dem', exaggeration: currentExag });
   map.easeTo({ pitch: 45, duration: 800 });
   applyHillshade();
 });
