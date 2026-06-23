@@ -21,48 +21,123 @@
 
 <div id="map"></div>
 
+<!-- ═══ MAPPA TOOLBAR ═══ -->
+<div id="map-toolbar-wrap">
+
+<div id="map-toolbar">
+
+  <!-- Home / reset vista -->
+  <button class="tb-btn" id="tb-home" title="Vista iniziale">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <path d="M12 3L2 12h3v8h5v-5h4v5h5v-8h3L12 3z"/>
+    </svg>
+  </button>
+
+  <div class="tb-sep"></div>
+
+  <!-- Basemap selector -->
+  <div class="tb-group" id="tb-basemaps" role="group" aria-label="Cartografia di base">
+    <button class="tb-btn tb-radio active" data-basemap="osm" title="OpenStreetMap">OSM</button>
+    <button class="tb-btn tb-radio" data-basemap="satellite" title="Google Satellite">SAT</button>
+  </div>
+
+  <div class="tb-sep"></div>
+
+  <!-- Carta tecnica 2K -->
+  <button class="tb-btn tb-toggle" id="tb-ctr" title="Carta tecnica regionale 2K">CTR</button>
+  <div class="tb-opacity" id="tb-ctr-opacity" style="display:none;">
+    <input type="range" id="tb-ctr-opacity-slider" min="0.1" max="1" step="0.05" value="0.7" title="Opacità CTR" />
+  </div>
+
+  <div class="tb-sep"></div>
+
+  <!-- Fullscreen -->
+  <button class="tb-btn" id="tb-fullscreen" title="Schermo intero">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <path d="M3 3h6v2H5v4H3V3zm12 0h6v6h-2V5h-4V3zM3 15h2v4h4v2H3v-6zm16 4h-4v2h6v-6h-2v4z"/>
+    </svg>
+  </button>
+
+  <!-- Orientamento Nord -->
+  <button class="tb-btn" id="tb-north" title="Reimposta orientamento Nord">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="none">
+      <polygon points="12,3 15,12 12,10 9,12" fill="currentColor"/>
+      <polygon points="12,21 15,12 12,14 9,12" fill="currentColor" opacity="0.3"/>
+    </svg>
+  </button>
+
+  <!-- Griglia analisi 50m -->
+  <button class="tb-btn tb-toggle on" id="tb-griglia" title="Griglia analisi 50m">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <rect x="3" y="3" width="18" height="18"/>
+      <line x1="3" y1="9" x2="21" y2="9"/>
+      <line x1="3" y1="15" x2="21" y2="15"/>
+      <line x1="9" y1="3" x2="9" y2="21"/>
+      <line x1="15" y1="3" x2="15" y2="21"/>
+    </svg>
+  </button>
+
+  <!-- Curve di livello -->
+  <button class="tb-btn tb-toggle" id="tb-contour" title="Curve di livello">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 7 Q6 4 9 7 Q12 10 15 7 Q18 4 21 7"/>
+      <path d="M3 12 Q7 8 11 12 Q15 16 19 12 Q21 10 22 12"/>
+      <path d="M3 17 Q6 14 9 17 Q12 20 15 17 Q18 14 21 17"/>
+    </svg>
+  </button>
+
+  <!-- Ombreggiatura -->
+  <button class="tb-btn tb-toggle on" id="tb-shadow" title="Ombreggiatura rilievo">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <circle cx="12" cy="12" r="4"/>
+      <line x1="12" y1="2" x2="12" y2="5"/>
+      <line x1="12" y1="19" x2="12" y2="22"/>
+      <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
+      <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
+      <line x1="2" y1="12" x2="5" y2="12"/>
+      <line x1="19" y1="12" x2="22" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/>
+      <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
+    </svg>
+  </button>
+
+  <div class="tb-sep"></div>
+
+  <!-- Toggle 3D / Piano -->
+  <button class="tb-btn tb-3d active" id="tb-3d" title="Alterna vista 3D e piano">
+    <span id="tb-3d-label">3D</span>
+  </button>
+
+</div>
+
+<!-- Sotto-pannello ombreggiatura -->
+<div id="tb-panel-shadow" class="tb-panel" style="display:none;">
+  <div class="tbp-row">
+    <span class="tbp-label">Intensità</span>
+    <input type="range" id="tbp-shadow-intensity" min="0" max="1" step="0.05" value="0.6" />
+    <span class="tbp-val" id="tbp-shadow-intensity-val">0.60</span>
+  </div>
+  <div class="tbp-row">
+    <span class="tbp-label">☀️ Ora solare</span>
+    <input type="range" id="tbp-shadow-time" min="360" max="1080" step="5" value="720" />
+    <span class="tbp-val" id="tbp-shadow-time-val">12:00</span>
+  </div>
+  <button class="tbp-btn" id="tbp-btn-now">⏱ Ora locale</button>
+</div>
+
+<!-- Sotto-pannello 3D -->
+<div id="tb-panel-3d" class="tb-panel" style="display:none;">
+  <div class="tbp-row">
+    <span class="tbp-label">Esagerazione</span>
+    <input type="range" id="tbp-exag" min="1" max="5" step="0.1" value="1.5" />
+    <span class="tbp-val" id="tbp-exag-val">1.5×</span>
+  </div>
+</div>
+
+</div><!-- /map-toolbar-wrap -->
+
 <div id="controls">
   <h2>🗻 Palermo DTM 5m</h2>
-
-  <div class="section-label">Cartografia di base</div>
-  <div class="radio-group">
-    <label class="radio-row">
-      <input type="radio" name="basemap" value="osm" checked /> OpenStreetMap
-    </label>
-    <label class="radio-row">
-      <input type="radio" name="basemap" value="satellite" /> Google Satellite
-    </label>
-    <label class="radio-row">
-      <input type="radio" name="basemap" value="esri" /> Esri WorldImagery
-    </label>
-  </div>
-
-  <div class="section-label">Overlay cartografico</div>
-
-  <div class="toggle-row">
-    <label for="toggle-ctr"><span class="icon">🗺️</span> Carta tecnica 2K</label>
-    <label class="switch">
-      <input type="checkbox" id="toggle-ctr" />
-      <span class="slider"></span>
-    </label>
-  </div>
-  <div class="slider-row" id="ctr-opacity-row" style="display:none;">
-    <label>
-      <span>Opacità CTR</span>
-      <span id="ctr-opacity-val">0.7</span>
-    </label>
-    <input type="range" id="ctr-opacity-slider" min="0.1" max="1" step="0.05" value="0.7" />
-  </div>
-
-  <div class="section-label">Analisi DTM</div>
-
-  <div class="toggle-row">
-    <label for="toggle-griglia"><span class="icon">📍</span> Griglia analisi 50m</label>
-    <label class="switch">
-      <input type="checkbox" id="toggle-griglia" checked />
-      <span class="slider"></span>
-    </label>
-  </div>
 
   <div class="section-label">Analisi elevazione</div>
 
@@ -80,7 +155,14 @@
     </label>
     <input type="range" id="elevation-opacity-slider" min="0.1" max="1" step="0.05" value="0.70" />
   </div>
-  <div class="legend visible" id="legend-elevation">
+
+</div>
+
+<!-- ═══ LEGENDE MAPPA ═══ -->
+<div id="map-legends">
+
+  <div id="legend-elevation" class="map-legend visible">
+    <div class="map-legend-title">Elevazione</div>
     <div class="legend-item"><div class="legend-box" style="background:#00bfbf;"></div><span>≤ 0 m</span></div>
     <div class="legend-item"><div class="legend-box" style="background:#00cb9b;"></div><span>0 – 50 m</span></div>
     <div class="legend-item"><div class="legend-box" style="background:#00d777;"></div><span>50 – 100 m</span></div>
@@ -93,17 +175,8 @@
     <div class="legend-item"><div class="legend-box" style="background:#141414;"></div><span>&gt; 800 m</span></div>
   </div>
 
-  <div class="section-label">Curve di livello</div>
-
-  <div class="toggle-row">
-    <label for="toggle-contour"><span class="icon">📏</span> Mostra curve</label>
-    <label class="switch">
-      <input type="checkbox" id="toggle-contour" />
-      <span class="slider"></span>
-    </label>
-  </div>
-
-  <div class="legend" id="legend-contour">
+  <div id="legend-contour" class="map-legend">
+    <div class="map-legend-title">Curve di livello</div>
     <div class="legend-item">
       <div class="legend-line" style="background:#8b0000; height:2px;"></div>
       <span>Curve principali (50m)</span>
@@ -112,51 +185,6 @@
       <div class="legend-line" style="background:#dc2626; height:1px;"></div>
       <span>Curve secondarie (10m) — zoom ≥13</span>
     </div>
-  </div>
-
-  <div class="section-label">Terreno & rilievo</div>
-
-  <div class="toggle-row">
-    <label for="toggle-terrain"><span class="icon">🏔️</span> Modello 3D terreno</label>
-    <label class="switch">
-      <input type="checkbox" id="toggle-terrain" checked />
-      <span class="slider"></span>
-    </label>
-  </div>
-
-  <div class="slider-row" id="exaggeration-row">
-    <label>
-      <span>Esagerazione verticale</span>
-      <span id="exag-val">1.5×</span>
-    </label>
-    <input type="range" id="exag-slider" min="1" max="5" step="0.1" value="1.5" />
-  </div>
-
-  <div class="toggle-row">
-    <label for="toggle-shadow"><span class="icon">🌤️</span> Ombreggiatura rilievo</label>
-    <label class="switch">
-      <input type="checkbox" id="toggle-shadow" checked />
-      <span class="slider"></span>
-    </label>
-  </div>
-
-  <div id="shadow-controls">
-    <div class="slider-row">
-      <label>
-        <span>Intensità ombra</span>
-        <span id="shadow-intensity-val">0.6</span>
-      </label>
-      <input type="range" id="shadow-intensity-slider" min="0" max="1" step="0.05" value="0.6" />
-    </div>
-
-    <div class="slider-row">
-      <label>
-        <span>☀️ Ora solare</span>
-        <span id="shadow-time-val">12:00</span>
-      </label>
-      <input type="range" id="shadow-time-slider" min="360" max="1080" step="5" value="720" />
-    </div>
-    <button id="btn-now" class="btn-small">⏱ Ora locale</button>
   </div>
 
 </div>

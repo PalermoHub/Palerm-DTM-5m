@@ -54,15 +54,6 @@ const BASEMAPS = {
     maxzoom: 18,
     opacity: 1.0
   },
-  esri: {
-    type: 'raster',
-    tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
-    tileSize: 256,
-    attribution: '© Esri, Maxar, Earthstar Geographics',
-    attributionNode: makeAttribNode('© Esri, Maxar, Earthstar Geographics', null),
-    maxzoom: 18,
-    opacity: 1.0
-  },
 };
 
 // ── Mappa ─────────────────────────────────────────────────────────────────
@@ -263,9 +254,7 @@ const map = new maplibregl.Map({
   ]
 });
 
-map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-right');
 map.addControl(new maplibregl.ScaleControl({ maxWidth: 120, unit: 'metric' }), 'bottom-right');
-map.addControl(new maplibregl.FullscreenControl(), 'top-right');
 
 // ── Stato locale ──────────────────────────────────────────────────────────
 let terrainActive   = true;
@@ -304,79 +293,162 @@ map.on('load', () => {
   applyHillshade();
 });
 
-// ── Toggle 3D terreno ─────────────────────────────────────────────────────
-document.getElementById('toggle-terrain').addEventListener('change', function () {
-  terrainActive = this.checked;
-  document.getElementById('exaggeration-row').style.display = terrainActive ? 'block' : 'none';
-
-  if (terrainActive) {
-    map.setTerrain({ source: 'terrain-dem', exaggeration: currentExag });
-    map.easeTo({ pitch: 45, duration: 800 });
-  } else {
-    map.setTerrain(null);
-    map.easeTo({ pitch: 0, duration: 600 });
-  }
+// ── Toolbar: Home ─────────────────────────────────────────────────────────
+document.getElementById('tb-home').addEventListener('click', () => {
+  map.flyTo({ center: CENTER, zoom: ZOOM, pitch: 23, bearing: -120.3, duration: 900 });
 });
 
-// ── Slider esagerazione verticale ─────────────────────────────────────────
-document.getElementById('exag-slider').addEventListener('input', function () {
-  currentExag = parseFloat(this.value);
-  document.getElementById('exag-val').textContent = currentExag.toFixed(1) + '×';
-  if (terrainActive) {
-    map.setTerrain({ source: 'terrain-dem', exaggeration: currentExag });
-  }
+// ── Toolbar: Basemap ──────────────────────────────────────────────────────
+document.querySelectorAll('#tb-basemaps .tb-radio').forEach(btn => {
+  btn.addEventListener('click', function () {
+    document.querySelectorAll('#tb-basemaps .tb-radio').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const def = BASEMAPS[this.dataset.basemap];
+    map.getSource('basemap').setTiles(def.tiles);
+    map.setPaintProperty('basemap-layer', 'raster-opacity', def.opacity);
+    const attribEl = document.querySelector('.maplibregl-ctrl-attrib-inner');
+    if (attribEl && def.attributionNode) {
+      attribEl.replaceChildren(def.attributionNode.cloneNode(true));
+    }
+  });
 });
 
-// ── Toggle ombreggiatura ──────────────────────────────────────────────────
-document.getElementById('toggle-shadow').addEventListener('change', function () {
-  shadowActive = this.checked;
-  map.setLayoutProperty('hillshade-layer', 'visibility', shadowActive ? 'visible' : 'none');
-  document.getElementById('shadow-controls').style.display = shadowActive ? 'block' : 'none';
+// ── Toolbar: CTR toggle ───────────────────────────────────────────────────
+document.getElementById('tb-ctr').addEventListener('click', function () {
+  this.classList.toggle('on');
+  const on = this.classList.contains('on');
+  map.setLayoutProperty('ctr2k-layer', 'visibility', on ? 'visible' : 'none');
+  document.getElementById('tb-ctr-opacity').style.display = on ? 'flex' : 'none';
 });
 
-// ── Slider intensità ombra ────────────────────────────────────────────────
-document.getElementById('shadow-intensity-slider').addEventListener('input', function () {
-  shadowIntensity = parseFloat(this.value);
-  document.getElementById('shadow-intensity-val').textContent = shadowIntensity.toFixed(2);
-  applyHillshade();
+document.getElementById('tb-ctr-opacity-slider').addEventListener('input', function () {
+  map.setPaintProperty('ctr2k-layer', 'raster-opacity', parseFloat(this.value));
 });
 
-// ── Slider ora solare ─────────────────────────────────────────────────────
-document.getElementById('shadow-time-slider').addEventListener('input', function () {
-  sunMinutes = parseInt(this.value, 10);
-  const label = document.getElementById('shadow-time-val');
-  const az = sunAzimuth(sunMinutes);
-  label.textContent = az !== null ? minutesToHHMM(sunMinutes) : minutesToHHMM(sunMinutes) + ' 🌙';
-  if (shadowActive) applyHillshade();
-});
-
-// ── Pulsante "Ora locale" ─────────────────────────────────────────────────
-document.getElementById('btn-now').addEventListener('click', () => {
-  const now = new Date();
-  sunMinutes = now.getHours() * 60 + now.getMinutes();
-  const slider = document.getElementById('shadow-time-slider');
-  // Clamp al range dello slider (6:00–18:00)
-  slider.value = Math.max(360, Math.min(1080, sunMinutes));
-  sunMinutes = parseInt(slider.value, 10);
-  const label = document.getElementById('shadow-time-val');
-  const az = sunAzimuth(sunMinutes);
-  label.textContent = az !== null ? minutesToHHMM(sunMinutes) : minutesToHHMM(sunMinutes) + ' 🌙';
-  if (shadowActive) applyHillshade();
-});
-
-// ── Toggle curve di livello ───────────────────────────────────────────────
-document.getElementById('toggle-contour').addEventListener('change', function () {
-  contourActive = this.checked;
+// ── Toolbar: Curve di livello ─────────────────────────────────────────────
+document.getElementById('tb-contour').addEventListener('click', function () {
+  this.classList.toggle('on');
+  contourActive = this.classList.contains('on');
   const vis = contourActive ? 'visible' : 'none';
-  ['contours-10m-layer', 'contours-50m-layer', 'contours-10m-labels', 'contours-50m-labels'].forEach(id => {
+  ['contours-10m-layer','contours-50m-layer','contours-10m-labels','contours-50m-labels'].forEach(id => {
     map.setLayoutProperty(id, 'visibility', vis);
   });
   document.getElementById('legend-contour').classList.toggle('visible', contourActive);
 });
 
-// ── Toggle griglia analisi DTM ────────────────────────────────────────
-document.getElementById('toggle-griglia').addEventListener('change', function () {
-  map.setLayoutProperty('griglia-circles', 'visibility', this.checked ? 'visible' : 'none');
+// ── Toolbar: Fullscreen ───────────────────────────────────────────────────
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+function makeFsIcon(compress) {
+  const svg = document.createElementNS(SVG_NS, 'svg');
+  svg.setAttribute('width', '14'); svg.setAttribute('height', '14');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('fill', 'currentColor'); svg.setAttribute('stroke', 'none');
+  const path = document.createElementNS(SVG_NS, 'path');
+  path.setAttribute('d', compress
+    ? 'M5 19h4v2H3v-6h2v4zm14 0v-4h2v6h-6v-2h4zM5 5v4H3V3h6v2H5zm14 4V5h-4V3h6v6h-2z'
+    : 'M3 3h6v2H5v4H3V3zm12 0h6v6h-2V5h-4V3zM3 15h2v4h4v2H3v-6zm16 4h-4v2h6v-6h-2v4z');
+  svg.appendChild(path);
+  return svg;
+}
+
+document.getElementById('tb-fullscreen').addEventListener('click', () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+});
+
+document.addEventListener('fullscreenchange', () => {
+  const btn = document.getElementById('tb-fullscreen');
+  const isFs = !!document.fullscreenElement;
+  btn.replaceChildren(makeFsIcon(isFs));
+  btn.classList.toggle('active', isFs);
+});
+
+// ── Toolbar: Nord / orientamento ──────────────────────────────────────────
+document.getElementById('tb-north').addEventListener('click', () => {
+  map.resetNorthPitch({ duration: 600 });
+});
+
+// ── Toolbar: Toggle 3D / Piano ────────────────────────────────────────────
+document.getElementById('tb-3d').addEventListener('click', function () {
+  const panel = document.getElementById('tb-panel-3d');
+  const panelWasOpen = panel.style.display !== 'none';
+
+  terrainActive = !terrainActive;
+  this.classList.toggle('active', terrainActive);
+  document.getElementById('tb-3d-label').textContent = terrainActive ? '3D' : '2D';
+
+  if (terrainActive) {
+    map.setTerrain({ source: 'terrain-dem', exaggeration: currentExag });
+    map.easeTo({ pitch: 45, duration: 800 });
+    if (!panelWasOpen) { closePanels('tb-panel-3d'); panel.style.display = 'flex'; }
+  } else {
+    map.setTerrain(null);
+    map.easeTo({ pitch: 0, duration: 600 });
+    panel.style.display = 'none';
+  }
+});
+
+// ── Sotto-pannello 3D: slider esagerazione ────────────────────────────────
+document.getElementById('tbp-exag').addEventListener('input', function () {
+  currentExag = parseFloat(this.value);
+  document.getElementById('tbp-exag-val').textContent = currentExag.toFixed(1) + '×';
+  if (terrainActive) map.setTerrain({ source: 'terrain-dem', exaggeration: currentExag });
+});
+
+
+// ── Toolbar: Ombreggiatura ────────────────────────────────────────────────
+function closePanels(except) {
+  ['tb-panel-shadow', 'tb-panel-3d'].forEach(id => {
+    if (id !== except) document.getElementById(id).style.display = 'none';
+  });
+}
+
+document.getElementById('tb-shadow').addEventListener('click', function () {
+  const panel = document.getElementById('tb-panel-shadow');
+  const open = panel.style.display === 'none';
+  closePanels(open ? 'tb-panel-shadow' : null);
+  panel.style.display = open ? 'flex' : 'none';
+  if (!open) return;
+  shadowActive = true;
+  this.classList.add('on');
+  map.setLayoutProperty('hillshade-layer', 'visibility', 'visible');
+});
+
+document.getElementById('tbp-shadow-intensity').addEventListener('input', function () {
+  shadowIntensity = parseFloat(this.value);
+  document.getElementById('tbp-shadow-intensity-val').textContent = shadowIntensity.toFixed(2);
+  applyHillshade();
+});
+
+document.getElementById('tbp-shadow-time').addEventListener('input', function () {
+  sunMinutes = parseInt(this.value, 10);
+  const az = sunAzimuth(sunMinutes);
+  document.getElementById('tbp-shadow-time-val').textContent =
+    minutesToHHMM(sunMinutes) + (az === null ? ' 🌙' : '');
+  if (shadowActive) applyHillshade();
+});
+
+document.getElementById('tbp-btn-now').addEventListener('click', () => {
+  const now = new Date();
+  sunMinutes = now.getHours() * 60 + now.getMinutes();
+  const slider = document.getElementById('tbp-shadow-time');
+  slider.value = Math.max(360, Math.min(1080, sunMinutes));
+  sunMinutes = parseInt(slider.value, 10);
+  const az = sunAzimuth(sunMinutes);
+  document.getElementById('tbp-shadow-time-val').textContent =
+    minutesToHHMM(sunMinutes) + (az === null ? ' 🌙' : '');
+  if (shadowActive) applyHillshade();
+});
+
+
+// ── Toolbar: Griglia analisi DTM ──────────────────────────────────────────
+document.getElementById('tb-griglia').addEventListener('click', function () {
+  this.classList.toggle('on');
+  map.setLayoutProperty('griglia-circles', 'visibility', this.classList.contains('on') ? 'visible' : 'none');
 });
 
 // Popup griglia — hover
@@ -439,30 +511,7 @@ document.getElementById('elevation-opacity-slider').addEventListener('input', fu
   map.setPaintProperty('elevation-layer', 'raster-opacity', val);
 });
 
-// ── Toggle overlay CTR ────────────────────────────────────────────────────
-document.getElementById('toggle-ctr').addEventListener('change', function () {
-  map.setLayoutProperty('ctr2k-layer', 'visibility', this.checked ? 'visible' : 'none');
-  document.getElementById('ctr-opacity-row').style.display = this.checked ? 'block' : 'none';
-});
 
-document.getElementById('ctr-opacity-slider').addEventListener('input', function () {
-  const val = parseFloat(this.value);
-  document.getElementById('ctr-opacity-val').textContent = val.toFixed(2);
-  map.setPaintProperty('ctr2k-layer', 'raster-opacity', val);
-});
-
-// ── Cambio basemap ────────────────────────────────────────────────────────
-document.querySelectorAll('input[name="basemap"]').forEach(radio => {
-  radio.addEventListener('change', function () {
-    const def = BASEMAPS[this.value];
-    map.getSource('basemap').setTiles(def.tiles);
-    map.setPaintProperty('basemap-layer', 'raster-opacity', def.opacity);
-    const attribEl = document.querySelector('.maplibregl-ctrl-attrib-inner');
-    if (attribEl && def.attributionNode) {
-      attribEl.replaceChildren(def.attributionNode.cloneNode(true));
-    }
-  });
-});
 
 // ── Popup quota al click ──────────────────────────────────────────────────
 map.on('click', function (e) {
