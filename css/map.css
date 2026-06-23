@@ -123,19 +123,19 @@ body {
 .tb-btn svg { width: 13px; height: 13px; }
 
 .tb-btn:hover {
-  background: rgba(36, 88, 200, 0.1);
-  color: #1a3898;
+  background: rgba(255, 153, 0, 0.12);
+  color: #b36b00;
 }
 
 .tb-btn.active,
 .tb-btn.tb-toggle.on {
-  background: #2458c8;
+  background: #ff9900;
   color: #fff;
-  box-shadow: 0 2px 6px rgba(36, 88, 200, 0.35);
+  box-shadow: 0 2px 6px rgba(255, 153, 0, 0.45);
 }
 
 .tb-btn.tb-3d.active {
-  background: #1a3898;
+  background: #e07800;
   color: #fff;
 }
 
@@ -405,20 +405,167 @@ input:checked + .slider::before { transform: translateX(18px); }
 /* MapLibre attrib */
 .maplibregl-ctrl-attrib { font-size: 10px !important; }
 
-/* Popup griglia analisi */
-.griglia-popup { font-size: 12px; color: #1a2a50; font-family: 'Titillium Web', sans-serif; }
-.griglia-popup strong { display: block; margin-bottom: 6px; font-size: 12px; color: #2458c8; }
-.griglia-popup table { border-collapse: collapse; width: 100%; }
-.griglia-popup td { padding: 2px 6px 2px 0; vertical-align: top; }
-.griglia-popup td:first-child { color: #6878a8; white-space: nowrap; font-size: 11px; }
-.griglia-popup td:last-child { color: #1a2a50; font-weight: 600; }
+/* ── Popup griglia analisi ── */
 .maplibregl-popup-content {
-  background: rgba(255,255,255,0.98) !important;
-  border: 1px solid rgba(30,60,160,0.15) !important;
-  border-radius: 10px !important;
-  padding: 10px 14px !important;
-  box-shadow: 0 4px 20px rgba(30,60,160,0.15) !important;
+  background: #fff !important;
+  border: 1px solid rgba(30,60,160,0.13) !important;
+  border-radius: 14px !important;
+  padding: 0 !important;
+  box-shadow: 0 8px 32px rgba(30,60,160,0.18) !important;
   font-family: 'Titillium Web', sans-serif !important;
+  overflow: hidden;
+}
+
+.maplibregl-popup-tip { border-top-color: #fff !important; border-bottom-color: #fff !important; }
+
+.griglia-popup {
+  font-family: 'Titillium Web', sans-serif;
+  color: #1a2a50;
+  width: 300px;
+}
+
+/* Header */
+.gp-header {
+  background: linear-gradient(135deg, #e07800 0%, #ff9900 100%);
+  padding: 12px 14px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.gp-header-left { display: flex; flex-direction: column; gap: 2px; }
+
+.gp-header-label {
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.gp-header-sub {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+.gp-header-circ {
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.gp-quota { text-align: right; line-height: 1; }
+.gp-quota-value {
+  font-size: 26px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+.gp-quota-unit {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.65);
+}
+
+/* Sezioni */
+.gp-section {
+  padding: 8px 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.gp-section:last-child { border-bottom: none; padding-bottom: 10px; }
+
+.gp-section-label {
+  font-size: 8.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: #aaa;
+  margin-bottom: 5px;
+}
+
+/* Righe */
+.gp-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+.gp-row:last-child { margin-bottom: 0; }
+
+.gp-row-label {
+  font-size: 11px;
+  color: #888;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gp-row-value {
+  font-size: 11px;
+  font-weight: 700;
+  color: #222;
+  text-align: right;
+}
+
+/* Pendenza */
+.gp-pend-main {
+  font-size: 20px;
+  font-weight: 900;
+  color: #e07800;
+  letter-spacing: -0.02em;
+}
+.gp-pend-sub {
+  font-size: 11px;
+  color: #aaa;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+/* Badge classi rischio */
+.gp-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  background: #f5f5f5;
+  color: #555;
+  white-space: nowrap;
+}
+
+/* Griglia indici */
+.gp-index-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  margin-top: 2px;
+}
+.gp-index-cell {
+  background: rgba(255,153,0,0.08);
+  border-radius: 7px;
+  padding: 5px 4px;
+  text-align: center;
+}
+.gp-index-val {
+  font-size: 12px;
+  font-weight: 800;
+  color: #e07800;
+  line-height: 1.1;
+}
+.gp-index-key {
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 2px;
 }
 
 /* ════════════════════════════════════════

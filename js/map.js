@@ -101,6 +101,10 @@ const map = new maplibregl.Map({
         maxzoom: 15,
         scheme: 'tms',
         attribution: 'Analisi elevazione: DTM HRDTM5m@italia'
+      },
+      'upl': {
+        type: 'geojson',
+        data: `${BASE_URL}docs/geojson/upl.geojson`
       }
     },
     layers: [
@@ -142,6 +146,27 @@ const map = new maplibregl.Map({
         source: 'ctr2k',
         layout: { visibility: 'none' },
         paint: { 'raster-opacity': 0.7 }
+      },
+
+      // UPL — confini amministrativi (fill invisibile per query + linee visibili)
+      {
+        id: 'upl-fill',
+        type: 'fill',
+        source: 'upl',
+        layout: { visibility: 'visible' },
+        paint: { 'fill-color': '#2458c8', 'fill-opacity': 0 }
+      },
+      {
+        id: 'upl-line',
+        type: 'line',
+        source: 'upl',
+        layout: { visibility: 'visible' },
+        paint: {
+          'line-color': '#2458c8',
+          'line-width': 1.4,
+          'line-opacity': 0.45,
+          'line-dasharray': [4, 2]
+        }
       },
 
       // Griglia analisi DTM 50m — punti vettoriali interrogabili (sopra tutti i raster)
@@ -288,9 +313,22 @@ function applyHillshade() {
   map.setPaintProperty('hillshade-layer', 'hillshade-exaggeration', shadowIntensity);
 }
 
-// ── Attivazione automatica al caricamento ─────────────────────────────────
+// ── Lookup aree UPL/Quartiere/Circoscrizione (ha) ────────────────────────
+const uplAreas = { upl: {}, quartiere: {}, circoscrizione: {} };
+
 map.on('load', () => {
   applyHillshade();
+
+  fetch(`${BASE_URL}docs/geojson/upl.geojson`)
+    .then(r => r.json())
+    .then(({ features }) => {
+      features.forEach(({ properties: p }) => {
+        const ha = (p.area || 0) / 10000;
+        if (p.UPL)             uplAreas.upl[p.UPL] = (uplAreas.upl[p.UPL] || 0) + ha;
+        if (p.Quartiere)       uplAreas.quartiere[p.Quartiere] = (uplAreas.quartiere[p.Quartiere] || 0) + ha;
+        if (p.circoscrizione)  uplAreas.circoscrizione[p.circoscrizione] = (uplAreas.circoscrizione[p.circoscrizione] || 0) + ha;
+      });
+    });
 });
 
 // ── Toolbar: Home ─────────────────────────────────────────────────────────
@@ -323,6 +361,14 @@ document.getElementById('tb-ctr').addEventListener('click', function () {
 
 document.getElementById('tb-ctr-opacity-slider').addEventListener('input', function () {
   map.setPaintProperty('ctr2k-layer', 'raster-opacity', parseFloat(this.value));
+});
+
+// ── Toolbar: UPL confini quartieri ────────────────────────────────────────
+// upl-fill rimane sempre visibile (opacity 0) per queryRenderedFeatures nel popup
+document.getElementById('tb-upl').addEventListener('click', function () {
+  this.classList.toggle('on');
+  const vis = this.classList.contains('on') ? 'visible' : 'none';
+  map.setLayoutProperty('upl-line', 'visibility', vis);
 });
 
 // ── Toolbar: Curve di livello ─────────────────────────────────────────────
@@ -452,42 +498,139 @@ document.getElementById('tb-griglia').addEventListener('click', function () {
 });
 
 // Popup griglia — hover
-const grigliaPop = new maplibregl.Popup({ closeButton: false, closeOnClick: false, maxWidth: '280px' });
+const grigliaPop = new maplibregl.Popup({ closeButton: false, closeOnClick: false, maxWidth: '340px' });
+
+// Colore badge per classi stabilità / costruibilità (1=migliore, 5=peggiore)
+const CLASS_COLORS = {
+  1: { bg: '#dcfce7', text: '#166534', border: '#86efac' },
+  2: { bg: '#d9f99d', text: '#3a5a0a', border: '#a3e635' },
+  3: { bg: '#fef9c3', text: '#854d0e', border: '#fde047' },
+  4: { bg: '#ffedd5', text: '#9a3412', border: '#fdba74' },
+  5: { bg: '#fee2e2', text: '#991b1b', border: '#fca5a5' },
+};
+const NAME_TO_CLASS = {
+  'molto stabile': 1, 'stabile': 2, 'moderatamente instabile': 3,
+  'instabile': 4, 'molto instabile': 5,
+  'ottima': 1, 'buona': 2, 'moderata': 3, 'difficile': 4, 'non idonea': 5,
+};
+
+function classColor(nome) {
+  if (!nome) return null;
+  const key = nome.toLowerCase().trim();
+  for (const [k, v] of Object.entries(NAME_TO_CLASS)) {
+    if (key.includes(k)) return CLASS_COLORS[v];
+  }
+  return null;
+}
+
+function el(tag, cls) { const e = document.createElement(tag); if (cls) e.className = cls; return e; }
+function txt(tag, text, cls) { const e = el(tag, cls); e.textContent = text; return e; }
+
+function makeBadge(nome) {
+  const c = classColor(nome);
+  const badge = el('span', 'gp-badge');
+  badge.textContent = nome || '—';
+  if (c) { badge.style.background = c.bg; badge.style.color = c.text; badge.style.borderColor = c.border; }
+  return badge;
+}
+
+function makeSection(label) {
+  const sec = el('div', 'gp-section');
+  sec.appendChild(txt('div', label, 'gp-section-label'));
+  return sec;
+}
+
+function makeRow(label, value) {
+  const row = el('div', 'gp-row');
+  row.appendChild(txt('span', label, 'gp-row-label'));
+  row.appendChild(txt('span', value, 'gp-row-value'));
+  return row;
+}
+
+function makeBadgeRow(label, nome) {
+  const row = el('div', 'gp-row');
+  row.appendChild(txt('span', label, 'gp-row-label'));
+  row.appendChild(makeBadge(nome));
+  return row;
+}
 
 map.on('mouseenter', 'griglia-circles', (e) => {
   map.getCanvas().style.cursor = 'pointer';
   const p = e.features[0].properties;
-  const n = (v, d=1) => v != null ? Number(v).toFixed(d) : '—';
-  const rows = [
-    ['Quota',        `${n(p.quota)} m s.l.m.`],
-    ['Pendenza',     `${n(p.slope_deg)}° (${n(p.slope_pct)}%)`],
-    ['Esposizione',  p.aspetto_nome || '—'],
-    ['Geomorfologia',p.geomorf_nome || '—'],
-    ['Stabilità',    p.stabilita_nome || '—'],
-    ['Costruibilità',p.costr_nome || '—'],
-    ['TRI',          n(p.tri, 3)],
-    ['TPI',          n(p.tpi, 3)],
-    ['Hillshade',    n(p.hillshade, 0)],
-    ['SRI',          n(p.sri, 3)],
-  ];
+  const n = (v, d = 1) => (v != null && v !== '' && !isNaN(v)) ? Number(v).toFixed(d) : '—';
 
-  const wrap = document.createElement('div');
-  wrap.className = 'griglia-popup';
-  const title = document.createElement('strong');
-  title.textContent = '📍 Punto analisi DTM';
-  wrap.appendChild(title);
-  const table = document.createElement('table');
-  rows.forEach(([k, v]) => {
-    const tr = document.createElement('tr');
-    const td1 = document.createElement('td');
-    td1.textContent = k;
-    const td2 = document.createElement('td');
-    td2.textContent = v ?? '—';
-    tr.appendChild(td1);
-    tr.appendChild(td2);
-    table.appendChild(tr);
+  // Query UPL al punto corrente
+  const uplFeats = map.queryRenderedFeatures(e.point, { layers: ['upl-fill'] });
+  const upl = uplFeats.length ? uplFeats[0].properties : null;
+
+  const wrap = el('div', 'griglia-popup');
+
+  // ── Header ──
+  const hdr = el('div', 'gp-header');
+  const hdrLeft = el('div', 'gp-header-left');
+  hdrLeft.appendChild(txt('div', upl ? (upl.Quartiere || upl.UPL) : 'Palermo', 'gp-header-label'));
+  if (upl) {
+    hdrLeft.appendChild(txt('div', `Circoscrizione ${upl.circoscrizione}`, 'gp-header-sub'));
+  }
+  hdr.appendChild(hdrLeft);
+  const quotaBox = el('div', 'gp-quota');
+  quotaBox.appendChild(txt('span', n(p.quota, 0), 'gp-quota-value'));
+  quotaBox.appendChild(txt('span', ' m s.l.m.', 'gp-quota-unit'));
+  hdr.appendChild(quotaBox);
+  wrap.appendChild(hdr);
+
+  // ── Pendenza ──
+  const secPend = makeSection('Pendenza');
+  const pendVal = `${n(p.slope_deg)}°`;
+  const pendPct = `${n(p.slope_pct)} %`;
+  const pendRow = el('div', 'gp-row');
+  pendRow.appendChild(txt('span', pendVal, 'gp-pend-main'));
+  pendRow.appendChild(txt('span', pendPct, 'gp-pend-sub'));
+  secPend.appendChild(pendRow);
+  wrap.appendChild(secPend);
+
+  // ── Morfologia ──
+  const secMorf = makeSection('Morfologia');
+  secMorf.appendChild(makeRow('Esposizione', p.aspetto_nome || '—'));
+  secMorf.appendChild(makeRow('Forma terreno', p.geomorf_nome || '—'));
+  wrap.appendChild(secMorf);
+
+  // ── Rischio ──
+  const secRisk = makeSection('Rischio');
+  secRisk.appendChild(makeBadgeRow('Stabilità', p.stabilita_nome));
+  secRisk.appendChild(makeBadgeRow('Costruibilità', p.costr_nome));
+  wrap.appendChild(secRisk);
+
+  // ── Indici ──
+  const secIdx = makeSection('Indici');
+  const grid = el('div', 'gp-index-grid');
+  [['TRI', n(p.tri, 2)], ['TPI', n(p.tpi, 2)], ['SRI', n(p.sri, 2)], ['HS', n(p.hillshade, 0)]].forEach(([k, v]) => {
+    const cell = el('div', 'gp-index-cell');
+    cell.appendChild(txt('div', v, 'gp-index-val'));
+    cell.appendChild(txt('div', k, 'gp-index-key'));
+    grid.appendChild(cell);
   });
-  wrap.appendChild(table);
+  secIdx.appendChild(grid);
+  wrap.appendChild(secIdx);
+
+  // ── Territorio (aree in ha) ──
+  if (upl) {
+    const ha = v => {
+      const val = uplAreas[Object.keys(uplAreas).find(k => uplAreas[k][v] !== undefined) || '']?.[v];
+      return val != null ? val.toLocaleString('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' ha' : '—';
+    };
+    const uplHa  = upl.area != null ? (upl.area / 10000).toLocaleString('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' ha' : '—';
+    const quartHa = uplAreas.quartiere[upl.Quartiere]
+      ? uplAreas.quartiere[upl.Quartiere].toLocaleString('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' ha' : '—';
+    const circHa  = uplAreas.circoscrizione[upl.circoscrizione]
+      ? uplAreas.circoscrizione[upl.circoscrizione].toLocaleString('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' ha' : '—';
+
+    const secTerr = makeSection('Superfici');
+    secTerr.appendChild(makeRow(`UPL · ${upl.UPL}`, uplHa));
+    secTerr.appendChild(makeRow(`Quartiere · ${upl.Quartiere}`, quartHa));
+    secTerr.appendChild(makeRow(`Circoscrizione ${upl.circoscrizione}`, circHa));
+    wrap.appendChild(secTerr);
+  }
 
   grigliaPop.setLngLat(e.lngLat).setDOMContent(wrap).addTo(map);
 });
