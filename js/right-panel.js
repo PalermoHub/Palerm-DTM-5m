@@ -584,8 +584,9 @@
   var rpDetailIcon = document.getElementById('rp-detail-icon');
   var rpDetailName = document.getElementById('rp-detail-name');
 
-  var panelOpen = false;
+  var panelOpen = true;
   var currentAnalysis = null;
+  rpWrap.classList.add('open');
 
   // Apri/chiudi pannello
   rpToggle.addEventListener('click', function () {
