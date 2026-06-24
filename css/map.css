@@ -813,6 +813,35 @@ body {
 }
 
 /* ════════════════════════════════════════
+   LOGO OPENDATASICILIA
+════════════════════════════════════════ */
+#ods-logo {
+  position: absolute;
+  bottom: 55px;
+  right: 20px;
+  z-index: 960;
+  display: block;
+  transition: right 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0.85;
+  pointer-events: auto;
+}
+
+#ods-logo:hover {
+  opacity: 1;
+}
+
+#ods-logo img {
+  height: 60px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+
+#ods-logo.panel-open {
+  right: 434px; /* 406px + 28px offset dal bordo attrib */
+}
+
+/* ════════════════════════════════════════
    ATTRIBUTION COLLASSABILE
 ════════════════════════════════════════ */
 #attrib-wrap {

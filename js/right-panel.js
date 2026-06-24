@@ -759,7 +759,8 @@
   function updateMapControlsPosition(instant) {
     var scale  = document.getElementById('map-scale');
     var attrib = document.getElementById('attrib-wrap');
-    [scale, attrib].forEach(function (el) {
+    var odsLogo = document.getElementById('ods-logo');
+    [scale, attrib, odsLogo].forEach(function (el) {
       if (!el) return;
       if (instant) el.style.transition = 'none';
       el.classList.toggle('panel-open', panelOpen);
