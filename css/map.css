@@ -264,7 +264,7 @@ body {
 #griglia-pop-fixed {
   position: fixed;
   z-index: 9999;
-  width: 340px;
+  width: 302px;
   max-height: 80vh;
   overflow-y: auto;
   background: #fff;
@@ -298,7 +298,9 @@ body {
 
 /* Header */
 .gp-header {
+  position: relative;
   background: linear-gradient(135deg, #e07800 0%, #ff9900 100%);
+  border-radius: 14px 14px 0 0;
   padding: 12px 14px 10px;
   display: flex;
   justify-content: space-between;

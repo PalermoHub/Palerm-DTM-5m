@@ -543,7 +543,9 @@ function grigliaPopShow(wrap, clientX, clientY) {
   closeBtn.className = 'gp-close-btn';
   closeBtn.textContent = '✕';
   closeBtn.addEventListener('click', grigliaPopClose);
-  pop.insertBefore(closeBtn, pop.firstChild);
+  const hdr = wrap.querySelector('.gp-header');
+  if (hdr) hdr.appendChild(closeBtn);
+  else pop.insertBefore(closeBtn, pop.firstChild);
 
   document.body.appendChild(pop);
   _grigliaPopEl = pop;
