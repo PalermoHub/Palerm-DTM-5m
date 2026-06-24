@@ -536,10 +536,9 @@ const map = new maplibregl.Map({
     ],
     terrain: {
       source: 'terrain-dem',
-      // Exaggeration bassa: a pitch alto un'esagerazione forte (1.5) crea un velo
-      // biancastro sul terreno lontano (artefatto di campionamento texture ad
-      // angolo radente, NON nebbia/atmosfera). 0.8 mantiene il rilievo leggibile.
-      exaggeration: 1.2
+      // Con MapLibre v4 l'esagerazione piena NON produce velo (il velo era una
+      // regressione del renderer terrain v5). Vedi nota versione in index.html.
+      exaggeration: 1.5
     }
   },
   center: CENTER,
@@ -610,7 +609,7 @@ map.on('move', updateMapScale);
 let terrainActive   = true;
 let shadowActive    = true;
 let contourActive   = false;
-let currentExag     = 1.2;
+let currentExag     = 1.5;
 let shadowIntensity = 0.35;
 let sunMinutes      = 720;   // 12:00 (mezzogiorno solare)
 
@@ -753,13 +752,16 @@ document.getElementById('tb-3d').addEventListener('click', function () {
   document.getElementById('tb-3d-label').textContent = terrainActive ? '3D' : '2D';
 
   if (terrainActive) {
-    map.setTerrain({ source: 'terrain-dem', exaggeration: currentExag });
-    map.easeTo({ pitch: 45, duration: 800 });
-    if (!panelWasOpen) { closePanels('tb-panel-3d'); panel.style.display = 'flex'; }
+  map.dragRotate.enable();
+  map.touchPitch.enable();
+  map.setTerrain({ source: 'terrain-dem', exaggeration: currentExag });
+  map.easeTo({ pitch: 45, duration: 800 });
   } else {
-    map.setTerrain(null);
-    map.easeTo({ pitch: 0, duration: 600 });
-    panel.style.display = 'none';
+  map.setTerrain(null);
+  map.easeTo({ pitch: 0, bearing: 0, duration: 600 });  // reset anche bearing
+  map.dragRotate.disable();
+  map.touchPitch.disable();
+  panel.style.display = 'none';
   }
 });
 
