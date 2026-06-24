@@ -10,7 +10,9 @@
     stability: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
     build:     '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12"/><polyline points="3 9 12 3 21 9"/><line x1="9" y1="21" x2="9" y2="15"/><line x1="15" y1="21" x2="15" y2="15"/><line x1="9" y1="15" x2="15" y2="15"/></svg>',
     solar:     '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
-    rugosity:  '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 Q5 8 7 12 Q9 16 11 12 Q13 8 15 12 Q17 16 19 12 Q21 8 23 12"/><line x1="3" y1="19" x2="21" y2="19"/></svg>'
+    rugosity:  '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 Q5 8 7 12 Q9 16 11 12 Q13 8 15 12 Q17 16 19 12 Q21 8 23 12"/><line x1="3" y1="19" x2="21" y2="19"/></svg>',
+    tpi:       '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20 L6 8 L10 14 L14 6 L18 11 L22 20Z"/><line x1="2" y1="20" x2="22" y2="20"/></svg>',
+    curvature: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 Q8 4 12 12 Q16 20 20 4"/></svg>'
   };
 
   const ANALYSES = {
@@ -634,6 +636,48 @@
           'complessità topografica: le creste dei Monti di Palermo, i versanti nord-ovest ' +
           'verso Monreale e le balze rocciose di Montepellegrino.'
         );
+
+        var HM_CLASSES = [
+          { key:'c0_02',  label:'0–0,2  molto bassa',  color:'#053061' },
+          { key:'c02_04', label:'0,2–0,4  bassa',       color:'#4393c3' },
+          { key:'c04_06', label:'0,4–0,6  media',       color:'#f7f7f7' },
+          { key:'c06_08', label:'0,6–0,8  alta',        color:'#d6604d' },
+          { key:'c08_1',  label:'0,8–1,0  molto alta',  color:'#67001f' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'complessità media',
+          unit: '',
+          maxVal: 0.284,
+          classes: HM_CLASSES,
+          items: [
+            { rank:1, label:'III · Oreto',           val:0.284, classi:{c0_02:55.0, c02_04:10.5, c04_06:14.0, c06_08:15.5, c08_1:5.1} },
+            { rank:2, label:'VII · Mondello',         val:0.265, classi:{c0_02:58.1, c02_04:10.7, c04_06:14.1, c06_08:10.9, c08_1:6.2} },
+            { rank:3, label:'V · Noce',               val:0.219, classi:{c0_02:59.8, c02_04:16.4, c04_06:14.7, c06_08:6.8,  c08_1:2.3} },
+            { rank:4, label:'IV · Mezzomonreale',     val:0.214, classi:{c0_02:64.6, c02_04:10.2, c04_06:13.7, c06_08:9.2,  c08_1:2.4} },
+            { rank:5, label:'VI · Nord-Ovest',        val:0.203, classi:{c0_02:59.1, c02_04:23.4, c04_06:12.3, c06_08:3.3,  c08_1:1.9} },
+            { rank:6, label:'VIII · Libertà',         val:0.171, classi:{c0_02:71.8, c02_04:12.0, c04_06:8.4,  c06_08:4.5,  c08_1:3.4} },
+            { rank:7, label:'II · Resuttana',         val:0.158, classi:{c0_02:78.9, c02_04:5.5,  c04_06:4.5,  c06_08:6.4,  c08_1:4.6} },
+            { rank:8, label:'I · Centro Storico',     val:0.048, classi:{c0_02:97.1, c02_04:2.4,  c04_06:0.4,  c06_08:0.0,  c08_1:0.0} }
+          ]
+        });
+        appendRankingCard(el, {
+          title: 'Top Quartieri · complessità',
+          subtitle: 'complessità media',
+          unit: '',
+          maxVal: 0.403,
+          classes: HM_CLASSES,
+          items: [
+            { rank:1, label:'Boccadifalco',                     val:0.403, classi:{c0_02:28.3, c02_04:17.2, c04_06:29.1, c06_08:20.2, c08_1:5.1} },
+            { rank:2, label:'Arenella - Vergine Maria',         val:0.340, classi:{c0_02:48.7, c02_04:10.5, c04_06:16.8, c06_08:14.8, c08_1:9.2} },
+            { rank:3, label:'Borgo Nuovo',                      val:0.333, classi:{c0_02:35.8, c02_04:25.8, c04_06:23.7, c06_08:11.0, c08_1:3.7} },
+            { rank:4, label:'Partanna Mondello',                val:0.330, classi:{c0_02:48.0, c02_04:10.9, c04_06:17.5, c06_08:14.4, c08_1:9.2} },
+            { rank:5, label:'Villagrazia - Falsomiele',         val:0.310, classi:{c0_02:50.6, c02_04:11.2, c04_06:15.4, c06_08:17.2, c08_1:5.6} },
+            { rank:6, label:'Montepellegrino',                  val:0.272, classi:{c0_02:52.6, c02_04:19.9, c04_06:14.1, c06_08:7.6,  c08_1:5.8} },
+            { rank:7, label:'Brancaccio - Ciaculli',            val:0.242, classi:{c0_02:65.5, c02_04:8.2,  c04_06:7.5,  c06_08:10.9, c08_1:7.9} },
+            { rank:8, label:'Tommaso Natale - Sferracavallo',   val:0.239, classi:{c0_02:58.9, c02_04:14.7, c04_06:14.2, c06_08:9.4,  c08_1:2.9} }
+          ]
+        });
       }
     },
 
@@ -679,6 +723,48 @@
           'Zona sicura: tutta la fascia costiera pianeggiante dalla Noce al Centro Storico ' +
           'e il fondovalle dell\'Oreto.'
         );
+
+        var VL_CLASSES = [
+          { key:'c0_02',  label:'0–0,2  molto bassa', color:'#1a9641' },
+          { key:'c02_04', label:'0,2–0,4  bassa',      color:'#a6d96a' },
+          { key:'c04_06', label:'0,4–0,6  media',      color:'#ffffbf' },
+          { key:'c06_08', label:'0,6–0,8  alta',       color:'#f46d43' },
+          { key:'c08_1',  label:'0,8–1,0  critica',    color:'#a50026' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'vulnerabilità media',
+          unit: '',
+          maxVal: 0.324,
+          classes: VL_CLASSES,
+          items: [
+            { rank:1, label:'III · Oreto',        val:0.324, classi:{c0_02:50.0, c02_04:9.8,  c04_06:11.0, c06_08:18.9, c08_1:10.4} },
+            { rank:2, label:'VII · Mondello',      val:0.297, classi:{c0_02:53.3, c02_04:9.3,  c04_06:12.0, c06_08:16.3, c08_1:9.1} },
+            { rank:3, label:'V · Noce',            val:0.275, classi:{c0_02:51.6, c02_04:14.3, c04_06:16.8, c06_08:13.0, c08_1:4.2} },
+            { rank:4, label:'VI · Nord-Ovest',     val:0.265, classi:{c0_02:46.8, c02_04:20.9, c04_06:21.2, c06_08:8.4,  c08_1:2.7} },
+            { rank:5, label:'IV · Mezzomonreale',  val:0.259, classi:{c0_02:59.7, c02_04:8.7,  c04_06:11.5, c06_08:15.2, c08_1:4.9} },
+            { rank:6, label:'VIII · Libertà',      val:0.206, classi:{c0_02:62.0, c02_04:15.6, c04_06:10.1, c06_08:7.6,  c08_1:4.6} },
+            { rank:7, label:'II · Resuttana',      val:0.170, classi:{c0_02:75.4, c02_04:6.5,  c04_06:4.3,  c06_08:6.3,  c08_1:7.5} },
+            { rank:8, label:'I · Centro Storico',  val:0.043, classi:{c0_02:94.1, c02_04:4.7,  c04_06:1.0,  c06_08:0.2,  c08_1:0.0} }
+          ]
+        });
+        appendRankingCard(el, {
+          title: 'Top Quartieri · vulnerabilità',
+          subtitle: 'vulnerabilità media',
+          unit: '',
+          maxVal: 0.492,
+          classes: VL_CLASSES,
+          items: [
+            { rank:1, label:'Boccadifalco',                   val:0.492, classi:{c0_02:22.3, c02_04:11.2, c04_06:22.7, c06_08:33.1, c08_1:10.7} },
+            { rank:2, label:'Borgo Nuovo',                    val:0.428, classi:{c0_02:23.5, c02_04:21.8, c04_06:26.9, c06_08:20.9, c08_1:6.8} },
+            { rank:3, label:'Arenella - Vergine Maria',       val:0.377, classi:{c0_02:42.7, c02_04:11.1, c04_06:10.6, c06_08:23.4, c08_1:12.2} },
+            { rank:4, label:'Partanna Mondello',              val:0.367, classi:{c0_02:44.4, c02_04:7.6,  c04_06:14.1, c06_08:20.8, c08_1:13.1} },
+            { rank:5, label:'Villagrazia - Falsomiele',       val:0.355, classi:{c0_02:45.3, c02_04:10.3, c04_06:11.9, c06_08:20.9, c08_1:11.5} },
+            { rank:6, label:'Montepellegrino',                val:0.337, classi:{c0_02:36.5, c02_04:25.8, c04_06:16.9, c06_08:12.9, c08_1:7.8} },
+            { rank:7, label:'Tommaso Natale - Sferracavallo', val:0.278, classi:{c0_02:51.2, c02_04:14.5, c04_06:14.0, c06_08:14.8, c08_1:5.5} },
+            { rank:8, label:'Cruillas - S.Giovanni Apostolo', val:0.272, classi:{c0_02:43.9, c02_04:24.2, c04_06:21.7, c06_08:7.3,  c08_1:2.9} }
+          ]
+        });
       }
     },
 
@@ -724,6 +810,455 @@
           'valori medi, mentre i versanti meridionali moderatamente inclinati (Mezzomonreale, ' +
           'Cruillas-Brancaccio) emergono come aree di massima efficienza solare.'
         );
+
+        var SR_CLASSES = [
+          { key:'c0_02',  label:'0–0,2  minima',    color:'#440154' },
+          { key:'c02_04', label:'0,2–0,4  bassa',   color:'#3e6f8e' },
+          { key:'c04_06', label:'0,4–0,6  media',   color:'#1fa188' },
+          { key:'c06_08', label:'0,6–0,8  alta',    color:'#9fda3a' },
+          { key:'c08_1',  label:'0,8–1,0  ottima',  color:'#f2a600' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'solare corretto medio',
+          unit: '',
+          maxVal: 0.41,
+          classes: SR_CLASSES,
+          items: [
+            { rank:1, label:'VI · Nord-Ovest',     val:0.410, classi:{c0_02:20.6, c02_04:31.8, c04_06:24.1, c06_08:18.6, c08_1:4.9} },
+            { rank:2, label:'IV · Mezzomonreale',  val:0.391, classi:{c0_02:24.7, c02_04:36.0, c04_06:18.1, c06_08:12.3, c08_1:9.0} },
+            { rank:3, label:'V · Noce',            val:0.381, classi:{c0_02:29.2, c02_04:31.1, c04_06:15.9, c06_08:17.9, c08_1:5.9} },
+            { rank:4, label:'VIII · Libertà',      val:0.370, classi:{c0_02:28.9, c02_04:32.2, c04_06:17.7, c06_08:17.0, c08_1:4.1} },
+            { rank:5, label:'VII · Mondello',      val:0.349, classi:{c0_02:29.8, c02_04:35.2, c04_06:19.8, c06_08:10.3, c08_1:4.8} },
+            { rank:6, label:'I · Centro Storico',  val:0.313, classi:{c0_02:31.2, c02_04:41.8, c04_06:17.9, c06_08:9.0,  c08_1:0.2} },
+            { rank:7, label:'III · Oreto',         val:0.261, classi:{c0_02:38.1, c02_04:47.5, c04_06:10.8, c06_08:3.4,  c08_1:0.2} },
+            { rank:8, label:'II · Resuttana',      val:0.242, classi:{c0_02:44.3, c02_04:43.7, c04_06:9.5,  c06_08:2.3,  c08_1:0.2} }
+          ]
+        });
+        appendRankingCard(el, {
+          title: 'Top Quartieri · solare raffinato',
+          subtitle: 'solare corretto medio',
+          unit: '',
+          maxVal: 0.478,
+          classes: SR_CLASSES,
+          items: [
+            { rank:1, label:'Boccadifalco',                   val:0.478, classi:{c0_02:17.6, c02_04:30.6, c04_06:16.1, c06_08:16.9, c08_1:18.8} },
+            { rank:2, label:'Cruillas - S.Giovanni Apostolo', val:0.469, classi:{c0_02:18.5, c02_04:22.6, c04_06:23.7, c06_08:26.0, c08_1:9.2} },
+            { rank:3, label:'Montepellegrino',                val:0.467, classi:{c0_02:14.4, c02_04:28.7, c04_06:22.8, c06_08:27.1, c08_1:7.1} },
+            { rank:4, label:'Borgo Nuovo',                    val:0.458, classi:{c0_02:20.7, c02_04:25.4, c04_06:17.5, c06_08:27.0, c08_1:9.5} },
+            { rank:5, label:'Arenella - Vergine Maria',       val:0.384, classi:{c0_02:18.7, c02_04:30.0, c04_06:40.5, c06_08:10.1, c08_1:0.7} },
+            { rank:6, label:'Partanna Mondello',              val:0.376, classi:{c0_02:31.2, c02_04:28.8, c04_06:17.1, c06_08:14.1, c08_1:8.8} },
+            { rank:7, label:'Resuttana - San Lorenzo',        val:0.364, classi:{c0_02:22.3, c02_04:39.0, c04_06:24.4, c06_08:12.8, c08_1:1.5} },
+            { rank:8, label:'Palazzo Reale - Monte di Pietà', val:0.351, classi:{c0_02:22.6, c02_04:44.2, c04_06:20.5, c06_08:12.3, c08_1:0.4} }
+          ]
+        });
+      }
+    },
+
+    tpi: {
+      icon: SVG_ICONS.tpi,
+      title: 'TPI — Posizione topografica locale',
+      layer: 'tpi-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'Il <strong>TPI (Topographic Position Index)</strong> confronta la quota di ogni cella con la media ' +
+          'del vicinato (scala ~100 m): valori negativi indicano valli e depressioni, valori positivi creste e sommità. ' +
+          'A Palermo il 50% del territorio ha TPI compreso tra <strong>−0,08 e +0,08</strong> — pianura e mezzacosta. ' +
+          'Le valli incise (TPI &lt; −0,5) rappresentano il <strong>5%</strong>, le creste (TPI &gt; 0,5) il <strong>5%</strong>. ' +
+          'Utile per identificare percorsi di deflusso idrico, aree di accumulo e crinali morfologici.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-tpi',
+          title: 'Classi TPI locale',
+          centerVal: '0,00',
+          centerLabel: 'media TPI',
+          legendData: [
+            { chartLabel: 'Valle < −1',        label: 'Valle / Depressione  TPI < −1',       pct:  5, color: '#4575b4' },
+            { chartLabel: 'Vers. basso −1/−0.5', label: 'Versante basso  −1 – −0,5',         pct: 20, color: '#91bfdb' },
+            { chartLabel: 'Pianura −0.5/+0.5', label: 'Pianura / Mezzacosta  −0,5 – +0,5',  pct: 50, color: '#ffffbf' },
+            { chartLabel: 'Vers. alto +0.5/+1', label: 'Versante alto  +0,5 – +1',           pct: 20, color: '#fc8d59' },
+            { chartLabel: 'Cresta > +1',        label: 'Cresta / Sommità  TPI > +1',         pct:  5, color: '#d73027' }
+          ],
+          summaries: [
+            { val: '50%', label: 'pianura/mezzac.' },
+            { val: '5%',  label: 'valli incise' },
+            { val: '5%',  label: 'creste' }
+          ]
+        });
+        appendText(el,
+          'Le valli principali (Oreto, Gabriele, Eleuterio) emergono come depressioni lineari (TPI molto negativo). ' +
+          'I rilievi di Montepellegrino e i Monti di Palermo mostrano creste continue ad alto TPI. ' +
+          'La Conca d\'Oro e il centro urbano costiero risultano in classe pianura/mezzacosta.'
+        );
+
+        var TPI_CLASSES = [
+          { key:'c_valle',   label:'Valle  TPI < −1',       color:'#4575b4' },
+          { key:'c_basso',   label:'Vers. basso  −1/−0,5', color:'#91bfdb' },
+          { key:'c_pianura', label:'Pianura  ±0,5',         color:'#ffffbf' },
+          { key:'c_alto',    label:'Vers. alto  +0,5/+1',  color:'#fc8d59' },
+          { key:'c_cresta',  label:'Cresta  TPI > +1',      color:'#d73027' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni · creste',
+          subtitle: '% creste (TPI > +1)',
+          unit: '%',
+          maxVal: 2.2,
+          classes: TPI_CLASSES,
+          items: [
+            { rank:1, label:'VII · Mondello',      val:2.2, classi:{c_valle:2.3, c_basso:5.4,  c_pianura:85.0, c_alto:5.2, c_cresta:2.2} },
+            { rank:2, label:'VIII · Libertà',      val:1.6, classi:{c_valle:1.2, c_basso:2.8,  c_pianura:91.4, c_alto:3.0, c_cresta:1.6} },
+            { rank:3, label:'III · Oreto',         val:1.4, classi:{c_valle:1.4, c_basso:6.7,  c_pianura:84.0, c_alto:6.5, c_cresta:1.4} },
+            { rank:4, label:'II · Resuttana',      val:1.2, classi:{c_valle:1.3, c_basso:3.2,  c_pianura:91.4, c_alto:2.9, c_cresta:1.2} },
+            { rank:5, label:'IV · Mezzomonreale',  val:0.9, classi:{c_valle:1.0, c_basso:4.9,  c_pianura:88.2, c_alto:5.0, c_cresta:0.9} },
+            { rank:6, label:'V · Noce',            val:0.9, classi:{c_valle:0.9, c_basso:4.1,  c_pianura:90.0, c_alto:4.2, c_cresta:0.9} },
+            { rank:7, label:'VI · Nord-Ovest',     val:0.8, classi:{c_valle:0.8, c_basso:3.2,  c_pianura:91.8, c_alto:3.3, c_cresta:0.8} },
+            { rank:8, label:'I · Centro Storico',  val:0.1, classi:{c_valle:0.1, c_basso:0.5,  c_pianura:98.8, c_alto:0.6, c_cresta:0.1} }
+          ]
+        });
+        appendRankingCard(el, {
+          title: 'Top Quartieri · creste locali',
+          subtitle: '% creste (TPI > +1)',
+          unit: '%',
+          maxVal: 3.3,
+          classes: TPI_CLASSES,
+          items: [
+            { rank:1, label:'Arenella - Vergine Maria',  val:3.3, classi:{c_valle:4.3, c_basso:7.4,  c_pianura:78.7, c_alto:6.3,  c_cresta:3.3} },
+            { rank:2, label:'Partanna Mondello',         val:3.3, classi:{c_valle:3.3, c_basso:6.5,  c_pianura:80.5, c_alto:6.3,  c_cresta:3.3} },
+            { rank:3, label:'Montepellegrino',           val:2.7, classi:{c_valle:1.9, c_basso:4.6,  c_pianura:85.8, c_alto:5.0,  c_cresta:2.7} },
+            { rank:4, label:'Brancaccio - Ciaculli',     val:2.1, classi:{c_valle:2.2, c_basso:5.1,  c_pianura:86.0, c_alto:4.6,  c_cresta:2.1} },
+            { rank:5, label:'Boccadifalco',              val:1.9, classi:{c_valle:1.9, c_basso:9.8,  c_pianura:76.5, c_alto:10.0, c_cresta:1.9} },
+            { rank:6, label:'Villagrazia - Falsomiele',  val:1.6, classi:{c_valle:1.5, c_basso:7.3,  c_pianura:82.5, c_alto:7.1,  c_cresta:1.6} },
+            { rank:7, label:'Borgo Nuovo',               val:1.4, classi:{c_valle:1.4, c_basso:6.4,  c_pianura:84.2, c_alto:6.6,  c_cresta:1.4} },
+            { rank:8, label:'Cruillas - S.Giovanni Apostolo', val:1.0, classi:{c_valle:1.0, c_basso:3.4, c_pianura:91.1, c_alto:3.6, c_cresta:1.0} }
+          ]
+        });
+      }
+    },
+
+    tpi300: {
+      icon: SVG_ICONS.tpi,
+      title: 'TPI — Posizione topografica regionale (300 m)',
+      layer: 'tpi300-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'Il <strong>TPI a scala regionale (300 m)</strong> confronta la quota di ogni cella con la media ' +
+          'di un vicinato ampio (~300 m di raggio): cattura la posizione morfologica nel paesaggio più vasto — ' +
+          'fondovalli fluviali, pianure intermontane, dorsali principali. ' +
+          'I valori spaziano da <strong>−142 m</strong> (fondovalle incassato) a <strong>+623 m</strong> (vetta prominente). ' +
+          'Combinato col TPI locale permette di classificare in 6 tipi morfologici: ' +
+          'piana, cresta locale, cresta esposta, versante aperto, valle chiusa, depressione.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-tpi300',
+          title: 'Classi TPI 300m',
+          centerVal: '4,9',
+          centerLabel: 'media (m)',
+          legendData: [
+            { chartLabel: 'Valle < −12',         label: 'Valle / Fondovalle  TPI < −12 m',    pct: 10, color: '#4575b4' },
+            { chartLabel: 'Vers. basso −12/−1.5', label: 'Versante basso  −12 – −1,5 m',      pct: 15, color: '#91bfdb' },
+            { chartLabel: 'Pianura −1.5/+1.5',   label: 'Pianura regionale  −1,5 – +1,5 m',  pct: 50, color: '#ffffbf' },
+            { chartLabel: 'Vers. alto +1.5/+12', label: 'Versante alto  +1,5 – +12 m',        pct: 15, color: '#fc8d59' },
+            { chartLabel: 'Cresta > +12',         label: 'Cresta / Dorsale  TPI > +12 m',     pct: 10, color: '#d73027' }
+          ],
+          summaries: [
+            { val: '−142',  label: 'm min (fondovalle)' },
+            { val: '+623',  label: 'm max (vetta)' },
+            { val: '34 m',  label: 'dev. std.' }
+          ]
+        });
+        appendText(el,
+          'A scala regionale emergono i grandi sistemi morfologici: la pianura costiera (Conca d\'Oro) in classe pianura, ' +
+          'le dorsali calcaree dei Monti di Palermo come creste continue, le incisioni fluviali maggiori come valli profonde. ' +
+          'Utile per pianificazione territoriale e valutazione del rischio idrogeologico a grande scala.'
+        );
+
+        var T3_CLASSES = [
+          { key:'c_valle',   label:'Valle  TPI < −12 m',       color:'#4575b4' },
+          { key:'c_basso',   label:'Vers. basso  −12/−1,5 m', color:'#91bfdb' },
+          { key:'c_pianura', label:'Pianura  ±1,5 m',          color:'#ffffbf' },
+          { key:'c_alto',    label:'Vers. alto  +1,5/+12 m',  color:'#fc8d59' },
+          { key:'c_cresta',  label:'Cresta  TPI > +12 m',      color:'#d73027' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'TPI regionale medio (m)',
+          unit: 'm',
+          maxVal: 9.37,
+          classes: T3_CLASSES,
+          items: [
+            { rank:1, label:'III · Oreto',        val:9.37, classi:{c_valle:8.1,  c_basso:20.0, c_pianura:44.3, c_alto:13.4, c_cresta:14.2} },
+            { rank:2, label:'IV · Mezzomonreale', val:7.87, classi:{c_valle:4.2,  c_basso:17.1, c_pianura:51.6, c_alto:14.3, c_cresta:12.9} },
+            { rank:3, label:'VI · Nord-Ovest',    val:4.09, classi:{c_valle:5.2,  c_basso:21.7, c_pianura:47.3, c_alto:17.5, c_cresta:8.3} },
+            { rank:4, label:'II · Resuttana',     val:4.05, classi:{c_valle:4.1,  c_basso:14.7, c_pianura:67.0, c_alto:7.1,  c_cresta:7.0} },
+            { rank:5, label:'VIII · Libertà',     val:3.06, classi:{c_valle:2.0,  c_basso:14.4, c_pianura:58.8, c_alto:14.2, c_cresta:10.7} },
+            { rank:6, label:'V · Noce',           val:2.65, classi:{c_valle:4.3,  c_basso:22.9, c_pianura:51.5, c_alto:14.1, c_cresta:7.3} },
+            { rank:7, label:'VII · Mondello',     val:0.10, classi:{c_valle:11.2, c_basso:22.5, c_pianura:47.9, c_alto:9.4,  c_cresta:8.9} },
+            { rank:8, label:'I · Centro Storico', val:0.08, classi:{c_valle:0.0,  c_basso:12.7, c_pianura:73.7, c_alto:13.6, c_cresta:0.0} }
+          ]
+        });
+        appendRankingCard(el, {
+          title: 'Top Quartieri · TPI 300m',
+          subtitle: 'TPI regionale medio (m)',
+          unit: 'm',
+          maxVal: 15.87,
+          classes: T3_CLASSES,
+          items: [
+            { rank:1, label:'Boccadifalco',                   val:15.87, classi:{c_valle:7.9, c_basso:24.7, c_pianura:25.5, c_alto:17.8, c_cresta:24.1} },
+            { rank:2, label:'Villagrazia - Falsomiele',       val:10.43, classi:{c_valle:8.9, c_basso:21.1, c_pianura:41.0, c_alto:13.2, c_cresta:15.9} },
+            { rank:3, label:'Brancaccio - Ciaculli',          val:6.69,  classi:{c_valle:7.0, c_basso:21.7, c_pianura:54.8, c_alto:4.9,  c_cresta:11.6} },
+            { rank:4, label:'Montepellegrino',                val:5.23,  classi:{c_valle:3.4, c_basso:22.8, c_pianura:33.7, c_alto:21.8, c_cresta:18.3} },
+            { rank:5, label:'Cruillas - S.Giovanni Apostolo', val:5.17,  classi:{c_valle:4.6, c_basso:23.9, c_pianura:43.6, c_alto:18.2, c_cresta:9.6} },
+            { rank:6, label:'Borgo Nuovo',                    val:4.29,  classi:{c_valle:6.9, c_basso:35.1, c_pianura:25.1, c_alto:21.0, c_cresta:11.8} },
+            { rank:7, label:'Resuttana - San Lorenzo',        val:3.24,  classi:{c_valle:5.6, c_basso:20.0, c_pianura:50.2, c_alto:16.9, c_cresta:7.3} },
+            { rank:8, label:'Tommaso Natale - Sferracavallo', val:3.18,  classi:{c_valle:3.7, c_basso:28.3, c_pianura:46.4, c_alto:12.9, c_cresta:8.7} }
+          ]
+        });
+      }
+    },
+
+    curvplanare: {
+      icon: SVG_ICONS.curvature,
+      title: 'Curvatura planare',
+      layer: 'curvplanare-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'La <strong>curvatura planare</strong> descrive la forma della superficie nel piano orizzontale: ' +
+          'valori negativi (blu) indicano forme <strong>convergenti</strong> — il flusso idrico si concentra, ' +
+          'accumulo di sedimenti e saturazione del suolo. ' +
+          'Valori positivi (arancio-rosso) indicano forme <strong>divergenti</strong> — il flusso si disperde, ' +
+          'drenaggio rapido. I valori vicini a zero (grigio chiaro) indicano superfici planari. ' +
+          'Indicatore chiave per rischio idraulico e modellazione del deflusso.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-curvp',
+          title: 'Curvatura planare',
+          centerVal: '0,00',
+          centerLabel: 'media',
+          legendData: [
+            { chartLabel: 'Convergente < −0.05', label: 'Convergente (accumulo)  < −0,05',  pct: 25, color: '#2166ac' },
+            { chartLabel: 'Planare ±0.05',       label: 'Planare  −0,05 – +0,05',           pct: 50, color: '#f7f7f7' },
+            { chartLabel: 'Divergente > +0.05',  label: 'Divergente (dispersione)  > +0,05', pct: 25, color: '#d6604d' }
+          ],
+          summaries: [
+            { val: '25%', label: 'convergente' },
+            { val: '50%', label: 'planare' },
+            { val: '25%', label: 'divergente' }
+          ]
+        });
+        appendText(el,
+          'Le zone convergenti (blu intenso) corrispondono ai canali drenanti e ai fondovalle — ' +
+          'aree a rischio alluvione e frana per saturazione. Le superfici divergenti (rosso) sono ' +
+          'tipiche di speroni e creste — drenaggio rapido ma rischio erosione superficiale. ' +
+          'Sovrapposta alla pendenza, guida la localizzazione dei bacini di raccolta.'
+        );
+
+        var CP_CLASSES = [
+          { key:'c_conv',  label:'Convergente  < −0,05', color:'#2166ac' },
+          { key:'c_plan',  label:'Planare  ±0,05',       color:'#f7f7f7' },
+          { key:'c_div',   label:'Divergente  > +0,05',  color:'#d6604d' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni · convergenza',
+          subtitle: '% superficie convergente',
+          unit: '%',
+          maxVal: 33.9,
+          classes: CP_CLASSES,
+          items: [
+            { rank:1, label:'I · Centro Storico',  val:33.9, classi:{c_conv:33.9, c_plan:33.4, c_div:32.7} },
+            { rank:2, label:'VIII · Libertà',      val:30.8, classi:{c_conv:30.8, c_plan:40.5, c_div:28.7} },
+            { rank:3, label:'V · Noce',            val:29.0, classi:{c_conv:29.0, c_plan:42.0, c_div:29.0} },
+            { rank:4, label:'VII · Mondello',      val:28.5, classi:{c_conv:28.5, c_plan:42.5, c_div:29.0} },
+            { rank:5, label:'II · Resuttana',      val:26.8, classi:{c_conv:26.8, c_plan:46.2, c_div:27.0} },
+            { rank:6, label:'VI · Nord-Ovest',     val:26.4, classi:{c_conv:26.4, c_plan:47.5, c_div:26.1} },
+            { rank:7, label:'III · Oreto',         val:26.2, classi:{c_conv:26.2, c_plan:47.5, c_div:26.3} },
+            { rank:8, label:'IV · Mezzomonreale',  val:26.0, classi:{c_conv:26.0, c_plan:47.2, c_div:26.7} }
+          ]
+        });
+        appendRankingCard(el, {
+          title: 'Top Quartieri · curvatura planare',
+          subtitle: '% superficie convergente',
+          unit: '%',
+          maxVal: 36.0,
+          classes: CP_CLASSES,
+          items: [
+            { rank:1, label:'Noce',                               val:36.0, classi:{c_conv:36.0, c_plan:27.8, c_div:36.2} },
+            { rank:2, label:'Palazzo Reale - Monte di Pietà',     val:35.5, classi:{c_conv:35.5, c_plan:29.3, c_div:35.2} },
+            { rank:3, label:'Oreto - Stazione',                   val:32.5, classi:{c_conv:32.5, c_plan:33.3, c_div:34.2} },
+            { rank:4, label:'Cuba - Calatafimi',                  val:32.0, classi:{c_conv:32.0, c_plan:35.4, c_div:32.7} },
+            { rank:5, label:'Brancaccio - Ciaculli',              val:31.7, classi:{c_conv:31.7, c_plan:37.8, c_div:30.5} },
+            { rank:6, label:'Villagrazia - Falsomiele',           val:30.4, classi:{c_conv:30.4, c_plan:38.5, c_div:31.1} },
+            { rank:7, label:'Cruillas - S.Giovanni Apostolo',     val:29.7, classi:{c_conv:29.7, c_plan:41.0, c_div:29.3} },
+            { rank:8, label:'Montepellegrino',                    val:29.6, classi:{c_conv:29.6, c_plan:41.4, c_div:29.0} }
+          ]
+        });
+      }
+    },
+
+    curvprofilo: {
+      icon: SVG_ICONS.curvature,
+      title: 'Curvatura profilo',
+      layer: 'curvprofilo-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'La <strong>curvatura del profilo</strong> misura la variazione di pendenza lungo la linea di massima pendenza: ' +
+          'valori negativi (verde) = superfici <strong>concave</strong> — il flusso decelera, favorisce deposito ' +
+          'e accumulo (forma a cucchiaio). Valori positivi (rosso) = superfici <strong>convesse</strong> — ' +
+          'il flusso accelera, favorisce erosione e trasporto. ' +
+          'Utile per individuare aree di deposito (rischio frana da colamento) e zone di erosione attiva.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-curvpr',
+          title: 'Curvatura profilo',
+          centerVal: '0,00',
+          centerLabel: 'media',
+          legendData: [
+            { chartLabel: 'Concava < −0.005', label: 'Concava (deposito)  < −0,005',   pct: 25, color: '#1a9850' },
+            { chartLabel: 'Lineare ±0.005',   label: 'Lineare  −0,005 – +0,005',       pct: 50, color: '#ffffbf' },
+            { chartLabel: 'Convessa > 0.005', label: 'Convessa (erosione)  > +0,005',  pct: 25, color: '#d73027' }
+          ],
+          summaries: [
+            { val: '25%', label: 'concava (deposito)' },
+            { val: '50%', label: 'lineare' },
+            { val: '25%', label: 'convessa (erosione)' }
+          ]
+        });
+        appendText(el,
+          'I versanti convessi (rosso) nei rilievi calcarei dei Monti di Palermo indicano erosione attiva e ' +
+          'trasporto di materiale. Le superfici concave (verde) ai piedi dei versanti e nelle conche ' +
+          'intravallive segnalano depositi colluviali — zone a rischio frana per colamento e debris flow. ' +
+          'Combinata con la pendenza, è un predittore di instabilità dei versanti.'
+        );
+
+        var CPR_CLASSES = [
+          { key:'c_conv',  label:'Concava  < −0,005',    color:'#1a9850' },
+          { key:'c_lin',   label:'Lineare  ±0,005',      color:'#ffffbf' },
+          { key:'c_cvx',   label:'Convessa  > +0,005',   color:'#d73027' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni · convessità',
+          subtitle: '% superficie convessa',
+          unit: '%',
+          maxVal: 25.8,
+          classes: CPR_CLASSES,
+          items: [
+            { rank:1, label:'VI · Nord-Ovest',     val:25.8, classi:{c_conv:24.2, c_lin:50.0, c_cvx:25.8} },
+            { rank:2, label:'III · Oreto',         val:25.7, classi:{c_conv:25.6, c_lin:48.7, c_cvx:25.7} },
+            { rank:3, label:'VII · Mondello',      val:25.3, classi:{c_conv:24.3, c_lin:50.4, c_cvx:25.3} },
+            { rank:4, label:'IV · Mezzomonreale',  val:25.1, classi:{c_conv:25.1, c_lin:49.8, c_cvx:25.1} },
+            { rank:5, label:'II · Resuttana',      val:24.9, classi:{c_conv:24.6, c_lin:50.5, c_cvx:24.9} },
+            { rank:6, label:'V · Noce',            val:24.9, classi:{c_conv:25.2, c_lin:49.9, c_cvx:24.9} },
+            { rank:7, label:'VIII · Libertà',      val:24.4, classi:{c_conv:23.8, c_lin:51.8, c_cvx:24.4} },
+            { rank:8, label:'I · Centro Storico',  val:23.3, classi:{c_conv:23.0, c_lin:53.7, c_cvx:23.3} }
+          ]
+        });
+        appendRankingCard(el, {
+          title: 'Top Quartieri · curvatura profilo',
+          subtitle: '% superficie convessa',
+          unit: '%',
+          maxVal: 29.2,
+          classes: CPR_CLASSES,
+          items: [
+            { rank:1, label:'Borgo Nuovo',                        val:29.2, classi:{c_conv:27.8, c_lin:43.0, c_cvx:29.2} },
+            { rank:2, label:'Boccadifalco',                       val:28.6, classi:{c_conv:28.4, c_lin:43.0, c_cvx:28.6} },
+            { rank:3, label:'Montepellegrino',                    val:27.8, classi:{c_conv:25.6, c_lin:46.6, c_cvx:27.8} },
+            { rank:4, label:'Partanna Mondello',                  val:27.5, classi:{c_conv:25.5, c_lin:47.0, c_cvx:27.5} },
+            { rank:5, label:'Arenella - Vergine Maria',           val:27.4, classi:{c_conv:27.2, c_lin:45.4, c_cvx:27.4} },
+            { rank:6, label:'Villagrazia - Falsomiele',           val:26.5, classi:{c_conv:26.3, c_lin:47.2, c_cvx:26.5} },
+            { rank:7, label:'Resuttana - San Lorenzo',            val:26.3, classi:{c_conv:26.5, c_lin:47.2, c_cvx:26.3} },
+            { rank:8, label:'Tommaso Natale - Sferracavallo',     val:25.6, classi:{c_conv:25.8, c_lin:48.6, c_cvx:25.6} }
+          ]
+        });
+      }
+    },
+
+    curvtotale: {
+      icon: SVG_ICONS.curvature,
+      title: 'Curvatura totale',
+      layer: 'curvtotale-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'La <strong>curvatura totale</strong> (Laplaciano) è la somma di curvatura planare e di profilo: ' +
+          'sintetizza la complessità morfologica in un unico indice. ' +
+          'Valori molto negativi (blu scuro) = superfici molto concave — zone di convergenza totale (flusso + deposito). ' +
+          'Valori molto positivi (rosso) = superfici molto convesse — zone di massima dispersione e accelerazione. ' +
+          'I valori centrali (giallo pallido) = terreno piano o a curvatura nulla.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-curvt',
+          title: 'Curvatura totale',
+          centerVal: '0,00',
+          centerLabel: 'media',
+          legendData: [
+            { chartLabel: 'Molto concava < −0.27', label: 'Molto concava  < −0,27',        pct:  5, color: '#4575b4' },
+            { chartLabel: 'Concava −0.27/−0.05',  label: 'Concava  −0,27 – −0,05',        pct: 20, color: '#91bfdb' },
+            { chartLabel: 'Piana ±0.05',           label: 'Piana  −0,05 – +0,05',          pct: 50, color: '#ffffbf' },
+            { chartLabel: 'Convessa +0.05/+0.27', label: 'Convessa  +0,05 – +0,27',        pct: 20, color: '#fc8d59' },
+            { chartLabel: 'Molto conv. > +0.27',  label: 'Molto convessa  > +0,27',        pct:  5, color: '#d73027' }
+          ],
+          summaries: [
+            { val: '50%', label: 'piana' },
+            { val: '5%',  label: 'molto concava' },
+            { val: '5%',  label: 'molto convessa' }
+          ]
+        });
+        appendText(el,
+          'La curvatura totale è la mappa geomorfologica più immediata per il pubblico generale: ' +
+          'le aree rosse corrispondono a creste e speroni erosi, le aree blu a valli e conche di accumulo. ' +
+          'Le aree gialle (pianura) dominano la Conca d\'Oro e il fronte costiero. ' +
+          'Utile per carte del rischio combinato e comunicazione del paesaggio.'
+        );
+
+        var CT_CLASSES = [
+          { key:'c_concava',  label:'Molto concava  < −0,27',  color:'#4575b4' },
+          { key:'c_lbassa',   label:'Liev. concava  −0,27/−0,046', color:'#91bfdb' },
+          { key:'c_piano',    label:'Piano  ±0,046',             color:'#ffffbf' },
+          { key:'c_lalta',    label:'Liev. convessa  +0,046/+0,27', color:'#fc8d59' },
+          { key:'c_convessa', label:'Molto convessa  > +0,27',  color:'#d73027' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni · pianura',
+          subtitle: '% superficie piana',
+          unit: '%',
+          maxVal: 55.8,
+          classes: CT_CLASSES,
+          items: [
+            { rank:1, label:'III · Oreto',        val:55.8, classi:{c_concava:4.2,  c_lbassa:19.5, c_piano:55.8, c_lalta:15.2, c_convessa:5.3} },
+            { rank:2, label:'I · Centro Storico', val:55.0, classi:{c_concava:4.5,  c_lbassa:18.0, c_piano:55.0, c_lalta:16.0, c_convessa:6.5} },
+            { rank:3, label:'V · Noce',           val:52.8, classi:{c_concava:5.1,  c_lbassa:18.8, c_piano:52.8, c_lalta:17.4, c_convessa:5.9} },
+            { rank:4, label:'VIII · Libertà',     val:52.5, classi:{c_concava:4.8,  c_lbassa:19.3, c_piano:52.5, c_lalta:17.5, c_convessa:5.9} },
+            { rank:5, label:'II · Resuttana',     val:52.0, classi:{c_concava:4.6,  c_lbassa:19.8, c_piano:52.0, c_lalta:17.9, c_convessa:5.7} },
+            { rank:6, label:'IV · Mezzomonreale', val:50.2, classi:{c_concava:4.6,  c_lbassa:21.6, c_piano:50.2, c_lalta:17.5, c_convessa:6.1} },
+            { rank:7, label:'VI · Nord-Ovest',    val:47.0, classi:{c_concava:5.9,  c_lbassa:21.9, c_piano:47.0, c_lalta:18.6, c_convessa:6.5} },
+            { rank:8, label:'VII · Mondello',     val:44.1, classi:{c_concava:7.0,  c_lbassa:22.1, c_piano:44.1, c_lalta:19.8, c_convessa:7.1} }
+          ]
+        });
+        appendRankingCard(el, {
+          title: 'Top Quartieri · curvatura totale',
+          subtitle: '% superficie piana',
+          unit: '%',
+          maxVal: 69.0,
+          classes: CT_CLASSES,
+          items: [
+            { rank:1, label:'Boccadifalco',                       val:69.0, classi:{c_concava:3.0, c_lbassa:10.8, c_piano:69.0, c_lalta:12.5, c_convessa:4.7} },
+            { rank:2, label:'Oreto - Stazione',                   val:65.3, classi:{c_concava:3.2, c_lbassa:13.5, c_piano:65.3, c_lalta:13.4, c_convessa:4.6} },
+            { rank:3, label:'Cuba - Calatafimi',                   val:58.1, classi:{c_concava:4.8, c_lbassa:17.0, c_piano:58.1, c_lalta:14.5, c_convessa:5.5} },
+            { rank:4, label:'Palazzo Reale - Monte di Pietà',     val:57.2, classi:{c_concava:4.6, c_lbassa:16.8, c_piano:57.2, c_lalta:15.2, c_convessa:6.2} },
+            { rank:5, label:'Noce',                               val:55.9, classi:{c_concava:5.1, c_lbassa:16.0, c_piano:55.9, c_lalta:17.0, c_convessa:6.1} },
+            { rank:6, label:'Cruillas - S.Giovanni Apostolo',     val:54.8, classi:{c_concava:5.0, c_lbassa:18.2, c_piano:54.8, c_lalta:16.0, c_convessa:6.0} },
+            { rank:7, label:'Villagrazia - Falsomiele',           val:53.5, classi:{c_concava:4.8, c_lbassa:19.5, c_piano:53.5, c_lalta:17.0, c_convessa:5.2} },
+            { rank:8, label:'Resuttana - San Lorenzo',            val:53.5, classi:{c_concava:5.3, c_lbassa:19.4, c_piano:53.5, c_lalta:16.6, c_convessa:5.2} }
+          ]
+        });
       }
     },
 

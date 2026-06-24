@@ -192,6 +192,51 @@ const map = new maplibregl.Map({
         scheme: 'tms',
         attribution: 'Radiazione solare raffinata: DTM HRDTM5m@italia'
       },
+      'tpi-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/tpi/{z}/{x}/{y}.png`],
+        tileSize: 256,
+        minzoom: 8,
+        maxzoom: 15,
+        scheme: 'tms',
+        attribution: 'TPI locale: DTM HRDTM5m@italia'
+      },
+      'tpi300-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/tpi_300m/{z}/{x}/{y}.png`],
+        tileSize: 256,
+        minzoom: 8,
+        maxzoom: 15,
+        scheme: 'tms',
+        attribution: 'TPI 300m: DTM HRDTM5m@italia'
+      },
+      'curvplanare-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/curvatura_planare/{z}/{x}/{y}.png`],
+        tileSize: 256,
+        minzoom: 8,
+        maxzoom: 15,
+        scheme: 'tms',
+        attribution: 'Curvatura planare: DTM HRDTM5m@italia'
+      },
+      'curvprofilo-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/curvatura_profilo/{z}/{x}/{y}.png`],
+        tileSize: 256,
+        minzoom: 8,
+        maxzoom: 15,
+        scheme: 'tms',
+        attribution: 'Curvatura profilo: DTM HRDTM5m@italia'
+      },
+      'curvtotale-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/curvatura_totale/{z}/{x}/{y}.png`],
+        tileSize: 256,
+        minzoom: 8,
+        maxzoom: 15,
+        scheme: 'tms',
+        attribution: 'Curvatura totale: DTM HRDTM5m@italia'
+      },
       'upl': {
         type: 'geojson',
         data: `${BASE_URL}docs/geojson/upl.geojson`
@@ -315,6 +360,51 @@ const map = new maplibregl.Map({
         id: 'solare-raf-layer',
         type: 'raster',
         source: 'solare-raf-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // TPI locale — disattiva di default
+      {
+        id: 'tpi-layer',
+        type: 'raster',
+        source: 'tpi-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // TPI 300m — disattiva di default
+      {
+        id: 'tpi300-layer',
+        type: 'raster',
+        source: 'tpi300-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // Curvatura planare — disattiva di default
+      {
+        id: 'curvplanare-layer',
+        type: 'raster',
+        source: 'curvplanare-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // Curvatura profilo — disattiva di default
+      {
+        id: 'curvprofilo-layer',
+        type: 'raster',
+        source: 'curvprofilo-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // Curvatura totale — disattiva di default
+      {
+        id: 'curvtotale-layer',
+        type: 'raster',
+        source: 'curvtotale-raster',
         layout: { visibility: 'none' },
         paint: { 'raster-opacity': 1.0 }
       },
