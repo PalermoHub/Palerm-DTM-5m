@@ -1007,7 +1007,9 @@
       </div>
       <div class="rp-cards">
 
-        <!-- ── 1. Morfometria di base ── -->
+        <!-- ── Morfometria di base ── -->
+        <div class="rp-category-header">Morfometria di base</div>
+
         <div class="rp-card" data-analysis="elevation">
           <div class="rp-card-line" style="background:#00cb9b;"></div>
           <div class="rp-card-title">Mappa Elevazione</div>
@@ -1024,6 +1026,39 @@
           <div class="rp-card-line" style="background:#4fc3f7;"></div>
           <div class="rp-card-title">Esposizione</div>
           <div class="rp-card-sub">Prevalente NE (18,9%)</div>
+        </div>
+
+        <div class="rp-card" data-analysis="rugosity">
+          <div class="rp-card-line" style="background:#546e7a;"></div>
+          <div class="rp-card-title">Rugosità (TRI)</div>
+          <div class="rp-card-sub">TRI medio 3,05 · max 369</div>
+        </div>
+
+        <div class="rp-card" data-analysis="heatmap">
+          <div class="rp-card-line" style="background:#b01a2e;"></div>
+          <div class="rp-card-title">Heatmap complessità</div>
+          <div class="rp-card-sub">Slope + TRI + Roughness · media 0,22</div>
+        </div>
+
+        <!-- ── Struttura e forma del paesaggio ── -->
+        <div class="rp-category-header">Struttura e forma del paesaggio</div>
+
+        <div class="rp-card" data-analysis="geomorph">
+          <div class="rp-card-line" style="background:#7986cb;"></div>
+          <div class="rp-card-title">Geomorfologia</div>
+          <div class="rp-card-sub">Versanti 60% · Creste 33%</div>
+        </div>
+
+        <div class="rp-card" data-analysis="tpi">
+          <div class="rp-card-line" style="background:#d73027;"></div>
+          <div class="rp-card-title">TPI locale</div>
+          <div class="rp-card-sub">Posizione topografica · scala 100 m</div>
+        </div>
+
+        <div class="rp-card" data-analysis="tpi300">
+          <div class="rp-card-line" style="background:#fc8d59;"></div>
+          <div class="rp-card-title">TPI regionale (300 m)</div>
+          <div class="rp-card-sub">Posizione nel paesaggio · scala 300 m</div>
         </div>
 
         <div class="rp-card" data-analysis="curvplanare">
@@ -1044,70 +1079,8 @@
           <div class="rp-card-sub">Laplaciano · sintesi morfologica</div>
         </div>
 
-        <!-- ── 2. Posizione e tessitura ── -->
-        <div class="rp-card" data-analysis="tpi">
-          <div class="rp-card-line" style="background:#d73027;"></div>
-          <div class="rp-card-title">TPI locale</div>
-          <div class="rp-card-sub">Posizione topografica · scala 100 m</div>
-        </div>
-
-        <div class="rp-card" data-analysis="tpi300">
-          <div class="rp-card-line" style="background:#fc8d59;"></div>
-          <div class="rp-card-title">TPI regionale (300 m)</div>
-          <div class="rp-card-sub">Posizione nel paesaggio · scala 300 m</div>
-        </div>
-
-        <div class="rp-card" data-analysis="rugosity">
-          <div class="rp-card-line" style="background:#546e7a;"></div>
-          <div class="rp-card-title">Rugosità (TRI)</div>
-          <div class="rp-card-sub">TRI medio 3,05 · max 369</div>
-        </div>
-
-        <!-- ── 3. Classificazione morfologica ── -->
-        <div class="rp-card" data-analysis="geomorph">
-          <div class="rp-card-line" style="background:#7986cb;"></div>
-          <div class="rp-card-title">Geomorfologia</div>
-          <div class="rp-card-sub">Versanti 60% · Creste 33%</div>
-        </div>
-
-        <!-- ── 4. Rischio e pianificazione ── -->
-        <div class="rp-card" data-analysis="stability">
-          <div class="rp-card-line" style="background:#ef5350;"></div>
-          <div class="rp-card-title">Stabilità versanti</div>
-          <div class="rp-card-sub">30,8% a rischio (cl. 3–5)</div>
-        </div>
-
-        <div class="rp-card" data-analysis="build">
-          <div class="rp-card-line" style="background:#1565c0;"></div>
-          <div class="rp-card-title">Costruibilità</div>
-          <div class="rp-card-sub">47,3% ottima · 28,7% critica</div>
-        </div>
-
-        <!-- ── 5. Energia solare ── -->
-        <div class="rp-card" data-analysis="solar">
-          <div class="rp-card-line" style="background:#ffb300;"></div>
-          <div class="rp-card-title">Radiazione solare</div>
-          <div class="rp-card-sub">SRI medio 0,59 · 56% fascia media</div>
-        </div>
-
-        <div class="rp-card" data-analysis="solarraf">
-          <div class="rp-card-line" style="background:#f2a600;"></div>
-          <div class="rp-card-title">Solare raffinato</div>
-          <div class="rp-card-sub">SRI × aspetto × pendenza · media 0,43</div>
-        </div>
-
-        <!-- ── 6. Indici sintetici ── -->
-        <div class="rp-card" data-analysis="heatmap">
-          <div class="rp-card-line" style="background:#b01a2e;"></div>
-          <div class="rp-card-title">Heatmap complessità</div>
-          <div class="rp-card-sub">Slope + TRI + Roughness · media 0,22</div>
-        </div>
-
-        <div class="rp-card" data-analysis="vulnerabilita">
-          <div class="rp-card-line" style="background:#d73027;"></div>
-          <div class="rp-card-title">Indice vulnerabilità</div>
-          <div class="rp-card-sub">Multi-criterio · 19% ad alto rischio</div>
-        </div>
+        <!-- ── Idrologia e rischio idraulico ── -->
+        <div class="rp-category-header">Idrologia e rischio idraulico</div>
 
         <div class="rp-card" data-analysis="twi">
           <div class="rp-card-line" style="background:#2171b5;"></div>
@@ -1137,6 +1110,54 @@
           <div class="rp-card-line" style="background:#00682c;"></div>
           <div class="rp-card-title">Depth-to-Water (HAND)</div>
           <div class="rp-card-sub">Profondità falda freatica</div>
+        </div>
+
+        <div class="rp-card" data-analysis="erosionerusle">
+          <div class="rp-card-line" style="background:#fd8d3c;"></div>
+          <div class="rp-card-title">Erosione potenziale RUSLE</div>
+          <div class="rp-card-sub">Fattore LS semplificato · 5% critico (forre calcaree)</div>
+        </div>
+
+        <!-- ── Rischio e pianificazione territoriale ── -->
+        <div class="rp-category-header">Rischio e pianificazione territoriale</div>
+
+        <div class="rp-card" data-analysis="stability">
+          <div class="rp-card-line" style="background:#ef5350;"></div>
+          <div class="rp-card-title">Stabilità versanti</div>
+          <div class="rp-card-sub">30,8% a rischio (cl. 3–5)</div>
+        </div>
+
+        <div class="rp-card" data-analysis="vulnerabilita">
+          <div class="rp-card-line" style="background:#d73027;"></div>
+          <div class="rp-card-title">Indice vulnerabilità</div>
+          <div class="rp-card-sub">Multi-criterio · 19% ad alto rischio</div>
+        </div>
+
+        <div class="rp-card" data-analysis="build">
+          <div class="rp-card-line" style="background:#1565c0;"></div>
+          <div class="rp-card-title">Costruibilità</div>
+          <div class="rp-card-sub">47,3% ottima · 28,7% critica</div>
+        </div>
+
+        <div class="rp-card" data-analysis="curvaturainstabilita">
+          <div class="rp-card-line" style="background:#bd0026;"></div>
+          <div class="rp-card-title">Curvatura · instabilità radicale</div>
+          <div class="rp-card-sub">Plan × profilo · 5% critico · accumulo detritico</div>
+        </div>
+
+        <!-- ── Energia, clima e microclima ── -->
+        <div class="rp-category-header">Energia, clima e microclima</div>
+
+        <div class="rp-card" data-analysis="solar">
+          <div class="rp-card-line" style="background:#ffb300;"></div>
+          <div class="rp-card-title">Radiazione solare</div>
+          <div class="rp-card-sub">SRI medio 0,59 · 56% fascia media</div>
+        </div>
+
+        <div class="rp-card" data-analysis="solarraf">
+          <div class="rp-card-line" style="background:#f2a600;"></div>
+          <div class="rp-card-title">Solare raffinato</div>
+          <div class="rp-card-sub">SRI × aspetto × pendenza · media 0,43</div>
         </div>
 
         <div class="rp-card" data-analysis="fotovoltaico">
@@ -1169,16 +1190,19 @@
           <div class="rp-card-sub">Apertura del cielo · isola di calore urbana</div>
         </div>
 
+        <!-- ── Verde urbano, mobilità e paesaggio ── -->
+        <div class="rp-category-header">Verde urbano, mobilità e paesaggio</div>
+
+        <div class="rp-card" data-analysis="corridoi">
+          <div class="rp-card-line" style="background:#1a9850;"></div>
+          <div class="rp-card-title">Corridoi ecologici morfologici</div>
+          <div class="rp-card-sub">Connettività su slope+rugosità · 45,5% corridoio ottimale</div>
+        </div>
+
         <div class="rp-card" data-analysis="viewshed">
           <div class="rp-card-line" style="background:#08519c;"></div>
           <div class="rp-card-title">Visibilità / Viewshed</div>
           <div class="rp-card-sub">Visibilità da 6 punti strategici · cumulativo</div>
-        </div>
-
-        <div class="rp-card" data-analysis="profili">
-          <div class="rp-card-line" style="background:#e07800;"></div>
-          <div class="rp-card-title">Profili altimetrici</div>
-          <div class="rp-card-sub">5 transetti · quota lungo assi territoriali</div>
         </div>
 
         <div class="rp-card" data-analysis="accessibilita">
@@ -1187,22 +1211,10 @@
           <div class="rp-card-sub">Velocità pedonale Tobler · media 3,1 km/h</div>
         </div>
 
-        <div class="rp-card" data-analysis="corridoi">
-          <div class="rp-card-line" style="background:#1a9850;"></div>
-          <div class="rp-card-title">Corridoi ecologici morfologici</div>
-          <div class="rp-card-sub">Connettività su slope+rugosità · 45,5% corridoio ottimale</div>
-        </div>
-
-        <div class="rp-card" data-analysis="erosionerusle">
-          <div class="rp-card-line" style="background:#fd8d3c;"></div>
-          <div class="rp-card-title">Erosione potenziale RUSLE</div>
-          <div class="rp-card-sub">Fattore LS semplificato · 5% critico (forre calcaree)</div>
-        </div>
-
-        <div class="rp-card" data-analysis="curvaturainstabilita">
-          <div class="rp-card-line" style="background:#bd0026;"></div>
-          <div class="rp-card-title">Curvatura · instabilità radicale</div>
-          <div class="rp-card-sub">Plan × profilo · 5% critico · accumulo detritico</div>
+        <div class="rp-card" data-analysis="profili">
+          <div class="rp-card-line" style="background:#e07800;"></div>
+          <div class="rp-card-title">Profili altimetrici</div>
+          <div class="rp-card-sub">9 transetti · quota lungo assi territoriali</div>
         </div>
 
       </div><!-- /rp-cards -->

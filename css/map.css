@@ -1155,6 +1155,31 @@ body {
 .rp-cards::-webkit-scrollbar { width: 4px; }
 .rp-cards::-webkit-scrollbar-thumb { background: #c0cce8; border-radius: 2px; }
 
+.rp-category-header {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 4px 4px;
+  margin-top: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8898c8;
+}
+
+.rp-category-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(30, 60, 160, 0.1);
+}
+
+.rp-category-header:first-child {
+  margin-top: 0;
+}
+
 .rp-card {
   background: #fff;
   border: 1px solid rgba(30, 60, 160, 0.1);
