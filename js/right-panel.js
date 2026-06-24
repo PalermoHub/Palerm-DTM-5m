@@ -2038,6 +2038,163 @@
     },
 
     // ── Accessibilità morfologica ────────────────────────────────────────────
+    corridoi: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 C7 17 7 7 12 7 C17 7 17 17 21 17"/><path d="M3 12 C7 12 7 4 12 4 C17 4 17 12 21 12"/></svg>',
+      title: 'Corridoi ecologici morfologici',
+      layer: 'corridoi-ecologici-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'I <strong>Corridoi Ecologici Morfologici</strong> identificano le aree dove la morfologia ' +
+          'del suolo <strong>favorisce la continuità della vegetazione naturalizzata</strong>: ' +
+          'bassa pendenza e bassa rugosità superficiale consentono alla flora di colonizzare ' +
+          'e connettere nuclei vegetali distanti. ' +
+          'L\'indice è calcolato come <strong>conn = (1 − slope_norm)^1.5 × (1 − rough_norm)^0.8</strong>, ' +
+          'dove slope_norm = pendenza/45° e rough_norm = rugosità/98° percentile. ' +
+          'Valori vicino a 1 (verde scuro) indicano <strong>nuclei e corridoi ottimali</strong>; ' +
+          'valori vicino a 0 (rosso) corrispondono a <strong>barriere morfologiche</strong> — ' +
+          'versanti calcarei ripidi e rocciosi dei Monti di Palermo. ' +
+          'Il <strong>45,5%</strong> del territorio ha connettività > 0,85 (corridoio ottimale), ' +
+          'prevalentemente nelle aree pianeggianti costiere e nella Conca d\'Oro.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-corridoi',
+          title: 'Connettività morfologica',
+          centerVal: '45,5%',
+          centerLabel: 'corridoio ottimale',
+          legendData: [
+            { chartLabel: 'Barriera critica',   label: '0,00–0,15  barriera critica (versanti ripidi)',  pct: 16.4, color: '#b40000' },
+            { chartLabel: 'Barriera alta',       label: '0,15–0,30  barriera alta',                       pct:  8.9, color: '#e65520' },
+            { chartLabel: 'Barriera moderata',   label: '0,30–0,45  barriera moderata',                   pct:  6.6, color: '#fdae61' },
+            { chartLabel: 'Potenziale',          label: '0,45–0,60  corridoio potenziale',                pct:  6.0, color: '#fee08b' },
+            { chartLabel: 'Buono',               label: '0,60–0,73  corridoio buono',                     pct:  6.3, color: '#a6d96a' },
+            { chartLabel: 'Ottimo',              label: '0,73–0,85  corridoio ottimo',                    pct: 10.4, color: '#66bd63' },
+            { chartLabel: 'Ottimale / nucleo',   label: '> 0,85  nucleo — alta connettività',             pct: 45.5, color: '#1a9850' }
+          ],
+          summaries: [
+            { val: '45,5%', label: 'corridoio ottimale' },
+            { val: '16,4%', label: 'barriera critica' },
+            { val: '0,634', label: 'indice medio' }
+          ]
+        });
+        appendText(el,
+          'Le barriere morfologiche critiche (16,4%) coincidono con i versanti calcarei di ' +
+          'Monte Pellegrino, Monte Cuccio, Monte Grifone e le falesie costiere. ' +
+          'I corridoi ottimali (45,5%) si concentrano nelle pianure costiere (Mondello–Sferracavallo), ' +
+          'nella Conca d\'Oro e nelle aree agricole della Circoscrizione VI. ' +
+          'Questa mappa è utile per la pianificazione della Rete Ecologica Comunale (REC): ' +
+          'i corridoi ottimali (verde) sono candidati prioritari per fasce boscate e greenway, ' +
+          'le aree "corridoio buono" (verde chiaro) per stepping stone vegetali, ' +
+          'le barriere moderate (giallo–arancio) richiedono interventi di ingegneria naturalistica.'
+        );
+      }
+    },
+
+    erosionerusle: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20 Q8 10 12 14 Q16 18 21 4"/><path d="M3 16 L7 12"/><path d="M10 18 L14 10"/></svg>',
+      title: 'Erosione potenziale RUSLE',
+      layer: 'erosione-rusle-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'La mappa di <strong>Erosione Potenziale RUSLE</strong> stima il <strong>fattore LS</strong> ' +
+          '(lunghezza e inclinazione del versante) dell\'equazione di perdita del suolo ' +
+          'RUSLE (Revised Universal Soil Loss Equation): ' +
+          '<strong>LS = L × S</strong>, dove ' +
+          'L = (A_s / 22,1)^0,4 (area drenante per unità di larghezza) e ' +
+          'S = (sin θ / 0,0896)^1,3 per pendenze ≥ 9% (McCool 1987). ' +
+          'Questo indice è <strong>adimensionale</strong> — rappresenta il potenziale erosivo ' +
+          'relativo rispetto a un versante standard di riferimento (22,1 m, 9%). ' +
+          'Senza i fattori K (erodibilità), R (pioggia), C (copertura), P (pratiche) ' +
+          'non è una stima di kg/ha/anno ma un <strong>indice spaziale di priorità</strong> ' +
+          'per la gestione del suolo e la difesa idrogeologica.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-rusle',
+          title: 'Potenziale erosivo LS',
+          centerVal: 'LS 3,7',
+          centerLabel: 'mediana',
+          legendData: [
+            { chartLabel: 'Molto basso',  label: 'LS < 0,20  molto basso (fondovalle/pianura)',  pct: 25, color: '#ffffe0' },
+            { chartLabel: 'Basso',        label: 'LS 0,20–0,52  basso',                          pct: 25, color: '#fecc5c' },
+            { chartLabel: 'Medio',        label: 'LS 0,52–3,68  medio (versanti moderati)',       pct: 25, color: '#fd8d3c' },
+            { chartLabel: 'Alto',         label: 'LS 3,68–6,58  alto',                           pct: 15, color: '#e31a1c' },
+            { chartLabel: 'Molto alto',   label: 'LS 6,58–7,76  molto alto',                     pct:  5, color: '#b10026' },
+            { chartLabel: 'Critico',      label: 'LS > 7,76  critico (canyon, forre calcaree)',  pct:  5, color: '#800026' }
+          ],
+          summaries: [
+            { val: '0,52',  label: 'LS mediana' },
+            { val: '5%',    label: 'LS critico' },
+            { val: '11,4',  label: 'LS max (p99)' }
+          ]
+        });
+        appendText(el,
+          'I valori più elevati (LS > 7,76 — critico, rosso scuro) si concentrano ' +
+          'nelle forre calcaree di Monte Pellegrino e Monte Cuccio, nelle incisioni ' +
+          'torrentizie dell\'Oreto e nei versanti acclivi della Circoscrizione VI. ' +
+          'Le aree pianeggianti costiere e la Conca d\'Oro hanno LS < 0,20 (pianura). ' +
+          'Per ottenere una stima di perdita di suolo in t/ha/anno si deve moltiplicare ' +
+          'LS × R × K × C × P, dove R per Palermo è circa 600–900 MJ·mm/(ha·h·anno) ' +
+          '(elevata erosività delle piogge autunnali) e K varia 0,02–0,45 ' +
+          'a seconda della litologia (calcare, argille, suoli alluvionali).'
+        );
+      }
+    },
+
+    curvaturainstabilita: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22 C8 22 4 18 4 14 C4 10 8 6 12 6"/><path d="M12 6 C16 6 20 10 20 14"/><path d="M9 14 L12 10 L15 14"/><line x1="12" y1="10" x2="12" y2="20"/></svg>',
+      title: 'Curvatura instabilità radicale',
+      layer: 'curvatura-instabilita-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'La mappa di <strong>Curvatura e Instabilità Radicale</strong> combina ' +
+          '<strong>curvatura planare</strong> (convergenza/divergenza del flusso idrico) ' +
+          'e <strong>curvatura di profilo</strong> (accelerazione/decelerazione del flusso) ' +
+          'per identificare due tipologie critiche: ' +
+          '(1) <strong>siti di accumulo detritico</strong> — convergenza planare (plan < 0) + ' +
+          'concavità di profilo (prof < 0) = acqua e materiale si concentrano; ' +
+          '(2) <strong>instabilità radicale</strong> — convergenza planare (plan < 0) + ' +
+          'convessità di profilo (prof > 0) + pendenza elevata = suolo secco, radici sottoposte ' +
+          'a stress meccanico laterale (rilevante per la gestione dei pini marittimi in aree acclivi). ' +
+          'L\'indice è normalizzato per deviazione standard: il <strong>5%</strong> del territorio ' +
+          'è classificato critico.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-instab',
+          title: 'Instabilità curvatura',
+          centerVal: '5%',
+          centerLabel: 'critico',
+          legendData: [
+            { chartLabel: 'Stabile',           label: 'stabile — pianura/divergente',              pct: 60, color: '#e5f5e0' },
+            { chartLabel: 'Basso',             label: 'basso — lieve convergenza',                 pct: 15, color: '#a1d99b' },
+            { chartLabel: 'Moderato',          label: 'moderato — potenziale accumulo detritico',  pct: 13, color: '#fdd058' },
+            { chartLabel: 'Alto',              label: 'alto — accumulo o instabilità radicale',    pct:  7, color: '#ef6548' },
+            { chartLabel: 'Critico',           label: 'critico — canyon convergenti/versanti ripidi', pct: 5, color: '#bd0026' }
+          ],
+          summaries: [
+            { val: '5%',   label: 'critico' },
+            { val: '60%',  label: 'stabile' },
+            { val: '20%',  label: 'accumulo/instab.' }
+          ]
+        });
+        appendText(el,
+          'Le aree critiche (5%, rosso) corrispondono alle incisioni torrentizie, ' +
+          'alle forre calcaree e ai canyon dei Monti di Palermo, dove la doppia convergenza ' +
+          '(planare + di profilo) concentra acqua e sedimenti. ' +
+          'Rilevante per la gestione forestale urbana: i pini in zone "alto" (7%) ' +
+          'sono soggetti a stress radicale combinato (suolo discontinuo, radici espanse ' +
+          'su versante convesso + apporto idrico laterale convergente) che ne aumenta ' +
+          'il rischio di schianto in caso di piogge intense. ' +
+          'Sovrapponendo questa mappa al catasto degli alberi è possibile identificare ' +
+          'i pini ad alto rischio per prioritizzare i controlli arboristici.'
+        );
+      }
+    },
+
     accessibilita: {
       icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M7 22 L10 14 L8 9 L14 9 L12 14 L15 22"/><path d="M8 9 L6 13"/><path d="M14 9 L17 13"/></svg>',
       title: 'Accessibilità morfologica',

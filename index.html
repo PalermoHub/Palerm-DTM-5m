@@ -410,7 +410,7 @@
 
   <!-- ── Profili altimetrici ─────────────────────────────────────────────── -->
   <div id="legend-profili" class="map-legend legend-analysis">
-    <div class="map-legend-title">Profili altimetrici · 5 transetti</div>
+    <div class="map-legend-title">Profili altimetrici · 9 transetti</div>
     <div class="legend-item">
       <div class="legend-line" style="background:#e07800; height:2.5px;"></div>
       <span>N-S Costiero (21 km, 2–550 m)</span>
@@ -431,6 +431,22 @@
       <div class="legend-line" style="background:#7040b0; height:2.5px;"></div>
       <span>Conca d'Oro (16 km, 4–340 m)</span>
     </div>
+    <div class="legend-item">
+      <div class="legend-line" style="background:#cc3399; height:2.5px;"></div>
+      <span>Valle dell'Oreto (8,8 km, 16–168 m)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-line" style="background:#e63900; height:2.5px;"></div>
+      <span>M. Pellegrino Traversata (15 km, 0–476 m)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-line" style="background:#0066aa; height:2.5px;"></div>
+      <span>Boccadifalco–Brancaccio (14 km, 1–269 m)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-line" style="background:#669900; height:2.5px;"></div>
+      <span>Costa Nord (17 km, 3–511 m)</span>
+    </div>
   </div>
 
   <!-- ── Accessibilità morfologica ──────────────────────────────────────── -->
@@ -443,6 +459,39 @@
     <div class="legend-item"><div class="legend-box" style="background:#d9ef8b;"></div><span>5,0 – 5,8 km/h  facile</span></div>
     <div class="legend-item"><div class="legend-box" style="background:#a6d96a;"></div><span>5,8 – 6,2 km/h  pianura</span></div>
     <div class="legend-item"><div class="legend-box" style="background:#1a9641;"></div><span>&gt; 6,2 km/h  ottimale (lieve disc.)</span></div>
+  </div>
+
+  <!-- ── Corridoi ecologici morfologici ──────────────────────────────────── -->
+  <div id="legend-corridoi" class="map-legend legend-analysis">
+    <div class="map-legend-title">Corridoi ecologici · connettività morfologica</div>
+    <div class="legend-item"><div class="legend-box" style="background:#b40000;"></div><span>0,00–0,15  barriera critica (versanti ripidi)</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#e65520;"></div><span>0,15–0,30  barriera alta</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#fdae61;"></div><span>0,30–0,45  barriera moderata</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#fee08b;"></div><span>0,45–0,60  corridoio potenziale</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#a6d96a;"></div><span>0,60–0,73  corridoio buono</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#66bd63;"></div><span>0,73–0,85  corridoio ottimo</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#1a9850;"></div><span>&gt; 0,85  nucleo — alta connettività</span></div>
+  </div>
+
+  <!-- ── Erosione potenziale RUSLE ─────────────────────────────────────── -->
+  <div id="legend-erosionerusle" class="map-legend legend-analysis">
+    <div class="map-legend-title">Erosione potenziale · fattore LS RUSLE</div>
+    <div class="legend-item"><div class="legend-box" style="background:#ffffe0;"></div><span>LS &lt; 0,20  molto basso — pianura/fondovalle</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#fecc5c;"></div><span>LS 0,20–0,52  basso</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#fd8d3c;"></div><span>LS 0,52–3,68  medio — versanti moderati</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#e31a1c;"></div><span>LS 3,68–6,58  alto</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#b10026;"></div><span>LS 6,58–7,76  molto alto</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#800026;"></div><span>LS &gt; 7,76  critico — forre e canyon calcarei</span></div>
+  </div>
+
+  <!-- ── Curvatura instabilità radicale ──────────────────────────────────── -->
+  <div id="legend-curvaturainstabilita" class="map-legend legend-analysis">
+    <div class="map-legend-title">Curvatura · instabilità radicale e accumulo</div>
+    <div class="legend-item"><div class="legend-box" style="background:#e5f5e0;"></div><span>stabile — pianura / divergente</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#a1d99b;"></div><span>basso — lieve convergenza</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#fdd058;"></div><span>moderato — potenziale accumulo detritico</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#ef6548;"></div><span>alto — accumulo o instabilità radicale</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#bd0026;"></div><span>critico — canyon convergenti / versanti ripidi</span></div>
   </div>
 
   <div id="legend-contour" class="map-legend">
@@ -1136,6 +1185,24 @@
           <div class="rp-card-line" style="background:#1a9641;"></div>
           <div class="rp-card-title">Accessibilità morfologica</div>
           <div class="rp-card-sub">Velocità pedonale Tobler · media 3,1 km/h</div>
+        </div>
+
+        <div class="rp-card" data-analysis="corridoi">
+          <div class="rp-card-line" style="background:#1a9850;"></div>
+          <div class="rp-card-title">Corridoi ecologici morfologici</div>
+          <div class="rp-card-sub">Connettività su slope+rugosità · 45,5% corridoio ottimale</div>
+        </div>
+
+        <div class="rp-card" data-analysis="erosionerusle">
+          <div class="rp-card-line" style="background:#fd8d3c;"></div>
+          <div class="rp-card-title">Erosione potenziale RUSLE</div>
+          <div class="rp-card-sub">Fattore LS semplificato · 5% critico (forre calcaree)</div>
+        </div>
+
+        <div class="rp-card" data-analysis="curvaturainstabilita">
+          <div class="rp-card-line" style="background:#bd0026;"></div>
+          <div class="rp-card-title">Curvatura · instabilità radicale</div>
+          <div class="rp-card-sub">Plan × profilo · 5% critico · accumulo detritico</div>
         </div>
 
       </div><!-- /rp-cards -->

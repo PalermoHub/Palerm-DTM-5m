@@ -315,6 +315,24 @@ const map = new maplibregl.Map({
         tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
         attribution: 'Accessibilità morfologica (Tobler): DTM HRDTM5m@italia'
       },
+      'corridoi-ecologici-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/corridoi_ecologici/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
+        attribution: 'Corridoi ecologici morfologici: DTM HRDTM5m@italia'
+      },
+      'erosione-rusle-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/erosione_rusle/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
+        attribution: 'Erosione potenziale RUSLE LS: DTM HRDTM5m@italia'
+      },
+      'curvatura-instabilita-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/curvatura_instabilita/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
+        attribution: 'Curvatura instabilità radicale: DTM HRDTM5m@italia'
+      },
       'transects-geojson': {
         type: 'geojson',
         data: `${BASE_URL}docs/transects.geojson`
@@ -591,6 +609,33 @@ const map = new maplibregl.Map({
         id: 'accessibilita-layer',
         type: 'raster',
         source: 'accessibilita-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 0.85 }
+      },
+
+      // Corridoi ecologici morfologici — disattiva di default
+      {
+        id: 'corridoi-ecologici-layer',
+        type: 'raster',
+        source: 'corridoi-ecologici-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 0.85 }
+      },
+
+      // Erosione potenziale RUSLE LS — disattiva di default
+      {
+        id: 'erosione-rusle-layer',
+        type: 'raster',
+        source: 'erosione-rusle-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 0.85 }
+      },
+
+      // Curvatura instabilità radicale — disattiva di default
+      {
+        id: 'curvatura-instabilita-layer',
+        type: 'raster',
+        source: 'curvatura-instabilita-raster',
         layout: { visibility: 'none' },
         paint: { 'raster-opacity': 0.85 }
       },
