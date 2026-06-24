@@ -1548,6 +1548,203 @@
           'Il metodo HAND fornisce una stima relativa — per valori assoluti servono dati piezometrici.'
         );
       }
+    },
+
+    // ── Potenziale fotovoltaico ──────────────────────────────────────────────
+    fotovoltaico: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="1"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="7" y1="7" x2="17" y2="7"/><line x1="7" y1="11" x2="17" y2="11"/></svg>',
+      title: 'Potenziale fotovoltaico',
+      layer: 'fotovoltaico-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'Il <strong>Potenziale Fotovoltaico</strong> stima l\'idoneità del territorio all\'installazione ' +
+          'di impianti FV su tetto, combinando tre fattori: ' +
+          '(1) <strong>Indice di Radiazione Solare (SRI)</strong> — quantità di energia solare disponibile; ' +
+          '(2) <strong>fattore aspetto</strong> — massimo per esposizione Sud (1,0), minimo per Nord (0,5) — ' +
+          'anche i tetti non idealmente orientati rimangono utilizzabili; ' +
+          '(3) <strong>fattore zona</strong> — priorità alle aree sotto i 200 m (densamente urbanizzate). ' +
+          'La <strong>media comunale è 0,41</strong>; il <strong>5,9%</strong> del territorio raggiunge ' +
+          'valori ottimali (> 0,60): versanti collinari meridionali tra 50 e 200 m di quota.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-fv',
+          title: 'Distribuzione potenziale FV',
+          centerVal: '0,41',
+          centerLabel: 'media',
+          legendData: [
+            { chartLabel: 'Basso 0–0.2',     label: '0,0–0,2  basso (N, ombra)',     pct: 10, color: '#440154' },
+            { chartLabel: 'Modesto 0.2–0.3', label: '0,2–0,3  modesto',              pct: 14, color: '#3e6f8e' },
+            { chartLabel: 'Medio 0.3–0.4',   label: '0,3–0,4  medio',               pct: 20, color: '#26808e' },
+            { chartLabel: 'Buono 0.4–0.5',   label: '0,4–0,5  buono',               pct: 22, color: '#35b779' },
+            { chartLabel: 'Alto 0.5–0.6',    label: '0,5–0,6  alto (S, pianura)',   pct: 28, color: '#b4de2c' },
+            { chartLabel: 'Ottimo > 0.6',    label: '> 0,6  ottimale (S/SE, colle)',pct:  6, color: '#fde725' }
+          ],
+          summaries: [
+            { val: '0,41', label: 'media comunale' },
+            { val: '5,9%', label: 'ottimale > 0,6' },
+            { val: '34%',  label: 'buono/alto' }
+          ]
+        });
+        appendText(el,
+          'Le zone di massimo potenziale (giallo) corrispondono ai versanti collinari ' +
+          'meridionali tra Mezzomonreale, Boccadifalco e Cruillas: esposizione a Sud, ' +
+          'quota 50–200 m, radiazione elevata. La pianura costiera (Centro Storico, Brancaccio) ' +
+          'ha potenziale buono grazie all\'alta radiazione, nonostante l\'orientamento variabile dei tetti. ' +
+          'Questa mappa supporta la pianificazione degli impianti FV per il PNRR — Comunità Energetiche.'
+        );
+      }
+    },
+
+    // ── Ombreggiamento estivo ────────────────────────────────────────────────
+    ombraestiva: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+      title: 'Ombreggiamento estivo (21 giugno)',
+      layer: 'ombra-estiva-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'La mappa mostra l\'<strong>ombra media</strong> proiettata dal rilievo nelle tre ore chiave ' +
+          'del solstizio d\'estate (<strong>21 giugno</strong>): ore 9, 12 e 15 CEST. ' +
+          'Posizioni solari calcolate per Palermo (φ = 38,1°N): ' +
+          '<strong>ore 9</strong> — altitudine 36°, azimuth 87° (quasi Est); ' +
+          '<strong>ore 12</strong> — altitudine 70°, azimuth 131° (SE); ' +
+          '<strong>ore 15</strong> — altitudine 62°, azimuth 247° (SO). ' +
+          'Il <strong>92,3%</strong> del territorio è prevalentemente soleggiato in estate (classe giallo-chiaro): ' +
+          'il sole alto estivo illumina quasi tutta la città. Solo le forre strette dei Monti di Palermo ' +
+          'rimangono in ombra (0,6% classe marrone scuro). ' +
+          'Utile per la progettazione di <strong>verde urbano</strong> e spazi pubblici estivi.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-ombraest',
+          title: 'Distribuzione ombra estiva',
+          centerVal: '56',
+          centerLabel: 'media',
+          legendData: [
+            { chartLabel: 'Piena luce', label: 'piena luce (val. basso)',   pct: 92, color: '#fff7bc' },
+            { chartLabel: 'Luce parz.', label: 'luce parziale',            pct:  6, color: '#fe9929' },
+            { chartLabel: 'Semi-ombra', label: 'semi-ombra',               pct:  1, color: '#cc4c02' },
+            { chartLabel: 'Ombra',      label: 'ombra (forre/incisioni)',  pct:  1, color: '#7f2704' }
+          ],
+          summaries: [
+            { val: '92%', label: 'soleggiato' },
+            { val: '0,6%', label: 'in ombra' },
+            { val: '70°', label: 'alt. max ore 12' }
+          ]
+        });
+        appendText(el,
+          'In estate l\'alto angolo solare (fino a 70° a mezzogiorno) minimizza le ombre portate. ' +
+          'Le poche zone d\'ombra si concentrano nelle incisioni vallive dei Monti di Palermo ' +
+          '(Boccadifalco-Baida, val di Mazara) e nei canyon urbani del Centro Storico. ' +
+          'Confronta con l\'ombreggiamento invernale per valutare la variazione stagionale.'
+        );
+      }
+    },
+
+    // ── Ombreggiamento invernale ─────────────────────────────────────────────
+    ombrainvernale: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="18" x2="16" y2="18"/></svg>',
+      title: 'Ombreggiamento invernale (21 dicembre)',
+      layer: 'ombra-invernale-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'La mappa mostra l\'<strong>ombra media</strong> del solstizio d\'inverno (<strong>21 dicembre</strong>): ' +
+          'ore 9, 12 e 15 CET. Posizioni solari per Palermo (φ = 38,1°N): ' +
+          '<strong>ore 9</strong> — altitudine 15°, azimuth 137° (SE); ' +
+          '<strong>ore 12</strong> — altitudine 28°, azimuth 178° (quasi S); ' +
+          '<strong>ore 15</strong> — altitudine 16°, azimuth 221° (SO). ' +
+          'Il sole basso invernale (max 28°) genera <strong>ombre lunghe</strong>: il <strong>18,5%</strong> del ' +
+          'territorio è quasi sempre in ombra (classe blu scuro), concentrato sui versanti settentrionali ' +
+          'dei rilievi. Il <strong>76%</strong> è nella fascia di semi-ombra (blu chiaro). ' +
+          'Critico per la <strong>progettazione del verde urbano invernale</strong>, la localizzazione ' +
+          'di piste ciclabili e aree di sosta al sole.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-ombrainv',
+          title: 'Distribuzione ombra invernale',
+          centerVal: '174',
+          centerLabel: 'media',
+          legendData: [
+            { chartLabel: 'Soleggiato', label: 'soleggiato (versanti S)',  pct:  5, color: '#c6dbef' },
+            { chartLabel: 'Semi-ombra', label: 'semi-ombra (pianura)',     pct: 76, color: '#6baed6' },
+            { chartLabel: 'Ombra parz.','label': 'ombra parziale',        pct: 18, color: '#2171b5' },
+            { chartLabel: 'Ombra tot.', label: 'ombra quasi totale (N)',  pct:  1, color: '#084594' }
+          ],
+          summaries: [
+            { val: '18%', label: 'ombra profonda' },
+            { val: '5%',  label: 'soleggiato' },
+            { val: '28°', label: 'alt. max ore 12' }
+          ]
+        });
+        appendText(el,
+          'Il contrasto con l\'estate è marcato: dove in estate il 92% è soleggiato, ' +
+          'in inverno solo il 5% riceve luce diretta piena. ' +
+          'Le zone più colpite dall\'ombra invernale sono i versanti nord dei Monti di Palermo ' +
+          '(Monte Cuccio, Pizzuta) e le valli strette di Boccadifalco e Baida. ' +
+          'La pianura costiera, pur nella fascia di semi-ombra, riceve luce diretta nelle ore centrali ' +
+          'della giornata (ore 11-14 circa). Questo dato è fondamentale per il comfort termico ' +
+          'degli spazi pubblici e la progettazione bioClimatica.'
+        );
+      }
+    },
+
+    // ── Frost hollow / cold air pooling ─────────────────────────────────────
+    frosthollow: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/><path d="M2 12h20"/><path d="M5.636 5.636l12.728 12.728M18.364 5.636L5.636 18.364"/></svg>',
+      title: 'Frost hollow — accumulo aria fredda',
+      layer: 'frost-hollow-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'Il <strong>Frost Hollow Index</strong> individua le <strong>depressioni morfologiche</strong> ' +
+          'dove l\'aria fredda tende ad accumularsi nelle notti serene per effetto della gravità. ' +
+          'Il calcolo combina: (1) <strong>TPI negativo</strong> (Topographic Position Index < 0: depressioni, ' +
+          'valli chiuse) normalizzato su 3 deviazioni standard; ' +
+          '(2) <strong>curvatura concava</strong> (curvatura totale < 0: bacini morfologici), ' +
+          'normalizzata su 2 deviazioni standard; ' +
+          '(3) <strong>fattore quota</strong> — le depressioni a bassa quota (<200 m) hanno ' +
+          'accumulo più intenso rispetto alle depressioni montane. ' +
+          'Il <strong>4,6%</strong> del territorio è ad alto o critico rischio di frost hollow ' +
+          '(classi blu scuro e blu notte): si tratta delle <strong>depressioni chiuse</strong> ' +
+          'identificate anche dall\'analisi geomorfologica (pianure e fondovalle al 3,1%). ' +
+          'Rilevante per la <strong>gestione del verde</strong>, le colture sensibili al gelo ' +
+          'e le infrastrutture critiche nelle aree depresse.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-frost',
+          title: 'Classi rischio frost hollow',
+          centerVal: '4,6%',
+          centerLabel: 'alto/critico',
+          legendData: [
+            { chartLabel: 'Nullo / pianura',   label: 'nullo / aree piatte e creste',    pct: 67, color: '#f5f5ff' },
+            { chartLabel: 'Trascurabile',      label: 'trascurabile (TPI liev. neg.)',   pct: 21, color: '#c6dbef' },
+            { chartLabel: 'Basso',             label: 'basso — depressioni ampie',       pct:  8, color: '#6baed6' },
+            { chartLabel: 'Moderato',          label: 'moderato — valli parzial. chiuse',pct:  4, color: '#3182bd' },
+            { chartLabel: 'Alto',              label: 'alto — fondovalli stretti',       pct:  0, color: '#08519c' },
+            { chartLabel: 'Critico',           label: 'critico — depressioni chiuse',    pct:  0, color: '#08306b' }
+          ],
+          summaries: [
+            { val: '4,6%', label: 'alto/critico' },
+            { val: '67%',  label: 'nullo/pianura' },
+            { val: '0,2%', label: 'critico' }
+          ]
+        });
+        appendText(el,
+          'Le zone a rischio critico (blu notte) corrispondono alle depressioni chiuse ' +
+          'identificate dall\'analisi geomorfologica come "Pianure e fondovalle" con ' +
+          'TPI fortemente negativo: il fondovalle dell\'Oreto, alcune depressioni di ' +
+          'Boccadifalco e Baida, e le conche nelle zone rurali della Circoscrizione VI. ' +
+          'In queste aree, nelle notti invernali serene, la temperatura può scendere ' +
+          '2-5°C sotto quella delle zone circostanti. ' +
+          'Attenzione nella pianificazione di colture sensibili al gelo tardivo ' +
+          '(agrumi, ulivi fioriti) e nella localizzazione di infrastrutture critiche.'
+        );
+      }
     }
 
   };

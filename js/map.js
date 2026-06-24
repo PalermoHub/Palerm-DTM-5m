@@ -271,6 +271,31 @@ const map = new maplibregl.Map({
         tiles: [`${BASE_URL}docs/tiles/depth_to_water/{z}/{x}/{y}.png`],
         tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
         attribution: 'Depth-to-Water (HAND): DTM HRDTM5m@italia'
+      },
+      // ── Nuove analisi termica / energetica ──────────────────────────────────
+      'fotovoltaico-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/potenziale_fv/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
+        attribution: 'Potenziale fotovoltaico: DTM HRDTM5m@italia'
+      },
+      'ombra-estiva-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/ombra_estiva/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
+        attribution: 'Ombreggiamento estivo: DTM HRDTM5m@italia'
+      },
+      'ombra-invernale-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/ombra_invernale/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
+        attribution: 'Ombreggiamento invernale: DTM HRDTM5m@italia'
+      },
+      'frost-hollow-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/frost_hollow/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
+        attribution: 'Frost hollow / cold air pooling: DTM HRDTM5m@italia'
       }
     },
     layers: [
@@ -481,6 +506,42 @@ const map = new maplibregl.Map({
         id: 'dtw-layer',
         type: 'raster',
         source: 'dtw-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // Potenziale fotovoltaico — disattiva di default
+      {
+        id: 'fotovoltaico-layer',
+        type: 'raster',
+        source: 'fotovoltaico-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // Ombreggiamento estivo — disattiva di default
+      {
+        id: 'ombra-estiva-layer',
+        type: 'raster',
+        source: 'ombra-estiva-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 0.90 }
+      },
+
+      // Ombreggiamento invernale — disattiva di default
+      {
+        id: 'ombra-invernale-layer',
+        type: 'raster',
+        source: 'ombra-invernale-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 0.90 }
+      },
+
+      // Frost hollow — disattiva di default
+      {
+        id: 'frost-hollow-layer',
+        type: 'raster',
+        source: 'frost-hollow-raster',
         layout: { visibility: 'none' },
         paint: { 'raster-opacity': 1.0 }
       },

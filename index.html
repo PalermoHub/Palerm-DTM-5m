@@ -347,6 +347,44 @@
     <div class="legend-item"><div class="legend-box" style="background:#800026;"></div><span>&gt; 8  falda molto profonda</span></div>
   </div>
 
+  <div id="legend-fotovoltaico" class="map-legend legend-analysis">
+    <div class="map-legend-title">Potenziale fotovoltaico</div>
+    <div class="legend-item"><div class="legend-box" style="background:#440154;"></div><span>0,0 – 0,2  basso (N, ombra)</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#3e6f8e;"></div><span>0,2 – 0,3  modesto</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#26808e;"></div><span>0,3 – 0,4  medio</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#35b779;"></div><span>0,4 – 0,5  buono</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#b4de2c;"></div><span>0,5 – 0,6  alto</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#fde725;"></div><span>&gt; 0,6  ottimale (S, 50–200 m)</span></div>
+  </div>
+
+  <div id="legend-ombraestiva" class="map-legend legend-analysis">
+    <div class="map-legend-title">Ombreggiamento estivo · 21 giugno</div>
+    <div class="legend-item"><div class="legend-box" style="background:#fff7bc;"></div><span>piena luce — soleggiato</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#fec44f;"></div><span>luce parziale</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#fe9929;"></div><span>semi-ombra</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#cc4c02;"></div><span>ombra profonda</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#7f2704;"></div><span>ombra quasi totale</span></div>
+  </div>
+
+  <div id="legend-ombrainvernale" class="map-legend legend-analysis">
+    <div class="map-legend-title">Ombreggiamento invernale · 21 dicembre</div>
+    <div class="legend-item"><div class="legend-box" style="background:#ffffd4;"></div><span>soleggiato (versanti S)</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#c6dbef;"></div><span>luce parziale</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#6baed6;"></div><span>semi-ombra — pianura</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#2171b5;"></div><span>ombra parziale</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#084594;"></div><span>ombra quasi totale (N)</span></div>
+  </div>
+
+  <div id="legend-frosthollow" class="map-legend legend-analysis">
+    <div class="map-legend-title">Frost hollow · accumulo aria fredda</div>
+    <div class="legend-item"><div class="legend-box" style="background:#f5f5ff;"></div><span>nullo / aree piatte e creste</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#c6dbef;"></div><span>trascurabile</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#6baed6;"></div><span>basso — depressioni ampie</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#3182bd;"></div><span>moderato — valli parz. chiuse</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#08519c;"></div><span>alto — fondovalli stretti</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#08306b;"></div><span>critico — depressioni chiuse</span></div>
+  </div>
+
   <div id="legend-contour" class="map-legend">
     <div class="map-legend-title">Curve di livello</div>
     <div class="legend-item">
@@ -990,6 +1028,30 @@
           <div class="rp-card-line" style="background:#00682c;"></div>
           <div class="rp-card-title">Depth-to-Water (HAND)</div>
           <div class="rp-card-sub">Profondità falda freatica</div>
+        </div>
+
+        <div class="rp-card" data-analysis="fotovoltaico">
+          <div class="rp-card-line" style="background:#fde725;"></div>
+          <div class="rp-card-title">Potenziale fotovoltaico</div>
+          <div class="rp-card-sub">SRI × aspetto × zona · media 0,41</div>
+        </div>
+
+        <div class="rp-card" data-analysis="ombraestiva">
+          <div class="rp-card-line" style="background:#cc4c02;"></div>
+          <div class="rp-card-title">Ombreggiamento estivo</div>
+          <div class="rp-card-sub">21 giugno · ore 9/12/15 · 92% soleggiato</div>
+        </div>
+
+        <div class="rp-card" data-analysis="ombrainvernale">
+          <div class="rp-card-line" style="background:#084594;"></div>
+          <div class="rp-card-title">Ombreggiamento invernale</div>
+          <div class="rp-card-sub">21 dicembre · ore 9/12/15 · 18% ombra profonda</div>
+        </div>
+
+        <div class="rp-card" data-analysis="frosthollow">
+          <div class="rp-card-line" style="background:#08306b;"></div>
+          <div class="rp-card-title">Frost hollow</div>
+          <div class="rp-card-sub">Accumulo aria fredda · 4,6% ad alto rischio</div>
         </div>
 
       </div><!-- /rp-cards -->
