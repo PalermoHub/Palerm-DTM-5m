@@ -732,9 +732,10 @@
   var rpDetailIcon = document.getElementById('rp-detail-icon');
   var rpDetailName = document.getElementById('rp-detail-name');
 
-  var panelOpen = true;
+  var isMobile = window.innerWidth < 768;
+  var panelOpen = !isMobile;
   var currentAnalysis = null;
-  rpWrap.classList.add('open');
+  if (panelOpen) rpWrap.classList.add('open');
   updateMapControlsPosition(true);
 
   // Apri/chiudi pannello

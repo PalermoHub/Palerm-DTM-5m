@@ -449,7 +449,7 @@ body {
   position: fixed;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%) translateY(calc(100% - 42px));
+  transform: translateX(-50%) translateY(calc(100% - 20px));
   width: 90%;
   height: 80vh;
   background: transparent;
@@ -469,45 +469,36 @@ body {
 
 /* Linguetta */
 #panel-handle {
-  height: 42px;
-  width: fit-content;
+  width: 60px;
+  height: 20px;
   align-self: center;
-  padding: 0 10px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
   cursor: pointer;
   user-select: none;
   flex-shrink: 0;
-  border-radius: 12px 12px 0 0;
+  border-radius: 8px 8px 0 0;
   background: rgba(255, 255, 255, 0.97);
-  border: 1px solid rgba(30, 60, 160, 0.15);
+  border: 1px solid rgba(30, 60, 160, 0.14);
   border-bottom: none;
-  box-shadow: 0 -4px 18px rgba(30, 60, 160, 0.14);
-  transition: background 0.2s;
+  box-shadow: 0 -4px 16px rgba(30, 60, 160, 0.1);
+  color: #2a3a68;
+  transition: background 0.15s, color 0.15s;
 }
 
-#panel-handle:hover { background: #f0f5ff; }
-
-#panel-handle-label {
-  font-size: 12px;
-  font-weight: 700;
-  color: #2458c8;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  white-space: nowrap;
+#panel-handle:hover {
+  background: #f0f5ff;
+  color: #e07800;
 }
 
-#panel-arrow {
-  font-size: 10px;
-  color: #6888d0;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  display: inline-block;
-  flex-shrink: 0;
+#panel-handle-icon {
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-#info-panel.open #panel-arrow { transform: rotate(180deg); }
+#info-panel.open #panel-handle-icon { transform: rotate(180deg); }
+
 
 /* Panel body */
 #panel-body {
