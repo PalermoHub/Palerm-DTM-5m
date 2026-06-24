@@ -536,7 +536,10 @@ const map = new maplibregl.Map({
     ],
     terrain: {
       source: 'terrain-dem',
-      exaggeration: 1.5
+      // Exaggeration bassa: a pitch alto un'esagerazione forte (1.5) crea un velo
+      // biancastro sul terreno lontano (artefatto di campionamento texture ad
+      // angolo radente, NON nebbia/atmosfera). 0.8 mantiene il rilievo leggibile.
+      exaggeration: 0.8
     }
   },
   center: CENTER,
@@ -563,17 +566,21 @@ map.on('style.load', function() {
     });
   }
 
-  // 2. Disabilita il "Fog" (la nebbia che sbiadisce i colori delle tile in 3D)
-  // Spingiamo il range della nebbia a distanze enormi (100-200 km) 
-  // così nella vista di Palermo sarà completamente invisibile.
-  if (typeof map.setFog === 'function') {
-    map.setFog({
-      range: [1000, 1500], 
-      color: 'white',
-      'high-color': '#245cdf',
-      'horizon-blend': 0.02,
-      'space-color': '#000000',
-      'star-intensity': 0
+  // 2. Disabilita l'atmospheric haze del "Sky" di MapLibre v5.
+  // In MapLibre GL JS v5 NON esiste map.setFog (è API Mapbox): la nebbia che
+  // sbiadisce le tile in 3D è l'atmosfera del Sky, renderizzata quando il
+  // terrain è attivo (compare "dopo qualche secondo", al caricamento del DEM).
+  // atmosphere-blend:0 + fog-blend a 0 eliminano completamente l'haze.
+  // Il velo bianco sul terreno 3D è il "fog" del Sky: il suo colore di default
+  // è #ffffff OPACO, perciò sbianca le tile. Lo rendiamo TRASPARENTE (alpha 0)
+  // così sparisce del tutto, e azzeriamo atmosphere-blend (glow d'orizzonte).
+  if (typeof map.setSky === 'function') {
+    map.setSky({
+      'atmosphere-blend': 0,
+      'fog-color': 'rgba(255, 255, 255, 0)',
+      'horizon-color': 'rgba(255, 255, 255, 0)',
+      'fog-ground-blend': 0,
+      'horizon-fog-blend': 0
     });
   }
 });
@@ -603,7 +610,7 @@ map.on('move', updateMapScale);
 let terrainActive   = true;
 let shadowActive    = true;
 let contourActive   = false;
-let currentExag     = 1.5;
+let currentExag     = 0.8;
 let shadowIntensity = 0.35;
 let sunMinutes      = 720;   // 12:00 (mezzogiorno solare)
 

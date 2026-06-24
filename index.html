@@ -181,8 +181,8 @@
 <div id="tb-panel-3d" class="tb-panel" style="display:none;">
   <div class="tbp-row">
     <span class="tbp-label">Esagerazione</span>
-    <input type="range" id="tbp-exag" min="1" max="5" step="0.1" value="1.5" />
-    <span class="tbp-val" id="tbp-exag-val">1.5×</span>
+    <input type="range" id="tbp-exag" min="0.3" max="3" step="0.1" value="0.8" />
+    <span class="tbp-val" id="tbp-exag-val">0.8×</span>
   </div>
 </div>
 
@@ -440,6 +440,37 @@
         </div>
       </div>
 
+      <!-- RUGOSITÀ -->
+      <div class="analysis-section">
+        <h3>Rugosità e irregolarità del terreno</h3>
+        <p>
+          Il <strong>TRI (Terrain Ruggedness Index)</strong> misura la differenza media di quota tra ogni cella
+          e le 8 celle circostanti: più alto il valore, più il terreno è morfologicamente irregolare.
+          La media comunale è <strong>3,05</strong> — un valore moderato, trainato verso il basso dall'ampia
+          pianura costiera e dalla Conca d'Oro (50% del territorio ha TRI 0–1).
+          Le punte raggiungono però <strong>369</strong> nelle creste più frastagliate dei rilievi nord,
+          dove la roccia affiora con dislivelli bruschi tra celle adiacenti.
+          Il <strong>Roughness</strong> (rugosità assoluta, massimo tra le differenze con le celle vicine)
+          conferma questo quadro: media 3,04 con valori massimi di 280 sulle pareti rocciose.
+          La Circoscrizione I Centro Storico è la più regolare (TRI medio 0,67 — quasi totalmente pianeggiante);
+          la VII Mondello è la più accidentata (4,19), per i contrafforti di Monte Pellegrino.
+          Il quartiere Arenella–Vergine Maria registra il TRI medio più alto tra i quartieri: <strong>6,67</strong>.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe TRI</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>0–1  pianura</td><td class="hl">50%</td></tr>
+              <tr><td>1–5  ondulato</td><td>27%</td></tr>
+              <tr><td>5–10  collinare</td><td>19%</td></tr>
+              <tr><td>10–25  accidentato</td><td class="hl-warn">3%</td></tr>
+              <tr><td>&gt;25  molto accidentato</td><td class="hl-warn">1%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-rugosity"></canvas></div>
+        </div>
+      </div>
+
       <!-- GEOMORFOLOGIA -->
       <div class="analysis-section">
         <h3>Come si classifica il paesaggio: la geomorfologia</h3>
@@ -558,37 +589,6 @@
             </tbody>
           </table>
           <div class="inline-chart"><canvas id="chart-solar"></canvas></div>
-        </div>
-      </div>
-
-      <!-- RUGOSITÀ -->
-      <div class="analysis-section">
-        <h3>Rugosità e irregolarità del terreno</h3>
-        <p>
-          Il <strong>TRI (Terrain Ruggedness Index)</strong> misura la differenza media di quota tra ogni cella
-          e le 8 celle circostanti: più alto il valore, più il terreno è morfologicamente irregolare.
-          La media comunale è <strong>3,05</strong> — un valore moderato, trainato verso il basso dall'ampia
-          pianura costiera e dalla Conca d'Oro (50% del territorio ha TRI 0–1).
-          Le punte raggiungono però <strong>369</strong> nelle creste più frastagliate dei rilievi nord,
-          dove la roccia affiora con dislivelli bruschi tra celle adiacenti.
-          Il <strong>Roughness</strong> (rugosità assoluta, massimo tra le differenze con le celle vicine)
-          conferma questo quadro: media 3,04 con valori massimi di 280 sulle pareti rocciose.
-          La Circoscrizione I Centro Storico è la più regolare (TRI medio 0,67 — quasi totalmente pianeggiante);
-          la VII Mondello è la più accidentata (4,19), per i contrafforti di Monte Pellegrino.
-          Il quartiere Arenella–Vergine Maria registra il TRI medio più alto tra i quartieri: <strong>6,67</strong>.
-        </p>
-        <div class="section-data">
-          <table class="data-table">
-            <thead><tr><th>Classe TRI</th><th>% territorio</th></tr></thead>
-            <tbody>
-              <tr><td>0–1  pianura</td><td class="hl">50%</td></tr>
-              <tr><td>1–5  ondulato</td><td>27%</td></tr>
-              <tr><td>5–10  collinare</td><td>19%</td></tr>
-              <tr><td>10–25  accidentato</td><td class="hl-warn">3%</td></tr>
-              <tr><td>&gt;25  molto accidentato</td><td class="hl-warn">1%</td></tr>
-            </tbody>
-          </table>
-          <div class="inline-chart"><canvas id="chart-rugosity"></canvas></div>
         </div>
       </div>
 
@@ -814,6 +814,7 @@
       </div>
       <div class="rp-cards">
 
+        <!-- ── 1. Morfometria di base ── -->
         <div class="rp-card" data-analysis="elevation">
           <div class="rp-card-line" style="background:#00cb9b;"></div>
           <div class="rp-card-title">Mappa Elevazione</div>
@@ -830,48 +831,6 @@
           <div class="rp-card-line" style="background:#4fc3f7;"></div>
           <div class="rp-card-title">Esposizione</div>
           <div class="rp-card-sub">Prevalente NE (18,9%)</div>
-        </div>
-
-        <div class="rp-card" data-analysis="geomorph">
-          <div class="rp-card-line" style="background:#7986cb;"></div>
-          <div class="rp-card-title">Geomorfologia</div>
-          <div class="rp-card-sub">Versanti 60% · Creste 33%</div>
-        </div>
-
-        <div class="rp-card" data-analysis="stability">
-          <div class="rp-card-line" style="background:#ef5350;"></div>
-          <div class="rp-card-title">Stabilità versanti</div>
-          <div class="rp-card-sub">30,8% a rischio (cl. 3–5)</div>
-        </div>
-
-        <div class="rp-card" data-analysis="build">
-          <div class="rp-card-line" style="background:#1565c0;"></div>
-          <div class="rp-card-title">Costruibilità</div>
-          <div class="rp-card-sub">47,3% ottima · 28,7% critica</div>
-        </div>
-
-        <div class="rp-card" data-analysis="solar">
-          <div class="rp-card-line" style="background:#ffb300;"></div>
-          <div class="rp-card-title">Radiazione solare</div>
-          <div class="rp-card-sub">SRI medio 0,59 · 56% fascia media</div>
-        </div>
-
-        <div class="rp-card" data-analysis="rugosity">
-          <div class="rp-card-line" style="background:#546e7a;"></div>
-          <div class="rp-card-title">Rugosità (TRI)</div>
-          <div class="rp-card-sub">TRI medio 3,05 · max 369</div>
-        </div>
-
-        <div class="rp-card" data-analysis="tpi">
-          <div class="rp-card-line" style="background:#d73027;"></div>
-          <div class="rp-card-title">TPI locale</div>
-          <div class="rp-card-sub">Posizione topografica · scala 100 m</div>
-        </div>
-
-        <div class="rp-card" data-analysis="tpi300">
-          <div class="rp-card-line" style="background:#fc8d59;"></div>
-          <div class="rp-card-title">TPI regionale (300 m)</div>
-          <div class="rp-card-sub">Posizione nel paesaggio · scala 300 m</div>
         </div>
 
         <div class="rp-card" data-analysis="curvplanare">
@@ -892,6 +851,59 @@
           <div class="rp-card-sub">Laplaciano · sintesi morfologica</div>
         </div>
 
+        <!-- ── 2. Posizione e tessitura ── -->
+        <div class="rp-card" data-analysis="tpi">
+          <div class="rp-card-line" style="background:#d73027;"></div>
+          <div class="rp-card-title">TPI locale</div>
+          <div class="rp-card-sub">Posizione topografica · scala 100 m</div>
+        </div>
+
+        <div class="rp-card" data-analysis="tpi300">
+          <div class="rp-card-line" style="background:#fc8d59;"></div>
+          <div class="rp-card-title">TPI regionale (300 m)</div>
+          <div class="rp-card-sub">Posizione nel paesaggio · scala 300 m</div>
+        </div>
+
+        <div class="rp-card" data-analysis="rugosity">
+          <div class="rp-card-line" style="background:#546e7a;"></div>
+          <div class="rp-card-title">Rugosità (TRI)</div>
+          <div class="rp-card-sub">TRI medio 3,05 · max 369</div>
+        </div>
+
+        <!-- ── 3. Classificazione morfologica ── -->
+        <div class="rp-card" data-analysis="geomorph">
+          <div class="rp-card-line" style="background:#7986cb;"></div>
+          <div class="rp-card-title">Geomorfologia</div>
+          <div class="rp-card-sub">Versanti 60% · Creste 33%</div>
+        </div>
+
+        <!-- ── 4. Rischio e pianificazione ── -->
+        <div class="rp-card" data-analysis="stability">
+          <div class="rp-card-line" style="background:#ef5350;"></div>
+          <div class="rp-card-title">Stabilità versanti</div>
+          <div class="rp-card-sub">30,8% a rischio (cl. 3–5)</div>
+        </div>
+
+        <div class="rp-card" data-analysis="build">
+          <div class="rp-card-line" style="background:#1565c0;"></div>
+          <div class="rp-card-title">Costruibilità</div>
+          <div class="rp-card-sub">47,3% ottima · 28,7% critica</div>
+        </div>
+
+        <!-- ── 5. Energia solare ── -->
+        <div class="rp-card" data-analysis="solar">
+          <div class="rp-card-line" style="background:#ffb300;"></div>
+          <div class="rp-card-title">Radiazione solare</div>
+          <div class="rp-card-sub">SRI medio 0,59 · 56% fascia media</div>
+        </div>
+
+        <div class="rp-card" data-analysis="solarraf">
+          <div class="rp-card-line" style="background:#f2a600;"></div>
+          <div class="rp-card-title">Solare raffinato</div>
+          <div class="rp-card-sub">SRI × aspetto × pendenza · media 0,43</div>
+        </div>
+
+        <!-- ── 6. Indici sintetici ── -->
         <div class="rp-card" data-analysis="heatmap">
           <div class="rp-card-line" style="background:#b01a2e;"></div>
           <div class="rp-card-title">Heatmap complessità</div>
@@ -902,12 +914,6 @@
           <div class="rp-card-line" style="background:#d73027;"></div>
           <div class="rp-card-title">Indice vulnerabilità</div>
           <div class="rp-card-sub">Multi-criterio · 19% ad alto rischio</div>
-        </div>
-
-        <div class="rp-card" data-analysis="solarraf">
-          <div class="rp-card-line" style="background:#f2a600;"></div>
-          <div class="rp-card-title">Solare raffinato</div>
-          <div class="rp-card-sub">SRI × aspetto × pendenza · media 0,43</div>
         </div>
 
       </div><!-- /rp-cards -->
