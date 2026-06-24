@@ -267,24 +267,24 @@
           '<strong>0,59</strong> — coerente con la latitudine e il clima mediterraneo. ' +
           'Rilevante per potenziale fotovoltaico e agricoltura eliofile.'
         );
-        appendSectionTitle(el, 'Riepilogo SRI');
-        var tbl = document.createElement('table');
-        tbl.className = 'rp-table';
-        var tb = document.createElement('tbody');
-        [
-          ['SRI medio', '0,59 / 1,00'],
-          ['SRI minimo', '~0,00 (versanti nord in ombra)'],
-          ['SRI massimo', '~1,00 (versanti meridionali)'],
-          ['Versanti più esposti', 'Sud, Sud-Ovest'],
-          ['Versanti meno esposti', 'Nord, Nord-Est (ma più estesi)']
-        ].forEach(function (r) {
-          var tr = document.createElement('tr');
-          var td1 = document.createElement('td'); td1.textContent = r[0]; tr.appendChild(td1);
-          var td2 = document.createElement('td'); td2.textContent = r[1]; tr.appendChild(td2);
-          tb.appendChild(tr);
+        appendRingCard(el, {
+          canvasId: 'rp-c-solar',
+          title: 'Classi di radiazione (SRI)',
+          centerVal: '0,59',
+          centerLabel: 'SRI medio',
+          legendData: [
+            { chartLabel: 'Bassa 0–0.3',      label: '0,0–0,3  bassa radiazione',    pct:  8, color: '#78909c' },
+            { chartLabel: 'Med-bassa 0.3–0.5', label: '0,3–0,5  medio-bassa',        pct: 17, color: '#ffcc02' },
+            { chartLabel: 'Media 0.5–0.7',     label: '0,5–0,7  media',              pct: 40, color: '#ff9800' },
+            { chartLabel: 'Alta 0.7–0.9',      label: '0,7–0,9  alta',               pct: 28, color: '#ff5722' },
+            { chartLabel: 'Max 0.9–1.0',       label: '0,9–1,0  massima',            pct:  7, color: '#b71c1c' }
+          ],
+          summaries: [
+            { val: '0,59', label: 'SRI medio' },
+            { val: '~0,00', label: 'min (ombra N)' },
+            { val: '~1,00', label: 'max (S/SO)' }
+          ]
         });
-        tbl.appendChild(tb);
-        el.appendChild(tbl);
         appendText(el,
           'I versanti nord e nord-est, pur essendo i più estesi, ricevono meno luce rispetto ' +
           'ai versanti meridionali. Questo dato è rilevante per studi energetici e pianificazione ' +
@@ -305,25 +305,24 @@
           'rispetto alle celle vicine. Media <strong>3,05</strong>, punte fino a <strong>369</strong> ' +
           'nelle creste più frastagliate.'
         );
-        appendSectionTitle(el, 'Indicatori di rugosità');
-        var tbl = document.createElement('table');
-        tbl.className = 'rp-table';
-        var tb = document.createElement('tbody');
-        [
-          ['TRI medio', '3,05'],
-          ['TRI massimo', '369 (creste rocciose)'],
-          ['Roughness media', '3,04'],
-          ['Roughness massima', '280 (pareti verticali)'],
-          ['Aree più rugose', 'Monti di Palermo, Parco Favorita'],
-          ['Aree più lisce', 'Conca d\'Oro, zona costiera']
-        ].forEach(function (r) {
-          var tr = document.createElement('tr');
-          var td1 = document.createElement('td'); td1.textContent = r[0]; tr.appendChild(td1);
-          var td2 = document.createElement('td'); td2.textContent = r[1]; tr.appendChild(td2);
-          tb.appendChild(tr);
+        appendRingCard(el, {
+          canvasId: 'rp-c-rugosity',
+          title: 'Classi di rugosità (TRI)',
+          centerVal: '3,05',
+          centerLabel: 'TRI medio',
+          legendData: [
+            { chartLabel: 'Pianura 0–1',     label: '0–1  pianura',            pct: 38, color: '#4fc3f7' },
+            { chartLabel: 'Lieve 1–5',       label: '1–5  poco rugoso',        pct: 27, color: '#81c784' },
+            { chartLabel: 'Moderato 5–15',   label: '5–15  moderato',          pct: 18, color: '#ffb74d' },
+            { chartLabel: 'Rugoso 15–50',    label: '15–50  rugoso',           pct: 12, color: '#e57373' },
+            { chartLabel: 'Estremo >50',     label: '>50  estremamente rugoso', pct:  5, color: '#7e57c2' }
+          ],
+          summaries: [
+            { val: '3,05', label: 'TRI medio' },
+            { val: '369', label: 'TRI max' },
+            { val: '3,04', label: 'roughness' }
+          ]
         });
-        tbl.appendChild(tb);
-        el.appendChild(tbl);
         appendText(el,
           'La rugosità assoluta conferma la forte variabilità del paesaggio: ambienti lisci ' +
           'lungo la fascia costiera e la pianura, con picchi estremi sulle pareti rocciose dei rilievi nord.'
