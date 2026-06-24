@@ -240,6 +240,37 @@ const map = new maplibregl.Map({
       'upl': {
         type: 'geojson',
         data: `${BASE_URL}docs/geojson/upl.geojson`
+      },
+      // ── Analisi idrologiche ──────────────────────────────────────────────
+      'twi-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/twi_idro/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
+        attribution: 'TWI — Topographic Wetness Index: DTM HRDTM5m@italia'
+      },
+      'flowacc-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/flow_accumulation/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
+        attribution: 'Flow Accumulation — reticolo idrografico: DTM HRDTM5m@italia'
+      },
+      'bacini-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/bacini/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
+        attribution: 'Bacini idrografici: DTM HRDTM5m@italia'
+      },
+      'spi-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/spi/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
+        attribution: 'SPI — Stream Power Index: DTM HRDTM5m@italia'
+      },
+      'dtw-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/depth_to_water/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
+        attribution: 'Depth-to-Water (HAND): DTM HRDTM5m@italia'
       }
     },
     layers: [
@@ -405,6 +436,51 @@ const map = new maplibregl.Map({
         id: 'curvtotale-layer',
         type: 'raster',
         source: 'curvtotale-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // TWI — disattiva di default
+      {
+        id: 'twi-layer',
+        type: 'raster',
+        source: 'twi-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // Flow Accumulation — disattiva di default
+      {
+        id: 'flowacc-layer',
+        type: 'raster',
+        source: 'flowacc-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // Bacini idrografici — disattiva di default
+      {
+        id: 'bacini-layer',
+        type: 'raster',
+        source: 'bacini-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 0.85 }
+      },
+
+      // SPI — disattiva di default
+      {
+        id: 'spi-layer',
+        type: 'raster',
+        source: 'spi-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // Depth-to-Water (HAND) — disattiva di default
+      {
+        id: 'dtw-layer',
+        type: 'raster',
+        source: 'dtw-raster',
         layout: { visibility: 'none' },
         paint: { 'raster-opacity': 1.0 }
       },

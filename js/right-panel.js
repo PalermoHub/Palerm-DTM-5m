@@ -1345,7 +1345,211 @@
           ]
         });
       }
+    },
+
+    // ── Analisi idrologiche ────────────────────────────────────────────────
+
+    twi: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M6 12c0-3.314 2.686-6 6-6s6 2.686 6 6"/><line x1="2" y1="17" x2="22" y2="17"/><path d="M8 17c0-2.21 1.79-4 4-4s4 1.79 4 4"/></svg>',
+      title: 'TWI — Topographic Wetness Index',
+      layer: 'twi-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'Il <strong>Topographic Wetness Index (TWI)</strong> stima la propensione di ogni cella ad accumulare ' +
+          'acqua superficiale: TWI = ln(A_s / tan β), dove A_s è l\'area contributiva specifica e β la pendenza. ' +
+          'Valori elevati (blu scuro) indicano fondovalli, pianure e zone concave dove l\'acqua si raccoglie — ' +
+          '<strong>aree a rischio alluvione e zone umide potenziali</strong>. ' +
+          'Valori bassi (bianco/celeste chiaro) corrispondono a creste e versanti ripidi con drenaggio rapido. ' +
+          'Il TWI è fondamentale per la valutazione del rischio idrogeologico urbano.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-twi',
+          title: 'Classi TWI',
+          centerVal: 'TWI',
+          centerLabel: 'indice',
+          legendData: [
+            { chartLabel: 'Drenato < 6',      label: '< 6  drenato rapidamente',      pct: 15, color: '#f7fbff' },
+            { chartLabel: 'Basso 6–9',         label: '6–9  bassa saturazione',        pct: 30, color: '#c6dbef' },
+            { chartLabel: 'Medio 9–12',        label: '9–12  media — versanti',        pct: 35, color: '#6baed6' },
+            { chartLabel: 'Alto 12–16',        label: '12–16  alta saturazione',       pct: 15, color: '#2171b5' },
+            { chartLabel: 'Molto alto > 16',   label: '> 16  fondovalle/pianura',      pct:  5, color: '#08306b' }
+          ],
+          summaries: [
+            { val: '~9', label: 'TWI medio' },
+            { val: '5%', label: 'fondovalle' },
+            { val: '15%', label: 'drenato' }
+          ]
+        });
+        appendText(el,
+          'Le pianure costiere e la Conca d\'Oro mostrano i TWI più elevati — aree storicamente soggette ad alluvioni. ' +
+          'Le valli fluviali dell\'Oreto e del Gabriele emergono come corridoi ad alta saturazione potenziale. ' +
+          'I rilievi dei Monti di Palermo presentano TWI molto bassi per l\'elevata pendenza e il drenaggio rapido.'
+        );
+      }
+    },
+
+    flowacc: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 7 17 3 3 3 3 17"/><polyline points="7 17 3 17"/><path d="M22 22 L17 17 M17 17 L12 22 M17 17 L22 12 M17 17 L3 17"/><circle cx="17" cy="17" r="2" fill="currentColor"/></svg>',
+      title: 'Flow Accumulation — reticolo idrografico',
+      layer: 'flowacc-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'La <strong>flow accumulation</strong> conta il numero di celle del DTM che drenano verso ciascun punto ' +
+          'seguendo la direzione di flusso D8 (massima pendenza). Visualizzata in scala logaritmica, ' +
+          'rivela il <strong>reticolo idrografico potenziale</strong> derivato unicamente dalla morfologia — ' +
+          'senza dati di portata o di rete idrografica ufficiale. ' +
+          'Le linee blu scuro corrispondono agli assi di drenaggio principali, ' +
+          'le aree bianche ai versanti con contributo minimo.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-flowacc',
+          title: 'Log₁₀ celle contribuenti',
+          centerVal: 'acc',
+          centerLabel: 'log₁₀',
+          legendData: [
+            { chartLabel: 'Versante 0–1', label: '1–10 celle   versante',           pct: 40, color: '#f7fbff' },
+            { chartLabel: 'Interfl. 1–2', label: '10–100 celle  interfluvi',        pct: 30, color: '#c6dbef' },
+            { chartLabel: 'Rill. 2–3',    label: '100–1000 celle  rilleni',         pct: 20, color: '#6baed6' },
+            { chartLabel: 'Stream 3–4',   label: '1.000–10.000 celle  corsi d\'acqua', pct: 8, color: '#2171b5' },
+            { chartLabel: 'Asta > 4',     label: '> 10.000 celle  aste principali', pct: 2, color: '#08306b' }
+          ],
+          summaries: [
+            { val: '~1,5M', label: 'max celle' },
+            { val: '500', label: 'soglia km²' },
+            { val: '2%', label: 'rete idrografica' }
+          ]
+        });
+        appendText(el,
+          'Soglia di 500 celle (~0,012 km²) per la definizione del reticolo. ' +
+          'I corsi d\'acqua principali identificati coincidono con i valloni storici di Palermo: ' +
+          'Oreto, Gabriele, Eleuterio e i torrenti dei Monti di Palermo. ' +
+          'Il reticolo potenziale è fondamentale per il dimensionamento dei collettori fognari.'
+        );
+      }
+    },
+
+    bacini: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 2 17 12 22 22 17 22 7 12 2"/><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="7" x2="22" y2="7"/><line x1="2" y1="17" x2="22" y2="17"/></svg>',
+      title: 'Bacini idrografici',
+      layer: 'bacini-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'La <strong>delineazione automatica dei bacini idrografici</strong> partiziona il territorio comunale ' +
+          'in <strong>28 sottobacini versanti</strong>, ciascuno corrispondente a un\'area che drena verso ' +
+          'un\'unica sezione del reticolo idrografico. Ogni bacino è identificato da un colore categorico distinto. ' +
+          'La delineazione si basa sull\'algoritmo D8 applicato al DTM pit-filled, con soglia di accumulo ' +
+          'di 500 celle (~0,012 km²) per la definizione del reticolo di riferimento. ' +
+          'Fondamentale per la <strong>gestione delle acque urbane</strong> e il dimensionamento dei collettori fognari.'
+        );
+        appendTable(el,
+          ['Caratteristica', 'Valore'],
+          [
+            ['Numero sottobacini', '28'],
+            ['Soglia reticolo', '500 celle ≈ 0,012 km²'],
+            ['Metodo delineazione', 'D8 watershed su DTM pit-filled'],
+            ['Bacini principali', 'Oreto, Gabriele, Eleuterio'],
+            ['Utilizzo', 'Gestione acque urbane · collettori fognari']
+          ]
+        );
+        appendText(el,
+          'I bacini principali corrispondono ai bacini idrografici storici: Oreto (sud-ovest), ' +
+          'Gabriele (nord-est), Eleuterio (est) e i numerosi valloni minori dei Monti di Palermo. ' +
+          'Le zone pianeggianti costiere tendono a formare bacini ampi con reticolo poco gerarchizzato. ' +
+          'Ogni bacino rappresenta un\'unità idrologica per la pianificazione del rischio alluvione.'
+        );
+      }
+    },
+
+    spi: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6 Q8 2 12 6 Q16 10 21 6"/><path d="M3 12 Q8 8 12 12 Q16 16 21 12"/><path d="M3 18 Q8 14 12 18 Q16 22 21 18"/><line x1="3" y1="22" x2="21" y2="22"/></svg>',
+      title: 'SPI — Stream Power Index',
+      layer: 'spi-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'Lo <strong>Stream Power Index (SPI)</strong> misura il potenziale erosivo dei corsi d\'acqua: ' +
+          'SPI = ln(A_s × tan β), dove A_s è l\'area contributiva specifica e β la pendenza. ' +
+          'Combina la quantità d\'acqua che transita in un punto con la velocità con cui si muove: ' +
+          'valori elevati (rosso) indicano aree ad alto potenziale di <strong>erosione e trasporto solido</strong>, ' +
+          'tipicamente nei fondovalli incisi ad alta pendenza. ' +
+          'Valori bassi (giallo) nelle pianure dove l\'acqua è abbondante ma lenta.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-spi',
+          title: 'Classi SPI',
+          centerVal: 'SPI',
+          centerLabel: 'indice',
+          legendData: [
+            { chartLabel: 'Basso < 4',    label: '< 4  bassa energia erosiva',     pct: 30, color: '#ffffcc' },
+            { chartLabel: 'Medio 4–7',    label: '4–7  energia moderata',          pct: 35, color: '#feb24c' },
+            { chartLabel: 'Alto 7–10',    label: '7–10  alta energia erosiva',     pct: 25, color: '#f03b20' },
+            { chartLabel: 'Estremo > 10', label: '> 10  potenziale estremo',       pct: 10, color: '#bd0026' }
+          ],
+          summaries: [
+            { val: '35%', label: 'media energia' },
+            { val: '10%', label: 'estremo' },
+            { val: '30%', label: 'bassa energia' }
+          ]
+        });
+        appendText(el,
+          'Le valli incise dei Monti di Palermo (Gabriele, Eleuterio) mostrano gli SPI più elevati: ' +
+          'alta pendenza + grande area contributiva = massimo potenziale erosivo. ' +
+          'L\'SPI è usato nella progettazione di opere di difesa del suolo e nella valutazione ' +
+          'del rischio di colate detritiche e trasporto solido.'
+        );
+      }
+    },
+
+    dtw: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L12 12"/><circle cx="12" cy="16" r="4" fill="none"/><line x1="4" y1="22" x2="20" y2="22"/><path d="M4 10 Q8 6 12 10 Q16 14 20 10" stroke-dasharray="3,2"/></svg>',
+      title: 'Depth-to-Water — profondità falda',
+      layer: 'dtw-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'Il <strong>Depth-to-Water (DTW)</strong> stima la profondità relativa della falda freatica ' +
+          'basandosi sulla morfologia del terreno (metodo HAND — Height Above Nearest Drainage). ' +
+          'Ogni cella misura la <strong>quota sul punto di drenaggio più vicino</strong> nel proprio bacino: ' +
+          'valori bassi (verde) indicano aree con falda vicina alla superficie — fondovalli, aree alluvionali, ' +
+          'pianure costiere. Valori alti (rosso) corrispondono a rilievi con falda profonda. ' +
+          'Utile per la pianificazione di scavi, fondazioni e per la valutazione del rischio ' +
+          'di <strong>allagamento dei piani interrati</strong>.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-dtw',
+          title: 'Classi DTW (HAND)',
+          centerVal: 'DTW',
+          centerLabel: 'indice',
+          legendData: [
+            { chartLabel: 'Falda alta 0–2',   label: '0–2  falda superficiale',   pct: 20, color: '#00682c' },
+            { chartLabel: 'Bassa 2–4',        label: '2–4  falda sub-superficiale',pct: 25, color: '#31a354' },
+            { chartLabel: 'Media 4–6',        label: '4–6  falda intermedia',      pct: 30, color: '#aedea7' },
+            { chartLabel: 'Profonda 6–8',     label: '6–8  falda profonda',        pct: 15, color: '#fd8d3c' },
+            { chartLabel: 'Molto prof. > 8',  label: '> 8  falda molto profonda',  pct: 10, color: '#800026' }
+          ],
+          summaries: [
+            { val: '20%', label: 'falda alta' },
+            { val: '30%', label: 'intermedia' },
+            { val: '10%', label: 'molto profonda' }
+          ]
+        });
+        appendText(el,
+          'La pianura costiera e la Conca d\'Oro mostrano DTW bassi: falda freatica spesso entro 2–5 m, ' +
+          'con rischi di allagamento di scantinati e piani interrati. ' +
+          'Le zone collinari e montane dei Monti di Palermo hanno DTW elevati (> 50 m sulle creste). ' +
+          'Il metodo HAND fornisce una stima relativa — per valori assoluti servono dati piezometrici.'
+        );
+      }
     }
+
   };
 
   // ── Helpers DOM ──────────────────────────────────────────────────────────

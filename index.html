@@ -303,6 +303,50 @@
     <div class="legend-item"><div class="legend-box" style="background:#f2a600;"></div><span>0,8 – 1,0  ottima (S/SO)</span></div>
   </div>
 
+  <div id="legend-twi" class="map-legend legend-analysis">
+    <div class="map-legend-title">TWI — Wetness Index</div>
+    <div class="legend-item"><div class="legend-box" style="background:#f7fbff;"></div><span>&lt; 6  drenato rapidamente</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#c6dbef;"></div><span>6 – 9  bassa saturazione</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#6baed6;"></div><span>9 – 12  media — versanti</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#2171b5;"></div><span>12 – 16  alta saturazione</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#08306b;"></div><span>&gt; 16  fondovalle / pianura</span></div>
+  </div>
+
+  <div id="legend-flowacc" class="map-legend legend-analysis">
+    <div class="map-legend-title">Flow Accumulation</div>
+    <div class="legend-item"><div class="legend-box" style="background:#f7fbff;"></div><span>1 – 10 celle  versante</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#c7e9c0;"></div><span>10 – 100 celle  interfluvi</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#6baed6;"></div><span>100 – 1.000  rilleni</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#2171b5;"></div><span>1.000 – 10.000  corsi d'acqua</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#08306b;"></div><span>&gt; 10.000  aste principali</span></div>
+  </div>
+
+  <div id="legend-bacini" class="map-legend legend-analysis">
+    <div class="map-legend-title">Bacini idrografici</div>
+    <div class="legend-item"><div class="legend-box" style="background:#1f77b4;"></div><span>Bacino 1</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#ff7f0e;"></div><span>Bacino 2</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#2ca02c;"></div><span>Bacino 3</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#d62728;"></div><span>Bacino 4</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#9467bd;border:1px solid #ccc;"></div><span>28 sottobacini tot. · colori categorici</span></div>
+  </div>
+
+  <div id="legend-spi" class="map-legend legend-analysis">
+    <div class="map-legend-title">SPI — Stream Power Index</div>
+    <div class="legend-item"><div class="legend-box" style="background:#ffffcc;"></div><span>&lt; 4  bassa energia erosiva</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#feb24c;"></div><span>4 – 7  energia moderata</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#f03b20;"></div><span>7 – 10  alta energia erosiva</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#bd0026;"></div><span>&gt; 10  potenziale erosivo estremo</span></div>
+  </div>
+
+  <div id="legend-dtw" class="map-legend legend-analysis">
+    <div class="map-legend-title">Depth-to-Water (HAND)</div>
+    <div class="legend-item"><div class="legend-box" style="background:#00682c;"></div><span>0 – 2  falda superficiale</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#31a354;"></div><span>2 – 4  falda sub-superficiale</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#aedea7;"></div><span>4 – 6  falda intermedia</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#fd8d3c;"></div><span>6 – 8  falda profonda</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#800026;"></div><span>&gt; 8  falda molto profonda</span></div>
+  </div>
+
   <div id="legend-contour" class="map-legend">
     <div class="map-legend-title">Curve di livello</div>
     <div class="legend-item">
@@ -811,7 +855,7 @@
     <!-- ── Vista 1: Galleria analisi ── -->
     <div id="rp-gallery" class="rp-view">
       <div class="rp-panel-header">
-        <div class="rp-panel-title">Analisi territorio</div>
+        <div class="rp-panel-title">Analisi del territorio</div>
         <div class="rp-panel-sub"><a href="https://zenodo.org/records/18872933" title="HR-DTM-5m Italia" target="_blank">HR-DTM-5m Italia</a> · Palermo</div>
       </div>
       <div class="rp-cards">
@@ -916,6 +960,36 @@
           <div class="rp-card-line" style="background:#d73027;"></div>
           <div class="rp-card-title">Indice vulnerabilità</div>
           <div class="rp-card-sub">Multi-criterio · 19% ad alto rischio</div>
+        </div>
+
+        <div class="rp-card" data-analysis="twi">
+          <div class="rp-card-line" style="background:#2171b5;"></div>
+          <div class="rp-card-title">TWI — Wetness Index</div>
+          <div class="rp-card-sub">Aree sature · rischio alluvione</div>
+        </div>
+
+        <div class="rp-card" data-analysis="flowacc">
+          <div class="rp-card-line" style="background:#08306b;"></div>
+          <div class="rp-card-title">Flow Accumulation</div>
+          <div class="rp-card-sub">Reticolo idrografico potenziale</div>
+        </div>
+
+        <div class="rp-card" data-analysis="bacini">
+          <div class="rp-card-line" style="background:#1f77b4;"></div>
+          <div class="rp-card-title">Bacini idrografici</div>
+          <div class="rp-card-sub">28 sottobacini versanti</div>
+        </div>
+
+        <div class="rp-card" data-analysis="spi">
+          <div class="rp-card-line" style="background:#d94801;"></div>
+          <div class="rp-card-title">SPI — Stream Power Index</div>
+          <div class="rp-card-sub">Potenziale erosivo corsi d'acqua</div>
+        </div>
+
+        <div class="rp-card" data-analysis="dtw">
+          <div class="rp-card-line" style="background:#00682c;"></div>
+          <div class="rp-card-title">Depth-to-Water (HAND)</div>
+          <div class="rp-card-sub">Profondità falda freatica</div>
         </div>
 
       </div><!-- /rp-cards -->
