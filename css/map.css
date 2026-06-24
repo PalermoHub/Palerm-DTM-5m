@@ -958,7 +958,7 @@ body {
 }
 
 #ods-logo.panel-open {
-  right: 434px; /* 406px + 28px offset dal bordo attrib */
+  right: 406px;
 }
 
 /* ════════════════════════════════════════

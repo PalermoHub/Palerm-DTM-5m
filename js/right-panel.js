@@ -175,8 +175,8 @@
     geomorph: {
       icon: SVG_ICONS.geomorph,
       title: 'Geomorfologia',
-      layer: null,
-      hasLayer: false,
+      layer: 'geomorfologia-layer',
+      hasLayer: true,
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
@@ -203,8 +203,8 @@
     stability: {
       icon: SVG_ICONS.stability,
       title: 'Stabilità versanti',
-      layer: null,
-      hasLayer: false,
+      layer: 'stabilita-layer',
+      hasLayer: true,
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,

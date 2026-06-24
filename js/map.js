@@ -120,6 +120,24 @@ const map = new maplibregl.Map({
         scheme: 'tms',
         attribution: 'Analisi esposizione: DTM HRDTM5m@italia'
       },
+      'geomorfologia-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/geomorfologia/{z}/{x}/{y}.png`],
+        tileSize: 256,
+        minzoom: 8,
+        maxzoom: 15,
+        scheme: 'tms',
+        attribution: 'Analisi geomorfologica: DTM HRDTM5m@italia'
+      },
+      'stabilita-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/stabilita/{z}/{x}/{y}.png`],
+        tileSize: 256,
+        minzoom: 8,
+        maxzoom: 15,
+        scheme: 'tms',
+        attribution: 'Analisi stabilità versanti: DTM HRDTM5m@italia'
+      },
       'upl': {
         type: 'geojson',
         data: `${BASE_URL}docs/geojson/upl.geojson`
@@ -171,6 +189,24 @@ const map = new maplibregl.Map({
         id: 'aspetto-layer',
         type: 'raster',
         source: 'aspetto-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // Mappa geomorfologia — disattiva di default
+      {
+        id: 'geomorfologia-layer',
+        type: 'raster',
+        source: 'geomorfologia-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 0.85 }
+      },
+
+      // Mappa stabilità versanti — disattiva di default
+      {
+        id: 'stabilita-layer',
+        type: 'raster',
+        source: 'stabilita-raster',
         layout: { visibility: 'none' },
         paint: { 'raster-opacity': 1.0 }
       },

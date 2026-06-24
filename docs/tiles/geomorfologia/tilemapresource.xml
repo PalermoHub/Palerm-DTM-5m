@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <TileMap version="1.0.0" tilemapservice="http://tms.osgeo.org/1.0.0">
+      <Title>geomorfologia_rgba.tif</Title>
+      <Abstract></Abstract>
+      <SRS>EPSG:3857</SRS>
+      <BoundingBox minx="13.24157549119330" miny="38.04868427956873" maxx="13.45528768620071" maxy="38.22546458806293"/>
+      <Origin x="13.24157549119330" y="38.04868427956873"/>
+      <TileFormat width="256" height="256" mime-type="image/png" extension="png"/>
+      <TileSets profile="mercator">
+        <TileSet href="15" units-per-pixel="4.77731426696777" order="15"/>
+      </TileSets>
+    </TileMap>
+    
