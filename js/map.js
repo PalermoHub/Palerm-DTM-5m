@@ -3,8 +3,8 @@ const pmtilesProtocol = new pmtiles.Protocol();
 maplibregl.addProtocol('pmtiles', pmtilesProtocol.tilev4.bind(pmtilesProtocol));
 
 // ── Costanti ──────────────────────────────────────────────────────────────
-const CENTER  = [13.32, 38.1026];
-const ZOOM    = 11.51;
+const CENTER  = [13.35, 38.14692];
+const ZOOM    = 12.12;
 const BOUNDS  = [13.20, 38.01, 13.50, 38.26];
 
 // Base URL assoluta: risolve correttamente sia in locale (http.server)
@@ -271,8 +271,8 @@ const map = new maplibregl.Map({
   },
   center: CENTER,
   zoom: ZOOM,
-  pitch: 23,
-  bearing: -120.3,
+  pitch: 60,
+  bearing: -84.5,
   maxBounds: [
     [BOUNDS[0], BOUNDS[1]],
     [BOUNDS[2], BOUNDS[3]]
@@ -353,7 +353,7 @@ map.on('load', () => {
 
 // ── Toolbar: Home ─────────────────────────────────────────────────────────
 document.getElementById('tb-home').addEventListener('click', () => {
-  map.flyTo({ center: CENTER, zoom: ZOOM, pitch: 23, bearing: -120.3, duration: 900 });
+  map.flyTo({ center: CENTER, zoom: ZOOM, pitch: 60, bearing: -84.5, duration: 900 });
 });
 
 // ── Toolbar: Basemap ──────────────────────────────────────────────────────
