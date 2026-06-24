@@ -102,6 +102,24 @@ const map = new maplibregl.Map({
         scheme: 'tms',
         attribution: 'Analisi elevazione: DTM HRDTM5m@italia'
       },
+      'pendenza-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/pendenza/{z}/{x}/{y}.png`],
+        tileSize: 256,
+        minzoom: 8,
+        maxzoom: 15,
+        scheme: 'tms',
+        attribution: 'Analisi pendenza: DTM HRDTM5m@italia'
+      },
+      'aspetto-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/aspetto/{z}/{x}/{y}.png`],
+        tileSize: 256,
+        minzoom: 8,
+        maxzoom: 15,
+        scheme: 'tms',
+        attribution: 'Analisi esposizione: DTM HRDTM5m@italia'
+      },
       'upl': {
         type: 'geojson',
         data: `${BASE_URL}docs/geojson/upl.geojson`
@@ -130,13 +148,31 @@ const map = new maplibregl.Map({
       // Basemap raster — SOPRA hillshade, con opacità per far trasparire il rilievo
       { id: 'basemap-layer', type: 'raster', source: 'basemap', paint: { 'raster-opacity': 0.85 } },
 
-      // Mappa elevazione colorata — analisi DTM, disattiva di default
+      // Mappa elevazione colorata — analisi DTM, visibile di default
       {
         id: 'elevation-layer',
         type: 'raster',
         source: 'elevation-raster',
         layout: { visibility: 'visible' },
         paint: { 'raster-opacity': 0.70 }
+      },
+
+      // Mappa pendenza — disattiva di default
+      {
+        id: 'pendenza-layer',
+        type: 'raster',
+        source: 'pendenza-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 0.75 }
+      },
+
+      // Mappa esposizione (aspetto) — disattiva di default
+      {
+        id: 'aspetto-layer',
+        type: 'raster',
+        source: 'aspetto-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 0.75 }
       },
 
       // Overlay CTR — disattivo di default, si sovrappone alla basemap attiva

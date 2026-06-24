@@ -2,9 +2,20 @@
   'use strict';
 
   // ── Dati per ogni analisi ────────────────────────────────────────────────
+  var SVG_ICONS = {
+    elevation: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 20 9 4 15 14 18 10 21 20"/></svg>',
+    slope:     '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 20 21 4"/><line x1="3" y1="20" x2="21" y2="20"/><line x1="21" y1="4" x2="21" y2="20"/></svg>',
+    aspect:    '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>',
+    geomorph:  '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20 L7 10 L11 15 L15 8 L22 20Z"/></svg>',
+    stability: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+    build:     '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12"/><polyline points="3 9 12 3 21 9"/><line x1="9" y1="21" x2="9" y2="15"/><line x1="15" y1="21" x2="15" y2="15"/><line x1="9" y1="15" x2="15" y2="15"/></svg>',
+    solar:     '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+    rugosity:  '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 Q5 8 7 12 Q9 16 11 12 Q13 8 15 12 Q17 16 19 12 Q21 8 23 12"/><line x1="3" y1="19" x2="21" y2="19"/></svg>'
+  };
+
   const ANALYSES = {
     elevation: {
-      icon: '🎨',
+      icon: SVG_ICONS.elevation,
       title: 'Mappa Elevazione',
       layer: 'elevation-layer',
       hasLayer: true,
@@ -97,10 +108,10 @@
     },
 
     slope: {
-      icon: '📐',
+      icon: SVG_ICONS.slope,
       title: 'Pendenze',
-      layer: null,
-      hasLayer: false,
+      layer: 'pendenza-layer',
+      hasLayer: true,
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
@@ -129,10 +140,10 @@
     },
 
     aspect: {
-      icon: '🧭',
+      icon: SVG_ICONS.aspect,
       title: 'Esposizione',
-      layer: null,
-      hasLayer: false,
+      layer: 'aspetto-layer',
+      hasLayer: true,
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
@@ -162,7 +173,7 @@
     },
 
     geomorph: {
-      icon: '🏔️',
+      icon: SVG_ICONS.geomorph,
       title: 'Geomorfologia',
       layer: null,
       hasLayer: false,
@@ -190,7 +201,7 @@
     },
 
     stability: {
-      icon: '⚠️',
+      icon: SVG_ICONS.stability,
       title: 'Stabilità versanti',
       layer: null,
       hasLayer: false,
@@ -217,7 +228,7 @@
     },
 
     build: {
-      icon: '🏗️',
+      icon: SVG_ICONS.build,
       title: 'Costruibilità',
       layer: null,
       hasLayer: false,
@@ -245,7 +256,7 @@
     },
 
     solar: {
-      icon: '☀️',
+      icon: SVG_ICONS.solar,
       title: 'Radiazione solare',
       layer: null,
       hasLayer: false,
@@ -283,7 +294,7 @@
     },
 
     rugosity: {
-      icon: '📏',
+      icon: SVG_ICONS.rugosity,
       title: 'Rugosità (TRI)',
       layer: null,
       hasLayer: false,
@@ -775,7 +786,7 @@
     if (activeCard) activeCard.classList.add('active');
 
     // Aggiorna header
-    rpDetailIcon.textContent = analysis.icon;
+    rpDetailIcon.innerHTML = analysis.icon;
     rpDetailName.textContent = analysis.title;
 
     // Opacità slider
@@ -792,10 +803,14 @@
     // Render contenuto
     analysis.render(rpDetailBody);
 
-    // Attiva layer se disponibile
+    // Attiva layer: nascondi tutti gli altri layer analisi, mostra solo quello selezionato
     if (analysis.hasLayer) {
       try {
-        map.setLayoutProperty(analysis.layer, 'visibility', 'visible');
+        Object.keys(ANALYSES).forEach(function (key) {
+          var a = ANALYSES[key];
+          if (!a.hasLayer || !a.layer) return;
+          map.setLayoutProperty(a.layer, 'visibility', key === id ? 'visible' : 'none');
+        });
         // Sync toggle in controls panel se esiste
         var toggleEl = document.getElementById('toggle-' + id);
         if (toggleEl) { toggleEl.checked = true; }

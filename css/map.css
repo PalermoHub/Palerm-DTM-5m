@@ -1030,7 +1030,7 @@ body {
   min-width: 0;
 }
 
-#rp-detail-icon { font-size: 15px; flex-shrink: 0; }
+#rp-detail-icon { flex-shrink: 0; display: flex; align-items: center; color: #2458c8; }
 
 #rp-detail-name {
   font-size: 12px;
