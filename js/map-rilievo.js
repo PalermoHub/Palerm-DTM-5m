@@ -81,6 +81,17 @@ const map = new maplibregl.Map({
         maxzoom: 15,
         attribution: 'DTM: HRDTM5m@italia'
       },
+      // Rilievo ombreggiato pre-cotto (hillshade multidirezionale, QGIS/GDAL).
+      // Sostituisce il terrain 3D: niente mesh = niente velo da angolo radente.
+      'rilievo-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/rilievo/{z}/{x}/{y}.png`],
+        tileSize: 256,
+        minzoom: 8,
+        maxzoom: 15,
+        scheme: 'tms',
+        attribution: 'Rilievo ombreggiato: DTM HRDTM5m@italia'
+      },
       contours: {
         type: 'vector',
         url: 'pmtiles://https://palermohub.github.io/Palerm-DTM-5m/docs/tiles/contours.pmtiles',
@@ -246,12 +257,14 @@ const map = new maplibregl.Map({
       // Background bianco (visibile dove non ci sono tile)
       { id: 'background', type: 'background', paint: { 'background-color': '#ffffff' } },
 
-      // Hillshade — SOTTO il basemap, fornisce profondità al terreno
+      // Hillshade runtime DISATTIVO in modalità rilievo (sostituito dal raster
+      // pre-cotto). Mantenuto nascosto per compatibilità con le funzioni esistenti
+      // (sole/ombre) che vi scrivono sopra senza effetti visivi.
       {
         id: 'hillshade-layer',
         type: 'hillshade',
         source: 'terrain-dem',
-        layout: { visibility: 'visible' },
+        layout: { visibility: 'none' },
         paint: {
           'hillshade-exaggeration': 0.35,
           'hillshade-shadow-color': '#283046',
@@ -262,8 +275,12 @@ const map = new maplibregl.Map({
         }
       },
 
-      // Basemap raster — SOPRA hillshade, con opacità per far trasparire il rilievo
+      // Basemap raster
       { id: 'basemap-layer', type: 'raster', source: 'basemap', paint: { 'raster-opacity': 1.0 } },
+
+      // Rilievo ombreggiato pre-cotto — SOPRA il basemap, SOTTO le analisi.
+      // Dà profondità ai layer semi-trasparenti senza terrain mesh (no velo).
+      { id: 'rilievo-layer', type: 'raster', source: 'rilievo-raster', paint: { 'raster-opacity': 0.6 } },
 
       // Mappa elevazione colorata — analisi DTM, visibile di default
       {
@@ -533,18 +550,13 @@ const map = new maplibregl.Map({
         },
         minzoom: 11
       }
-    ],
-    terrain: {
-      source: 'terrain-dem',
-      // Exaggeration bassa: a pitch alto un'esagerazione forte (1.5) crea un velo
-      // biancastro sul terreno lontano (artefatto di campionamento texture ad
-      // angolo radente, NON nebbia/atmosfera). 0.8 mantiene il rilievo leggibile.
-      exaggeration: 1.2
-    }
+    ]
+    // MODALITÀ RILIEVO: nessun terrain mesh. Il rilievo è dato dal raster
+    // hillshade pre-cotto ('rilievo-layer'). Niente mesh = niente velo.
   },
   center: CENTER,
   zoom: ZOOM,
-  pitch: 60,
+  pitch: 55,        // vista inclinata: dà profondità al rilievo ombreggiato (piano, no mesh = no velo)
   bearing: -84.5,
   maxBounds: [
     [BOUNDS[0], BOUNDS[1]],
@@ -607,10 +619,10 @@ map.on('load', updateMapScale);
 map.on('move', updateMapScale);
 
 // ── Stato locale ──────────────────────────────────────────────────────────
-let terrainActive   = true;
+let terrainActive   = true;    // modalità rilievo: parte inclinata (tilt, senza mesh)
 let shadowActive    = true;
 let contourActive   = false;
-let currentExag     = 1.2;
+let currentExag     = 0.8;
 let shadowIntensity = 0.35;
 let sunMinutes      = 720;   // 12:00 (mezzogiorno solare)
 
@@ -658,7 +670,7 @@ map.on('load', () => {
 
 // ── Toolbar: Home ─────────────────────────────────────────────────────────
 document.getElementById('tb-home').addEventListener('click', () => {
-  map.flyTo({ center: CENTER, zoom: ZOOM, pitch: 60, bearing: -84.5, duration: 900 });
+  map.flyTo({ center: CENTER, zoom: ZOOM, pitch: 55, bearing: -84.5, duration: 900 });
 });
 
 // ── Toolbar: Basemap ──────────────────────────────────────────────────────
@@ -748,26 +760,29 @@ document.getElementById('tb-3d').addEventListener('click', function () {
   const panel = document.getElementById('tb-panel-3d');
   const panelWasOpen = panel.style.display !== 'none';
 
+  // MODALITÀ RILIEVO: niente terrain mesh (causa del velo). Il toggle inclina
+  // soltanto la vista piatta; il rilievo resta quello pre-cotto del raster.
   terrainActive = !terrainActive;
   this.classList.toggle('active', terrainActive);
-  document.getElementById('tb-3d-label').textContent = terrainActive ? '3D' : '2D';
+  document.getElementById('tb-3d-label').textContent = terrainActive ? 'Inclina' : 'Piano';
 
   if (terrainActive) {
-    map.setTerrain({ source: 'terrain-dem', exaggeration: currentExag });
-    map.easeTo({ pitch: 45, duration: 800 });
+    map.easeTo({ pitch: 55, duration: 800 });
     if (!panelWasOpen) { closePanels('tb-panel-3d'); panel.style.display = 'flex'; }
   } else {
-    map.setTerrain(null);
     map.easeTo({ pitch: 0, duration: 600 });
     panel.style.display = 'none';
   }
 });
 
-// ── Sotto-pannello 3D: slider esagerazione ────────────────────────────────
+// ── Sotto-pannello: intensità rilievo ombreggiato ─────────────────────────
+// Lo slider (ex "esagerazione") regola l'opacità del rilievo pre-cotto.
 document.getElementById('tbp-exag').addEventListener('input', function () {
-  currentExag = parseFloat(this.value);
-  document.getElementById('tbp-exag-val').textContent = currentExag.toFixed(1) + '×';
-  if (terrainActive) map.setTerrain({ source: 'terrain-dem', exaggeration: currentExag });
+  const v = parseFloat(this.value);
+  document.getElementById('tbp-exag-val').textContent = v.toFixed(1) + '×';
+  // mappa 0.3–3 → opacità 0–0.9
+  const op = Math.max(0, Math.min(0.9, (v - 0.3) / (3 - 0.3) * 0.9));
+  if (map.getLayer('rilievo-layer')) map.setPaintProperty('rilievo-layer', 'raster-opacity', op);
 });
 
 
@@ -782,7 +797,8 @@ function closePanels(except) {
 document.getElementById('tb-shadow-toggle').addEventListener('click', function () {
   this.classList.toggle('on');
   shadowActive = this.classList.contains('on');
-  map.setLayoutProperty('hillshade-layer', 'visibility', shadowActive ? 'visible' : 'none');
+  // Modalità rilievo: l'ombreggiatura è il raster pre-cotto 'rilievo-layer'.
+  map.setLayoutProperty('rilievo-layer', 'visibility', shadowActive ? 'visible' : 'none');
   // Se si spegne l'ombreggiatura chiudi anche il pannello impostazioni
   if (!shadowActive) {
     document.getElementById('tb-panel-shadow').style.display = 'none';
@@ -857,7 +873,7 @@ function grigliaPopShow(wrap, clientX, clientY) {
 
   // Posiziona: default sopra-sinistra del click, poi aggiusta se esce dallo schermo
   const W = window.innerWidth, H = window.innerHeight;
-  const PW = 350, PH = Math.min(pop.scrollHeight || 520, H * 1.2);
+  const PW = 350, PH = Math.min(pop.scrollHeight || 520, H * 0.8);
   let left = clientX + 12;
   let top  = clientY - PH - 12;
   if (left + PW > W - 8)  left = clientX - PW - 12;
