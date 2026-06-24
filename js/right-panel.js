@@ -793,8 +793,8 @@
     // Opacità slider
     if (analysis.hasLayer) {
       rpOpacityBar.classList.remove('hidden');
-      var currentOpacity = 0.70;
-      try { currentOpacity = map.getPaintProperty(analysis.layer, 'raster-opacity') || 0.70; } catch(e) {}
+      var currentOpacity = 1.0;
+      try { currentOpacity = map.getPaintProperty(analysis.layer, 'raster-opacity') || 1.0; } catch(e) {}
       rpOpacity.value = currentOpacity;
       rpOpacityVal.textContent = currentOpacity.toFixed(2);
     } else {
@@ -867,11 +867,11 @@
   // Mostra sempre la gallery all'avvio
   rpGallery.style.display = 'flex';
   rpDetail.style.display = 'none';
-  // Imposta opacità iniziale (slider = 0.70)
-  rpOpacity.value = 0.70;
-  rpOpacityVal.textContent = '0.70';
+  // Imposta opacità iniziale (slider = 1.0)
+  rpOpacity.value = 1.0;
+  rpOpacityVal.textContent = '1.00';
   map.on('load', function() {
-    map.setPaintProperty('elevation-layer', 'raster-opacity', 0.70);
+    map.setPaintProperty('elevation-layer', 'raster-opacity', 1.0);
     updateMapControlsPosition();
   });
 })();

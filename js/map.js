@@ -5,7 +5,7 @@ maplibregl.addProtocol('pmtiles', pmtilesProtocol.tilev4.bind(pmtilesProtocol));
 // ── Costanti ──────────────────────────────────────────────────────────────
 const CENTER  = [13.35, 38.14692];
 const ZOOM    = 12.12;
-const BOUNDS  = [13.20, 38.01, 13.50, 38.26];
+const BOUNDS  = [13.10, 37.94, 13.60, 38.33];
 
 // Base URL assoluta: risolve correttamente sia in locale (http.server)
 // che su GitHub Pages, sia in sottocartella che in radice.
@@ -38,7 +38,7 @@ const BASEMAPS = {
     attribution: '© OpenStreetMap contributors',
     attributionNode: makeAttribNode('© OpenStreetMap contributors', 'https://www.openstreetmap.org/copyright'),
     maxzoom: 18,
-    opacity: 0.85
+    opacity: 1.0
   },
   satellite: {
     type: 'raster',
@@ -136,9 +136,9 @@ const map = new maplibregl.Map({
         source: 'terrain-dem',
         layout: { visibility: 'visible' },
         paint: {
-          'hillshade-exaggeration': 0.6,
+          'hillshade-exaggeration': 0.35,
           'hillshade-shadow-color': '#283046',
-          'hillshade-highlight-color': '#ffffff',
+          'hillshade-highlight-color': '#f5f0e8',
           'hillshade-accent-color': '#202040',
           'hillshade-illumination-direction': 180,
           'hillshade-illumination-anchor': 'map'
@@ -146,7 +146,7 @@ const map = new maplibregl.Map({
       },
 
       // Basemap raster — SOPRA hillshade, con opacità per far trasparire il rilievo
-      { id: 'basemap-layer', type: 'raster', source: 'basemap', paint: { 'raster-opacity': 0.85 } },
+      { id: 'basemap-layer', type: 'raster', source: 'basemap', paint: { 'raster-opacity': 1.0 } },
 
       // Mappa elevazione colorata — analisi DTM, visibile di default
       {
@@ -154,7 +154,7 @@ const map = new maplibregl.Map({
         type: 'raster',
         source: 'elevation-raster',
         layout: { visibility: 'visible' },
-        paint: { 'raster-opacity': 0.70 }
+        paint: { 'raster-opacity': 1.0 }
       },
 
       // Mappa pendenza — disattiva di default
@@ -163,7 +163,7 @@ const map = new maplibregl.Map({
         type: 'raster',
         source: 'pendenza-raster',
         layout: { visibility: 'none' },
-        paint: { 'raster-opacity': 0.75 }
+        paint: { 'raster-opacity': 1.0 }
       },
 
       // Mappa esposizione (aspetto) — disattiva di default
@@ -172,7 +172,7 @@ const map = new maplibregl.Map({
         type: 'raster',
         source: 'aspetto-raster',
         layout: { visibility: 'none' },
-        paint: { 'raster-opacity': 0.75 }
+        paint: { 'raster-opacity': 1.0 }
       },
 
       // Overlay CTR — disattivo di default, si sovrappone alla basemap attiva
@@ -181,7 +181,7 @@ const map = new maplibregl.Map({
         type: 'raster',
         source: 'ctr2k',
         layout: { visibility: 'none' },
-        paint: { 'raster-opacity': 0.7 }
+        paint: { 'raster-opacity': 1.0 }
       },
 
       // UPL — confini amministrativi (fill invisibile per query + linee visibili)
@@ -342,7 +342,7 @@ let terrainActive   = true;
 let shadowActive    = true;
 let contourActive   = false;
 let currentExag     = 1.5;
-let shadowIntensity = 0.6;
+let shadowIntensity = 0.35;
 let sunMinutes      = 720;   // 12:00 (mezzogiorno solare)
 
 // ── Calcolo azimuth solare ────────────────────────────────────────────────
