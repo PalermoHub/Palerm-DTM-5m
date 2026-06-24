@@ -181,7 +181,7 @@ const map = new maplibregl.Map({
           'circle-radius': ['interpolate', ['linear'], ['zoom'], 8, 4, 11, 6, 13, 8, 15, 12],
           'circle-color': 'transparent',
           'circle-stroke-width': 0,
-          'circle-opacity': 0
+          'circle-opacity': 0.01
         }
       },
 
@@ -276,10 +276,30 @@ const map = new maplibregl.Map({
   maxBounds: [
     [BOUNDS[0], BOUNDS[1]],
     [BOUNDS[2], BOUNDS[3]]
-  ]
+  ],
+  attributionControl: false
 });
 
-map.addControl(new maplibregl.ScaleControl({ maxWidth: 120, unit: 'metric' }), 'bottom-right');
+// ── Scala metrica custom ──────────────────────────────────────────────────
+function updateMapScale() {
+  const scaleBar   = document.getElementById('map-scale-bar');
+  const scaleLabel = document.getElementById('map-scale-label');
+  if (!scaleBar || !scaleLabel) return;
+  const center = map.getCenter();
+  const zoom   = map.getZoom();
+  const mpp    = 156543.03392 * Math.cos(center.lat * Math.PI / 180) / Math.pow(2, zoom);
+  const maxPx  = 120;
+  const maxM   = mpp * maxPx;
+  // Arrotonda al numero "bello" più vicino
+  const exp    = Math.pow(10, Math.floor(Math.log10(maxM)));
+  const nice   = [1, 2, 5, 10].map(f => f * exp).find(v => v <= maxM) || exp;
+  const barW   = Math.round(nice / mpp);
+  scaleBar.style.width = barW + 'px';
+  scaleLabel.textContent = nice >= 1000 ? (nice / 1000) + ' km' : Math.round(nice) + ' m';
+}
+
+map.on('load', updateMapScale);
+map.on('move', updateMapScale);
 
 // ── Stato locale ──────────────────────────────────────────────────────────
 let terrainActive   = true;
@@ -509,8 +529,45 @@ document.getElementById('tb-griglia').addEventListener('click', function () {
   map.setLayoutProperty('griglia-circles', 'visibility', this.classList.contains('on') ? 'visible' : 'none');
 });
 
-// Popup griglia — hover
-const grigliaPop = new maplibregl.Popup({ closeButton: false, closeOnClick: false, maxWidth: '340px' });
+// Popup griglia — custom fixed div (bypassa il container MapLibre)
+let _grigliaLastKey = null;
+let _grigliaPopEl = null;
+
+function grigliaPopShow(wrap, clientX, clientY) {
+  grigliaPopClose();
+  const pop = document.createElement('div');
+  pop.id = 'griglia-pop-fixed';
+  pop.appendChild(wrap);
+
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'gp-close-btn';
+  closeBtn.textContent = '✕';
+  closeBtn.addEventListener('click', grigliaPopClose);
+  pop.insertBefore(closeBtn, pop.firstChild);
+
+  document.body.appendChild(pop);
+  _grigliaPopEl = pop;
+
+  // Posiziona: default sopra-sinistra del click, poi aggiusta se esce dallo schermo
+  const W = window.innerWidth, H = window.innerHeight;
+  const PW = 350, PH = Math.min(pop.scrollHeight || 520, H * 0.8);
+  let left = clientX + 12;
+  let top  = clientY - PH - 12;
+  if (left + PW > W - 8)  left = clientX - PW - 12;
+  if (top < 8)             top  = clientY + 12;
+  if (top + PH > H - 8)   top  = H - PH - 8;
+  pop.style.left = left + 'px';
+  pop.style.top  = top  + 'px';
+}
+
+function grigliaPopClose() {
+  if (_grigliaPopEl) { _grigliaPopEl.remove(); _grigliaPopEl = null; }
+}
+
+// Chiudi popup griglia cliccando fuori
+document.addEventListener('click', function (e) {
+  if (_grigliaPopEl && !_grigliaPopEl.contains(e.target)) grigliaPopClose();
+});
 
 // Colore badge per classi stabilità / costruibilità (1=migliore, 5=peggiore)
 const CLASS_COLORS = {
@@ -566,8 +623,13 @@ function makeBadgeRow(label, nome) {
   return row;
 }
 
-map.on('mouseenter', 'griglia-circles', (e) => {
-  map.getCanvas().style.cursor = 'pointer';
+map.on('mouseenter', 'griglia-circles', () => { map.getCanvas().style.cursor = 'pointer'; });
+map.on('mouseleave', 'griglia-circles', () => { map.getCanvas().style.cursor = ''; });
+
+map.on('click', 'griglia-circles', (e) => {
+  e.originalEvent.stopPropagation();
+  const key = `${e.lngLat.lng.toFixed(5)},${e.lngLat.lat.toFixed(5)}`;
+  _grigliaLastKey = key;
   const p = e.features[0].properties;
   const n = (v, d = 1) => (v != null && v !== '' && !isNaN(v)) ? Number(v).toFixed(d) : '—';
 
@@ -644,13 +706,9 @@ map.on('mouseenter', 'griglia-circles', (e) => {
     wrap.appendChild(secTerr);
   }
 
-  grigliaPop.setLngLat(e.lngLat).setDOMContent(wrap).addTo(map);
+  grigliaPopShow(wrap, e.originalEvent.clientX, e.originalEvent.clientY);
 });
 
-map.on('mouseleave', 'griglia-circles', () => {
-  map.getCanvas().style.cursor = '';
-  grigliaPop.remove();
-});
 
 
 
@@ -679,3 +737,62 @@ map.on('click', function (e) {
   map.on('mouseenter', id, () => { map.getCanvas().style.cursor = 'crosshair'; });
   map.on('mouseleave', id, () => { map.getCanvas().style.cursor = ''; });
 });
+
+// ── Attribution collassabile ──────────────────────────────────────────────
+(function () {
+  const btn   = document.getElementById('attrib-btn');
+  const panel = document.getElementById('attrib-panel');
+  const text  = document.getElementById('attrib-text');
+
+  const STATIC_ATTRIB = [
+    { label: 'MapLibre GL JS', url: 'https://maplibre.org/' },
+    { label: 'DTM HRDTM5m@italia', url: null },
+    { label: 'Curve di livello: DTM HRDTM5m@italia', url: null },
+    { label: 'CTC – Carta tecnica comunale 2k 2006', url: null },
+  ];
+
+  function buildAttribContent(basemapDef) {
+    text.textContent = '';
+    const parts = [];
+
+    // basemap attribution
+    if (basemapDef.attributionNode) {
+      parts.push(basemapDef.attributionNode.cloneNode(true));
+    }
+
+    // separatore + attribuzioni statiche
+    STATIC_ATTRIB.forEach(item => {
+      const sep = document.createTextNode(' | ');
+      parts.push(sep);
+      if (item.url) {
+        const a = document.createElement('a');
+        a.href = item.url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.textContent = item.label;
+        parts.push(a);
+      } else {
+        parts.push(document.createTextNode(item.label));
+      }
+    });
+
+    text.replaceChildren(...parts);
+  }
+
+  // init con basemap OSM
+  buildAttribContent(BASEMAPS.osm);
+
+  // aggiorna al cambio basemap
+  document.querySelectorAll('#tb-basemaps .tb-radio').forEach(b => {
+    b.addEventListener('click', function () {
+      buildAttribContent(BASEMAPS[this.dataset.basemap]);
+    });
+  });
+
+  // toggle pannello
+  btn.addEventListener('click', function () {
+    const open = panel.hidden === false;
+    panel.hidden = open;
+    btn.setAttribute('aria-expanded', String(!open));
+  });
+})();

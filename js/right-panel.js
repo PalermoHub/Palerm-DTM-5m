@@ -34,6 +34,65 @@
             { val: '1.050', label: 'm max' }
           ]
         });
+
+        var ELEV_CLASSES = [
+          { key: 'c0_50',    label: '0–50 m',    color: '#00cb9b' },
+          { key: 'c50_200',  label: '50–200 m',  color: '#00ef2f' },
+          { key: 'c200_500', label: '200–500 m', color: '#e2ff00' },
+          { key: 'c500_800', label: '500–800 m', color: '#fe7f01' },
+          { key: 'c800',     label: '800+ m',    color: '#505050' }
+        ];
+
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'quota media',
+          unit: ' m',
+          maxVal: 271.0,
+          classes: ELEV_CLASSES,
+          items: [
+            { rank:1, label:'VI · Nord-Ovest',    val:271.0, classi:{c0_50:19.0, c50_200:35.4, c200_500:21.4, c500_800:22.8, c800:1.4} },
+            { rank:2, label:'V · Noce',            val:258.3, classi:{c0_50:14.7, c50_200:43.2, c200_500:19.6, c500_800:20.7, c800:1.8} },
+            { rank:3, label:'IV · Mezzomonreale',  val:241.7, classi:{c0_50:8.6,  c50_200:59.8, c200_500:14.5, c500_800:8.6,  c800:8.5} },
+            { rank:4, label:'III · Oreto',         val:197.9, classi:{c0_50:17.4, c50_200:47.0, c200_500:26.2, c500_800:9.3,  c800:0.0} },
+            { rank:5, label:'VIII · Libertà',      val:156.0, classi:{c0_50:59.9, c50_200:3.3,  c200_500:34.6, c500_800:2.2,  c800:0.0} },
+            { rank:6, label:'VII · Mondello',      val:109.3, classi:{c0_50:55.7, c50_200:24.3, c200_500:18.5, c500_800:1.5,  c800:0.0} },
+            { rank:7, label:'II · Resuttana',      val:82.2,  classi:{c0_50:66.8, c50_200:21.5, c200_500:8.3,  c500_800:3.3,  c800:0.0} },
+            { rank:8, label:'I · Centro Storico',  val:14.5,  classi:{c0_50:100,  c50_200:0.0,  c200_500:0.0,  c500_800:0.0,  c800:0.0} }
+          ]
+        });
+
+        appendRankingCard(el, {
+          title: 'Top Quartieri',
+          subtitle: 'quota media',
+          unit: ' m',
+          maxVal: 437.9,
+          classes: ELEV_CLASSES,
+          items: [
+            { rank:1, label:'Boccadifalco · Baida',      val:437.9, classi:{c0_50:0.0,  c50_200:29.0, c200_500:32.6, c500_800:19.3, c800:19.1} },
+            { rank:2, label:'Borgo Nuovo',               val:384.3, classi:{c0_50:0.0,  c50_200:31.8, c200_500:31.7, c500_800:33.5, c800:2.9} },
+            { rank:3, label:'San Lorenzo',               val:359.8, classi:{c0_50:4.9,  c50_200:35.6, c200_500:24.2, c500_800:32.2, c800:3.1} },
+            { rank:4, label:'San Giovanni Apostolo',     val:310.8, classi:{c0_50:0.0,  c50_200:37.8, c200_500:40.3, c500_800:21.9, c800:0.0} },
+            { rank:5, label:'Montepellegrino',           val:290.0, classi:{c0_50:20.6, c50_200:6.1,  c200_500:68.9, c500_800:4.4,  c800:0.0} },
+            { rank:6, label:'Villagrazia',               val:279.1, classi:{c0_50:0.0,  c50_200:45.9, c200_500:39.9, c500_800:14.2, c800:0.0} },
+            { rank:7, label:'Cruillas',                  val:236.7, classi:{c0_50:20.2, c50_200:43.3, c200_500:11.1, c500_800:24.3, c800:1.1} },
+            { rank:8, label:'Chiavelli · S.M. di Gesù', val:198.7, classi:{c0_50:9.7,  c50_200:54.7, c200_500:26.2, c500_800:9.4,  c800:0.0} }
+          ]
+        });
+
+        appendRankingCard(el, {
+          title: 'Top Quartieri',
+          subtitle: 'quota massima',
+          unit: ' m',
+          maxVal: 1045.0,
+          classes: ELEV_CLASSES,
+          items: [
+            { rank:1, label:'Boccadifalco · Baida',  val:1045.0, classi:{c0_50:0.0,  c50_200:29.0, c200_500:32.6, c500_800:19.3, c800:19.1} },
+            { rank:2, label:'Borgo Nuovo',            val:990.7,  classi:{c0_50:0.0,  c50_200:31.8, c200_500:31.7, c500_800:33.5, c800:2.9} },
+            { rank:3, label:'Cruillas',               val:879.8,  classi:{c0_50:20.2, c50_200:43.3, c200_500:11.1, c500_800:24.3, c800:1.1} },
+            { rank:4, label:'San Lorenzo',            val:869.3,  classi:{c0_50:4.9,  c50_200:35.6, c200_500:24.2, c500_800:32.2, c800:3.1} },
+            { rank:5, label:'Ciaculli · Croce Verde', val:819.6,  classi:{c0_50:34.4, c50_200:42.6, c200_500:16.5, c500_800:6.5,  c800:0.1} }
+          ]
+        });
       }
     },
 
@@ -342,6 +401,96 @@
     parent.appendChild(tbl);
   }
 
+  function appendRankingCard(parent, opts) {
+    var card = document.createElement('div');
+    card.className = 'rank-card';
+
+    var header = document.createElement('div');
+    header.className = 'rank-card-header';
+    var titleEl = document.createElement('div');
+    titleEl.className = 'rank-card-title';
+    titleEl.textContent = opts.title;
+    header.appendChild(titleEl);
+    if (opts.subtitle) {
+      var subEl = document.createElement('div');
+      subEl.className = 'rank-card-subtitle';
+      subEl.textContent = opts.subtitle;
+      header.appendChild(subEl);
+    }
+    card.appendChild(header);
+
+    // legenda classi (una volta sola in cima)
+    if (opts.classes) {
+      var legend = document.createElement('div');
+      legend.className = 'rank-class-legend';
+      opts.classes.forEach(function (cls) {
+        var item = document.createElement('div');
+        item.className = 'rank-class-legend-item';
+        var dot = document.createElement('span');
+        dot.className = 'rank-class-dot';
+        dot.style.backgroundColor = cls.color;
+        item.appendChild(dot);
+        var lbl = document.createElement('span');
+        lbl.textContent = cls.label;
+        item.appendChild(lbl);
+        legend.appendChild(item);
+      });
+      card.appendChild(legend);
+    }
+
+    var list = document.createElement('div');
+    list.className = 'rank-list';
+
+    opts.items.forEach(function (item) {
+      var row = document.createElement('div');
+      row.className = 'rank-row';
+
+      var rankEl = document.createElement('div');
+      rankEl.className = 'rank-num';
+      rankEl.textContent = item.rank;
+      row.appendChild(rankEl);
+
+      var labelEl = document.createElement('div');
+      labelEl.className = 'rank-label';
+      labelEl.textContent = item.label;
+      row.appendChild(labelEl);
+
+      var barWrap = document.createElement('div');
+      barWrap.className = 'rank-bar-wrap';
+
+      if (opts.classes && item.classi) {
+        // stacked bar per classi elevazione
+        opts.classes.forEach(function (cls) {
+          var pct = item.classi[cls.key] || 0;
+          if (pct <= 0) return;
+          var seg = document.createElement('div');
+          seg.className = 'rank-bar-seg';
+          seg.style.width = pct + '%';
+          seg.style.backgroundColor = cls.color;
+          seg.title = cls.label + ': ' + pct + '%';
+          barWrap.appendChild(seg);
+        });
+      } else {
+        var barFill = document.createElement('div');
+        barFill.className = 'rank-bar-fill';
+        barFill.style.backgroundColor = opts.color || '#2458c8';
+        barFill.style.width = Math.round((item.val / opts.maxVal) * 100) + '%';
+        barWrap.appendChild(barFill);
+      }
+      row.appendChild(barWrap);
+
+      var valEl = document.createElement('div');
+      valEl.className = 'rank-val';
+      valEl.textContent = item.val.toLocaleString('it-IT') + (opts.unit || '');
+      row.appendChild(valEl);
+
+      list.appendChild(row);
+    });
+
+    card.appendChild(list);
+    parent.appendChild(card);
+  }
+
   function appendRingCard(parent, opts) {
     var card = document.createElement('div');
     card.className = 'ring-card';
@@ -586,12 +735,25 @@
   var panelOpen = true;
   var currentAnalysis = null;
   rpWrap.classList.add('open');
+  updateMapControlsPosition(true);
 
   // Apri/chiudi pannello
   rpToggle.addEventListener('click', function () {
     panelOpen = !panelOpen;
     rpWrap.classList.toggle('open', panelOpen);
+    updateMapControlsPosition();
   });
+
+  function updateMapControlsPosition(instant) {
+    var scale  = document.getElementById('map-scale');
+    var attrib = document.getElementById('attrib-wrap');
+    [scale, attrib].forEach(function (el) {
+      if (!el) return;
+      if (instant) el.style.transition = 'none';
+      el.classList.toggle('panel-open', panelOpen);
+      if (instant) requestAnimationFrame(function () { el.style.transition = ''; });
+    });
+  }
 
   // Click su card analisi
   document.querySelectorAll('.rp-card').forEach(function (card) {
@@ -651,6 +813,7 @@
     if (!panelOpen) {
       panelOpen = true;
       rpWrap.classList.add('open');
+      updateMapControlsPosition();
     }
   }
 
@@ -680,4 +843,15 @@
     } catch(e) {}
   });
 
+  // ── INIT ────────────────────────────────────────────────────────────────
+  // Mostra sempre la gallery all'avvio
+  rpGallery.style.display = 'flex';
+  rpDetail.style.display = 'none';
+  // Imposta opacità iniziale (slider = 0.70)
+  rpOpacity.value = 0.70;
+  rpOpacityVal.textContent = '0.70';
+  map.on('load', function() {
+    map.setPaintProperty('elevation-layer', 'raster-opacity', 0.70);
+    updateMapControlsPosition();
+  });
 })();
