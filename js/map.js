@@ -33,10 +33,10 @@ function makeAttribNode(text, href) {
 const BASEMAPS = {
   osm: {
     type: 'raster',
-    tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+    tiles: ['https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png'],
     tileSize: 256,
-    attribution: '© OpenStreetMap contributors',
-    attributionNode: makeAttribNode('© OpenStreetMap contributors', 'https://www.openstreetmap.org/copyright'),
+    attribution: '© OpenStreetMap contributors © CartoDB',
+    attributionNode: makeAttribNode('© OpenStreetMap contributors © CartoDB', 'https://www.openstreetmap.org/copyright'),
     maxzoom: 18,
     opacity: 1.0
   },
