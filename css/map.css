@@ -570,6 +570,9 @@ body {
 }
 
 .ptab {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
@@ -705,6 +708,9 @@ body {
 }
 
 .credits-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: 12px;
   font-weight: 700;
   color: #4060a0;
@@ -714,6 +720,7 @@ body {
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(30, 60, 160, 0.1);
 }
+.credits-section h3 svg { flex-shrink: 0; color: #4060a0; }
 
 .credit-item {
   display: flex;
@@ -724,7 +731,7 @@ body {
   color: #3a4e78;
 }
 
-.credit-item .ci-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.credit-item .ci-icon { display: flex; align-items: flex-start; flex-shrink: 0; padding-top: 1px; color: #4060a0; }
 .credit-item strong { display: block; color: #1a2a50; font-size: 13px; margin-bottom: 2px; }
 .credit-item a { color: #2458c8; text-decoration: none; }
 .credit-item a:hover { color: #1a3898; text-decoration: underline; }
@@ -773,6 +780,119 @@ body {
   border-radius: 20px;
   margin-top: 4px;
 }
+
+/* ── QGIS headless tab ── */
+.qh-page { padding: 4px 2px 16px; }
+
+.qh-hero {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(135deg, rgba(36,88,200,0.07) 0%, rgba(36,88,200,0.02) 100%);
+  border: 1px solid rgba(36,88,200,0.15);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+}
+.qh-hero-icon { color: #2458c8; flex-shrink: 0; }
+.qh-hero-title { font-size: 15px; font-weight: 800; color: #1a2a50; letter-spacing: 0.02em; }
+.qh-hero-sub { font-size: 11px; color: #6070a0; margin-top: 3px; line-height: 1.4; }
+.qh-hero-author { font-size: 11px; color: #8090b8; margin-top: 5px; }
+.qh-hero-author a { color: #2458c8; text-decoration: none; font-weight: 600; }
+.qh-hero-author a:hover { text-decoration: underline; }
+.qh-handle { color: #6080c8; font-weight: 400; font-size: 10.5px; }
+
+.qh-section { margin-bottom: 16px; }
+
+.qh-section-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #4060a0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(30,60,160,0.1);
+}
+.qh-section-title svg { flex-shrink: 0; }
+
+.qh-text { font-size: 12px; color: #3a4e78; line-height: 1.6; margin: 0 0 8px; }
+.qh-text code, .qh-list code {
+  background: rgba(36,88,200,0.08);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 11px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  color: #1a3898;
+}
+
+.qh-list { list-style: none; padding: 0; margin: 0 0 8px; display: flex; flex-direction: column; gap: 6px; }
+.qh-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-size: 12px;
+  color: #3a4e78;
+  line-height: 1.45;
+}
+.qh-list li svg { flex-shrink: 0; color: #2458c8; margin-top: 2px; }
+
+.qh-note {
+  font-size: 11px;
+  color: #5566a0;
+  background: rgba(36,88,200,0.05);
+  border-left: 3px solid #2458c8;
+  border-radius: 0 4px 4px 0;
+  padding: 7px 10px;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+.qh-steps { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.qh-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12px;
+  color: #3a4e78;
+  line-height: 1.5;
+}
+.qh-step-n {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #2458c8;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.qh-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+.qh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #2458c8;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  letter-spacing: 0.02em;
+}
+.qh-btn:hover { background: #1a3898; color: #fff; text-decoration: none; }
+.qh-btn-yt { background: #c00; }
+.qh-btn-yt:hover { background: #900; }
 
 /* ════════════════════════════════════════
    SCALA METRICA CUSTOM
@@ -859,6 +979,14 @@ body {
 
 #attrib-wrap.panel-open {
   right: 406px;
+}
+
+/* Nascondi logo e attributi quando il pannello info è aperto */
+#info-panel.open ~ #ods-logo,
+#info-panel.open ~ #attrib-wrap {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
 }
 
 #attrib-btn {
