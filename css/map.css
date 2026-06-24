@@ -356,7 +356,7 @@ body {
 
 .gp-header-label {
   font-size: 17px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.01em;
   color: #fff;
   line-height: 1.1;
@@ -381,7 +381,7 @@ body {
 .gp-quota { text-align: right; line-height: 1; }
 .gp-quota-value {
   font-size: 26px;
-  font-weight: 900;
+  font-weight: 700;
   color: #fff;
   letter-spacing: -0.02em;
 }
@@ -436,7 +436,7 @@ body {
 /* Pendenza */
 .gp-pend-main {
   font-size: 20px;
-  font-weight: 900;
+  font-weight:700;
   color: #e07800;
   letter-spacing: -0.02em;
 }
@@ -474,7 +474,7 @@ body {
 }
 .gp-index-val {
   font-size: 12px;
-  font-weight: 800;
+  font-weight:700;
   color: #e07800;
   line-height: 1.1;
 }
