@@ -192,7 +192,7 @@
 <!-- ═══ LEGENDE MAPPA ═══ -->
 <div id="map-legends">
 
-  <div id="legend-elevation" class="map-legend visible">
+  <div id="legend-elevation" class="map-legend legend-analysis visible">
     <div class="map-legend-title">Elevazione</div>
     <div class="legend-item"><div class="legend-box" style="background:#00bfbf;"></div><span>≤ 0 m</span></div>
     <div class="legend-item"><div class="legend-box" style="background:#00cb9b;"></div><span>0 – 50 m</span></div>
@@ -204,6 +204,29 @@
     <div class="legend-item"><div class="legend-box" style="background:#ffdd00;"></div><span>500 – 600 m</span></div>
     <div class="legend-item"><div class="legend-box" style="background:#fe7f01;"></div><span>600 – 800 m</span></div>
     <div class="legend-item"><div class="legend-box" style="background:#141414;"></div><span>&gt; 800 m</span></div>
+  </div>
+
+  <div id="legend-slope" class="map-legend legend-analysis">
+    <div class="map-legend-title">Pendenza</div>
+    <div class="legend-item"><div class="legend-box" style="background:#43a047;"></div><span>0 – 5°  pianura</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#8bc34a;"></div><span>5 – 15°  moderata</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#ffeb3b;"></div><span>15 – 30°  acclive</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#ff9800;"></div><span>30 – 45°  molto acclive</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#f44336;"></div><span>&gt; 45°  subverticale</span></div>
+  </div>
+
+  <div id="legend-aspect" class="map-legend legend-analysis">
+    <div class="map-legend-title">Esposizione</div>
+    <div class="legend-aspect-wrap">
+      <div class="legend-aspect-ring"></div>
+      <div class="legend-aspect-compass">
+        <span class="lac-n">N</span>
+        <span class="lac-e">E</span>
+        <span class="lac-s">S</span>
+        <span class="lac-o">O</span>
+      </div>
+    </div>
+    <div class="legend-item" style="margin-top:5px;"><div class="legend-box" style="background:#808080;border-color:rgba(0,0,0,.18);"></div><span>Pianura</span></div>
   </div>
 
   <div id="legend-contour" class="map-legend">

@@ -804,6 +804,9 @@
     analysis.render(rpDetailBody);
 
     // Attiva layer: nascondi tutti gli altri layer analisi, mostra solo quello selezionato
+    document.querySelectorAll('.legend-analysis').forEach(function (el) {
+      el.classList.remove('visible');
+    });
     if (analysis.hasLayer) {
       try {
         Object.keys(ANALYSES).forEach(function (key) {

@@ -248,6 +248,51 @@ body {
 
 .map-legend.visible { display: block; }
 
+/* Legenda aspetto — cerchio conic-gradient + etichette cardinali */
+.legend-aspect-wrap {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  margin: 4px auto 2px;
+}
+.legend-aspect-ring {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from -90deg,
+    #0077ff 0%,
+    #00cfff 12.5%,
+    #00ee77 25%,
+    #aaee00 37.5%,
+    #ffee00 50%,
+    #ff8800 62.5%,
+    #ff2200 75%,
+    #cc00dd 87.5%,
+    #0077ff 100%
+  );
+  border: 1px solid rgba(30,60,160,0.18);
+}
+.legend-aspect-compass {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.legend-aspect-compass span {
+  position: absolute;
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 3px rgba(0,0,0,0.7);
+  line-height: 1;
+}
+.lac-n { top: 3px;  left: 50%; transform: translateX(-50%); }
+.lac-e { right: 3px; top: 50%; transform: translateY(-50%); }
+.lac-s { bottom: 3px; left: 50%; transform: translateX(-50%); }
+.lac-o { left: 3px; top: 50%; transform: translateY(-50%); }
+
 .map-legend-title {
   font-size: 9px;
   font-weight: 700;
