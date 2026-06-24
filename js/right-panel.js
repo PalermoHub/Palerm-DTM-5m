@@ -1745,6 +1745,347 @@
           '(agrumi, ulivi fioriti) e nella localizzazione di infrastrutture critiche.'
         );
       }
+    },
+
+    // ── Sky View Factor ─────────────────────────────────────────────────────
+    svf: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M5 12 Q12 4 19 12"/><line x1="12" y1="2" x2="12" y2="22" stroke-dasharray="3,2"/></svg>',
+      title: 'Sky View Factor (SVF)',
+      layer: 'svf-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'Lo <strong>Sky View Factor (SVF)</strong> misura la <strong>frazione di cielo visibile</strong> ' +
+          'da ogni punto del territorio: valori prossimi a 1,0 indicano un orizzonte aperto (creste, pianure), ' +
+          'valori bassi indicano forti ostruzioni (valli strette, canyon urbani). ' +
+          'Il calcolo esegue uno <strong>scan dell\'orizzonte in 8 direzioni</strong> (raggio 600 m): ' +
+          'per ogni direzione viene misurato il massimo angolo di elevazione verso il terreno circostante; ' +
+          'SVF = media dei cos²(angolo) — angoli positivi (terreno sopra l\'orizzonte) riducono l\'SVF. ' +
+          'Rilevante per la <strong>stima dell\'isola di calore urbana</strong>, il comfort termico negli spazi pubblici ' +
+          'e le strategie del PAESC (Piano di Adattamento ai Cambiamenti Climatici). ' +
+          'Il <strong>7,3%</strong> del territorio ha SVF < 0,90 (ostruzione significativa): ' +
+          'valli incise dei Monti di Palermo, fondovalli dell\'Oreto e le depressioni chiuse.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-svf',
+          title: 'Distribuzione SVF',
+          centerVal: '0,97',
+          centerLabel: 'media',
+          legendData: [
+            { chartLabel: 'Forte ostru. <0,50', label: '< 0,50  fortemente ostruito',  pct:  0.2, color: '#21252a' },
+            { chartLabel: 'Ostruito 0,50-0,65', label: '0,50–0,65  ostruito (valli)',  pct:  0.9, color: '#1e4e79' },
+            { chartLabel: 'Parz. 0,65-0,75',    label: '0,65–0,75  parzialmente',      pct:  1.4, color: '#3182bd' },
+            { chartLabel: 'Semi-ap. 0,75-0,82', label: '0,75–0,82  semi-aperto',       pct:  4.8, color: '#74c476' },
+            { chartLabel: 'Aperto 0,82-0,88',   label: '0,82–0,88  aperto',            pct:  8.7, color: '#c7e9c0' },
+            { chartLabel: 'Molto ap. 0,88-0,94',label: '0,88–0,94  molto aperto',      pct: 12.5, color: '#ffffc0' },
+            { chartLabel: 'Pianura >0,94',      label: '> 0,94  pianura / crinale',    pct: 71.5, color: '#ffffff' }
+          ],
+          summaries: [
+            { val: '0,97', label: 'SVF medio' },
+            { val: '7,3%', label: 'SVF < 0,90' },
+            { val: '0,25', label: 'min (valli)' }
+          ]
+        });
+        appendText(el,
+          'I valori SVF più bassi (< 0,65) si concentrano nelle valli montane ' +
+          'del Gabriele e dell\'Eleuterio (Circoscrizione VI), nelle pareti ripide ' +
+          'verso Monte Cuccio e Monte Grifone. Le aree costiere e la Conca d\'Oro ' +
+          'presentano SVF > 0,95 (cielo quasi completamente aperto). ' +
+          'SVF bassi nelle aree urbanizzate dense favoriscono il riscaldamento notturno ' +
+          '(l\'energia re-emessa non disperde verso il cielo) — utile per ' +
+          'identificare priorità di intervento con verde urbano e materiali riflettenti.'
+        );
+      }
+    },
+
+    // ── Viewshed cumulativo ─────────────────────────────────────────────────
+    viewshed: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M1 12 C4 6 8 3 12 3 C16 3 20 6 23 12 C20 18 16 21 12 21 C8 21 4 18 1 12Z"/></svg>',
+      title: 'Visibilità / Viewshed',
+      layer: 'viewshed-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'La mappa di <strong>visibilità cumulativa (Viewshed)</strong> mostra, per ogni cella del DTM, ' +
+          'da quanti dei <strong>6 punti strategici</strong> di Palermo quella cella è visibile. ' +
+          'I punti osservatori sono: <strong>Monte Pellegrino</strong> (429 m), <strong>Monte Cuccio</strong> ' +
+          '(1.002 m), <strong>Monte Grifone</strong> (504 m), <strong>Palazzo dei Normanni</strong> (72 m), ' +
+          '<strong>Teatro Massimo</strong> (15 m), <strong>Belvedere Mondello</strong>. ' +
+          'Raggio massimo 25 km, correzione curvatura terrestre. ' +
+          'Il <strong>69%</strong> del territorio è visibile da almeno un punto; ' +
+          'nessuna cella risulta visibile da tutti e 6 gli osservatori (effetto del rilievo interno). ' +
+          'Utile per la pianificazione paesaggistica, l\'individuazione di corridoi visuali protetti ' +
+          'e la localizzazione di infrastrutture (antenne, impianti eolici, edifici alti).'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-vs',
+          title: 'Visibilità da N osservatori',
+          centerVal: '69%',
+          centerLabel: 'visibile ≥1',
+          legendData: [
+            { chartLabel: 'Non visibile',    label: '0 obs — non visibile',   pct: 31.0, color: '#f0f0f0' },
+            { chartLabel: '1 osservatore',   label: '1 obs — marginale',      pct: 24.4, color: '#f7fbff' },
+            { chartLabel: '2 osservatori',   label: '2 obs — bassa',          pct: 17.6, color: '#c6dbef' },
+            { chartLabel: '3 osservatori',   label: '3 obs — media',          pct: 13.6, color: '#6baed6' },
+            { chartLabel: '4 osservatori',   label: '4 obs — alta',           pct: 10.5, color: '#3182bd' },
+            { chartLabel: '5 osservatori',   label: '5 obs — molto alta',     pct:  2.8, color: '#08519c' }
+          ],
+          summaries: [
+            { val: '69%',  label: 'visibile' },
+            { val: '31%',  label: 'non visibile' },
+            { val: '2,8%', label: 'da 5 obs' }
+          ]
+        });
+        appendText(el,
+          'Monte Pellegrino (2.526.309 celle visibili) e Palazzo dei Normanni (2.202.109) ' +
+          'hanno il maggiore dominio visuale. Monte Cuccio (976.280) e il Belvedere di Mondello ' +
+          '(845.049) hanno visibilità più contenuta per le ostruzioni dei rilievi intermedi. ' +
+          'Le zone non visibili da nessun punto (31%) si trovano nelle valli montane interne, ' +
+          'nelle depressioni tra le creste e nelle zone costiere fuori dal campo visivo. ' +
+          'Questa analisi è base per valutazioni di impatto paesaggistico (art. 146 D.Lgs. 42/2004).'
+        );
+      }
+    },
+
+    // ── Profili altimetrici ──────────────────────────────────────────────────
+    profili: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 20 7 10 11 16 15 6 19 13 23 8"/><line x1="3" y1="20" x2="23" y2="20"/></svg>',
+      title: 'Profili altimetrici',
+      layer: 'transects-line',
+      extraLayers: ['transects-label'],
+      hasLayer: true,
+      noOpacity: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'I <strong>9 profili altimetrici</strong> mostrano la variazione di quota lungo assi ' +
+          'territoriali significativi, campionati sul DTM 5m con 200 punti per transetto. ' +
+          'Utili per l\'analisi dei <strong>costi di accessibilità pedonale e ciclabile</strong>, ' +
+          'la comprensione della morfologia urbana e la progettazione di percorsi sostenibili. ' +
+          'Il transetto <strong>Monte Pellegrino Traversata</strong> è il più spettacolare: ' +
+          'dal mare di Mondello (0 m) alla vetta (476 m) e giù verso i quartieri nord. ' +
+          'La <strong>Valle dell\'Oreto</strong> percorre il fondovalle fluviale inciso (8,8 km). ' +
+          'La <strong>Costa Nord</strong> (17 km) rivela la morfologia costiera da Sferracavallo a Palermo nord.'
+        );
+
+        // ── Mini-mappa posizione transetti ──────────────────────────────────
+        appendSectionTitle(el, 'Posizione dei transetti');
+        var mapWrap = document.createElement('div');
+        mapWrap.style.cssText = 'position:relative;width:100%;margin:6px 0 10px;border-radius:6px;overflow:hidden;border:1px solid #c8d4e8;background:#d9e8f5;';
+        var mmCanvas = document.createElement('canvas');
+        mmCanvas.id = 'transects-minimap-canvas';
+        mmCanvas.style.cssText = 'width:100%;height:auto;display:block;';
+        mmCanvas.width = 260; mmCanvas.height = 176;
+        mapWrap.appendChild(mmCanvas);
+        el.appendChild(mapWrap);
+
+        requestAnimationFrame(function () {
+          var c = document.getElementById('transects-minimap-canvas');
+          if (!c) return;
+          var ctx = c.getContext('2d');
+          var W = 260, H = 176;
+          var BOUNDS = { w: 13.22, e: 13.47, s: 38.03, n: 38.24 };
+          function toC(lon, lat) {
+            return [(lon - BOUNDS.w) / (BOUNDS.e - BOUNDS.w) * W,
+                    (1 - (lat - BOUNDS.s) / (BOUNDS.n - BOUNDS.s)) * H];
+          }
+
+          // sfondo mare
+          ctx.fillStyle = '#b8d8ee'; ctx.fillRect(0, 0, W, H);
+
+          // perimetro comunale (fill territorio)
+          var BOUNDARY = [[13.35856,38.19193],[13.36774,38.17536],[13.36698,38.16857],[13.37664,38.15222],[13.37643,38.1495],[13.37591,38.14872],[13.37549,38.15245],[13.37183,38.14821],[13.37324,38.14433],[13.37135,38.14583],[13.36881,38.14273],[13.37134,38.14192],[13.37217,38.14426],[13.37781,38.13252],[13.3737,38.14068],[13.37136,38.14077],[13.37234,38.13767],[13.37043,38.14055],[13.37137,38.13729],[13.36969,38.14008],[13.37124,38.13641],[13.36832,38.13847],[13.37079,38.13314],[13.3731,38.13337],[13.37553,38.12676],[13.38033,38.1227],[13.37502,38.12635],[13.37254,38.13299],[13.37031,38.13056],[13.36793,38.1326],[13.36891,38.1355],[13.36698,38.13553],[13.36269,38.13402],[13.36337,38.13048],[13.36568,38.13039],[13.36267,38.12984],[13.36691,38.12935],[13.36361,38.12811],[13.36773,38.12745],[13.36442,38.12662],[13.36925,38.12541],[13.37033,38.12296],[13.367,38.11936],[13.37248,38.12252],[13.37182,38.12615],[13.37279,38.1225],[13.37164,38.12095],[13.37926,38.11423],[13.37855,38.11263],[13.39302,38.10469],[13.41172,38.09862],[13.42825,38.09929],[13.43452,38.09552],[13.4506,38.09545],[13.45271,38.09262],[13.45147,38.08872],[13.44502,38.09228],[13.44024,38.09095],[13.44305,38.08811],[13.44172,38.0857],[13.43322,38.08696],[13.43417,38.08253],[13.42996,38.0783],[13.43414,38.07648],[13.43315,38.06611],[13.42201,38.06158],[13.42143,38.0591],[13.4092,38.0589],[13.40247,38.06015],[13.39602,38.06631],[13.38403,38.06877],[13.37663,38.06772],[13.36793,38.07197],[13.36839,38.06466],[13.36632,38.06298],[13.35866,38.06459],[13.35293,38.06111],[13.34758,38.06186],[13.34169,38.05651],[13.33352,38.05851],[13.32431,38.05034],[13.3184,38.05072],[13.31462,38.05443],[13.32529,38.06568],[13.31921,38.07096],[13.31499,38.0702],[13.31334,38.07831],[13.30928,38.07464],[13.303,38.0747],[13.30207,38.07756],[13.30497,38.07929],[13.30138,38.08517],[13.30551,38.09711],[13.30333,38.10004],[13.29426,38.10094],[13.29004,38.1048],[13.29165,38.10864],[13.24238,38.10051],[13.24719,38.10626],[13.2472,38.11415],[13.25265,38.12229],[13.24832,38.1304],[13.24836,38.135],[13.26478,38.15035],[13.26247,38.16005],[13.2558,38.1685],[13.26388,38.16975],[13.27155,38.17683],[13.26952,38.18367],[13.27599,38.18607],[13.26948,38.19902],[13.25871,38.19957],[13.2585,38.201],[13.26529,38.19987],[13.26854,38.20358],[13.27433,38.19835],[13.27624,38.20009],[13.27394,38.20089],[13.28204,38.206],[13.2808,38.21104],[13.28517,38.20923],[13.30121,38.22032],[13.31647,38.22468],[13.32432,38.21618],[13.32292,38.21383],[13.33067,38.21202],[13.32565,38.20591],[13.32888,38.19985],[13.33384,38.19677],[13.33714,38.19757],[13.3466,38.19108],[13.35856,38.19193]];
+
+          ctx.beginPath();
+          BOUNDARY.forEach(function (pt, j) {
+            var xy = toC(pt[0], pt[1]);
+            if (j === 0) ctx.moveTo(xy[0], xy[1]); else ctx.lineTo(xy[0], xy[1]);
+          });
+          ctx.closePath();
+          ctx.fillStyle = '#e8eef7';
+          ctx.fill();
+          ctx.strokeStyle = '#8899cc';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+
+          // etichette
+          ctx.fillStyle = '#7aadcc'; ctx.font = '7px sans-serif'; ctx.fillText('Mar Tirreno', 4, 14);
+          ctx.fillStyle = '#99aacc'; ctx.font = '9px sans-serif'; ctx.fillText('Palermo', 106, 96);
+
+          // transetti
+          var TCOLORS = ['#e07800','#2458c8','#1a7a40','#b84010','#7040b0','#cc3399','#e63900','#0066aa','#669900'];
+          var TCOORDS = [
+            [[13.3502,38.2127],[13.3506,38.1815],[13.3523,38.1114],[13.3513,38.0879],[13.3481,38.0632]],
+            [[13.2847,38.1289],[13.3130,38.1200],[13.3523,38.1114],[13.3900,38.1050],[13.4100,38.1020]],
+            [[13.2750,38.1900],[13.3100,38.1600],[13.3523,38.1114],[13.3900,38.0800],[13.4150,38.0650]],
+            [[13.4100,38.1800],[13.3900,38.1500],[13.3523,38.1114],[13.3000,38.0800],[13.2700,38.0600]],
+            [[13.2900,38.1700],[13.3200,38.1600],[13.3600,38.1500],[13.3900,38.1400],[13.4200,38.1300]],
+            [[13.3630,38.0710],[13.3520,38.0830],[13.3440,38.0960],[13.3400,38.1070],[13.3450,38.1180],[13.3540,38.1250]],
+            [[13.3150,38.2150],[13.3300,38.1850],[13.3420,38.1630],[13.3520,38.1470],[13.3650,38.1350],[13.3850,38.1300]],
+            [[13.2900,38.1380],[13.3200,38.1330],[13.3500,38.1270],[13.3800,38.1220],[13.4100,38.1170]],
+            [[13.2550,38.2000],[13.2850,38.2150],[13.3150,38.2120],[13.3400,38.2050],[13.3700,38.1950],[13.4000,38.1900]]
+          ];
+          var TLABELS = ['N-S','E-O','NO-SE','NE-SO','C.O.','Oreto','Pell.','Bocc.','Costa'];
+
+          TCOORDS.forEach(function (pts, i) {
+            ctx.strokeStyle = TCOLORS[i];
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            pts.forEach(function (pt, j) {
+              var xy = toC(pt[0], pt[1]);
+              if (j === 0) ctx.moveTo(xy[0], xy[1]); else ctx.lineTo(xy[0], xy[1]);
+            });
+            ctx.stroke();
+            // punto iniziale marcato
+            var p0 = toC(pts[0][0], pts[0][1]);
+            ctx.fillStyle = TCOLORS[i];
+            ctx.beginPath(); ctx.arc(p0[0], p0[1], 2.5, 0, Math.PI*2); ctx.fill();
+            ctx.font = 'bold 7px sans-serif';
+            ctx.fillText(TLABELS[i], p0[0] + 3, p0[1] - 2);
+          });
+        });
+
+        // ── Lista transetti ──────────────────────────────────────────────────
+        appendSectionTitle(el, 'Transetti disponibili');
+        var PROFILES = [
+          { key: 'Nord-Sud_Costiero',           label: 'N-S Costiero',             km: 21.2,  min:   2, max: 550, color: '#e07800' },
+          { key: 'Est-Ovest_Centro',            label: 'E-O Centro',               km: 14.5,  min:   1, max: 127, color: '#2458c8' },
+          { key: 'NordOvest-SudEst',            label: 'NO-SE Montagna',           km: 23.7,  min:  12, max: 402, color: '#1a7a40' },
+          { key: 'NordEst-SudOvest',            label: 'NE-SO Diagonale',          km: 23.4,  min:   2, max: 145, color: '#b84010' },
+          { key: 'Conca_d_Oro',                 label: 'Conca d\'Oro',             km: 15.6,  min:   4, max: 340, color: '#7040b0' },
+          { key: 'Valle_Oreto',                 label: 'Valle dell\'Oreto',        km:  8.82, min:  16, max: 168, color: '#cc3399' },
+          { key: 'Monte_Pellegrino_Traversata', label: 'M. Pellegrino Traversata', km: 15.05, min:   0, max: 476, color: '#e63900' },
+          { key: 'Boccadifalco_Brancaccio',     label: 'Boccadifalco–Brancaccio', km: 13.69, min:   1, max: 269, color: '#0066aa' },
+          { key: 'Costa_Nord',                  label: 'Costa Nord',               km: 17.32, min:   3, max: 511, color: '#669900' }
+        ];
+
+        PROFILES.forEach(function (p) {
+          var row = document.createElement('div');
+          row.style.cssText = 'display:flex;align-items:center;gap:6px;margin:3px 0;font-size:11px;color:#3a4e78;';
+          var dot = document.createElement('span');
+          dot.style.cssText = 'width:10px;height:10px;border-radius:50%;background:' + p.color + ';flex-shrink:0;';
+          var txt = document.createElement('span');
+          txt.textContent = p.label + ' — ' + p.km + ' km · ' + p.min + '–' + p.max + ' m';
+          row.appendChild(dot); row.appendChild(txt);
+          el.appendChild(row);
+        });
+
+        // ── 5 profili chiave come grafici ────────────────────────────────────
+        var KEY_PROFILES = [
+          { key: 'Nord-Sud_Costiero',           title: 'N-S Costiero (21 km)',          id: 'rp-c-profilo-ns',   color: '#e07800', alpha: 'rgba(224,120,0,0.12)'   },
+          { key: 'Monte_Pellegrino_Traversata', title: 'M.Pellegrino: Mondello → Città (15 km)', id: 'rp-c-profilo-pell', color: '#e63900', alpha: 'rgba(230,57,0,0.12)'   },
+          { key: 'Valle_Oreto',                 title: 'Valle dell\'Oreto (8,8 km)',    id: 'rp-c-profilo-ore',  color: '#cc3399', alpha: 'rgba(204,51,153,0.12)' },
+          { key: 'NordOvest-SudEst',            title: 'NO-SE Montagna (23,7 km)',      id: 'rp-c-profilo-nose', color: '#1a7a40', alpha: 'rgba(26,122,64,0.12)'  },
+          { key: 'Costa_Nord',                  title: 'Costa Nord (17 km)',            id: 'rp-c-profilo-costa',color: '#669900', alpha: 'rgba(102,153,0,0.12)' }
+        ];
+
+        KEY_PROFILES.forEach(function (kp) {
+          appendSectionTitle(el, 'Profilo ' + kp.title);
+          appendChart(el, kp.id);
+          (function (chartId, profileKey, borderColor, bgColor) {
+            requestAnimationFrame(function () {
+              var cvs = document.getElementById(chartId);
+              if (!cvs || !window.transectsProfiles) return;
+              var d = window.transectsProfiles[profileKey];
+              if (!d) return;
+              var labels = d.distances.map(function (v) { return (v/1000).toFixed(1)+'km'; });
+              var filtered = [];
+              labels.forEach(function(_,i){ if(i%3===0) filtered.push(labels[i]); else filtered.push(''); });
+              if (chartInstances[chartId]) chartInstances[chartId].destroy();
+              chartInstances[chartId] = new Chart(cvs, {
+                type: 'line',
+                data: {
+                  labels: filtered,
+                  datasets: [{
+                    data: d.elevations,
+                    borderColor: borderColor,
+                    borderWidth: 1.5,
+                    pointRadius: 0,
+                    fill: true,
+                    backgroundColor: bgColor,
+                    spanGaps: true
+                  }]
+                },
+                options: {
+                  responsive: true,
+                  maintainAspectRatio: true,
+                  plugins: { legend: { display: false }, tooltip: {
+                    callbacks: { label: function(c){ return c.raw ? c.raw.toFixed(0)+' m' : 'ND'; } }
+                  }},
+                  scales: {
+                    x: { ticks: { color: '#6070a0', font: { size: 8 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 8 }, grid: { color: 'rgba(30,60,160,0.06)' } },
+                    y: { ticks: { color: '#6070a0', font: { size: 8 }, callback: function(v){ return v+'m'; } }, grid: { color: 'rgba(30,60,160,0.06)' } }
+                  }
+                }
+              });
+            });
+          }(kp.id, kp.key, kp.color, kp.alpha));
+        });
+
+        appendText(el,
+          'I profili mostrano i transetti sul terreno reale (DTM 5m). ' +
+          '<strong>Monte Pellegrino</strong>: dal livello del mare a 476 m in meno di 3 km orizzontali — ' +
+          'il dislivello più drammatico del territorio comunale. ' +
+          '<strong>Costa Nord</strong>: profilo costiero tirrenico con le balze di Sferracavallo (511 m) ' +
+          'che scendono direttamente al mare. ' +
+          '<strong>Valle dell\'Oreto</strong>: fondovalle inciso a 16–50 m s.l.m., circondato da versanti a 100–168 m. ' +
+          'Tutti i 9 transetti sono attivi sulla mappa come linee colorabili. ' +
+          'Dati utili per il Piano Urbano della Mobilità Sostenibile (PUMS) e la rete ciclabile.'
+        );
+      }
+    },
+
+    // ── Accessibilità morfologica ────────────────────────────────────────────
+    accessibilita: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M7 22 L10 14 L8 9 L14 9 L12 14 L15 22"/><path d="M8 9 L6 13"/><path d="M14 9 L17 13"/></svg>',
+      title: 'Accessibilità morfologica',
+      layer: 'accessibilita-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'La mappa di <strong>Accessibilità Morfologica</strong> mostra la <strong>velocità di percorrenza ' +
+          'pedonale teorica</strong> secondo la <strong>funzione di Tobler</strong>: ' +
+          'V = 6 × exp(−3,5 × |tan(pendenza) + 0,05|) km/h. ' +
+          'Questa formula, calibrata su escursionisti, produce valori massimi per terreno ' +
+          'pianeggiante (~5,0 km/h) e minimi per pendenze superiori al 45° (< 0,5 km/h). ' +
+          'La <strong>velocità media comunale è 3,1 km/h</strong>, fortemente condizionata ' +
+          'dalla presenza dei Monti di Palermo (NW). ' +
+          'Il <strong>51,4%</strong> del territorio ha velocità 3,8–5,0 km/h (moderato), ' +
+          'il <strong>18,8%</strong> è sotto 1 km/h (quasi impraticabile a piedi). ' +
+          'Utile come <strong>raster di attrito</strong> per analisi di prossimità realistiche ' +
+          '(servizi, scuole, ospedali) e il Piano Urbano della Mobilità Sostenibile (PUMS).'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-acc',
+          title: 'Velocità pedonale Tobler',
+          centerVal: '3,1',
+          centerLabel: 'km/h media',
+          legendData: [
+            { chartLabel: '< 1 km/h',     label: '< 1 km/h  impraticabile (>45°)',    pct: 18.8, color: '#a50026' },
+            { chartLabel: '1–2,5 km/h',   label: '1–2,5 km/h  molto difficile',       pct: 16.6, color: '#d73027' },
+            { chartLabel: '2,5–3,8 km/h', label: '2,5–3,8 km/h  difficile',           pct: 13.0, color: '#fd8d3c' },
+            { chartLabel: '3,8–5,0 km/h', label: '3,8–5,0 km/h  moderato / piano',   pct: 51.4, color: '#fee08b' },
+            { chartLabel: '> 5,0 km/h',   label: '> 5,0 km/h  facile (lieve discesa)',pct:  0.2, color: '#1a9641' }
+          ],
+          summaries: [
+            { val: '3,1',  label: 'km/h media' },
+            { val: '18,8%',label: '< 1 km/h' },
+            { val: '51,4%',label: '3,8–5 km/h' }
+          ]
+        });
+        appendText(el,
+          'Le aree pianeggianti costiere (Mondello, Sferracavallo, litorale di Brancaccio) ' +
+          'mostrano velocità 4,5–5,0 km/h. Le aree urbane centrali con pendenza media ' +
+          'del 2–8% hanno velocità 4,0–4,8 km/h. I versanti montani di Monte Cuccio, ' +
+          'Monte Pellegrino e Monte Grifone scendono sotto 1 km/h nelle aree più ripide. ' +
+          'Questa mappa può essere usata come layer di attrito per calcolare isocrone ' +
+          'realistiche (es. servizi raggiungibili in 10/15/30 minuti a piedi) ' +
+          'nell\'ambito del Piano Urbano della Mobilità Sostenibile di Palermo.'
+        );
+      }
     }
 
   };
@@ -2208,7 +2549,7 @@
     rpDetailName.textContent = analysis.title;
 
     // Opacità slider
-    if (analysis.hasLayer) {
+    if (analysis.hasLayer && !analysis.noOpacity) {
       rpOpacityBar.classList.remove('hidden');
       var currentOpacity = 1.0;
       try { currentOpacity = map.getPaintProperty(analysis.layer, 'raster-opacity') || 1.0; } catch(e) {}
@@ -2231,6 +2572,12 @@
           var a = ANALYSES[key];
           if (!a.hasLayer || !a.layer) return;
           map.setLayoutProperty(a.layer, 'visibility', key === id ? 'visible' : 'none');
+          // extra layers (es. transects-label per profili)
+          if (a.extraLayers) {
+            a.extraLayers.forEach(function(lyr) {
+              try { map.setLayoutProperty(lyr, 'visibility', key === id ? 'visible' : 'none'); } catch(e){}
+            });
+          }
         });
         // Sync toggle in controls panel se esiste
         var toggleEl = document.getElementById('toggle-' + id);
@@ -2279,6 +2626,12 @@
       }
     } catch(e) {}
   });
+
+  // ── Carica dati transetti profili altimetrici ────────────────────────────
+  fetch(new URL('docs/transects_profiles.json', document.baseURI).href)
+    .then(function(r){ return r.json(); })
+    .then(function(data){ window.transectsProfiles = data; })
+    .catch(function(){});
 
   // ── INIT ────────────────────────────────────────────────────────────────
   // Mostra sempre la gallery all'avvio

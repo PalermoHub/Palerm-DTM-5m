@@ -296,6 +296,28 @@ const map = new maplibregl.Map({
         tiles: [`${BASE_URL}docs/tiles/frost_hollow/{z}/{x}/{y}.png`],
         tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
         attribution: 'Frost hollow / cold air pooling: DTM HRDTM5m@italia'
+      },
+      'svf-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/svf/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
+        attribution: 'Sky View Factor: DTM HRDTM5m@italia'
+      },
+      'viewshed-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/viewshed/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
+        attribution: 'Viewshed cumulativo: DTM HRDTM5m@italia'
+      },
+      'accessibilita-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/accessibilita/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
+        attribution: 'Accessibilità morfologica (Tobler): DTM HRDTM5m@italia'
+      },
+      'transects-geojson': {
+        type: 'geojson',
+        data: `${BASE_URL}docs/transects.geojson`
       }
     },
     layers: [
@@ -544,6 +566,64 @@ const map = new maplibregl.Map({
         source: 'frost-hollow-raster',
         layout: { visibility: 'none' },
         paint: { 'raster-opacity': 1.0 }
+      },
+
+      // Sky View Factor — disattiva di default
+      {
+        id: 'svf-layer',
+        type: 'raster',
+        source: 'svf-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 0.85 }
+      },
+
+      // Viewshed cumulativo — disattiva di default
+      {
+        id: 'viewshed-layer',
+        type: 'raster',
+        source: 'viewshed-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 0.85 }
+      },
+
+      // Accessibilità morfologica — disattiva di default
+      {
+        id: 'accessibilita-layer',
+        type: 'raster',
+        source: 'accessibilita-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 0.85 }
+      },
+
+      // Transetti profili altimetrici — vettoriale GeoJSON, disattivo di default
+      {
+        id: 'transects-line',
+        type: 'line',
+        source: 'transects-geojson',
+        layout: { visibility: 'none' },
+        paint: {
+          'line-color': ['coalesce', ['get', 'color'], '#e07800'],
+          'line-width': 2.5,
+          'line-opacity': 0.9
+        }
+      },
+      {
+        id: 'transects-label',
+        type: 'symbol',
+        source: 'transects-geojson',
+        layout: {
+          visibility: 'none',
+          'text-field': ['get', 'name'],
+          'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+          'text-size': 9,
+          'symbol-placement': 'line-center',
+          'text-offset': [0, -0.8]
+        },
+        paint: {
+          'text-color': ['coalesce', ['get', 'color'], '#e07800'],
+          'text-halo-color': '#ffffff',
+          'text-halo-width': 1.5
+        }
       },
 
       // Overlay CTR — disattivo di default, si sovrappone alla basemap attiva

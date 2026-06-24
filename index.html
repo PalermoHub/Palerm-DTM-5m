@@ -385,6 +385,66 @@
     <div class="legend-item"><div class="legend-box" style="background:#08306b;"></div><span>critico — depressioni chiuse</span></div>
   </div>
 
+  <!-- ── Sky View Factor ────────────────────────────────────────────────── -->
+  <div id="legend-svf" class="map-legend legend-analysis">
+    <div class="map-legend-title">Sky View Factor · apertura cielo</div>
+    <div class="legend-item"><div class="legend-box" style="background:#21252a;"></div><span>&lt; 0,50  fortemente ostruito</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#1e4e79;"></div><span>0,50 – 0,65  ostruito (valli)</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#3182bd;"></div><span>0,65 – 0,75  parzialmente ostruito</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#74c476;"></div><span>0,75 – 0,82  semi-aperto</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#c7e9c0;"></div><span>0,82 – 0,88  aperto</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#ffffc0;"></div><span>0,88 – 0,94  molto aperto</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#ffffff; border:1px solid #ddd;"></div><span>&gt; 0,94  pianura / crinale</span></div>
+  </div>
+
+  <!-- ── Viewshed cumulativo ─────────────────────────────────────────────── -->
+  <div id="legend-viewshed" class="map-legend legend-analysis">
+    <div class="map-legend-title">Visibilità cumulativa · 6 punti</div>
+    <div class="legend-item"><div class="legend-box" style="background:#f0f0f0;"></div><span>0 obs — non visibile</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#f7fbff;border:1px solid #ddd;"></div><span>1 obs — marginale</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#c6dbef;"></div><span>2 obs — bassa</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#6baed6;"></div><span>3 obs — media</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#3182bd;"></div><span>4 obs — alta</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#08519c;"></div><span>5 obs — molto alta</span></div>
+  </div>
+
+  <!-- ── Profili altimetrici ─────────────────────────────────────────────── -->
+  <div id="legend-profili" class="map-legend legend-analysis">
+    <div class="map-legend-title">Profili altimetrici · 5 transetti</div>
+    <div class="legend-item">
+      <div class="legend-line" style="background:#e07800; height:2.5px;"></div>
+      <span>N-S Costiero (21 km, 2–550 m)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-line" style="background:#2458c8; height:2.5px;"></div>
+      <span>E-O Centro (14 km, 1–127 m)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-line" style="background:#1a7a40; height:2.5px;"></div>
+      <span>NO-SE Montagna (24 km, 12–402 m)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-line" style="background:#b84010; height:2.5px;"></div>
+      <span>NE-SO Diagonale (23 km, 2–145 m)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-line" style="background:#7040b0; height:2.5px;"></div>
+      <span>Conca d'Oro (16 km, 4–340 m)</span>
+    </div>
+  </div>
+
+  <!-- ── Accessibilità morfologica ──────────────────────────────────────── -->
+  <div id="legend-accessibilita" class="map-legend legend-analysis">
+    <div class="map-legend-title">Accessibilità Tobler · km/h pedonale</div>
+    <div class="legend-item"><div class="legend-box" style="background:#a50026;"></div><span>&lt; 1 km/h  quasi impraticabile</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#d73027;"></div><span>1 – 2,5 km/h  molto difficile</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#fd8d3c;"></div><span>2,5 – 3,8 km/h  difficile</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#fee08b;"></div><span>3,8 – 5,0 km/h  moderato / piano</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#d9ef8b;"></div><span>5,0 – 5,8 km/h  facile</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#a6d96a;"></div><span>5,8 – 6,2 km/h  pianura</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#1a9641;"></div><span>&gt; 6,2 km/h  ottimale (lieve disc.)</span></div>
+  </div>
+
   <div id="legend-contour" class="map-legend">
     <div class="map-legend-title">Curve di livello</div>
     <div class="legend-item">
@@ -1052,6 +1112,30 @@
           <div class="rp-card-line" style="background:#08306b;"></div>
           <div class="rp-card-title">Frost hollow</div>
           <div class="rp-card-sub">Accumulo aria fredda · 4,6% ad alto rischio</div>
+        </div>
+
+        <div class="rp-card" data-analysis="svf">
+          <div class="rp-card-line" style="background:#6bbfed;"></div>
+          <div class="rp-card-title">Sky View Factor</div>
+          <div class="rp-card-sub">Apertura del cielo · isola di calore urbana</div>
+        </div>
+
+        <div class="rp-card" data-analysis="viewshed">
+          <div class="rp-card-line" style="background:#08519c;"></div>
+          <div class="rp-card-title">Visibilità / Viewshed</div>
+          <div class="rp-card-sub">Visibilità da 6 punti strategici · cumulativo</div>
+        </div>
+
+        <div class="rp-card" data-analysis="profili">
+          <div class="rp-card-line" style="background:#e07800;"></div>
+          <div class="rp-card-title">Profili altimetrici</div>
+          <div class="rp-card-sub">5 transetti · quota lungo assi territoriali</div>
+        </div>
+
+        <div class="rp-card" data-analysis="accessibilita">
+          <div class="rp-card-line" style="background:#1a9641;"></div>
+          <div class="rp-card-title">Accessibilità morfologica</div>
+          <div class="rp-card-sub">Velocità pedonale Tobler · media 3,1 km/h</div>
         </div>
 
       </div><!-- /rp-cards -->
