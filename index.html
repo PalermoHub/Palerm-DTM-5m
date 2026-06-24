@@ -314,21 +314,27 @@
 
       <p class="analysis-intro">
         Un <strong>Modello Digitale del Terreno</strong> (DTM) è una griglia di quote: ogni cella di 5×5 metri
-        contiene l'altitudine di quel punto del suolo. Da questa semplice griglia di numeri si ricava una quantità
-        sorprendente di informazioni sul territorio — pendenze, esposizioni, rischio di frana, idoneità edificatoria,
-        quantità di luce solare ricevuta. Il DTM di Palermo copre l'intero territorio comunale con una risoluzione
-        di 5 metri su <strong>~6,4 milioni di pixel validi</strong>.
+        contiene l'altitudine misurata di quel punto del suolo. Da questa semplice griglia di numeri si deriva
+        una quantità sorprendente di informazioni sul territorio — pendenze, esposizioni, forme del paesaggio,
+        rischio di instabilità, idoneità morfologica all'edificazione, potenziale di irraggiamento solare.
+        Il DTM usato copre l'intero territorio del Comune di Palermo (158,9 km²) con una risoluzione
+        di <strong>5 metri</strong> per cella, per un totale di <strong>~6,4 milioni di pixel validi</strong>.
+        La fonte è il dataset HR-DTM-5m Italia, disponibile su Zenodo con licenza aperta.
       </p>
 
       <!-- PROFILO ALTIMETRICO -->
       <div class="analysis-section">
         <h3>Il profilo altimetrico della città</h3>
         <p>
-          Palermo è una città che sale velocemente dal mare verso le colline e poi le montagne che la circondano.
-          <strong>Il punto più alto raggiunge 1.050 m</strong> (Monte Cuccio / Pizzuta), mentre la quota media del
-          territorio è di circa <strong>183 m</strong> sul livello del mare. Quasi il 70% della superficie si trova
-          sotto i 200 m, ma il territorio si estende verticalmente per oltre un chilometro — una varietà notevole
-          per una città di pianura costiera.
+          Palermo è una città che sale rapidamente dal livello del mare fino ai rilievi dei Monti di Palermo.
+          <strong>Il punto più alto raggiunge 1.050 m</strong> (Monte Cuccio / Pizzuta, nel quartiere Boccadifalco–Baida),
+          mentre la quota media del territorio comunale è di circa <strong>183 m</strong> s.l.m.
+          Quasi il 70% della superficie si trova sotto i 200 m — la Conca d'Oro, le aree costiere
+          e il Centro Storico (interamente sotto i 50 m, quota media 14,5 m) definiscono questa fascia bassa.
+          Il territorio si estende però verticalmente per oltre un chilometro: una variazione altimetrica
+          eccezionale per una città affacciata sul mare.
+          La Circoscrizione VI Nord-Ovest è quella con la quota media più alta (271 m), seguita dalla V Noce (258 m),
+          mentre la I Centro Storico è la più bassa (14,5 m).
         </p>
         <div class="section-data">
           <table class="data-table">
@@ -349,11 +355,14 @@
       <div class="analysis-section">
         <h3>Le pendenze: dove il terreno è piatto e dove è ripido</h3>
         <p>
-          La pendenza è forse il dato più immediato per capire un territorio. A Palermo la distribuzione è molto
-          eterogenea: più della metà del territorio è sostanzialmente pianeggiante — la Conca d'Oro, le aree
-          costiere, le valli interne. Ma quasi <strong>un terzo supera i 15°</strong>, e il 12% è fortemente
-          acclive. La pendenza media è <strong>11,4°</strong>, con una deviazione standard di 13,6°: segno che
-          il paesaggio è molto vario.
+          La pendenza misura quanto è inclinato il terreno in ogni punto. A Palermo la distribuzione è molto
+          eterogenea: il 52,8% del territorio è praticamente pianeggiante (0–5°) — la Conca d'Oro, le aree
+          costiere e il Centro Storico (89,5% sotto i 5°). Ma quasi <strong>un terzo supera i 15°</strong>,
+          e il 12,4% supera i 30°: versanti molto ripidi che pongono vincoli seri a qualsiasi attività
+          antropica. La pendenza media è <strong>11,4°</strong>, con una deviazione standard di 13,6°:
+          un valore di dispersione alto che conferma la grande variabilità interna.
+          La Circoscrizione III Oreto è la più acclive (media 14,5°), seguita dalla VII Mondello (14,0°);
+          il quartiere con la pendenza massima è Boccadifalco (media 20,5°, con il 65,4% del territorio oltre i 15°).
         </p>
         <div class="section-data">
           <table class="data-table">
@@ -374,11 +383,16 @@
       <div class="analysis-section">
         <h3>Come si orienta il terreno: l'esposizione</h3>
         <p>
-          L'esposizione (o aspetto) indica verso quale direzione guarda un versante. Influenza la quantità di sole
-          ricevuta, il rischio di siccità, la vegetazione — e, in una città, anche il microclima degli spazi pubblici.
-          I versanti dominano verso <strong>Nord-Est (18,9%)</strong>: coerente con la posizione di Palermo, aperta
-          sul Mar Tirreno a nord, con i rilievi che scendono verso il litorale. I versanti esposti a sud e sud-ovest
-          sono i meno rappresentati — i pendii "al sole" delle colline interne, spesso più aridi.
+          L'esposizione (o aspetto) indica la direzione verso cui è orientato un versante.
+          Determina la quantità di sole ricevuta nel corso dell'anno e influenza temperatura, umidità, vegetazione
+          e, nelle aree urbane, il comfort termico degli spazi pubblici.
+          I versanti dominano verso <strong>Nord-Est (18,9%)</strong>: la morfologia di Palermo —
+          aperta sul Mar Tirreno a nord con rilievi che degradano verso il litorale — orienta naturalmente
+          gran parte dei pendii in questa direzione.
+          I versanti esposti a Sud e Sud-Ovest (rispettivamente 6,6% e 4,7%) sono i meno rappresentati:
+          sono i pendii più soleggiati, tipicamente più caldi e aridi, concentrati nelle colline interne.
+          La Circoscrizione III Oreto è quella con la maggiore percentuale di versanti ombreggiati (68,7% esposti a N+NE+NO);
+          tra i quartieri, Montepellegrino è il più soleggiato (44,5% esposto a S+SE+SO).
         </p>
         <div class="section-data">
           <table class="data-table">
@@ -403,11 +417,16 @@
       <div class="analysis-section">
         <h3>Come si classifica il paesaggio: la geomorfologia</h3>
         <p>
-          Analizzando la forma del terreno (curvatura, rugosità, TPI), il territorio è stato classificato in
-          grandi unità geomorfologiche. Il paesaggio di Palermo è dominato dai <strong>versanti (60%)</strong>
-          e dalle <strong>creste (33%)</strong>: un territorio prevalentemente collinare e montano, con poche
-          pianure vere. Le valli e le depressioni, sebbene piccole in percentuale, sono importanti perché
-          concentrano il deflusso delle acque.
+          La geomorfologia classifica la forma del terreno in grandi unità paesaggistiche,
+          derivate dall'analisi combinata di curvatura, rugosità e indice di posizione topografica (TPI).
+          Il paesaggio di Palermo è dominato dai <strong>versanti regolari (60,1%)</strong>
+          e dalle <strong>creste e dorsali (33,3%)</strong>: un territorio prevalentemente collinare e montano.
+          Le pianure e fondovalle veri e propri coprono appena lo <strong>0,2%</strong> della superficie:
+          la Conca d'Oro è morfologicamente un versante di raccordo, non una pianura nel senso stretto.
+          Valli e impluvii (3,3%) e depressioni chiuse (3,1%), pur coprendo complessivamente il 6,4% del territorio,
+          sono elementi chiave: concentrano il deflusso delle acque superficiali ed è in queste zone
+          che si manifesta il maggior rischio idraulico in caso di piogge intense.
+          Il quartiere Malaspina-Palagonia ha la più alta percentuale di creste in assoluto: 80,7%.
         </p>
         <div class="section-data">
           <table class="data-table">
@@ -428,11 +447,16 @@
       <div class="analysis-section">
         <h3>Stabilità dei versanti: dove il suolo è a rischio</h3>
         <p>
-          La stabilità dei versanti è calcolata combinando pendenza, curvatura, esposizione e morfologia.
-          La scala va da 1 (molto stabile) a 5 (molto instabile). Più della metà del territorio è in
-          classe 1 — le aree pianeggianti o a bassa pendenza. Ma quasi <strong>il 31% del territorio</strong>
-          ricade in classi 3-4-5: aree dove pendenza, forma e caratteristiche morfologiche aumentano il
-          rischio di instabilità. Un dato che merita attenzione nella pianificazione urbanistica.
+          La stabilità dei versanti è calcolata combinando pendenza, curvatura del profilo e morfologia
+          su una scala da 1 (molto stabile) a 5 (molto instabile). Non considera la geologia né la copertura del suolo,
+          ma fornisce un primo quadro morfologico del rischio di instabilità.
+          Il 52,6% del territorio è in classe 1 — le aree pianeggianti o a bassa pendenza, naturalmente stabili.
+          Quasi il <strong>30,8% ricade in classi 3–4–5</strong>: zone dove pendenza elevata, curvatura convessa
+          e morfologia complessa aumentano significativamente il rischio di instabilità superficiale.
+          La Circoscrizione III Oreto presenta la quota più alta di superficie a rischio (40%),
+          seguita dalla VII Mondello (37,1%). Tra i quartieri, Boccadifalco è il più critico
+          con ben il <strong>65%</strong> della superficie in classi di rischio (3–4–5) — il valore più alto del comune.
+          Questi dati meritano attenzione nella pianificazione urbanistica e nella gestione del rischio idrogeologico.
         </p>
         <div class="section-data">
           <table class="data-table">
@@ -453,11 +477,16 @@
       <div class="analysis-section">
         <h3>Costruibilità: dove si può edificare (in base alla morfologia)</h3>
         <p>
-          L'indice di costruibilità morfologica è una stima basata esclusivamente sulla forma del terreno —
-          non include vincoli legali o urbanistici, ma fornisce una base oggettiva per valutare l'idoneità
-          di un'area. Quasi la metà del territorio ha caratteristiche morfologiche favorevoli all'edificazione.
-          Tuttavia, il <strong>28,7% ricade in classi 4–5</strong>: aree dove la pendenza, l'instabilità o
-          la morfologia rendono l'edificazione problematica dal punto di vista fisico.
+          L'indice di costruibilità morfologica è derivato esclusivamente dalla forma del terreno
+          (pendenza e stabilità morfologica) — non include vincoli legali, urbanistici o geologici.
+          Rappresenta quindi una valutazione della sola idoneità fisica di un'area rispetto all'edificazione.
+          Il <strong>47,3% del territorio è in classe 1 (ottima)</strong>: terreno pianeggiante e stabile,
+          senza limitazioni morfologiche significative.
+          Il <strong>28,7% ricade in classi 4–5</strong>: pendenza accentuata, instabilità morfologica
+          o combinazione di fattori sfavorevoli rendono l'edificazione fisicamente problematica.
+          I quartieri più favorevoli sono concentrati nel centro storico e nella pianura centrale:
+          Noce (98,8% classe ottima), Malaspina-Palagonia (97,4%) e Politeama (96,9%).
+          Al contrario, le pendici dei rilievi nord-occidentali registrano i valori più critici.
         </p>
         <div class="section-data">
           <table class="data-table">
@@ -478,12 +507,17 @@
       <div class="analysis-section">
         <h3>La luce solare: l'indice di radiazione solare</h3>
         <p>
-          L'Indice di Radiazione Solare (SRI) misura quanto sole riceve mediamente una cella nel corso
-          dell'anno, normalizzato tra 0 (nessuna luce) e 1 (massima esposizione). Il valore medio per
-          Palermo è <strong>0,59</strong> — abbastanza alto, coerente con la latitudine e il clima mediterraneo.
-          I versanti nord e nord-est, pur essendo i più estesi, ricevono meno luce rispetto ai versanti
-          meridionali. Questo dato è rilevante per studi energetici (potenziale fotovoltaico), agricoltura
-          (colture eliofile), e comfort urbano.
+          L'Indice di Radiazione Solare (SRI) misura la quantità di energia solare mediamente ricevuta
+          da ogni cella nel corso dell'anno, normalizzata tra 0 (assenza di luce, versanti nord molto inclinati)
+          e 1 (massima esposizione, versanti sud perfettamente orientati).
+          Il valore medio per Palermo è <strong>0,59</strong> — coerente con la latitudine e il clima mediterraneo.
+          Il 56% del territorio ricade nella classe media (0,5–0,65).
+          I versanti nord e nord-est, pur essendo i più estesi, ricevono significativamente meno luce
+          rispetto ai versanti meridionali: la Circoscrizione III Oreto, la più ombreggiata, ha SRI medio di 0,494,
+          contro 0,641 della Circoscrizione VIII Libertà, la più irraggiata.
+          Tra i quartieri, Cruillas–S.Giovanni Apostolo raggiunge il valore più alto (SRI 0,663).
+          Questo dato è rilevante per la stima del potenziale fotovoltaico, la pianificazione del verde urbano
+          e le valutazioni agro-climatiche.
         </p>
         <div class="section-data">
           <table class="data-table">
@@ -504,11 +538,17 @@
       <div class="analysis-section">
         <h3>Rugosità e irregolarità del terreno</h3>
         <p>
-          Il <strong>TRI (Terrain Ruggedness Index)</strong> misura la variazione media di quota rispetto
-          alle celle vicine. La media di <strong>3,05</strong> è relativamente bassa, ma con punte fino a
-          <strong>369</strong> nelle zone di cresta più frastagliate — un ulteriore segnale della forte
-          variabilità del paesaggio. Il <strong>Roughness</strong> (rugosità assoluta) conferma: media
-          3,04 con massimi di 280, concentrati sulle pareti rocciose dei rilievi.
+          Il <strong>TRI (Terrain Ruggedness Index)</strong> misura la differenza media di quota tra ogni cella
+          e le 8 celle circostanti: più alto il valore, più il terreno è morfologicamente irregolare.
+          La media comunale è <strong>3,05</strong> — un valore moderato, trainato verso il basso dall'ampia
+          pianura costiera e dalla Conca d'Oro (50% del territorio ha TRI 0–1).
+          Le punte raggiungono però <strong>369</strong> nelle creste più frastagliate dei rilievi nord,
+          dove la roccia affiora con dislivelli bruschi tra celle adiacenti.
+          Il <strong>Roughness</strong> (rugosità assoluta, massimo tra le differenze con le celle vicine)
+          conferma questo quadro: media 3,04 con valori massimi di 280 sulle pareti rocciose.
+          La Circoscrizione I Centro Storico è la più regolare (TRI medio 0,67 — quasi totalmente pianeggiante);
+          la VII Mondello è la più accidentata (4,19), per i contrafforti di Monte Pellegrino.
+          Il quartiere Arenella–Vergine Maria registra il TRI medio più alto tra i quartieri: <strong>6,67</strong>.
         </p>
         <div class="section-data">
           <table class="data-table">
@@ -529,10 +569,15 @@
       <div class="analysis-section">
         <h3>In sintesi</h3>
         <p>
-          Palermo è una città di contrasti fisici: mezza pianura, mezza montagna. La Conca d'Oro e le aree
-          costiere offrono terreni stabili e facilmente edificabili, mentre le colline e i rilievi del Parco
-          della Favorita e dei Monti di Palermo presentano condizioni morfologiche che richiedono maggiore
-          attenzione nella progettazione e nella pianificazione del territorio.
+          Palermo è una città di forti contrasti fisici: oltre la metà del territorio è pianeggiante e stabile,
+          ma quasi un terzo presenta condizioni morfologiche impegnative — versanti acclivi, instabilità,
+          costruibilità limitata. La Conca d'Oro e le aree costiere offrono terreni stabili e morfologicamente
+          idonei all'edificazione, con altissimi indici di radiazione solare e rugosità quasi nulla.
+          I rilievi del Parco della Favorita, dei Monti di Palermo e delle colline ovest presentano invece
+          condizioni che richiedono attenzione progettuale: pendenze superiori ai 15–20°, instabilità
+          morfologica diffusa e rugosità elevata. Questi dati, derivati esclusivamente dalla morfologia,
+          costituiscono un quadro di riferimento per la pianificazione del territorio — da integrare
+          sempre con le cartografie geologiche, il PAI e gli strumenti urbanistici vigenti.
         </p>
         <table class="data-table">
           <thead><tr><th>Indicatore</th><th>Valore chiave</th></tr></thead>
@@ -745,49 +790,49 @@
         <div class="rp-card" data-analysis="elevation">
           <div class="rp-card-line" style="background:#00cb9b;"></div>
           <div class="rp-card-title">Mappa Elevazione</div>
-          <div class="rp-card-sub">Altimetria 0 – 1050 m</div>
+          <div class="rp-card-sub">0–1.050 m · media 183 m</div>
         </div>
 
         <div class="rp-card" data-analysis="slope">
           <div class="rp-card-line" style="background:#ff9800;"></div>
           <div class="rp-card-title">Pendenze</div>
-          <div class="rp-card-sub">Media 11,4°</div>
+          <div class="rp-card-sub">Media 11,4° · 30,8% oltre 15°</div>
         </div>
 
         <div class="rp-card" data-analysis="aspect">
           <div class="rp-card-line" style="background:#4fc3f7;"></div>
           <div class="rp-card-title">Esposizione</div>
-          <div class="rp-card-sub">Prevalente NE</div>
+          <div class="rp-card-sub">Prevalente NE (18,9%)</div>
         </div>
 
         <div class="rp-card" data-analysis="geomorph">
           <div class="rp-card-line" style="background:#7986cb;"></div>
           <div class="rp-card-title">Geomorfologia</div>
-          <div class="rp-card-sub">Versanti 60%</div>
+          <div class="rp-card-sub">Versanti 60% · Creste 33%</div>
         </div>
 
         <div class="rp-card" data-analysis="stability">
           <div class="rp-card-line" style="background:#ef5350;"></div>
-          <div class="rp-card-title">Stabilità</div>
-          <div class="rp-card-sub">~31% a rischio</div>
+          <div class="rp-card-title">Stabilità versanti</div>
+          <div class="rp-card-sub">30,8% a rischio (cl. 3–5)</div>
         </div>
 
         <div class="rp-card" data-analysis="build">
           <div class="rp-card-line" style="background:#1565c0;"></div>
           <div class="rp-card-title">Costruibilità</div>
-          <div class="rp-card-sub">47,3% ottima</div>
+          <div class="rp-card-sub">47,3% ottima · 28,7% critica</div>
         </div>
 
         <div class="rp-card" data-analysis="solar">
           <div class="rp-card-line" style="background:#ffb300;"></div>
           <div class="rp-card-title">Radiazione solare</div>
-          <div class="rp-card-sub">SRI medio 0,59</div>
+          <div class="rp-card-sub">SRI medio 0,59 · 56% fascia media</div>
         </div>
 
         <div class="rp-card" data-analysis="rugosity">
           <div class="rp-card-line" style="background:#546e7a;"></div>
           <div class="rp-card-title">Rugosità (TRI)</div>
-          <div class="rp-card-sub">Media 3,05</div>
+          <div class="rp-card-sub">TRI medio 3,05 · max 369</div>
         </div>
 
       </div><!-- /rp-cards -->

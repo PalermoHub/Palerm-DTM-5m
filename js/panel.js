@@ -24,13 +24,40 @@
     });
   });
 
+  // ── Plugin centro testo doughnut ────────────────────
+  const centerTextPlugin = {
+    id: 'centerText',
+    beforeDraw: function (chart) {
+      if (chart.config.type !== 'doughnut') return;
+      var text = chart.config.options.plugins.centerText && chart.config.options.plugins.centerText.text;
+      if (!text) return;
+      var ctx = chart.ctx;
+      var ca = chart.chartArea;
+      var cx = (ca.left + ca.right) / 2;
+      var cy = (ca.top + ca.bottom) / 2;
+      var lines = text.split('\n');
+      var lh = 13;
+      ctx.save();
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#3a4e78';
+      ctx.font = "bold 11px 'Titillium Web', sans-serif";
+      lines.forEach(function (line, i) {
+        ctx.fillText(line, cx, cy + (i - (lines.length - 1) / 2) * lh);
+      });
+      ctx.restore();
+    }
+  };
+  Chart.register(centerTextPlugin);
+
   // ── Chart defaults ──────────────────────────────────
-  function donutOpts() {
+  function donutOpts(centerText) {
     return {
       responsive: true,
       maintainAspectRatio: true,
       cutout: '58%',
       plugins: {
+        centerText: { text: centerText || '' },
         legend: {
           display: true,
           position: 'right',
@@ -73,7 +100,7 @@
           borderWidth: 0
         }]
       },
-      options: donutOpts()
+      options: donutOpts('Elevazione')
     });
 
     // 2 · Pendenza
@@ -87,7 +114,7 @@
           borderWidth: 0
         }]
       },
-      options: donutOpts()
+      options: donutOpts('Pendenza')
     });
 
     // 3 · Esposizione (radar — 8 direzioni, esclusa pianura)
@@ -119,7 +146,7 @@
           borderWidth: 0
         }]
       },
-      options: donutOpts()
+      options: donutOpts('Geomorfologia')
     });
 
     // 5 · Stabilità versanti
@@ -133,7 +160,7 @@
           borderWidth: 0
         }]
       },
-      options: donutOpts()
+      options: donutOpts('Stabilità\nversanti')
     });
 
     // 6 · Costruibilità morfologica
@@ -147,7 +174,7 @@
           borderWidth: 0
         }]
       },
-      options: donutOpts()
+      options: donutOpts('Costruibilità')
     });
 
     // 7 · Radiazione solare
@@ -161,7 +188,7 @@
           borderWidth: 0
         }]
       },
-      options: donutOpts()
+      options: donutOpts('Radiazione\nsolare')
     });
 
     // 8 · Rugosità (TRI)
@@ -175,7 +202,7 @@
           borderWidth: 0
         }]
       },
-      options: donutOpts()
+      options: donutOpts('Rugosità\n(TRI)')
     });
   }
 })();

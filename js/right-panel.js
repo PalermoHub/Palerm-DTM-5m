@@ -22,9 +22,13 @@
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
-          'Quota max <strong>1.050 m</strong> (Monte Cuccio). Quota media <strong>183 m</strong> s.l.m. ' +
-          'Quasi il <strong>70% della superficie</strong> si trova sotto i 200 m, ma il territorio si estende ' +
-          'verticalmente per oltre un chilometro.'
+          'Quota massima <strong>1.050 m</strong> (Monte Cuccio / Pizzuta, quartiere Boccadifalco·Baida). ' +
+          'Quota media comunale <strong>183 m</strong> s.l.m. su un\'area di 158,9 km². ' +
+          'Quasi il <strong>70% della superficie</strong> ricade sotto i 200 m: la Conca d\'Oro e le zone ' +
+          'costiere dominano il profilo basso. Il territorio si estende però verticalmente per oltre un chilometro — ' +
+          'dalla riva del mare fino ai rilievi dei Monti di Palermo. ' +
+          'Il Centro Storico è interamente sotto i 50 m (quota media 14,5 m); ' +
+          'la Circoscrizione VI Nord-Ovest è la più elevata in media (<strong>271 m</strong>).'
         );
 
         appendRingCard(el, {
@@ -115,8 +119,12 @@
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
-          'Pendenza media <strong>11,4°</strong> con deviazione standard 13,6°. ' +
-          'Oltre la metà del territorio è pianeggiante, ma quasi <strong>un terzo supera i 15°</strong>.'
+          'Pendenza media <strong>11,4°</strong>, deviazione standard 13,6° — segno di un paesaggio ' +
+          'molto eterogeneo. Il 52,8% del territorio è pianeggiante (0–5°), concentrato nella Conca d\'Oro ' +
+          'e nelle aree costiere. Quasi <strong>un terzo supera i 15°</strong>, con il 12,4% in classi ' +
+          'fortemente acclivi (oltre 30°). ' +
+          'La Circoscrizione III Oreto è la più acclive (media 14,5°), il Centro Storico la più piatta (2,7°). ' +
+          'Tra i quartieri, Boccadifalco registra la pendenza media più alta: <strong>20,5°</strong>.'
         );
         appendRingCard(el, {
           canvasId: 'rp-c-slope',
@@ -136,6 +144,50 @@
             { val: '13,6°', label: 'dev. standard' }
           ]
         });
+
+        var SLOPE_CLASSES = [
+          { key: 'c0_5',   label: '0–5°',   color: '#43a047' },
+          { key: 'c5_15',  label: '5–15°',  color: '#8bc34a' },
+          { key: 'c15_30', label: '15–30°', color: '#ffeb3b' },
+          { key: 'c30_45', label: '30–45°', color: '#ff9800' },
+          { key: 'c45',    label: '>45°',   color: '#f44336' }
+        ];
+
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'pendenza media',
+          unit: '°',
+          maxVal: 14.5,
+          classes: SLOPE_CLASSES,
+          items: [
+            { rank:1, label:'III · Oreto',         val:14.5, classi:{c0_5:44.4, c5_15:15.5, c15_30:19.3, c30_45:18.7, c45:2.1} },
+            { rank:2, label:'VII · Mondello',       val:14.0, classi:{c0_5:48.0, c5_15:14.8, c15_30:19.9, c30_45:13.2, c45:4.2} },
+            { rank:3, label:'V · Noce',             val:11.3, classi:{c0_5:48.7, c5_15:18.1, c15_30:23.6, c30_45:8.9,  c45:0.7} },
+            { rank:4, label:'IV · Mezzomonreale',   val:11.0, classi:{c0_5:55.7, c5_15:13.1, c15_30:19.2, c30_45:11.1, c45:0.8} },
+            { rank:5, label:'VI · Nord-Ovest',      val:10.8, classi:{c0_5:44.5, c5_15:24.8, c15_30:25.4, c30_45:4.1,  c45:1.2} },
+            { rank:6, label:'VIII · Libertà',       val:9.0,  classi:{c0_5:59.8, c5_15:17.8, c15_30:14.3, c30_45:6.0,  c45:2.0} },
+            { rank:7, label:'II · Resuttana',       val:8.3,  classi:{c0_5:70.0, c5_15:11.9, c15_30:6.8,  c30_45:8.6,  c45:2.6} },
+            { rank:8, label:'I · Centro Storico',   val:2.7,  classi:{c0_5:89.5, c5_15:8.9,  c15_30:1.5,  c30_45:0.0,  c45:0.0} }
+          ]
+        });
+
+        appendRankingCard(el, {
+          title: 'Top Quartieri · pendenza media',
+          subtitle: 'pendenza media',
+          unit: '°',
+          maxVal: 20.5,
+          classes: SLOPE_CLASSES,
+          items: [
+            { rank:1, label:'Boccadifalco',                 val:20.5, classi:{c0_5:20.8, c5_15:13.9, c15_30:39.1, c30_45:24.3, c45:1.9} },
+            { rank:2, label:'Arenella - Vergine Maria',     val:18.7, classi:{c0_5:34.1, c5_15:20.2, c15_30:19.7, c30_45:18.3, c45:7.7} },
+            { rank:3, label:'Partanna Mondello',            val:17.5, classi:{c0_5:40.5, c5_15:11.4, c15_30:24.6, c30_45:16.9, c45:6.6} },
+            { rank:4, label:'Borgo Nuovo',                  val:17.0, classi:{c0_5:20.8, c5_15:25.8, c15_30:37.7, c30_45:14.4, c45:1.2} },
+            { rank:5, label:'Villagrazia - Falsomiele',     val:15.8, classi:{c0_5:39.6, c5_15:16.2, c15_30:21.0, c30_45:20.8, c45:2.3} },
+            { rank:6, label:'Montepellegrino',              val:14.2, classi:{c0_5:34.0, c5_15:28.3, c15_30:24.2, c30_45:10.0, c45:3.4} },
+            { rank:7, label:'Brancaccio - Ciaculli',        val:12.6, classi:{c0_5:55.2, c5_15:14.4, c15_30:11.3, c30_45:14.7, c45:4.5} },
+            { rank:8, label:'Tommaso Natale - Sferracavallo', val:12.2, classi:{c0_5:44.8, c5_15:21.4, c15_30:20.9, c30_45:12.0, c45:0.9} }
+          ]
+        });
       }
     },
 
@@ -147,8 +199,12 @@
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
-          'I versanti dominano verso <strong>Nord-Est (18,9%)</strong>: coerente con la posizione di Palermo ' +
-          'aperta sul Tirreno. I versanti a Sud e Sud-Ovest sono i meno rappresentati.'
+          'L\'esposizione prevalente è <strong>Nord-Est (18,9%)</strong>: i rilievi scendono verso il ' +
+          'Mar Tirreno orientando gran parte dei versanti a nord e nord-est. ' +
+          'I versanti esposti a Sud-Ovest sono i meno diffusi (4,7%) — i pendii più soleggiati, ' +
+          'tipicamente più caldi e aridi. Il 15,9% del territorio è pianura senza esposizione netta. ' +
+          'La Circoscrizione III Oreto è la più ombreggiata (<strong>68,7%</strong> di versanti N+NE+NO); ' +
+          'Montepellegrino è il quartiere con la maggiore esposizione a sud (<strong>44,5%</strong> di versanti S+SE+SO).'
         );
         appendSectionTitle(el, 'Distribuzione per direzione');
         var canvasId = 'rp-c-aspect';
@@ -169,6 +225,54 @@
           [14.6, 18.9, 15.0, 10.5, 6.6, 4.7, 5.1, 8.8],
           null
         );
+
+        var ASP_CLASSES = [
+          { key: 'Piano', label: 'Pianura',   color: '#aaaaaa' },
+          { key: 'N',     label: 'Nord',      color: '#4575b4' },
+          { key: 'NE',    label: 'Nord-Est',  color: '#313695' },
+          { key: 'E',     label: 'Est',       color: '#74add1' },
+          { key: 'SE',    label: 'Sud-Est',   color: '#abd9e9' },
+          { key: 'S',     label: 'Sud',       color: '#d73027' },
+          { key: 'SO',    label: 'Sud-Ovest', color: '#f46d43' },
+          { key: 'O',     label: 'Ovest',     color: '#fdae61' },
+          { key: 'NO',    label: 'Nord-Ovest',color: '#fee090' }
+        ];
+
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni · versanti nord',
+          subtitle: '% versanti N+NE+NO (più ombreggiati)',
+          unit: '%',
+          maxVal: 68.7,
+          classes: ASP_CLASSES,
+          items: [
+            { rank:1, label:'III · Oreto',        val:68.7, classi:{Piano:11.0, N:27.1, NE:18.8, E:5.6,  SE:2.0,  S:1.0, SO:2.8, O:8.8,  NO:22.8} },
+            { rank:2, label:'II · Resuttana',     val:56.9, classi:{Piano:25.3, N:25.0, NE:20.9, E:7.5,  SE:2.7,  S:1.8, SO:1.8, O:3.8,  NO:11.0} },
+            { rank:3, label:'VII · Mondello',     val:39.9, classi:{Piano:15.2, N:11.6, NE:18.1, E:16.4, SE:9.0,  S:6.2, SO:5.3, O:8.1,  NO:10.2} },
+            { rank:4, label:'IV · Mezzomonreale', val:39.5, classi:{Piano:12.2, N:11.7, NE:23.3, E:19.4, SE:15.0, S:9.3, SO:2.4, O:2.1,  NO:4.5}  },
+            { rank:5, label:'V · Noce',           val:37.8, classi:{Piano:14.0, N:13.5, NE:21.7, E:17.6, SE:16.8, S:8.9, SO:3.0, O:2.0,  NO:2.6}  },
+            { rank:6, label:'I · Centro Storico', val:34.6, classi:{Piano:23.4, N:12.4, NE:14.9, E:13.5, SE:13.2, S:5.5, SO:4.8, O:4.8,  NO:7.3}  },
+            { rank:7, label:'VI · Nord-Ovest',    val:27.8, classi:{Piano:13.9, N:7.7,  NE:16.1, E:21.6, SE:16.6, S:10.0,SO:6.7, O:3.4,  NO:4.0}  },
+            { rank:8, label:'VIII · Libertà',     val:25.2, classi:{Piano:21.1, N:6.4,  NE:13.8, E:13.2, SE:10.8, S:9.7, SO:12.4,O:7.5,  NO:5.0}  }
+          ]
+        });
+
+        appendRankingCard(el, {
+          title: 'Top Quartieri · versanti sud',
+          subtitle: '% versanti S+SE+SO (più soleggiati)',
+          unit: '%',
+          maxVal: 44.5,
+          classes: ASP_CLASSES,
+          items: [
+            { rank:1, label:'Montepellegrino',              val:44.5, classi:{Piano:10.1, N:9.6,  NE:13.6, E:14.4, SE:12.6, S:13.6, SO:18.3, O:3.4, NO:4.4} },
+            { rank:2, label:'Cruillas - S.Giov. Apostolo',  val:42.8, classi:{Piano:7.3,  N:7.8,  NE:10.7, E:21.9, SE:25.1, S:13.5, SO:4.2,  O:4.5, NO:5.0} },
+            { rank:3, label:'Borgo Nuovo',                  val:39.1, classi:{Piano:7.8,  N:15.4, NE:23.2, E:10.5, SE:22.7, S:12.5, SO:3.9,  O:2.2, NO:2.0} },
+            { rank:4, label:'Boccadifalco',                 val:37.5, classi:{Piano:7.4,  N:17.6, NE:15.8, E:15.9, SE:18.5, S:15.9, SO:3.1,  O:3.9, NO:1.5} },
+            { rank:5, label:'Partanna Mondello',            val:28.3, classi:{Piano:15.1, N:11.4, NE:18.6, E:16.9, SE:12.5, S:9.4,  SO:6.4,  O:6.4, NO:3.4} },
+            { rank:6, label:'Palazzo Reale - Monte di Pietà',val:26.6,classi:{Piano:27.5, N:16.5, NE:22.5, E:3.3,  SE:15.7, S:6.5,  SO:4.4,  O:2.8, NO:0.8} },
+            { rank:7, label:'Resuttana - San Lorenzo',      val:25.9, classi:{Piano:14.3, N:22.1, NE:20.7, E:11.3, SE:10.0, S:7.2,  SO:8.7,  O:4.6, NO:1.1} },
+            { rank:8, label:'Libertà',                      val:25.5, classi:{Piano:19.8, N:6.0,  NE:13.0, E:13.6, SE:11.9, S:6.9,  SO:6.7,  O:8.7, NO:13.4} }
+          ]
+        });
       }
     },
 
@@ -180,9 +284,13 @@
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
-          'Il paesaggio di Palermo è dominato dai <strong>versanti (60%)</strong> e dalle ' +
-          '<strong>creste (33%)</strong>. Le pianure vere sono pochissime. ' +
-          'Valli e depressioni (<strong>6,4%</strong>) concentrano il deflusso idrico.'
+          'Il territorio di Palermo è classificato in cinque unità geomorfologiche derivate da ' +
+          'curvatura, rugosità e indice di posizione topografica (TPI). ' +
+          'Dominano i <strong>versanti regolari (60,1%)</strong> e le <strong>creste e dorsali (33,3%)</strong> — ' +
+          'morfologia tipicamente collinare e montana. Le pianure e fondovalle coprono appena lo <strong>0,2%</strong>: ' +
+          'la Conca d\'Oro è morfologicamente piatta ma è classificata come versante di raccordo. ' +
+          'Valli e depressioni chiuse (<strong>6,4% complessivo</strong>) sono cruciali per il deflusso ' +
+          'idrico superficiale. Tra i quartieri, Malaspina-Palagonia ha la percentuale più alta di creste: <strong>80,7%</strong>.'
         );
         appendRingCard(el, {
           canvasId: 'rp-c-geomorph',
@@ -197,6 +305,50 @@
             { chartLabel: 'Depressioni', label: '8 - Depressioni chiuse', pct: 3.1, color: '#ffb74d' }
           ]
         });
+
+        var GEOMORPH_CLASSES = [
+          { key: 'c1', label: 'Pianure',    color: '#4fc3f7' },
+          { key: 'c3', label: 'Versanti',   color: '#7986cb' },
+          { key: 'c4', label: 'Creste',     color: '#ce93d8' },
+          { key: 'c7', label: 'Valli',      color: '#80cbc4' },
+          { key: 'c8', label: 'Depressioni',color: '#ffb74d' }
+        ];
+
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: '% creste e dorsali',
+          unit: '%',
+          maxVal: 52.8,
+          classes: GEOMORPH_CLASSES,
+          items: [
+            { rank:1, label:'I · Centro Storico',  val:52.8, classi:{c1:1.3,  c3:45.9, c4:52.8, c7:0.0, c8:0.0} },
+            { rank:2, label:'II · Resuttana',      val:47.4, classi:{c1:0.5,  c3:47.0, c4:47.4, c7:2.5, c8:2.7} },
+            { rank:3, label:'VIII · Libertà',      val:43.3, classi:{c1:0.5,  c3:49.8, c4:43.3, c7:5.1, c8:1.3} },
+            { rank:4, label:'IV · Mezzomonreale',  val:31.3, classi:{c1:0.0,  c3:60.2, c4:31.3, c7:4.2, c8:4.3} },
+            { rank:5, label:'V · Noce',            val:30.7, classi:{c1:0.0,  c3:65.7, c4:30.7, c7:2.2, c8:1.5} },
+            { rank:6, label:'VII · Mondello',      val:29.8, classi:{c1:0.5,  c3:64.4, c4:29.8, c7:3.2, c8:2.0} },
+            { rank:7, label:'VI · Nord-Ovest',     val:28.2, classi:{c1:0.0,  c3:67.5, c4:28.2, c7:1.8, c8:2.4} },
+            { rank:8, label:'III · Oreto',         val:26.1, classi:{c1:0.0,  c3:63.7, c4:26.1, c7:4.9, c8:5.2} }
+          ]
+        });
+
+        appendRankingCard(el, {
+          title: 'Top Quartieri · creste e dorsali',
+          subtitle: '% creste e dorsali',
+          unit: '%',
+          maxVal: 80.7,
+          classes: GEOMORPH_CLASSES,
+          items: [
+            { rank:1, label:'Malaspina - Palagonia',   val:80.7, classi:{c1:0.0, c3:19.3, c4:80.7, c7:0.0, c8:0.0} },
+            { rank:2, label:'Politeama',               val:76.8, classi:{c1:1.3, c3:22.0, c4:76.8, c7:0.0, c8:0.0} },
+            { rank:3, label:'Noce',                    val:73.9, classi:{c1:0.0, c3:26.1, c4:73.9, c7:0.0, c8:0.0} },
+            { rank:4, label:'Libertà',                 val:72.7, classi:{c1:0.0, c3:27.3, c4:72.7, c7:0.0, c8:0.0} },
+            { rank:5, label:'Oreto - Stazione',        val:64.9, classi:{c1:0.2, c3:35.0, c4:64.9, c7:0.0, c8:0.0} },
+            { rank:6, label:'Settecannoli',            val:64.4, classi:{c1:1.2, c3:34.4, c4:64.4, c7:0.0, c8:0.0} },
+            { rank:7, label:'Zisa',                    val:64.4, classi:{c1:0.0, c3:35.6, c4:64.4, c7:0.0, c8:0.0} },
+            { rank:8, label:'Altarello',               val:64.0, classi:{c1:0.0, c3:36.0, c4:64.0, c7:0.0, c8:0.0} }
+          ]
+        });
       }
     },
 
@@ -208,8 +360,14 @@
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
-          'Scala 1–5 (stabile→instabile). Più della metà del territorio è in classe 1 (aree pianeggianti). ' +
-          'Ma quasi il <strong>31% ricade in classi 3–4–5</strong>: dato da considerare nella pianificazione.'
+          'Indice calcolato combinando pendenza, curvatura e morfologia su scala 1–5 ' +
+          '(molto stabile → molto instabile). Il <strong>52,6%</strong> del territorio è in classe 1: ' +
+          'aree pianeggianti o a bassa pendenza, naturalmente stabili. ' +
+          'Il <strong>30,8% ricade in classi 3–4–5</strong> — zone dove la combinazione di pendenza elevata, ' +
+          'curvatura convessa e morfologia accidentata aumenta il rischio di instabilità. ' +
+          'Dato importante per la pianificazione urbanistica e la prevenzione del rischio idrogeologico. ' +
+          'La Circoscrizione III Oreto ha il 40% di superficie a rischio; ' +
+          'il quartiere più critico è Boccadifalco con <strong>65%</strong> in classi 3–4–5.'
         );
         appendRingCard(el, {
           canvasId: 'rp-c-stab',
@@ -224,6 +382,50 @@
             { chartLabel: 'Molto instabile', label: '5 - Molto instabile', pct: 6.3, color: '#ef5350' }
           ]
         });
+
+        var STAB_CLASSES = [
+          { key: 'c1', label: 'Molto stabile',  color: '#2e7d32' },
+          { key: 'c2', label: 'Stabile',         color: '#66bb6a' },
+          { key: 'c3', label: 'Mod. instabile',  color: '#ffee58' },
+          { key: 'c4', label: 'Instabile',       color: '#ffa726' },
+          { key: 'c5', label: 'Molto instabile', color: '#ef5350' }
+        ];
+
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: '% rischio (classi 3–4–5)',
+          unit: '%',
+          maxVal: 40.0,
+          classes: STAB_CLASSES,
+          items: [
+            { rank:1, label:'III · Oreto',        val:40.0, classi:{c1:44.4, c2:15.5, c3:10.8, c4:19.0, c5:10.2} },
+            { rank:2, label:'VII · Mondello',      val:37.1, classi:{c1:47.7, c2:14.7, c3:11.9, c4:16.2, c5:9.0}  },
+            { rank:3, label:'V · Noce',            val:33.2, classi:{c1:48.6, c2:18.1, c3:16.8, c4:11.7, c5:4.7}  },
+            { rank:4, label:'IV · Mezzomonreale',  val:31.0, classi:{c1:55.5, c2:13.1, c3:11.6, c4:14.7, c5:4.7}  },
+            { rank:5, label:'VI · Nord-Ovest',     val:30.7, classi:{c1:44.5, c2:24.8, c3:19.9, c4:8.0,  c5:2.8}  },
+            { rank:6, label:'VIII · Libertà',      val:22.2, classi:{c1:59.5, c2:17.7, c3:9.9,  c4:7.7,  c5:4.6}  },
+            { rank:7, label:'II · Resuttana',      val:17.9, classi:{c1:69.7, c2:11.9, c3:4.3,  c4:6.3,  c5:7.3}  },
+            { rank:8, label:'I · Centro Storico',  val:1.5,  classi:{c1:88.4, c2:8.8,  c3:1.5,  c4:0.0,  c5:0.0}  }
+          ]
+        });
+
+        appendRankingCard(el, {
+          title: 'Top Quartieri · aree a rischio',
+          subtitle: '% rischio (classi 3–4–5)',
+          unit: '%',
+          maxVal: 65.0,
+          classes: STAB_CLASSES,
+          items: [
+            { rank:1, label:'Boccadifalco',               val:65.0, classi:{c1:20.7, c2:13.8, c3:22.7, c4:32.0, c5:10.3} },
+            { rank:2, label:'Borgo Nuovo',                val:53.4, classi:{c1:20.8, c2:25.8, c3:26.8, c4:19.0, c5:7.6}  },
+            { rank:3, label:'Partanna Mondello',          val:47.7, classi:{c1:40.3, c2:11.3, c3:14.3, c4:20.4, c5:13.0} },
+            { rank:4, label:'Arenella - Vergine Maria',   val:45.0, classi:{c1:33.5, c2:19.8, c3:9.3,  c4:24.4, c5:11.3} },
+            { rank:5, label:'Villagrazia - Falsomiele',   val:44.0, classi:{c1:39.6, c2:16.2, c3:11.6, c4:21.1, c5:11.3} },
+            { rank:6, label:'Montepellegrino',            val:37.5, classi:{c1:33.8, c2:28.2, c3:16.7, c4:13.0, c5:7.8}  },
+            { rank:7, label:'Tommaso Natale - Sferracavallo', val:33.6, classi:{c1:44.6, c2:21.3, c3:13.6, c4:14.5, c5:5.5} },
+            { rank:8, label:'Cruillas - S.Giov. Apostolo', val:30.8, classi:{c1:41.2, c2:28.1, c3:20.5, c4:7.3,  c5:3.0}  }
+          ]
+        });
       }
     },
 
@@ -235,9 +437,15 @@
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
-          'Indice morfologico puro — non include vincoli legali. Quasi la <strong>metà del territorio</strong> ' +
-          'ha caratteristiche favorevoli. Il <strong>28,7% ricade in classi 4–5</strong>: ' +
-          'edificazione fisicamente problematica.'
+          'Indice morfologico puro derivato da pendenza, stabilità e forma del terreno: ' +
+          'non include vincoli legali o urbanistici, ma fornisce una base oggettiva per valutare ' +
+          'l\'idoneità fisica di un\'area all\'edificazione. ' +
+          'Il <strong>47,3% del territorio</strong> è in classe 1 (ottima): terreno pianeggiante e stabile. ' +
+          'Il <strong>28,7% ricade in classi 4–5</strong>: pendenza, instabilità o morfologia complessa ' +
+          'rendono l\'edificazione fisicamente problematica. ' +
+          'Il quartiere Noce ha la costruibilità morfologica più alta in assoluto (<strong>98,8%</strong> classe ottima), ' +
+          'seguito da Malaspina-Palagonia (97,4%) e Politeama (96,9%). ' +
+          'Le aree peggiori corrispondono alle pendici dei rilievi nord-occidentali.'
         );
         appendRingCard(el, {
           canvasId: 'rp-c-build',
@@ -252,6 +460,50 @@
             { chartLabel: 'Non idonea', label: '5 - Non idonea', pct: 12.3, color: '#d7191c' }
           ]
         });
+
+        var BUILD_CLASSES = [
+          { key: 'c1', label: '1 - Ottima',      color: '#1a9641' },
+          { key: 'c2', label: '2 - Buona',       color: '#a6d96a' },
+          { key: 'c3', label: '3 - Moderata',    color: '#ffffbf' },
+          { key: 'c4', label: '4 - Difficile',   color: '#fdae61' },
+          { key: 'c5', label: '5 - Non idonea',  color: '#d7191c' }
+        ];
+
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: '% ottima (classe 1)',
+          unit: '%',
+          maxVal: 89.7,
+          classes: BUILD_CLASSES,
+          items: [
+            { rank:1, label:'I · Centro Storico',  val:89.7, classi:{c1:89.7, c2:8.8,  c3:1.5,  c4:0.0,  c5:0.0}  },
+            { rank:2, label:'II · Resuttana',      val:70.0, classi:{c1:70.0, c2:12.0, c3:4.1,  c4:5.8,  c5:8.2}  },
+            { rank:3, label:'VIII · Libertà',      val:55.2, classi:{c1:55.2, c2:4.5,  c3:17.5, c4:18.2, c5:4.6}  },
+            { rank:4, label:'VII · Mondello',      val:47.9, classi:{c1:47.9, c2:12.7, c3:10.6, c4:19.6, c5:9.3}  },
+            { rank:5, label:'V · Noce',            val:42.2, classi:{c1:42.2, c2:11.5, c3:6.8,  c4:23.8, c5:15.7} },
+            { rank:6, label:'VI · Nord-Ovest',     val:40.7, classi:{c1:40.7, c2:8.2,  c3:13.3, c4:19.9, c5:17.9} },
+            { rank:7, label:'III · Oreto',         val:38.1, classi:{c1:38.1, c2:20.0, c3:10.6, c4:19.0, c5:12.2} },
+            { rank:8, label:'IV · Mezzomonreale',  val:38.1, classi:{c1:38.1, c2:26.0, c3:8.5,  c4:10.7, c5:16.7} }
+          ]
+        });
+
+        appendRankingCard(el, {
+          title: 'Top Quartieri · costruibilità ottima',
+          subtitle: '% ottima (classe 1)',
+          unit: '%',
+          maxVal: 98.8,
+          classes: BUILD_CLASSES,
+          items: [
+            { rank:1, label:'Noce',                    val:98.8, classi:{c1:98.8, c2:1.2,  c3:0.0, c4:0.0, c5:0.0} },
+            { rank:2, label:'Malaspina - Palagonia',   val:97.4, classi:{c1:97.4, c2:2.4,  c3:0.0, c4:0.0, c5:0.2} },
+            { rank:3, label:'Politeama',               val:96.9, classi:{c1:96.9, c2:2.5,  c3:0.5, c4:0.1, c5:0.0} },
+            { rank:4, label:'Libertà',                 val:95.3, classi:{c1:95.3, c2:3.9,  c3:0.0, c4:0.6, c5:0.2} },
+            { rank:5, label:'Tribunali-Castellammare', val:93.9, classi:{c1:93.9, c2:5.8,  c3:0.4, c4:0.0, c5:0.0} },
+            { rank:6, label:'Zisa',                    val:93.2, classi:{c1:93.2, c2:5.5,  c3:1.2, c4:0.2, c5:0.0} },
+            { rank:7, label:'Uditore - Passo di Rigano', val:92.3, classi:{c1:92.3, c2:7.0, c3:0.6, c4:0.0, c5:0.0} },
+            { rank:8, label:'Altarello',               val:92.2, classi:{c1:92.2, c2:7.5,  c3:0.3, c4:0.0, c5:0.0} }
+          ]
+        });
       }
     },
 
@@ -263,9 +515,14 @@
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
-          'Indice di Radiazione Solare (SRI) normalizzato 0–1. Valore medio per Palermo: ' +
-          '<strong>0,59</strong> — coerente con la latitudine e il clima mediterraneo. ' +
-          'Rilevante per potenziale fotovoltaico e agricoltura eliofile.'
+          'L\'Indice di Radiazione Solare (SRI) misura la quantità di energia solare ' +
+          'mediamente ricevuta da ogni cella nel corso dell\'anno, normalizzata tra 0 (assenza di luce) ' +
+          'e 1 (massima esposizione). Valore medio per Palermo: <strong>0,59</strong>, ' +
+          'coerente con la latitudine mediterranea. Il 56% del territorio ricade nella fascia media (0,5–0,65). ' +
+          'La Circoscrizione VIII Libertà è la più irraggiata (SRI <strong>0,641</strong>); ' +
+          'la III Oreto la meno irraggiata (0,494) per effetto dei versanti esposti a nord. ' +
+          'Tra i quartieri, Cruillas–S.Giovanni Apostolo raggiunge SRI <strong>0,663</strong>. ' +
+          'Dato utile per: potenziale fotovoltaico, colture eliofile, comfort termico urbano.'
         );
         appendRingCard(el, {
           canvasId: 'rp-c-solar',
@@ -290,6 +547,50 @@
           'ai versanti meridionali. Questo dato è rilevante per studi energetici e pianificazione ' +
           'del verde urbano.'
         );
+
+        var SOLAR_CLASSES = [
+          { key: 'c0_03',   label: '0,0–0,3',   color: '#2c7bb6' },
+          { key: 'c03_05',  label: '0,3–0,5',   color: '#abd9e9' },
+          { key: 'c05_065', label: '0,5–0,65',  color: '#ffffbf' },
+          { key: 'c065_08', label: '0,65–0,8',  color: '#fdae61' },
+          { key: 'c08_1',   label: '0,8–1,0',   color: '#d7191c' }
+        ];
+
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'SRI medio',
+          unit: '',
+          maxVal: 0.641,
+          classes: SOLAR_CLASSES,
+          items: [
+            { rank:1, label:'VIII · Libertà',      val:0.641, classi:{c0_03:2.0,  c03_05:5.3,  c05_065:53.8, c065_08:32.2, c08_1:6.8} },
+            { rank:2, label:'I · Centro Storico',  val:0.628, classi:{c0_03:1.6,  c03_05:0.7,  c05_065:70.6, c065_08:26.7, c08_1:0.4} },
+            { rank:3, label:'IV · Mezzomonreale',  val:0.627, classi:{c0_03:5.8,  c03_05:6.8,  c05_065:56.2, c065_08:19.2, c08_1:12.1} },
+            { rank:4, label:'VI · Nord-Ovest',     val:0.626, classi:{c0_03:3.0,  c03_05:9.6,  c05_065:46.2, c065_08:34.3, c08_1:6.9} },
+            { rank:5, label:'V · Noce',            val:0.607, classi:{c0_03:8.3,  c03_05:8.8,  c05_065:49.6, c065_08:24.3, c08_1:9.1} },
+            { rank:6, label:'VII · Mondello',      val:0.581, classi:{c0_03:9.2,  c03_05:11.0, c05_065:54.5, c065_08:18.2, c08_1:7.1} },
+            { rank:7, label:'II · Resuttana',      val:0.561, classi:{c0_03:9.7,  c03_05:6.8,  c05_065:74.7, c065_08:8.3,  c08_1:0.5} },
+            { rank:8, label:'III · Oreto',         val:0.494, classi:{c0_03:19.5, c03_05:16.5, c05_065:55.9, c065_08:7.5,  c08_1:0.5} }
+          ]
+        });
+
+        appendRankingCard(el, {
+          title: 'Top Quartieri · radiazione solare',
+          subtitle: 'SRI medio',
+          unit: '',
+          maxVal: 0.663,
+          classes: SOLAR_CLASSES,
+          items: [
+            { rank:1, label:'Cruillas - S.Giov. Apostolo', val:0.663, classi:{c0_03:2.1, c03_05:5.0, c05_065:41.4, c065_08:39.3, c08_1:12.2} },
+            { rank:2, label:'Montepellegrino',             val:0.645, classi:{c0_03:3.0, c03_05:8.8, c05_065:36.9, c065_08:39.7, c08_1:11.6} },
+            { rank:3, label:'Libertà',                     val:0.643, classi:{c0_03:0.1, c03_05:0.5, c05_065:65.5, c065_08:33.9, c08_1:0.0}  },
+            { rank:4, label:'Mezzomonreale - Villa Tasca', val:0.640, classi:{c0_03:0.3, c03_05:0.6, c05_065:74.1, c065_08:23.0, c08_1:2.0}  },
+            { rank:5, label:'Montegrappa - S.Rosalia',     val:0.639, classi:{c0_03:0.1, c03_05:1.9, c05_065:75.4, c065_08:20.0, c08_1:2.5}  },
+            { rank:6, label:'Malaspina - Palagonia',       val:0.638, classi:{c0_03:0.0, c03_05:0.2, c05_065:85.0, c065_08:14.8, c08_1:0.0}  },
+            { rank:7, label:'Zisa',                        val:0.638, classi:{c0_03:0.0, c03_05:0.3, c05_065:82.8, c065_08:16.0, c08_1:0.9}  },
+            { rank:8, label:'Noce',                        val:0.636, classi:{c0_03:0.0, c03_05:0.0, c05_065:87.2, c065_08:12.8, c08_1:0.0}  }
+          ]
+        });
       }
     },
 
@@ -301,9 +602,13 @@
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
-          'Il <strong>TRI (Terrain Ruggedness Index)</strong> misura la variazione media di quota ' +
-          'rispetto alle celle vicine. Media <strong>3,05</strong>, punte fino a <strong>369</strong> ' +
-          'nelle creste più frastagliate.'
+          'Il <strong>TRI (Terrain Ruggedness Index)</strong> misura la differenza media di quota ' +
+          'tra ogni cella e le 8 celle circostanti: più alto il valore, più il terreno è irregolare. ' +
+          'Media comunale <strong>3,05</strong>, con picchi fino a <strong>369</strong> sulle creste ' +
+          'più frastagliate dei rilievi nord. Il 50% del territorio ha TRI 0–1 (pianura quasi piatta). ' +
+          'La Circoscrizione I Centro Storico è la più regolare (TRI medio 0,67); ' +
+          'la VII Mondello la più accidentata (4,19). ' +
+          'Tra i quartieri, Arenella–Vergine Maria registra la rugosità più alta: TRI <strong>6,67</strong>.'
         );
         appendRingCard(el, {
           canvasId: 'rp-c-rugosity',
@@ -327,6 +632,50 @@
           'La rugosità assoluta conferma la forte variabilità del paesaggio: ambienti lisci ' +
           'lungo la fascia costiera e la pianura, con picchi estremi sulle pareti rocciose dei rilievi nord.'
         );
+
+        var TRI_CLASSES = [
+          { key: 'c0_1',   label: '0–1',    color: '#3182bd' },
+          { key: 'c1_5',   label: '1–5',    color: '#6baed6' },
+          { key: 'c5_10',  label: '5–10',   color: '#ffffb2' },
+          { key: 'c10_25', label: '10–25',  color: '#fd8d3c' },
+          { key: 'c25',    label: '>25',    color: '#bd0026' }
+        ];
+
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'TRI medio',
+          unit: '',
+          maxVal: 4.19,
+          classes: TRI_CLASSES,
+          items: [
+            { rank:1, label:'VII · Mondello',      val:4.19, classi:{c0_1:44.9, c1_5:24.7, c5_10:24.0, c10_25:4.2,  c25:2.1} },
+            { rank:2, label:'III · Oreto',         val:3.69, classi:{c0_1:41.0, c1_5:25.3, c5_10:28.7, c10_25:4.6,  c25:0.4} },
+            { rank:3, label:'V · Noce',            val:2.77, classi:{c0_1:45.7, c1_5:32.0, c5_10:19.9, c10_25:2.4,  c25:0.0} },
+            { rank:4, label:'IV · Mezzomonreale',  val:2.76, classi:{c0_1:52.0, c1_5:23.4, c5_10:22.3, c10_25:2.2,  c25:0.1} },
+            { rank:5, label:'VI · Nord-Ovest',     val:2.68, classi:{c0_1:41.5, c1_5:42.2, c5_10:14.2, c10_25:1.7,  c25:0.4} },
+            { rank:6, label:'VIII · Libertà',      val:2.45, classi:{c0_1:57.3, c1_5:26.8, c5_10:12.4, c10_25:3.0,  c25:0.5} },
+            { rank:7, label:'II · Resuttana',      val:2.26, classi:{c0_1:66.6, c1_5:18.0, c5_10:10.6, c10_25:4.2,  c25:0.6} },
+            { rank:8, label:'I · Centro Storico',  val:0.67, classi:{c0_1:85.0, c1_5:14.3, c5_10:0.7,  c10_25:0.0,  c25:0.0} }
+          ]
+        });
+
+        appendRankingCard(el, {
+          title: 'Top Quartieri · rugosità (TRI)',
+          subtitle: 'TRI medio',
+          unit: '',
+          maxVal: 6.67,
+          classes: TRI_CLASSES,
+          items: [
+            { rank:1, label:'Arenella - Vergine Maria',     val:6.67, classi:{c0_1:31.4, c1_5:27.7, c5_10:32.1, c10_25:3.0, c25:5.8} },
+            { rank:2, label:'Partanna Mondello',            val:5.49, classi:{c0_1:38.4, c1_5:21.6, c5_10:30.6, c10_25:6.1, c25:3.3} },
+            { rank:3, label:'Boccadifalco',                 val:5.10, classi:{c0_1:19.0, c1_5:28.0, c5_10:47.9, c10_25:4.8, c25:0.3} },
+            { rank:4, label:'Borgo Nuovo',                  val:4.16, classi:{c0_1:18.1, c1_5:45.8, c5_10:32.1, c10_25:3.9, c25:0.1} },
+            { rank:5, label:'Villagrazia - Falsomiele',     val:4.02, classi:{c0_1:36.3, c1_5:26.4, c5_10:31.7, c10_25:5.1, c25:0.4} },
+            { rank:6, label:'Montepellegrino',              val:3.85, classi:{c0_1:31.2, c1_5:42.1, c5_10:20.9, c10_25:4.9, c25:0.9} },
+            { rank:7, label:'Brancaccio - Ciaculli',        val:3.45, classi:{c0_1:52.1, c1_5:21.6, c5_10:18.0, c10_25:7.2, c25:1.0} },
+            { rank:8, label:'Tommaso Natale - Sferracavallo', val:2.99, classi:{c0_1:41.0, c1_5:33.7, c5_10:22.3, c10_25:2.9, c25:0.0} }
+          ]
+        });
       }
     }
   };

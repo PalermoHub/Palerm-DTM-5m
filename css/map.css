@@ -661,13 +661,15 @@ body {
   margin-top: 10px;
 }
 
+/*
 .inline-chart {
   background: #fff;
   border: 1px solid rgba(30, 60, 160, 0.1);
   border-radius: 10px;
   padding: 14px 12px 10px;
   box-shadow: 0 2px 10px rgba(30, 60, 160, 0.06);
-}
+}*/
+
 .inline-chart canvas { max-height: 210px; width: 100% !important; }
 
 /* ── Data tables ── */
@@ -1293,8 +1295,8 @@ body {
 
 /* Intro analisi (pannello dx) */
 .rp-intro {
-  background: rgba(36, 88, 200, 0.05);
-  border-left: 3px solid #2458c8;
+ /* background: rgba(36, 88, 200, 0.05);
+  border-left: 3px solid #2458c8;*/
   border-radius: 0 6px 6px 0;
   padding: 10px 12px;
   font-size: 12px;
@@ -1376,7 +1378,7 @@ body {
 
 /* ── Ring Card Widget ── */
 .ring-card {
-  background: #eceff8;
+  /*background: #eceff8;*/
   border: 1px solid #d0d7de;
   border-radius: 16px;
   padding: 16px;
