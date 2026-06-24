@@ -165,6 +165,33 @@ const map = new maplibregl.Map({
         scheme: 'tms',
         attribution: 'Indice radiazione solare: DTM HRDTM5m@italia'
       },
+      'heatmap-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/heatmap/{z}/{x}/{y}.png`],
+        tileSize: 256,
+        minzoom: 8,
+        maxzoom: 15,
+        scheme: 'tms',
+        attribution: 'Heatmap complessità terreno: DTM HRDTM5m@italia'
+      },
+      'vulnerabilita-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/vulnerabilita/{z}/{x}/{y}.png`],
+        tileSize: 256,
+        minzoom: 8,
+        maxzoom: 15,
+        scheme: 'tms',
+        attribution: 'Indice vulnerabilità: DTM HRDTM5m@italia'
+      },
+      'solare-raf-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/solare_raf/{z}/{x}/{y}.png`],
+        tileSize: 256,
+        minzoom: 8,
+        maxzoom: 15,
+        scheme: 'tms',
+        attribution: 'Radiazione solare raffinata: DTM HRDTM5m@italia'
+      },
       'upl': {
         type: 'geojson',
         data: `${BASE_URL}docs/geojson/upl.geojson`
@@ -261,6 +288,33 @@ const map = new maplibregl.Map({
         id: 'radiazione-layer',
         type: 'raster',
         source: 'radiazione-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // Heatmap complessità terreno — disattiva di default
+      {
+        id: 'heatmap-layer',
+        type: 'raster',
+        source: 'heatmap-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // Indice vulnerabilità — disattiva di default
+      {
+        id: 'vulnerabilita-layer',
+        type: 'raster',
+        source: 'vulnerabilita-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // Radiazione solare raffinata — disattiva di default
+      {
+        id: 'solare-raf-layer',
+        type: 'raster',
+        source: 'solare-raf-raster',
         layout: { visibility: 'none' },
         paint: { 'raster-opacity': 1.0 }
       },

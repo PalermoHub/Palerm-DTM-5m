@@ -594,6 +594,139 @@
       }
     },
 
+    heatmap: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>',
+      title: 'Heatmap complessità',
+      layer: 'heatmap-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'La <strong>Heatmap di Complessità Terreno</strong> combina tre indicatori morfometrici: ' +
+          'pendenza (peso 40%), Terrain Ruggedness Index — TRI (35%) e rugosità assoluta (25%). ' +
+          'Ogni variabile è normalizzata tra 0 e 1 (percentile 2–98 per escludere outlier). ' +
+          'Il <strong>63,6% del territorio</strong> ricade nella classe molto bassa (0–0,2): ' +
+          'la pianura costiera e la Conca d\'Oro presentano terreno semplice. ' +
+          'Solo il <strong>12,2% supera 0,6</strong>: si tratta dei versanti nord (Monte Cuccio, Pizzuta) ' +
+          'dove pendenza, irregolarità e rugosità si sommano. Indice utile per: ' +
+          'valutazione itinerari, pianificazione infrastrutture, analisi di pericolosità geomorfologica.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-heatmap',
+          title: 'Distribuzione complessità',
+          centerVal: '0,22',
+          centerLabel: 'media',
+          legendData: [
+            { chartLabel: 'Molto bassa 0–0.2', label: '0,0–0,2  molto bassa',  pct: 63, color: '#053061' },
+            { chartLabel: 'Bassa 0.2–0.4',     label: '0,2–0,4  bassa',        pct: 12, color: '#4393c3' },
+            { chartLabel: 'Media 0.4–0.6',     label: '0,4–0,6  media',        pct: 12, color: '#f7f7f7' },
+            { chartLabel: 'Alta 0.6–0.8',      label: '0,6–0,8  alta',         pct:  8, color: '#d6604d' },
+            { chartLabel: 'Molto alta 0.8–1',  label: '0,8–1,0  molto alta',   pct:  4, color: '#67001f' }
+          ],
+          summaries: [
+            { val: '0,22', label: 'media' },
+            { val: '63,6%', label: 'bassa (<0,2)' },
+            { val: '12,2%', label: 'alta (>0,6)' }
+          ]
+        });
+        appendText(el,
+          'Il confronto incrociato dei tre indici morfometrici rivela le aree di massima ' +
+          'complessità topografica: le creste dei Monti di Palermo, i versanti nord-ovest ' +
+          'verso Monreale e le balze rocciose di Montepellegrino.'
+        );
+      }
+    },
+
+    vulnerabilita: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+      title: 'Indice vulnerabilità',
+      layer: 'vulnerabilita-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'L\'<strong>Indice di Vulnerabilità Territoriale</strong> aggrega quattro fattori di rischio ' +
+          'morfologico con pesi differenziati: pendenza (35%), classe di stabilità versanti (30%), ' +
+          'costruibilità (20%), rugosità TRI (15%). ' +
+          'Il <strong>56,9%</strong> del territorio presenta vulnerabilità molto bassa: aree pianeggianti ' +
+          'e stabili dove il rischio geomorfologico è trascurabile. ' +
+          'Il <strong>18,8%</strong> supera la soglia critica (0,6): versanti ripidi, instabili o con ' +
+          'costruibilità molto limitata — concentrati nei rilievi nord-ovest e nelle balze collinari. ' +
+          'Il <strong>6,3%</strong> raggiunge vulnerabilità massima (0,8–1,0), ' +
+          'corrispondente a pendenze oltre 35°, stabilità classe 4–5 e costruibilità nulla.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-vuln',
+          title: 'Classi di vulnerabilità',
+          centerVal: '0,26',
+          centerLabel: 'media',
+          legendData: [
+            { chartLabel: 'Molto bassa 0–0.2', label: '0,0–0,2  molto bassa',  pct: 57, color: '#1a9641' },
+            { chartLabel: 'Bassa 0.2–0.4',     label: '0,2–0,4  bassa',        pct: 12, color: '#a6d96a' },
+            { chartLabel: 'Media 0.4–0.6',     label: '0,4–0,6  media',        pct: 13, color: '#ffffbf' },
+            { chartLabel: 'Alta 0.6–0.8',      label: '0,6–0,8  alta',         pct: 13, color: '#f46d43' },
+            { chartLabel: 'Critica 0.8–1.0',   label: '0,8–1,0  critica',      pct:  6, color: '#a50026' }
+          ],
+          summaries: [
+            { val: '0,26', label: 'media' },
+            { val: '56,9%', label: 'bassa (<0,2)' },
+            { val: '18,8%', label: 'alta (>0,6)' }
+          ]
+        });
+        appendText(el,
+          'L\'indice sintetico di vulnerabilità individua le zone a maggior rischio combinato. ' +
+          'Zona critica: crinali dei Monti di Palermo tra Boccadifalco, Baida e Mondello. ' +
+          'Zona sicura: tutta la fascia costiera pianeggiante dalla Noce al Centro Storico ' +
+          'e il fondovalle dell\'Oreto.'
+        );
+      }
+    },
+
+    solarraf: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/><line x1="12" y1="8" x2="12" y2="12" stroke-width="3"/></svg>',
+      title: 'Solare raffinato',
+      layer: 'solare-raf-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'Il <strong>Solare Raffinato</strong> corregge l\'Indice di Radiazione Solare (SRI) base ' +
+          'moltiplicandolo per due fattori: (1) <strong>fattore aspetto</strong> — massimo per esposizione ' +
+          'Sud (180°), minimo per Nord; formula: 0,60 + 0,40 × (1 − cos(aspetto))/2; ' +
+          '(2) <strong>fattore pendenza</strong> — ottimale 3°–30°, penalità lieve sotto 3° (pianura ' +
+          'quasi orizzontale) e oltre 30° (versante eccessivo). ' +
+          'Rispetto al SRI grezzo (media 0,59), la correzione riduce la media a <strong>0,43</strong> ' +
+          'perché penalizza i numerosi versanti esposti a nord. ' +
+          'Il <strong>14,7%</strong> raggiunge valori ottimali (0,6–1,0): versanti meridionali ' +
+          'moderatamente inclinati — zone ideali per impianti fotovoltaici e colture eliofile.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-solarraf',
+          title: 'Distribuzione solare corretto',
+          centerVal: '0,43',
+          centerLabel: 'media corr.',
+          legendData: [
+            { chartLabel: 'Minima 0–0.2',   label: '0,0–0,2  minima (N/ombra)',  pct:  8, color: '#440154' },
+            { chartLabel: 'Bassa 0.2–0.4',  label: '0,2–0,4  bassa',             pct: 41, color: '#3e6f8e' },
+            { chartLabel: 'Media 0.4–0.6',  label: '0,4–0,6  media',             pct: 36, color: '#1fa188' },
+            { chartLabel: 'Alta 0.6–0.8',   label: '0,6–0,8  alta',              pct: 11, color: '#9fda3a' },
+            { chartLabel: 'Ottima 0.8–1.0', label: '0,8–1,0  ottima (S/SO)',     pct:  4, color: '#f2a600' }
+          ],
+          summaries: [
+            { val: '0,43', label: 'media corr.' },
+            { val: '0,59', label: 'SRI grezzo' },
+            { val: '14,7%', label: 'ottimale (>0,6)' }
+          ]
+        });
+        appendText(el,
+          'La correzione rivela la reale potenzialità energetica del territorio: ' +
+          'le zone pianeggianti costiere (SRI grezzo alto ma aspetto piatto) scendono a ' +
+          'valori medi, mentre i versanti meridionali moderatamente inclinati (Mezzomonreale, ' +
+          'Cruillas-Brancaccio) emergono come aree di massima efficienza solare.'
+        );
+      }
+    },
+
     rugosity: {
       icon: SVG_ICONS.rugosity,
       title: 'Rugosità (TRI)',

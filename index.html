@@ -274,6 +274,33 @@
     <div class="legend-item"><div class="legend-box" style="background:#d7191c;"></div><span>0,8 – 1,0  molto alta</span></div>
   </div>
 
+  <div id="legend-heatmap" class="map-legend legend-analysis">
+    <div class="map-legend-title">Heatmap complessità</div>
+    <div class="legend-item"><div class="legend-box" style="background:#053061;"></div><span>0,0 – 0,2  molto bassa</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#4393c3;"></div><span>0,2 – 0,4  bassa</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#f7f7f7;"></div><span>0,4 – 0,6  media</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#d6604d;"></div><span>0,6 – 0,8  alta</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#67001f;"></div><span>0,8 – 1,0  molto alta</span></div>
+  </div>
+
+  <div id="legend-vulnerabilita" class="map-legend legend-analysis">
+    <div class="map-legend-title">Indice vulnerabilità</div>
+    <div class="legend-item"><div class="legend-box" style="background:#1a9641;"></div><span>0,0 – 0,2  molto bassa</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#a6d96a;"></div><span>0,2 – 0,4  bassa</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#ffffbf;"></div><span>0,4 – 0,6  media</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#f46d43;"></div><span>0,6 – 0,8  alta</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#a50026;"></div><span>0,8 – 1,0  critica</span></div>
+  </div>
+
+  <div id="legend-solarraf" class="map-legend legend-analysis">
+    <div class="map-legend-title">Solare raffinato</div>
+    <div class="legend-item"><div class="legend-box" style="background:#440154;"></div><span>0,0 – 0,2  minima (N/ombra)</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#3e6f8e;"></div><span>0,2 – 0,4  bassa</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#1fa188;"></div><span>0,4 – 0,6  media</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#9fda3a;"></div><span>0,6 – 0,8  alta</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#f2a600;"></div><span>0,8 – 1,0  ottima (S/SO)</span></div>
+  </div>
+
   <div id="legend-contour" class="map-legend">
     <div class="map-legend-title">Curve di livello</div>
     <div class="legend-item">
@@ -833,6 +860,24 @@
           <div class="rp-card-line" style="background:#546e7a;"></div>
           <div class="rp-card-title">Rugosità (TRI)</div>
           <div class="rp-card-sub">TRI medio 3,05 · max 369</div>
+        </div>
+
+        <div class="rp-card" data-analysis="heatmap">
+          <div class="rp-card-line" style="background:#b01a2e;"></div>
+          <div class="rp-card-title">Heatmap complessità</div>
+          <div class="rp-card-sub">Slope + TRI + Roughness · media 0,22</div>
+        </div>
+
+        <div class="rp-card" data-analysis="vulnerabilita">
+          <div class="rp-card-line" style="background:#d73027;"></div>
+          <div class="rp-card-title">Indice vulnerabilità</div>
+          <div class="rp-card-sub">Multi-criterio · 19% ad alto rischio</div>
+        </div>
+
+        <div class="rp-card" data-analysis="solarraf">
+          <div class="rp-card-line" style="background:#f2a600;"></div>
+          <div class="rp-card-title">Solare raffinato</div>
+          <div class="rp-card-sub">SRI × aspetto × pendenza · media 0,43</div>
         </div>
 
       </div><!-- /rp-cards -->
