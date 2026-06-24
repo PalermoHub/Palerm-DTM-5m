@@ -230,8 +230,8 @@
     build: {
       icon: SVG_ICONS.build,
       title: 'Costruibilità',
-      layer: null,
-      hasLayer: false,
+      layer: 'costruibilita-layer',
+      hasLayer: true,
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
@@ -245,11 +245,11 @@
           centerVal: '47.3',
           centerLabel: '% ottima',
           legendData: [
-            { chartLabel: 'Ottima', label: '1 - Ottima (pianura)', pct: 47.3, color: '#1565c0' },
-            { chartLabel: 'Buona', label: '2 - Buona', pct: 14.1, color: '#42a5f5' },
-            { chartLabel: 'Moderata', label: '3 - Moderata', pct: 9.9, color: '#ffcc02' },
-            { chartLabel: 'Difficile', label: '4 - Difficile', pct: 16.4, color: '#ff7043' },
-            { chartLabel: 'Non idonea', label: '5 - Non idonea', pct: 12.3, color: '#b71c1c' }
+            { chartLabel: 'Ottima', label: '1 - Ottima (pianura)', pct: 47.3, color: '#1a9641' },
+            { chartLabel: 'Buona', label: '2 - Buona', pct: 14.1, color: '#a6d96a' },
+            { chartLabel: 'Moderata', label: '3 - Moderata', pct: 9.9, color: '#ffffbf' },
+            { chartLabel: 'Difficile', label: '4 - Difficile', pct: 16.4, color: '#fdae61' },
+            { chartLabel: 'Non idonea', label: '5 - Non idonea', pct: 12.3, color: '#d7191c' }
           ]
         });
       }
@@ -258,8 +258,8 @@
     solar: {
       icon: SVG_ICONS.solar,
       title: 'Radiazione solare',
-      layer: null,
-      hasLayer: false,
+      layer: 'radiazione-layer',
+      hasLayer: true,
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
@@ -296,8 +296,8 @@
     rugosity: {
       icon: SVG_ICONS.rugosity,
       title: 'Rugosità (TRI)',
-      layer: null,
-      hasLayer: false,
+      layer: 'rugosita-layer',
+      hasLayer: true,
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
