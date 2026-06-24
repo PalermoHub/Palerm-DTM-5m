@@ -273,11 +273,11 @@
           centerVal: '0,59',
           centerLabel: 'SRI medio',
           legendData: [
-            { chartLabel: 'Bassa 0–0.3',      label: '0,0–0,3  bassa radiazione',    pct:  8, color: '#78909c' },
-            { chartLabel: 'Med-bassa 0.3–0.5', label: '0,3–0,5  medio-bassa',        pct: 17, color: '#ffcc02' },
-            { chartLabel: 'Media 0.5–0.7',     label: '0,5–0,7  media',              pct: 40, color: '#ff9800' },
-            { chartLabel: 'Alta 0.7–0.9',      label: '0,7–0,9  alta',               pct: 28, color: '#ff5722' },
-            { chartLabel: 'Max 0.9–1.0',       label: '0,9–1,0  massima',            pct:  7, color: '#b71c1c' }
+            { chartLabel: 'Molto bassa 0–0.3',  label: '0,0–0,3  molto bassa',  pct:  8, color: '#2c7bb6' },
+            { chartLabel: 'Bassa 0.3–0.5',     label: '0,3–0,5  bassa',        pct: 10, color: '#abd9e9' },
+            { chartLabel: 'Media 0.5–0.65',    label: '0,5–0,65  media',       pct: 56, color: '#ffffbf' },
+            { chartLabel: 'Alta 0.65–0.8',     label: '0,65–0,8  alta',        pct: 20, color: '#fdae61' },
+            { chartLabel: 'Molto alta 0.8–1',  label: '0,8–1,0  molto alta',   pct:  6, color: '#d7191c' }
           ],
           summaries: [
             { val: '0,59', label: 'SRI medio' },
@@ -311,11 +311,11 @@
           centerVal: '3,05',
           centerLabel: 'TRI medio',
           legendData: [
-            { chartLabel: 'Pianura 0–1',     label: '0–1  pianura',            pct: 38, color: '#4fc3f7' },
-            { chartLabel: 'Lieve 1–5',       label: '1–5  poco rugoso',        pct: 27, color: '#81c784' },
-            { chartLabel: 'Moderato 5–15',   label: '5–15  moderato',          pct: 18, color: '#ffb74d' },
-            { chartLabel: 'Rugoso 15–50',    label: '15–50  rugoso',           pct: 12, color: '#e57373' },
-            { chartLabel: 'Estremo >50',     label: '>50  estremamente rugoso', pct:  5, color: '#7e57c2' }
+            { chartLabel: 'Pianura 0–1',        label: '0–1  pianura',           pct: 50, color: '#3182bd' },
+            { chartLabel: 'Ondulato 1–5',      label: '1–5  ondulato',          pct: 27, color: '#6baed6' },
+            { chartLabel: 'Collinare 5–10',    label: '5–10  collinare',        pct: 19, color: '#ffffb2' },
+            { chartLabel: 'Accidentato 10–25', label: '10–25  accidentato',     pct:  3, color: '#fd8d3c' },
+            { chartLabel: 'Molto acc. >25',    label: '>25  molto accidentato', pct:  1, color: '#bd0026' }
           ],
           summaries: [
             { val: '3,05', label: 'TRI medio' },

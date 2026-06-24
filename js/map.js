@@ -406,6 +406,34 @@ const map = new maplibregl.Map({
   attributionControl: false
 });
 
+// ── Fix: Rimuovi nebbia/atmosfera dalla vista 3D ──────────────────────────
+map.on('style.load', function() {
+  
+  // 1. Rimuovi il layer del cielo in modo sicuro (senza far crashare la mappa)
+  const layers = map.getStyle().layers;
+  if (layers) {
+    layers.forEach(function(layer) {
+      if (layer.type === 'sky') {
+        map.removeLayer(layer.id);
+      }
+    });
+  }
+
+  // 2. Disabilita il "Fog" (la nebbia che sbiadisce i colori delle tile in 3D)
+  // Spingiamo il range della nebbia a distanze enormi (100-200 km) 
+  // così nella vista di Palermo sarà completamente invisibile.
+  if (typeof map.setFog === 'function') {
+    map.setFog({
+      range: [1000, 1500], 
+      color: 'white',
+      'high-color': '#245cdf',
+      'horizon-blend': 0.02,
+      'space-color': '#000000',
+      'star-intensity': 0
+    });
+  }
+});
+
 // ── Scala metrica custom ──────────────────────────────────────────────────
 function updateMapScale() {
   const scaleBar   = document.getElementById('map-scale-bar');

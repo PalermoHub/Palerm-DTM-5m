@@ -25,22 +25,6 @@
   });
 
   // ── Chart defaults ──────────────────────────────────
-  function barOpts(unit) {
-    unit = unit || '%';
-    return {
-      responsive: true,
-      maintainAspectRatio: true,
-      plugins: {
-        legend: { display: false },
-        tooltip: { callbacks: { label: function (c) { return ' ' + c.raw + unit; } } }
-      },
-      scales: {
-        x: { ticks: { color: '#6070a0', font: { size: 10, family: "'Titillium Web', sans-serif" } }, grid: { color: 'rgba(30,60,160,0.06)' } },
-        y: { ticks: { color: '#6070a0', font: { size: 10, family: "'Titillium Web', sans-serif" }, callback: function (v) { return v + unit; } }, grid: { color: 'rgba(30,60,160,0.08)' } }
-      }
-    };
-  }
-
   function donutOpts() {
     return {
       responsive: true,
@@ -80,16 +64,16 @@
   function initCharts() {
     // 1 · Altimetria
     new Chart(document.getElementById('chart-elevation'), {
-      type: 'bar',
+      type: 'doughnut',
       data: {
         labels: ['0–50 m', '50–200 m', '200–500 m', '500–800 m', '800–1051 m'],
         datasets: [{
           data: [35.6, 33.9, 19.2, 9.4, 1.8],
-          backgroundColor: ['#00cb9b', '#00ef2f', '#e2ff00', '#fe7f01', '#505050'],
-          borderRadius: 4, borderWidth: 0
+          backgroundColor: ['#00cb9b', '#00ef2f', '#e2ff00', '#fe7f01', '#141414'],
+          borderWidth: 0
         }]
       },
-      options: barOpts()
+      options: donutOpts()
     });
 
     // 2 · Pendenza
@@ -126,16 +110,16 @@
 
     // 4 · Geomorfologia
     new Chart(document.getElementById('chart-geomorph'), {
-      type: 'bar',
+      type: 'doughnut',
       data: {
         labels: ['Pianure', 'Versanti', 'Creste', 'Valli', 'Depressioni'],
         datasets: [{
           data: [0.2, 60.1, 33.3, 3.3, 3.1],
           backgroundColor: ['#4fc3f7', '#7986cb', '#ce93d8', '#80cbc4', '#ffb74d'],
-          borderRadius: 4, borderWidth: 0
+          borderWidth: 0
         }]
       },
-      options: barOpts()
+      options: donutOpts()
     });
 
     // 5 · Stabilità versanti
@@ -159,7 +143,35 @@
         labels: ['Ottima', 'Buona', 'Moderata', 'Difficile', 'Non idonea'],
         datasets: [{
           data: [47.3, 14.1, 9.9, 16.4, 12.3],
-          backgroundColor: ['#1565c0', '#42a5f5', '#ffcc02', '#ff7043', '#b71c1c'],
+          backgroundColor: ['#1a9641', '#a6d96a', '#ffffbf', '#fdae61', '#d7191c'],
+          borderWidth: 0
+        }]
+      },
+      options: donutOpts()
+    });
+
+    // 7 · Radiazione solare
+    new Chart(document.getElementById('chart-solar'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Molto bassa 0–0.3', 'Bassa 0.3–0.5', 'Media 0.5–0.65', 'Alta 0.65–0.8', 'Molto alta 0.8–1'],
+        datasets: [{
+          data: [8, 10, 56, 20, 6],
+          backgroundColor: ['#2c7bb6', '#abd9e9', '#ffffbf', '#fdae61', '#d7191c'],
+          borderWidth: 0
+        }]
+      },
+      options: donutOpts()
+    });
+
+    // 8 · Rugosità (TRI)
+    new Chart(document.getElementById('chart-rugosity'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Pianura 0–1', 'Ondulato 1–5', 'Collinare 5–10', 'Accidentato 10–25', 'Molto acc. >25'],
+        datasets: [{
+          data: [50, 27, 19, 3, 1],
+          backgroundColor: ['#3182bd', '#6baed6', '#ffffb2', '#fd8d3c', '#bd0026'],
           borderWidth: 0
         }]
       },

@@ -485,6 +485,19 @@
           meridionali. Questo dato è rilevante per studi energetici (potenziale fotovoltaico), agricoltura
           (colture eliofile), e comfort urbano.
         </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe SRI</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>0,0–0,3  molto bassa</td><td>8%</td></tr>
+              <tr><td>0,3–0,5  bassa</td><td>10%</td></tr>
+              <tr><td>0,5–0,65  media</td><td class="hl">56%</td></tr>
+              <tr><td>0,65–0,8  alta</td><td>20%</td></tr>
+              <tr><td>0,8–1,0  molto alta</td><td>6%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-solar"></canvas></div>
+        </div>
       </div>
 
       <!-- RUGOSITÀ -->
@@ -497,6 +510,19 @@
           variabilità del paesaggio. Il <strong>Roughness</strong> (rugosità assoluta) conferma: media
           3,04 con massimi di 280, concentrati sulle pareti rocciose dei rilievi.
         </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe TRI</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>0–1  pianura</td><td class="hl">50%</td></tr>
+              <tr><td>1–5  ondulato</td><td>27%</td></tr>
+              <tr><td>5–10  collinare</td><td>19%</td></tr>
+              <tr><td>10–25  accidentato</td><td class="hl-warn">3%</td></tr>
+              <tr><td>&gt;25  molto accidentato</td><td class="hl-warn">1%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-rugosity"></canvas></div>
+        </div>
       </div>
 
       <!-- SINTESI -->
