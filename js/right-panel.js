@@ -2274,6 +2274,42 @@
       noOpacity: true,
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
+
+        // ── Checkbox toggle layer transetti ─────────────────────────────────
+        var cbRow = document.createElement('label');
+        cbRow.style.cssText = 'display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;' +
+          'background:rgba(36,88,200,0.06);border:1px solid rgba(36,88,200,0.15);border-radius:6px;' +
+          'padding:7px 10px;margin-bottom:10px;font-size:12px;color:#2458c8;font-weight:600;';
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.id = 'transects-panel-cb';
+        cb.checked = true;
+        cb.style.cssText = 'width:14px;height:14px;accent-color:#e07800;cursor:pointer;flex-shrink:0;';
+        cb.addEventListener('change', function () {
+          if (typeof window.setTransectsVisible === 'function') {
+            window.setTransectsVisible(this.checked);
+          }
+        });
+        var cbIcon = document.createElement('span');
+        cbIcon.style.cssText = 'display:flex;align-items:center;flex-shrink:0;';
+        var svgNS = 'http://www.w3.org/2000/svg';
+        var svgEl = document.createElementNS(svgNS, 'svg');
+        svgEl.setAttribute('width', '18'); svgEl.setAttribute('height', '6');
+        svgEl.setAttribute('viewBox', '0 0 18 6'); svgEl.setAttribute('fill', 'none');
+        var lineEl = document.createElementNS(svgNS, 'line');
+        lineEl.setAttribute('x1', '0'); lineEl.setAttribute('y1', '3');
+        lineEl.setAttribute('x2', '18'); lineEl.setAttribute('y2', '3');
+        lineEl.setAttribute('stroke', '#e07800'); lineEl.setAttribute('stroke-width', '4');
+        lineEl.setAttribute('stroke-linecap', 'round');
+        svgEl.appendChild(lineEl);
+        cbIcon.appendChild(svgEl);
+        var cbTxt = document.createElement('span');
+        cbTxt.textContent = 'Mostra transetti sulla mappa';
+        cbRow.appendChild(cb);
+        cbRow.appendChild(cbIcon);
+        cbRow.appendChild(cbTxt);
+        el.appendChild(cbRow);
+
         appendIntro(el,
           'I <strong>9 profili altimetrici</strong> mostrano la variazione di quota lungo assi ' +
           'territoriali significativi, campionati sul DTM 5m con 200 punti per transetto. ' +
@@ -3330,6 +3366,10 @@
         if (opacityRow) { opacityRow.style.display = 'block'; }
         var legend = document.getElementById('legend-' + id);
         if (legend) { legend.classList.add('visible'); }
+        // Sync checkbox overlay transetti
+        if (typeof window.setTransectsVisible === 'function') {
+          window.setTransectsVisible(id === 'profili');
+        }
       } catch(e) {}
     }
 

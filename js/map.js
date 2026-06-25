@@ -648,8 +648,8 @@ const map = new maplibregl.Map({
         layout: { visibility: 'none' },
         paint: {
           'line-color': ['coalesce', ['get', 'color'], '#e07800'],
-          'line-width': 2.5,
-          'line-opacity': 0.9
+          'line-width': 6,
+          'line-opacity': 0.85
         }
       },
       {
@@ -1097,6 +1097,76 @@ document.getElementById('tb-griglia').addEventListener('click', function () {
   this.classList.toggle('on');
   map.setLayoutProperty('griglia-circles', 'visibility', this.classList.contains('on') ? 'visible' : 'none');
 });
+
+// ── Transetti profili altimetrici: funzione globale toggle ───────────────
+window.setTransectsVisible = function (visible) {
+  const vis = visible ? 'visible' : 'none';
+  try { map.setLayoutProperty('transects-line',  'visibility', vis); } catch(e) {}
+  try { map.setLayoutProperty('transects-label', 'visibility', vis); } catch(e) {}
+  const cb = document.getElementById('transects-panel-cb');
+  if (cb) cb.checked = visible;
+};
+
+// ── Tooltip hover transetti ───────────────────────────────────────────────
+(function () {
+  let _transectPopup = null;
+
+  map.on('mouseenter', 'transects-line', function (e) {
+    map.getCanvas().style.cursor = 'pointer';
+    const p = e.features && e.features[0] && e.features[0].properties;
+    if (!p) return;
+    if (_transectPopup) { _transectPopup.remove(); _transectPopup = null; }
+
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'font-size:12px;color:#2a3a5c;min-width:180px;';
+
+    const title = document.createElement('div');
+    title.style.cssText = 'font-weight:700;font-size:13px;margin-bottom:4px;display:flex;align-items:center;gap:6px;';
+    const dot = document.createElement('span');
+    dot.style.cssText = 'display:inline-block;width:10px;height:10px;border-radius:50%;background:' + (p.color || '#e07800') + ';flex-shrink:0;';
+    title.appendChild(dot);
+    title.appendChild(document.createTextNode(p.name || ''));
+    wrap.appendChild(title);
+
+    if (p.description) {
+      const desc = document.createElement('div');
+      desc.style.cssText = 'color:#5a6a98;margin-bottom:5px;line-height:1.4;';
+      desc.textContent = p.description;
+      wrap.appendChild(desc);
+    }
+
+    const meta = document.createElement('div');
+    meta.style.cssText = 'display:flex;gap:10px;font-size:11px;color:#3a4e78;';
+    const kmSpan = document.createElement('span');
+    kmSpan.textContent = '\u{1F4CF} ' + (p.length_km || '?') + ' km';
+    meta.appendChild(kmSpan);
+    if (p.min_m !== undefined && p.max_m !== undefined) {
+      const elvSpan = document.createElement('span');
+      elvSpan.textContent = '\u{26F0} ' + p.min_m + '–' + p.max_m + ' m s.l.m.';
+      meta.appendChild(elvSpan);
+    }
+    wrap.appendChild(meta);
+
+    _transectPopup = new maplibregl.Popup({
+      closeButton: false,
+      closeOnClick: false,
+      maxWidth: '260px',
+      offset: [0, -4]
+    })
+      .setLngLat(e.lngLat)
+      .setDOMContent(wrap)
+      .addTo(map);
+  });
+
+  map.on('mousemove', 'transects-line', function (e) {
+    if (_transectPopup) _transectPopup.setLngLat(e.lngLat);
+  });
+
+  map.on('mouseleave', 'transects-line', function () {
+    map.getCanvas().style.cursor = '';
+    if (_transectPopup) { _transectPopup.remove(); _transectPopup = null; }
+  });
+}());
 
 // Popup griglia — custom fixed div (bypassa il container MapLibre)
 let _grigliaLastKey = null;
