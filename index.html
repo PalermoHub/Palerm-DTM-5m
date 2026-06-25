@@ -503,6 +503,15 @@
     <div class="legend-item"><div class="legend-box" style="background:#ffa000;opacity:0.78;"></div><span>Gap moderato — instabile cl.3, fuori PAI</span></div>
   </div>
 
+  <!-- ── DTM × Uso Suolo ISPRA — Edificato su pendenze critiche ──────────── -->
+  <div id="legend-usosuolorischio" class="map-legend legend-analysis">
+    <div class="map-legend-title">Edificato × Pendenza (ISPRA 2023)</div>
+    <div class="legend-item"><div class="legend-box" style="background:#f0c020;opacity:0.85;"></div><span>Edificato — pendenza bassa (≤15°)</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#e87810;opacity:0.88;"></div><span>Edificato — pendenza moderata (15–30°)</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#c81010;opacity:0.92;"></div><span>Edificato — pendenza alta (&gt;30°) — rischio</span></div>
+    <div style="font-size:9px;color:#aaa;margin-top:4px;">Uso suolo: ISPRA copertura suolo 2023 v5 (EAGLE)</div>
+  </div>
+
   <!-- Bivariate: Elevazione × Densità -->
   <div id="legend-bivariateElev" class="map-legend legend-analysis">
     <div class="map-legend-title">Elevazione × Densità ab. (ISTAT 2021)</div>
@@ -1059,240 +1068,246 @@
     <!-- ── Vista 1: Galleria analisi ── -->
     <div id="rp-gallery" class="rp-view">
       <div class="rp-panel-header">
-        <div class="rp-panel-title">Analisi del territorio</div>
+        <div class="rp-panel-title">Analisi del territorio (36)</div>
         <div class="rp-panel-sub"><a href="https://zenodo.org/records/18872933" title="HR-DTM-5m Italia" target="_blank">HR-DTM-5m Italia</a> · Palermo</div>
       </div>
       <div class="rp-cards">
 
-        <!-- ── Morfometria di base ── -->
-        <div class="rp-category-header">Morfometria di base</div>
+        <!-- ── Morfometria di base (5) ── -->
+        <div class="rp-category-header" style="color:#7B5535;">Morfometria di base (5)</div>
 
-        <div class="rp-card" data-analysis="elevation">
-          <div class="rp-card-line" style="background:#00cb9b;"></div>
+        <div class="rp-card" data-analysis="elevation" title="Mappa Elevazione — 0–1.050 m · media 183 m">
+          <div class="rp-card-line" style="background:#7B5535;"></div>
           <div class="rp-card-title">Mappa Elevazione</div>
           <div class="rp-card-sub">0–1.050 m · media 183 m</div>
         </div>
 
-        <div class="rp-card" data-analysis="slope">
-          <div class="rp-card-line" style="background:#ff9800;"></div>
+        <div class="rp-card" data-analysis="slope" title="Pendenze — Media 11,4° · 30,8% oltre 15°">
+          <div class="rp-card-line" style="background:#7B5535;"></div>
           <div class="rp-card-title">Pendenze</div>
           <div class="rp-card-sub">Media 11,4° · 30,8% oltre 15°</div>
         </div>
 
-        <div class="rp-card" data-analysis="aspect">
-          <div class="rp-card-line" style="background:#4fc3f7;"></div>
+        <div class="rp-card" data-analysis="aspect" title="Esposizione — Prevalente NE (18,9%)">
+          <div class="rp-card-line" style="background:#7B5535;"></div>
           <div class="rp-card-title">Esposizione</div>
           <div class="rp-card-sub">Prevalente NE (18,9%)</div>
         </div>
 
-        <div class="rp-card" data-analysis="rugosity">
-          <div class="rp-card-line" style="background:#546e7a;"></div>
+        <div class="rp-card" data-analysis="rugosity" title="Rugosità (TRI) — TRI medio 3,05 · max 369">
+          <div class="rp-card-line" style="background:#7B5535;"></div>
           <div class="rp-card-title">Rugosità (TRI)</div>
           <div class="rp-card-sub">TRI medio 3,05 · max 369</div>
         </div>
 
-        <div class="rp-card" data-analysis="heatmap">
-          <div class="rp-card-line" style="background:#b01a2e;"></div>
+        <div class="rp-card" data-analysis="heatmap" title="Heatmap complessità — Slope + TRI + Roughness · media 0,22">
+          <div class="rp-card-line" style="background:#7B5535;"></div>
           <div class="rp-card-title">Heatmap complessità</div>
           <div class="rp-card-sub">Slope + TRI + Roughness · media 0,22</div>
         </div>
 
-        <!-- ── Struttura e forma del paesaggio ── -->
-        <div class="rp-category-header">Struttura e forma del paesaggio</div>
+        <!-- ── Struttura e forma del paesaggio (6) ── -->
+        <div class="rp-category-header" style="color:#5046A0;">Struttura e forma del paesaggio (6)</div>
 
-        <div class="rp-card" data-analysis="geomorph">
-          <div class="rp-card-line" style="background:#7986cb;"></div>
+        <div class="rp-card" data-analysis="geomorph" title="Geomorfologia — Versanti 60% · Creste 33%">
+          <div class="rp-card-line" style="background:#5046A0;"></div>
           <div class="rp-card-title">Geomorfologia</div>
           <div class="rp-card-sub">Versanti 60% · Creste 33%</div>
         </div>
 
-        <div class="rp-card" data-analysis="tpi">
-          <div class="rp-card-line" style="background:#d73027;"></div>
+        <div class="rp-card" data-analysis="tpi" title="TPI locale — Posizione topografica · scala 100 m">
+          <div class="rp-card-line" style="background:#5046A0;"></div>
           <div class="rp-card-title">TPI locale</div>
           <div class="rp-card-sub">Posizione topografica · scala 100 m</div>
         </div>
 
-        <div class="rp-card" data-analysis="tpi300">
-          <div class="rp-card-line" style="background:#fc8d59;"></div>
+        <div class="rp-card" data-analysis="tpi300" title="TPI regionale (300 m) — Posizione nel paesaggio · scala 300 m">
+          <div class="rp-card-line" style="background:#5046A0;"></div>
           <div class="rp-card-title">TPI regionale (300 m)</div>
           <div class="rp-card-sub">Posizione nel paesaggio · scala 300 m</div>
         </div>
 
-        <div class="rp-card" data-analysis="curvplanare">
-          <div class="rp-card-line" style="background:#2166ac;"></div>
+        <div class="rp-card" data-analysis="curvplanare" title="Curvatura planare — Convergenza / divergenza flusso idrico">
+          <div class="rp-card-line" style="background:#5046A0;"></div>
           <div class="rp-card-title">Curvatura planare</div>
           <div class="rp-card-sub">Convergenza / divergenza flusso idrico</div>
         </div>
 
-        <div class="rp-card" data-analysis="curvprofilo">
-          <div class="rp-card-line" style="background:#1a9850;"></div>
+        <div class="rp-card" data-analysis="curvprofilo" title="Curvatura profilo — Accelerazione erosione · deposito">
+          <div class="rp-card-line" style="background:#5046A0;"></div>
           <div class="rp-card-title">Curvatura profilo</div>
           <div class="rp-card-sub">Accelerazione erosione · deposito</div>
         </div>
 
-        <div class="rp-card" data-analysis="curvtotale">
-          <div class="rp-card-line" style="background:#4575b4;"></div>
+        <div class="rp-card" data-analysis="curvtotale" title="Curvatura totale — Laplaciano · sintesi morfologica">
+          <div class="rp-card-line" style="background:#5046A0;"></div>
           <div class="rp-card-title">Curvatura totale</div>
           <div class="rp-card-sub">Laplaciano · sintesi morfologica</div>
         </div>
 
-        <!-- ── Idrologia e rischio idraulico ── -->
-        <div class="rp-category-header">Idrologia e rischio idraulico</div>
+        <!-- ── Idrologia e rischio idraulico (6) ── -->
+        <div class="rp-category-header" style="color:#1255A4;">Idrologia e rischio idraulico (6)</div>
 
-        <div class="rp-card" data-analysis="twi">
-          <div class="rp-card-line" style="background:#2171b5;"></div>
+        <div class="rp-card" data-analysis="twi" title="TWI — Wetness Index — Aree sature · rischio alluvione">
+          <div class="rp-card-line" style="background:#1255A4;"></div>
           <div class="rp-card-title">TWI — Wetness Index</div>
           <div class="rp-card-sub">Aree sature · rischio alluvione</div>
         </div>
 
-        <div class="rp-card" data-analysis="flowacc">
-          <div class="rp-card-line" style="background:#08306b;"></div>
+        <div class="rp-card" data-analysis="flowacc" title="Flow Accumulation — Reticolo idrografico potenziale">
+          <div class="rp-card-line" style="background:#1255A4;"></div>
           <div class="rp-card-title">Flow Accumulation</div>
           <div class="rp-card-sub">Reticolo idrografico potenziale</div>
         </div>
 
-        <div class="rp-card" data-analysis="bacini">
-          <div class="rp-card-line" style="background:#1f77b4;"></div>
+        <div class="rp-card" data-analysis="bacini" title="Bacini idrografici — 28 sottobacini versanti">
+          <div class="rp-card-line" style="background:#1255A4;"></div>
           <div class="rp-card-title">Bacini idrografici</div>
           <div class="rp-card-sub">28 sottobacini versanti</div>
         </div>
 
-        <div class="rp-card" data-analysis="spi">
-          <div class="rp-card-line" style="background:#d94801;"></div>
+        <div class="rp-card" data-analysis="spi" title="SPI — Stream Power Index — Potenziale erosivo corsi d'acqua">
+          <div class="rp-card-line" style="background:#1255A4;"></div>
           <div class="rp-card-title">SPI — Stream Power Index</div>
           <div class="rp-card-sub">Potenziale erosivo corsi d'acqua</div>
         </div>
 
-        <div class="rp-card" data-analysis="dtw">
-          <div class="rp-card-line" style="background:#00682c;"></div>
+        <div class="rp-card" data-analysis="dtw" title="Depth-to-Water (HAND) — Profondità falda freatica">
+          <div class="rp-card-line" style="background:#1255A4;"></div>
           <div class="rp-card-title">Depth-to-Water (HAND)</div>
           <div class="rp-card-sub">Profondità falda freatica</div>
         </div>
 
-        <div class="rp-card" data-analysis="erosionerusle">
-          <div class="rp-card-line" style="background:#fd8d3c;"></div>
+        <div class="rp-card" data-analysis="erosionerusle" title="Erosione potenziale RUSLE — Fattore LS semplificato · 5% critico (forre calcaree)">
+          <div class="rp-card-line" style="background:#1255A4;"></div>
           <div class="rp-card-title">Erosione potenziale RUSLE</div>
           <div class="rp-card-sub">Fattore LS semplificato · 5% critico (forre calcaree)</div>
         </div>
 
-        <!-- ── Rischio e pianificazione territoriale ── -->
-        <div class="rp-category-header">Rischio e pianificazione territoriale</div>
+        <!-- ── Rischio e pianificazione territoriale (4) ── -->
+        <div class="rp-category-header" style="color:#B71C1C;">Rischio e pianificazione territoriale (4)</div>
 
-        <div class="rp-card" data-analysis="stability">
-          <div class="rp-card-line" style="background:#ef5350;"></div>
+        <div class="rp-card" data-analysis="stability" title="Stabilità versanti — 30,8% a rischio (cl. 3–5)">
+          <div class="rp-card-line" style="background:#B71C1C;"></div>
           <div class="rp-card-title">Stabilità versanti</div>
           <div class="rp-card-sub">30,8% a rischio (cl. 3–5)</div>
         </div>
 
-        <div class="rp-card" data-analysis="vulnerabilita">
-          <div class="rp-card-line" style="background:#d73027;"></div>
+        <div class="rp-card" data-analysis="vulnerabilita" title="Indice vulnerabilità — Multi-criterio · 19% ad alto rischio">
+          <div class="rp-card-line" style="background:#B71C1C;"></div>
           <div class="rp-card-title">Indice vulnerabilità</div>
           <div class="rp-card-sub">Multi-criterio · 19% ad alto rischio</div>
         </div>
 
-        <div class="rp-card" data-analysis="build">
-          <div class="rp-card-line" style="background:#1565c0;"></div>
+        <div class="rp-card" data-analysis="build" title="Costruibilità — 47,3% ottima · 28,7% critica">
+          <div class="rp-card-line" style="background:#B71C1C;"></div>
           <div class="rp-card-title">Costruibilità</div>
           <div class="rp-card-sub">47,3% ottima · 28,7% critica</div>
         </div>
 
-        <div class="rp-card" data-analysis="curvaturainstabilita">
-          <div class="rp-card-line" style="background:#bd0026;"></div>
+        <div class="rp-card" data-analysis="curvaturainstabilita" title="Curvatura · instabilità radicale — Plan × profilo · 5% critico · accumulo detritico">
+          <div class="rp-card-line" style="background:#B71C1C;"></div>
           <div class="rp-card-title">Curvatura · instabilità radicale</div>
           <div class="rp-card-sub">Plan × profilo · 5% critico · accumulo detritico</div>
         </div>
 
-        <!-- ── Energia, clima e microclima ── -->
-        <div class="rp-category-header">Energia, clima e microclima</div>
+        <!-- ── Energia, clima e microclima (7) ── -->
+        <div class="rp-category-header" style="color:#BF6000;">Energia, clima e microclima (7)</div>
 
-        <div class="rp-card" data-analysis="solar">
-          <div class="rp-card-line" style="background:#ffb300;"></div>
+        <div class="rp-card" data-analysis="solar" title="Radiazione solare — SRI medio 0,59 · 56% fascia media">
+          <div class="rp-card-line" style="background:#BF6000;"></div>
           <div class="rp-card-title">Radiazione solare</div>
           <div class="rp-card-sub">SRI medio 0,59 · 56% fascia media</div>
         </div>
 
-        <div class="rp-card" data-analysis="solarraf">
-          <div class="rp-card-line" style="background:#f2a600;"></div>
+        <div class="rp-card" data-analysis="solarraf" title="Solare raffinato — SRI × aspetto × pendenza · media 0,43">
+          <div class="rp-card-line" style="background:#BF6000;"></div>
           <div class="rp-card-title">Solare raffinato</div>
           <div class="rp-card-sub">SRI × aspetto × pendenza · media 0,43</div>
         </div>
 
-        <div class="rp-card" data-analysis="fotovoltaico">
-          <div class="rp-card-line" style="background:#fde725;"></div>
+        <div class="rp-card" data-analysis="fotovoltaico" title="Potenziale fotovoltaico — SRI × aspetto × zona · media 0,41">
+          <div class="rp-card-line" style="background:#BF6000;"></div>
           <div class="rp-card-title">Potenziale fotovoltaico</div>
           <div class="rp-card-sub">SRI × aspetto × zona · media 0,41</div>
         </div>
 
-        <div class="rp-card" data-analysis="ombraestiva">
-          <div class="rp-card-line" style="background:#cc4c02;"></div>
+        <div class="rp-card" data-analysis="ombraestiva" title="Ombreggiamento estivo — 21 giugno · ore 9/12/15 · 92% soleggiato">
+          <div class="rp-card-line" style="background:#BF6000;"></div>
           <div class="rp-card-title">Ombreggiamento estivo</div>
           <div class="rp-card-sub">21 giugno · ore 9/12/15 · 92% soleggiato</div>
         </div>
 
-        <div class="rp-card" data-analysis="ombrainvernale">
-          <div class="rp-card-line" style="background:#084594;"></div>
+        <div class="rp-card" data-analysis="ombrainvernale" title="Ombreggiamento invernale — 21 dicembre · ore 9/12/15 · 18% ombra profonda">
+          <div class="rp-card-line" style="background:#BF6000;"></div>
           <div class="rp-card-title">Ombreggiamento invernale</div>
           <div class="rp-card-sub">21 dicembre · ore 9/12/15 · 18% ombra profonda</div>
         </div>
 
-        <div class="rp-card" data-analysis="frosthollow">
-          <div class="rp-card-line" style="background:#08306b;"></div>
+        <div class="rp-card" data-analysis="frosthollow" title="Frost hollow — Accumulo aria fredda · 4,6% ad alto rischio">
+          <div class="rp-card-line" style="background:#BF6000;"></div>
           <div class="rp-card-title">Frost hollow</div>
           <div class="rp-card-sub">Accumulo aria fredda · 4,6% ad alto rischio</div>
         </div>
 
-        <div class="rp-card" data-analysis="svf">
-          <div class="rp-card-line" style="background:#6bbfed;"></div>
+        <div class="rp-card" data-analysis="svf" title="Sky View Factor — Apertura del cielo · isola di calore urbana">
+          <div class="rp-card-line" style="background:#BF6000;"></div>
           <div class="rp-card-title">Sky View Factor</div>
           <div class="rp-card-sub">Apertura del cielo · isola di calore urbana</div>
         </div>
 
-        <!-- ── Verde urbano, mobilità e paesaggio ── -->
-        <div class="rp-category-header">Verde urbano, mobilità e paesaggio</div>
+        <!-- ── Verde urbano, mobilità e paesaggio (4) ── -->
+        <div class="rp-category-header" style="color:#1E7A2A;">Verde urbano, mobilità e paesaggio (4)</div>
 
-        <div class="rp-card" data-analysis="corridoi">
-          <div class="rp-card-line" style="background:#1a9850;"></div>
+        <div class="rp-card" data-analysis="corridoi" title="Corridoi ecologici morfologici — Connettività su slope+rugosità · 45,5% corridoio ottimale">
+          <div class="rp-card-line" style="background:#1E7A2A;"></div>
           <div class="rp-card-title">Corridoi ecologici morfologici</div>
           <div class="rp-card-sub">Connettività su slope+rugosità · 45,5% corridoio ottimale</div>
         </div>
 
-        <div class="rp-card" data-analysis="viewshed">
-          <div class="rp-card-line" style="background:#08519c;"></div>
+        <div class="rp-card" data-analysis="viewshed" title="Visibilità / Viewshed — Visibilità da 6 punti strategici · cumulativo">
+          <div class="rp-card-line" style="background:#1E7A2A;"></div>
           <div class="rp-card-title">Visibilità / Viewshed</div>
           <div class="rp-card-sub">Visibilità da 6 punti strategici · cumulativo</div>
         </div>
 
-        <div class="rp-card" data-analysis="accessibilita">
-          <div class="rp-card-line" style="background:#1a9641;"></div>
+        <div class="rp-card" data-analysis="accessibilita" title="Accessibilità morfologica — Velocità pedonale Tobler · media 3,1 km/h">
+          <div class="rp-card-line" style="background:#1E7A2A;"></div>
           <div class="rp-card-title">Accessibilità morfologica</div>
           <div class="rp-card-sub">Velocità pedonale Tobler · media 3,1 km/h</div>
         </div>
 
-        <div class="rp-card" data-analysis="profili">
-          <div class="rp-card-line" style="background:#e07800;"></div>
+        <div class="rp-card" data-analysis="profili" title="Profili altimetrici — 9 transetti · quota lungo assi territoriali">
+          <div class="rp-card-line" style="background:#1E7A2A;"></div>
           <div class="rp-card-title">Profili altimetrici</div>
           <div class="rp-card-sub">9 transetti · quota lungo assi territoriali</div>
         </div>
 
-        <!-- ── Analisi incrociate con altri dataset ── -->
-        <div class="rp-category-header">Analisi incrociate con altri dataset</div>
+        <!-- ── Analisi incrociate con altri dataset (4) ── -->
+        <div class="rp-category-header" style="color:#364F5A;">Analisi incrociate con altri dataset (4)</div>
 
-        <div class="rp-card" data-analysis="dtmpaigap">
-          <div class="rp-card-line" style="background:#dc1e1e;"></div>
+        <div class="rp-card" data-analysis="dtmpaigap" title="DTM × PAI — Gap morfologico — Aree instabili non perimetrate PAI R3/R4 · 79% fuori PAI">
+          <div class="rp-card-line" style="background:#364F5A;"></div>
           <div class="rp-card-title">DTM × PAI — Gap morfologico</div>
           <div class="rp-card-sub">Aree instabili non perimetrate PAI R3/R4 · 79% fuori PAI</div>
         </div>
 
-        <div class="rp-card" data-analysis="bivariateElev">
-          <div class="rp-card-line" style="background:linear-gradient(to right,#e8e8e8,#5698b9,#3b4994);"></div>
+        <div class="rp-card" data-analysis="bivariateElev" title="DTM × ISTAT — Elevazione × Densità — Bivariate · 3.600 sezioni ISTAT 2021 · 57% pop. in pianura">
+          <div class="rp-card-line" style="background:#364F5A;"></div>
           <div class="rp-card-title">DTM × ISTAT — Elevazione × Densità</div>
           <div class="rp-card-sub">Bivariate · 3.600 sezioni ISTAT 2021 · 57% pop. in pianura</div>
         </div>
 
-        <div class="rp-card" data-analysis="bivariateSlope">
-          <div class="rp-card-line" style="background:linear-gradient(to right,#e8e8e8,#bdb8c1,#2a5a8c);"></div>
+        <div class="rp-card" data-analysis="bivariateSlope" title="DTM × ISTAT — Pendenza × Densità — Bivariate · 10.229 ab. su versanti acclivi · rischio demografico">
+          <div class="rp-card-line" style="background:#364F5A;"></div>
           <div class="rp-card-title">DTM × ISTAT — Pendenza × Densità</div>
           <div class="rp-card-sub">Bivariate · 10.229 ab. su versanti acclivi · rischio demografico</div>
+        </div>
+
+        <div class="rp-card" data-analysis="usosuolorischio" title="DTM × Uso Suolo ISPRA — Edificato su pendenze critiche — EAGLE 2023 · 3,05 km² edificato su versanti >15° · rischio urbanistico">
+          <div class="rp-card-line" style="background:#364F5A;"></div>
+          <div class="rp-card-title">DTM × Uso Suolo ISPRA — Edificato su pendenze critiche</div>
+          <div class="rp-card-sub">EAGLE 2023 · 3,05 km² edificato su versanti &gt;15° · rischio urbanistico</div>
         </div>
 
       </div><!-- /rp-cards -->

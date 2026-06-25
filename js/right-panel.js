@@ -3199,6 +3199,78 @@
           'Soglie densità (terzili): bassa <8.777 · media 8.777–22.389 · alta >22.389 ab/km².'
         );
       }
+    },
+
+    usosuolorischio: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12"/><polyline points="3 9 12 3 21 9"/><line x1="9" y1="21" x2="9" y2="15"/><line x1="15" y1="21" x2="15" y2="15"/><line x1="9" y1="15" x2="15" y2="15"/><path d="M12 3 L12 3" stroke-width="3"/><path d="M4 14 L4 14 M20 14 L20 14" stroke-width="3"/></svg>',
+      title: 'DTM × Uso Suolo ISPRA — Edificato su pendenze critiche',
+      layer: 'uso-suolo-rischio-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'Incrocio tra la <strong>copertura del suolo ISPRA 2023</strong> (EAGLE v5, 10m) e la ' +
+          '<strong>pendenza derivata dal DTM 5m</strong>. Vengono evidenziate le superfici ' +
+          '<strong>edificate</strong> (codici EAGLE 1110, 1210, 1220 — suolo artificiale continuo, ' +
+          'discontinuo e infrastrutture) classificate per pendenza: <strong>bassa ≤15°</strong>, ' +
+          '<strong>moderata 15–30°</strong>, <strong>alta >30°</strong>. ' +
+          'L\'analisi individua le aree urbane dove l\'edificazione si sovrappone a versanti ' +
+          'acclivi, indicatore primario di rischio urbanistico da frana e instabilità.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-usosuolo',
+          title: 'Edificato per classe di pendenza',
+          centerVal: '4,8%',
+          centerLabel: 'su versanti >15°',
+          legendData: [
+            { chartLabel: '≤15°',   label: 'Pendenza bassa (≤15°) — rischio basso',      pct: 95.2, color: '#f0c020' },
+            { chartLabel: '15–30°', label: 'Pendenza moderata (15–30°) — rischio moderato', pct: 3.5,  color: '#e87810' },
+            { chartLabel: '>30°',   label: 'Pendenza alta (>30°) — rischio elevato',      pct: 1.2,  color: '#c81010' }
+          ],
+          summaries: [
+            { val: '63,8',  label: 'km² edificato' },
+            { val: '3,05',  label: 'km² su >15°' },
+            { val: '0,79',  label: 'km² su >30°' }
+          ]
+        });
+        appendSectionTitle(el, 'Superfici edificate per pendenza');
+        appendTable(el,
+          ['Categoria', 'Superficie', '% edificato'],
+          [
+            ['Edificato — pendenza bassa (≤15°)',    '60,70 km²', '95,2%'],
+            ['Edificato — pendenza moderata (15–30°)', '2,26 km²',  '3,5%',  'hl'],
+            ['Edificato — pendenza alta (>30°)',       '0,79 km²',  '1,2%',  'hl'],
+            ['Totale edificato',                       '63,75 km²', '100%'],
+            ['Di cui su pendenza critica (>15°)',      '3,05 km²',  '4,8%',  'hl']
+          ]
+        );
+        appendSectionTitle(el, 'Uso del suolo EAGLE');
+        appendTable(el,
+          ['Codice EAGLE', 'Classe', 'Note'],
+          [
+            ['1110', 'Suolo artificiale continuo', 'tessuto urbano compatto'],
+            ['1210', 'Suolo artificiale discontinuo', 'residenziale, industriale, commerciale'],
+            ['1220', 'Infrastrutture di trasporto', 'strade, ferrovie, aree connesse']
+          ]
+        );
+        appendSectionTitle(el, 'Contesto territoriale');
+        appendText(el,
+          'Il <strong>39,9%</strong> del territorio comunale (63,75 km² su 159,7 km²) risulta ' +
+          'classificato come suolo artificiale secondo ISPRA 2023. Di questo edificato, ' +
+          'la grande maggioranza (95,2%) si trova su pendenze ≤15° — la piana costiera e la ' +
+          'Conca d\'Oro. I <strong>3,05 km² su pendenze >15°</strong> corrispondono principalmente ' +
+          'ai quartieri periurbani collinari: Boccadifalco, Mezzomonreale, Santa Maria di Gesù, ' +
+          'Altarello e le pendici dei Monti di Palermo. ' +
+          'I <strong>0,79 km² su pendenza >30°</strong> rappresentano il rischio più critico: ' +
+          'strutture edificate su versanti ripidi dove il rischio di scivolamento e crollo ' +
+          'è significativamente amplificato.'
+        );
+        appendText(el,
+          'Fonte uso suolo: ISPRA — Copertura del suolo 2023 (v5), codifica EAGLE a 4 cifre, ' +
+          'risoluzione 10m, EPSG:3035 → riproiettato su griglia DTM 5m (EPSG:6875). ' +
+          'Pendenza calcolata dal DTM HRDTM5m@italia 5m.'
+        );
+      }
     }
 
   };

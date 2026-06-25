@@ -339,6 +339,12 @@ const map = new maplibregl.Map({
         tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'xyz',
         attribution: 'DTM × PAI — Gap morfologico: DTM HRDTM5m@italia + PAI Sicilia'
       },
+      'uso-suolo-rischio-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/uso_suolo_rischio/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'xyz',
+        attribution: 'DTM × Uso Suolo ISPRA 2023 — Edificato su pendenze critiche: DTM HRDTM5m@italia + ISPRA v5'
+      },
       'transects-geojson': {
         type: 'geojson',
         data: `${BASE_URL}docs/transects.geojson`
@@ -663,6 +669,15 @@ const map = new maplibregl.Map({
         id: 'dtm-pai-gap-layer',
         type: 'raster',
         source: 'dtm-pai-gap-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 0.9 }
+      },
+
+      // DTM × Uso Suolo ISPRA — Edificato su pendenze critiche
+      {
+        id: 'uso-suolo-rischio-layer',
+        type: 'raster',
+        source: 'uso-suolo-rischio-raster',
         layout: { visibility: 'none' },
         paint: { 'raster-opacity': 0.9 }
       },
@@ -1371,6 +1386,27 @@ function openGrigliaPanel(p, upl, lngLat, bivElev, bivSlope) {
     }
   }
 
+  // ── DTM × Uso Suolo ISPRA — Edificato su pendenze critiche ──
+  const USO_SUOLO_INFO = {
+    1: { label: 'Edificato — pendenza bassa (≤15°)',      bg: '#fef9c3', text: '#713f12', border: '#fde047' },
+    2: { label: 'Edificato — pendenza moderata (15–30°)', bg: '#ffedd5', text: '#9a3412', border: '#fdba74' },
+    3: { label: 'Edificato — pendenza alta (>30°)',       bg: '#fee2e2', text: '#991b1b', border: '#fca5a5' },
+  };
+  let sUsoSuolo = null;
+  if (p.uso_suolo != null && p.uso_suolo > 0) {
+    const usKey = Math.round(p.uso_suolo);
+    const usInf = USO_SUOLO_INFO[usKey];
+    sUsoSuolo = sec('DTM × Uso Suolo ISPRA — Edificato');
+    if (usInf) {
+      const r3 = document.createElement('div'); r3.className = 'rp-punto-row';
+      const lEl3 = document.createElement('span'); lEl3.className = 'rp-punto-row-label'; lEl3.textContent = 'Classe pendenza';
+      const badge3 = document.createElement('span'); badge3.className = 'rp-punto-badge';
+      badge3.textContent = usInf.label;
+      badge3.style.cssText = `background:${usInf.bg};color:${usInf.text};border-color:${usInf.border};`;
+      r3.appendChild(lEl3); r3.appendChild(badge3); sUsoSuolo.appendChild(r3);
+    }
+  }
+
   // ── DTM × ISTAT — Elevazione × Densità ──
   const ELEV_LABELS  = { '1': 'bassa quota',   '2': 'media quota',   '3': 'alta quota' };
   const DENS_LABELS  = { '1': 'bassa densità', '2': 'media densità', '3': 'alta densità' };
@@ -1418,7 +1454,7 @@ function openGrigliaPanel(p, upl, lngLat, bivElev, bivSlope) {
   const body = pEl('rp-punto-body');
   body.innerHTML = '';
   body.appendChild(hdr);
-  [sPend, sMorf, sRisk, sIdx, sIdro, sEn, sMob, sPai, sBivElev, sBivSlope, sTerr].forEach(s => s && body.appendChild(s));
+  [sPend, sMorf, sRisk, sIdx, sIdro, sEn, sMob, sPai, sUsoSuolo, sBivElev, sBivSlope, sTerr].forEach(s => s && body.appendChild(s));
   body.scrollTop = 0;
 
   // Titolo e coordinate
