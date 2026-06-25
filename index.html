@@ -107,7 +107,7 @@
 
   <!-- Orientamento Nord -->
   <button class="tb-btn" id="tb-north" title="Reimposta orientamento Nord">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="none">
+    <svg id="compass-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="none" style="transition:transform 0.1s linear;transform-origin:center center;">
       <polygon points="12,3 15,12 12,10 9,12" fill="currentColor"/>
       <polygon points="12,21 15,12 12,14 9,12" fill="currentColor" opacity="0.3"/>
     </svg>
@@ -589,10 +589,14 @@
 
   <div id="panel-body">
 
+    <button id="panel-back-top" onclick="panelScrollTop()" title="Torna in cima">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
     <nav id="panel-nav">
       <button class="ptab active" data-tab="analisi"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg> Analisi DTM</button>
-      <button class="ptab" data-tab="credits"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Credits</button>
-      <button class="ptab" data-tab="mappa"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> QGIS headless</button>
+	 <button class="ptab" data-tab="mappa"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> QGIS headless</button>
+	       <button class="ptab" data-tab="credits"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Credits</button>
     </nav>
 
     <!-- Tab: Analisi -->
@@ -849,6 +853,696 @@
           </table>
           <div class="inline-chart"><canvas id="chart-solar"></canvas></div>
         </div>
+      </div>
+
+      <!-- MORFOMETRIA AVANZATA -->
+      <div style="margin:28px 0 12px;border-top:2px solid rgba(36,88,200,0.12);padding-top:18px;">
+        <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;color:#8898cc;text-transform:uppercase;">Morfometria avanzata</span>
+      </div>
+
+      <div class="analysis-section">
+        <h3>TPI: posizione topografica locale</h3>
+        <p>
+          Il <strong>Topographic Position Index (TPI)</strong> confronta la quota di ogni cella con la media
+          del vicinato (~100 m): valori negativi indicano valli e depressioni, positivi creste e sommità.
+          A Palermo il <strong>50% del territorio</strong> ricade in classe pianura/mezzacosta.
+          Le valli incise (TPI &lt; −0,5) e le creste (TPI &gt; +0,5) rappresentano ciascuna il 25%.
+          Le valli principali (Oreto, Gabriele) emergono come depressioni lineari marcate;
+          i rilievi di Montepellegrino e i Monti di Palermo mostrano creste continue ad alto TPI.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe TPI</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>Valle / Depressione (TPI &lt; −1)</td><td>5%</td></tr>
+              <tr><td>Versante basso (−1 – −0,5)</td><td>20%</td></tr>
+              <tr><td>Pianura / Mezzacosta (±0,5)</td><td class="hl">50%</td></tr>
+              <tr><td>Versante alto (+0,5 – +1)</td><td>20%</td></tr>
+              <tr><td>Cresta / Sommità (TPI &gt; +1)</td><td>5%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-tpi"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>TPI regionale a 300 m</h3>
+        <p>
+          Il <strong>TPI a scala regionale (300 m di raggio)</strong> cattura la posizione morfologica nel paesaggio
+          più vasto: fondovalli fluviali, pianure intermontane, dorsali principali.
+          I valori spaziano da <strong>−142 m</strong> (fondovalle incassato) a <strong>+623 m</strong> (vetta prominente).
+          Combinato col TPI locale permette di classificare il territorio in 6 tipi morfologici:
+          piana, cresta locale, cresta esposta, versante aperto, valle chiusa, depressione.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe TPI 300 m</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>Fondovalle / Valle (TPI &lt; −5 m)</td><td>10%</td></tr>
+              <tr><td>Versante basso (−5 – −2 m)</td><td>15%</td></tr>
+              <tr><td>Pianura / Mezzacosta (±2 m)</td><td class="hl">50%</td></tr>
+              <tr><td>Versante alto (+2 – +5 m)</td><td>15%</td></tr>
+              <tr><td>Cresta / Dorsale (&gt; +5 m)</td><td>10%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-tpi300"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Curvatura planare</h3>
+        <p>
+          La <strong>curvatura planare</strong> descrive la forma della superficie nel piano orizzontale:
+          valori negativi (blu) indicano forme <strong>convergenti</strong> — il flusso idrico si concentra
+          e il suolo si satura. Valori positivi (rosso) indicano forme <strong>divergenti</strong> — drenaggio rapido.
+          Il <strong>50% del territorio</strong> è in classe planare (valori vicini a zero).
+          Le zone convergenti (canali, fondovalle) sono a rischio alluvione e frana per saturazione.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe curvatura planare</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>Convergente — accumulo (&lt; −0,05)</td><td class="hl-warn">25%</td></tr>
+              <tr><td>Planare (±0,05)</td><td class="hl">50%</td></tr>
+              <tr><td>Divergente — dispersione (&gt; +0,05)</td><td>25%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-curvplanare"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Curvatura di profilo</h3>
+        <p>
+          La <strong>curvatura di profilo</strong> descrive la forma della superficie nel piano verticale:
+          valori negativi indicano profili <strong>concavi</strong> (accelerazione del flusso verso il basso),
+          valori positivi profili <strong>convessi</strong> (decelerazione). Le aree concave tendono ad accumulare
+          acqua e materiale, le convesse a disperdere. Il <strong>50%</strong> ha profilo lineare.
+          Combinata con la curvatura planare, localizza aree ad alta probabilità di accumulo detritico.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe curvatura profilo</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>Concava — accelerazione (&lt; −0,05)</td><td class="hl-warn">25%</td></tr>
+              <tr><td>Lineare (±0,05)</td><td class="hl">50%</td></tr>
+              <tr><td>Convessa — decelerazione (&gt; +0,05)</td><td>25%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-curvprofilo"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Curvatura totale</h3>
+        <p>
+          La <strong>curvatura totale</strong> (curvatura media della superficie) combina gli effetti della curvatura
+          planare e di profilo: misura la variazione globale della direzione della normale alla superficie.
+          Identifica aree di massima convessità (speroni, creste) e concavità (canaloni, fondovalle).
+          Solo il <strong>5% del territorio</strong> ha curvatura estrema (creste/canyon) per classe.
+          Il 50% è in classe piatta/lineare — la dominante morfologia pianeggiante costiera.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe curvatura totale</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>Fortemente concava (&lt; −0,10)</td><td>5%</td></tr>
+              <tr><td>Moderatamente concava (−0,10 – −0,03)</td><td>20%</td></tr>
+              <tr><td>Piatta / lineare (±0,03)</td><td class="hl">50%</td></tr>
+              <tr><td>Moderatamente convessa (+0,03 – +0,10)</td><td>20%</td></tr>
+              <tr><td>Fortemente convessa (&gt; +0,10)</td><td>5%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-curvtotale"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Heatmap complessità del terreno</h3>
+        <p>
+          La <strong>Heatmap di Complessità</strong> combina tre indicatori morfometrici con pesi differenziati:
+          pendenza (40%), Terrain Ruggedness Index — TRI (35%) e rugosità assoluta (25%),
+          ciascuno normalizzato tra 0 e 1 (percentile 2–98).
+          Il <strong>63,6% del territorio</strong> ha complessità molto bassa (0–0,2): la Conca d'Oro e le aree
+          costiere presentano terreno semplice. Solo il <strong>12,2% supera 0,6</strong>:
+          versanti nord dei Monti di Palermo dove pendenza, irregolarità e rugosità si sommano.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe complessità</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>Molto bassa (0,0–0,2)</td><td class="hl">63%</td></tr>
+              <tr><td>Bassa (0,2–0,4)</td><td>12%</td></tr>
+              <tr><td>Media (0,4–0,6)</td><td>12%</td></tr>
+              <tr><td>Alta (0,6–0,8)</td><td class="hl-warn">8%</td></tr>
+              <tr><td>Molto alta (0,8–1,0)</td><td class="hl-warn">4%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-heatmap"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Indice di vulnerabilità territoriale</h3>
+        <p>
+          L'<strong>Indice di Vulnerabilità Territoriale</strong> aggrega quattro fattori di rischio morfologico:
+          pendenza (35%), stabilità versanti (30%), costruibilità (20%), rugosità TRI (15%).
+          Il <strong>56,9% del territorio</strong> presenta vulnerabilità molto bassa: aree pianeggianti e stabili.
+          Il <strong>18,8% supera la soglia critica (0,6)</strong>: versanti ripidi, instabili o con costruibilità
+          limitata — concentrati nei rilievi nord-ovest e nelle balze collinari.
+          Il <strong>6,3%</strong> raggiunge vulnerabilità massima (0,8–1,0).
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe vulnerabilità</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>Molto bassa (0,0–0,2)</td><td class="hl">57%</td></tr>
+              <tr><td>Bassa (0,2–0,4)</td><td>12%</td></tr>
+              <tr><td>Media (0,4–0,6)</td><td>13%</td></tr>
+              <tr><td>Alta (0,6–0,8)</td><td class="hl-warn">13%</td></tr>
+              <tr><td>Critica (0,8–1,0)</td><td class="hl-warn">6%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-vulnerabilita"></canvas></div>
+        </div>
+      </div>
+
+      <!-- IDROLOGIA -->
+      <div style="margin:28px 0 12px;border-top:2px solid rgba(36,88,200,0.12);padding-top:18px;">
+        <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;color:#8898cc;text-transform:uppercase;">Idrologia morfologica</span>
+      </div>
+
+      <div class="analysis-section">
+        <h3>TWI — Topographic Wetness Index</h3>
+        <p>
+          Il <strong>Topographic Wetness Index (TWI)</strong> stima la propensione di ogni cella ad accumulare
+          acqua superficiale: TWI = ln(A<sub>s</sub> / tan β). Valori elevati (blu scuro) indicano fondovalli,
+          pianure e zone concave — <strong>aree a rischio alluvione e zone umide potenziali</strong>.
+          Valori bassi indicano creste e versanti ripidi con drenaggio rapido.
+          La pianura costiera e la Conca d'Oro mostrano i TWI più elevati;
+          il Centro Storico ha il TWI medio più alto tra le circoscrizioni (6,52).
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe TWI</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>&lt; 6 — drenato rapidamente</td><td>15%</td></tr>
+              <tr><td>6–9 — bassa saturazione</td><td>30%</td></tr>
+              <tr><td>9–12 — media saturazione</td><td class="hl">35%</td></tr>
+              <tr><td>12–16 — alta saturazione</td><td class="hl-warn">15%</td></tr>
+              <tr><td>&gt; 16 — fondovalle / pianura</td><td class="hl-warn">5%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-twi"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Flow Accumulation — reticolo idrografico</h3>
+        <p>
+          La <strong>flow accumulation</strong> conta il numero di celle del DTM che drenano verso ciascun punto
+          seguendo la direzione D8 (massima pendenza). Visualizzata in scala logaritmica, rivela il
+          <strong>reticolo idrografico potenziale</strong> derivato unicamente dalla morfologia.
+          Le linee blu scuro corrispondono agli assi di drenaggio principali (aste &gt; 10.000 celle — il 2%).
+          I corsi individuati coincidono con i valloni storici: Oreto, Gabriele, Eleuterio.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Log₁₀ celle contribuenti</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>1–10 celle — versante</td><td class="hl">40%</td></tr>
+              <tr><td>10–100 celle — interfluvi</td><td>30%</td></tr>
+              <tr><td>100–1.000 celle — rilleni</td><td>20%</td></tr>
+              <tr><td>1.000–10.000 celle — corsi d'acqua</td><td>8%</td></tr>
+              <tr><td>&gt; 10.000 celle — aste principali</td><td class="hl-warn">2%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-flowacc"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Bacini idrografici</h3>
+        <p>
+          La <strong>delineazione automatica dei bacini idrografici</strong> partiziona il territorio comunale
+          in <strong>28 sottobacini</strong>, ciascuno corrispondente ad un'area che drena verso un'unica
+          sezione del reticolo idrografico. La delineazione si basa sull'algoritmo D8 applicato al DTM
+          pit-filled, con soglia di accumulo di 500 celle (~0,012 km²). I bacini principali corrispondono
+          ai bacini idrografici storici: Oreto (sud-ovest), Gabriele (nord-est), Eleuterio (est) e i
+          valloni minori dei Monti di Palermo.
+        </p>
+        <table class="data-table">
+          <thead><tr><th>Caratteristica</th><th>Valore</th></tr></thead>
+          <tbody>
+            <tr><td>Numero sottobacini</td><td class="hl">28</td></tr>
+            <tr><td>Soglia reticolo</td><td>500 celle ≈ 0,012 km²</td></tr>
+            <tr><td>Metodo delineazione</td><td>D8 watershed su DTM pit-filled</td></tr>
+            <tr><td>Bacini principali</td><td>Oreto, Gabriele, Eleuterio</td></tr>
+            <tr><td>Utilizzo</td><td>Gestione acque urbane · collettori fognari</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="analysis-section">
+        <h3>SPI — Stream Power Index</h3>
+        <p>
+          Lo <strong>Stream Power Index (SPI)</strong> misura il potenziale erosivo dei corsi d'acqua:
+          SPI = ln(A<sub>s</sub> × tan β). Combina la quantità d'acqua con la velocità di deflusso:
+          valori elevati (rosso) indicano aree ad alto potenziale di <strong>erosione e trasporto solido</strong>,
+          tipicamente nei fondovalli incisi ad alta pendenza.
+          Le valli dei Monti di Palermo (Gabriele, Eleuterio) mostrano gli SPI più elevati:
+          alta pendenza + grande area contributiva = massimo potenziale erosivo.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe SPI</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>&lt; 4 — bassa energia erosiva</td><td>30%</td></tr>
+              <tr><td>4–7 — energia moderata</td><td class="hl">35%</td></tr>
+              <tr><td>7–10 — alta energia erosiva</td><td class="hl-warn">25%</td></tr>
+              <tr><td>&gt; 10 — potenziale estremo</td><td class="hl-warn">10%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-spi"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Depth-to-Water (DTW) — profondità della falda</h3>
+        <p>
+          Il <strong>Depth-to-Water (DTW)</strong> stima la profondità relativa della falda freatica
+          con il metodo HAND (Height Above Nearest Drainage): ogni cella misura la quota
+          sul punto di drenaggio più vicino nel proprio bacino.
+          Valori bassi (verde) indicano falda vicina alla superficie — fondovalli, aree alluvionali, pianure costiere.
+          La Conca d'Oro mostra DTW bassi con rischi di allagamento di piani interrati.
+          Utile per la pianificazione di scavi e fondazioni.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe DTW (HAND)</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>0–2 m — falda superficiale</td><td class="hl-warn">20%</td></tr>
+              <tr><td>2–4 m — falda sub-superficiale</td><td>25%</td></tr>
+              <tr><td>4–6 m — falda intermedia</td><td class="hl">30%</td></tr>
+              <tr><td>6–8 m — falda profonda</td><td>15%</td></tr>
+              <tr><td>&gt; 8 m — falda molto profonda</td><td>10%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-dtw"></canvas></div>
+        </div>
+      </div>
+
+      <!-- ENERGIA E CLIMA -->
+      <div style="margin:28px 0 12px;border-top:2px solid rgba(36,88,200,0.12);padding-top:18px;">
+        <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;color:#8898cc;text-transform:uppercase;">Energia e clima</span>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Radiazione solare raffinata</h3>
+        <p>
+          Il <strong>Solare Raffinato</strong> corregge l'Indice di Radiazione Solare (SRI) base moltiplicandolo
+          per il <strong>fattore aspetto</strong> (max per esposizione Sud, min per Nord) e per il
+          <strong>fattore pendenza</strong> (ottimale 3°–30°). La correzione riduce la media da 0,59 a <strong>0,43</strong>
+          penalizzando i numerosi versanti esposti a nord.
+          Il <strong>14,7%</strong> raggiunge valori ottimali (&gt; 0,6): versanti meridionali moderatamente inclinati —
+          zone ideali per impianti fotovoltaici e colture eliofile.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe solare corretto</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>0,0–0,2 — minima (N / ombra)</td><td>8%</td></tr>
+              <tr><td>0,2–0,4 — bassa</td><td>41%</td></tr>
+              <tr><td>0,4–0,6 — media</td><td class="hl">36%</td></tr>
+              <tr><td>0,6–0,8 — alta</td><td>11%</td></tr>
+              <tr><td>0,8–1,0 — ottima (S / SO)</td><td class="hl">4%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-solarraf"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Potenziale fotovoltaico</h3>
+        <p>
+          Il <strong>Potenziale Fotovoltaico</strong> combina SRI, fattore aspetto e fattore zona
+          (priorità alle aree sotto i 200 m densamente urbanizzate).
+          La <strong>media comunale è 0,41</strong>; il <strong>5,9%</strong> raggiunge valori ottimali (&gt; 0,60):
+          versanti collinari meridionali tra 50 e 200 m di quota. Il Centro Storico ha il potenziale medio più
+          alto tra le circoscrizioni (0,494) grazie all'alta radiazione della pianura costiera.
+          Mappa di supporto per il PNRR — Comunità Energetiche.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe potenziale FV</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>0,0–0,2 — basso (N, ombra)</td><td>10%</td></tr>
+              <tr><td>0,2–0,3 — modesto</td><td>14%</td></tr>
+              <tr><td>0,3–0,4 — medio</td><td>20%</td></tr>
+              <tr><td>0,4–0,5 — buono</td><td class="hl">22%</td></tr>
+              <tr><td>0,5–0,6 — alto (S, pianura)</td><td class="hl">28%</td></tr>
+              <tr><td>&gt; 0,6 — ottimale (S/SE, colle)</td><td class="hl">6%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-fotovoltaico"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Ombreggiamento estivo (21 giugno)</h3>
+        <p>
+          La mappa mostra l'<strong>ombra media</strong> nelle tre ore chiave del solstizio d'estate (21 giugno):
+          ore 9, 12 e 15 CEST. Il sole alto estivo (massimo 70° a mezzogiorno) illumina quasi tutta la città:
+          il <strong>92,3% del territorio</strong> è prevalentemente soleggiato.
+          Solo le forre strette dei Monti di Palermo rimangono in ombra (0,6% classe marrone scuro).
+          La Circoscrizione III Oreto è la più soleggiata (irradiazione media 66);
+          la VI Nord-Ovest la meno soleggiata.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe ombreggiamento estivo</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>Piena luce (valore basso)</td><td class="hl">92%</td></tr>
+              <tr><td>Luce parziale</td><td>6%</td></tr>
+              <tr><td>Semi-ombra</td><td>1%</td></tr>
+              <tr><td>Ombra (forre / incisioni)</td><td>1%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-ombraestiva"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Ombreggiamento invernale (21 dicembre)</h3>
+        <p>
+          La mappa mostra l'<strong>ombra media</strong> del solstizio d'inverno (21 dicembre):
+          ore 9, 12 e 15 CET. Il sole basso invernale (massimo 28°) genera <strong>ombre lunghe</strong>:
+          il <strong>18,5% del territorio</strong> è quasi sempre in ombra (versanti settentrionali dei rilievi),
+          mentre il <strong>76%</strong> è in semi-ombra. In estate il 92% era soleggiato;
+          in inverno solo il <strong>5% riceve luce diretta piena</strong>. Fondamentale per il comfort
+          termico degli spazi pubblici e la progettazione bioclimatica.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe ombreggiamento invernale</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>Soleggiato (versanti S)</td><td class="hl">5%</td></tr>
+              <tr><td>Semi-ombra (pianura)</td><td class="hl">76%</td></tr>
+              <tr><td>Ombra parziale</td><td class="hl-warn">18%</td></tr>
+              <tr><td>Ombra quasi totale (N)</td><td class="hl-warn">1%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-ombrainvernale"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Frost hollow — accumulo di aria fredda</h3>
+        <p>
+          Il <strong>Frost Hollow Index</strong> individua le <strong>depressioni morfologiche</strong>
+          dove l'aria fredda tende ad accumularsi nelle notti serene per gravità.
+          Il calcolo combina TPI negativo (depressioni), curvatura concava e fattore quota.
+          Il <strong>4,6% del territorio</strong> è ad alto o critico rischio: fondovalle dell'Oreto,
+          depressioni di Boccadifalco-Baida, conche della Circoscrizione VI.
+          In queste aree nelle notti invernali la temperatura può scendere <strong>2–5°C</strong> sotto
+          le zone circostanti. Rilevante per la gestione del verde e le colture sensibili al gelo.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe rischio frost hollow</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>Nullo / aree piatte e creste</td><td class="hl">67%</td></tr>
+              <tr><td>Trascurabile (TPI lievemente negativo)</td><td>21%</td></tr>
+              <tr><td>Basso — depressioni ampie</td><td>8%</td></tr>
+              <tr><td>Moderato — valli parzialmente chiuse</td><td>3,5%</td></tr>
+              <tr><td>Alto — fondovalli stretti</td><td class="hl-warn">0,3%</td></tr>
+              <tr><td>Critico — depressioni chiuse</td><td class="hl-warn">0,2%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-frosthollow"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Sky View Factor (SVF)</h3>
+        <p>
+          Lo <strong>Sky View Factor (SVF)</strong> misura la <strong>frazione di cielo visibile</strong>
+          da ogni punto: valori vicini a 1,0 indicano orizzonte aperto (pianure, creste); valori bassi
+          indicano forti ostruzioni (valli strette, canyon urbani).
+          Il calcolo esegue uno scan in 8 direzioni con raggio 600 m: SVF = media dei cos²(angolo elevazione).
+          Il <strong>7,3% del territorio</strong> ha SVF &lt; 0,90 (ostruzione significativa).
+          SVF bassi nelle aree dense favoriscono l'isola di calore urbana notturna.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe SVF</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>&lt; 0,50 — fortemente ostruito</td><td class="hl-warn">0,2%</td></tr>
+              <tr><td>0,50–0,65 — ostruito (valli)</td><td class="hl-warn">0,9%</td></tr>
+              <tr><td>0,65–0,75 — parzialmente ostruito</td><td>1,4%</td></tr>
+              <tr><td>0,75–0,82 — semi-aperto</td><td>4,8%</td></tr>
+              <tr><td>0,82–0,88 — aperto</td><td>8,7%</td></tr>
+              <tr><td>0,88–0,94 — molto aperto</td><td>12,5%</td></tr>
+              <tr><td>&gt; 0,94 — pianura / crinale</td><td class="hl">71,5%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-svf"></canvas></div>
+        </div>
+      </div>
+
+      <!-- PIANIFICAZIONE E RISCHIO -->
+      <div style="margin:28px 0 12px;border-top:2px solid rgba(36,88,200,0.12);padding-top:18px;">
+        <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;color:#8898cc;text-transform:uppercase;">Pianificazione e rischio</span>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Corridoi ecologici morfologici</h3>
+        <p>
+          I <strong>Corridoi Ecologici Morfologici</strong> identificano le aree dove la morfologia del suolo
+          <strong>favorisce la continuità della vegetazione naturalizzata</strong>: bassa pendenza e bassa rugosità
+          permettono alla flora di connettere nuclei vegetali distanti.
+          Il <strong>45,5% del territorio</strong> ha connettività &gt; 0,85 (corridoio ottimale): pianure costiere
+          e Conca d'Oro. Il <strong>16,4%</strong> costituisce barriera critica: versanti calcarei di Monte Pellegrino,
+          Monte Cuccio e Monte Grifone. Base per la Rete Ecologica Comunale (REC).
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe connettività ecologica</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>0,00–0,15 — barriera critica</td><td class="hl-warn">16,4%</td></tr>
+              <tr><td>0,15–0,30 — barriera alta</td><td class="hl-warn">8,9%</td></tr>
+              <tr><td>0,30–0,45 — barriera moderata</td><td>6,6%</td></tr>
+              <tr><td>0,45–0,60 — corridoio potenziale</td><td>6,0%</td></tr>
+              <tr><td>0,60–0,73 — corridoio buono</td><td>6,3%</td></tr>
+              <tr><td>0,73–0,85 — corridoio ottimo</td><td>10,4%</td></tr>
+              <tr><td>&gt; 0,85 — nucleo — alta connettività</td><td class="hl">45,5%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-corridoi"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Erosione potenziale RUSLE — fattore LS</h3>
+        <p>
+          La mappa stima il <strong>fattore LS</strong> dell'equazione RUSLE (lunghezza e inclinazione del versante):
+          LS = L × S (formula McCool 1987). È un indice adimensionale di priorità spaziale, non una stima in t/ha/anno.
+          I valori più elevati (LS &gt; 7,76 — critico) si concentrano nelle forre calcaree di Monte Pellegrino
+          e Monte Cuccio e nei versanti acclivi della Circoscrizione VI.
+          Le aree pianeggianti costiere hanno LS &lt; 0,20.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe potenziale erosivo LS</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>LS &lt; 0,20 — molto basso (fondovalle)</td><td class="hl">25%</td></tr>
+              <tr><td>LS 0,20–0,52 — basso</td><td>25%</td></tr>
+              <tr><td>LS 0,52–3,68 — medio (versanti moderati)</td><td>25%</td></tr>
+              <tr><td>LS 3,68–7,76 — alto</td><td class="hl-warn">20%</td></tr>
+              <tr><td>LS &gt; 7,76 — critico (forre calcaree)</td><td class="hl-warn">5%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-erosionerusle"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Curvatura e instabilità radicale</h3>
+        <p>
+          La mappa combina <strong>curvatura planare</strong> e <strong>curvatura di profilo</strong> per identificare
+          siti di accumulo detritico (convergenza planare + concavità di profilo) e
+          <strong>instabilità radicale</strong> (convergenza planare + convessità + pendenza elevata:
+          suolo secco con radici sottoposte a stress meccanico laterale —
+          rilevante per la gestione dei pini marittimi su versanti acclivi).
+          Il <strong>5%</strong> del territorio è classificato critico; il 60% è stabile.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe instabilità curvatura</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>Stabile — pianura / divergente</td><td class="hl">60%</td></tr>
+              <tr><td>Basso — lieve convergenza</td><td>15%</td></tr>
+              <tr><td>Moderato — potenziale accumulo detritico</td><td>13%</td></tr>
+              <tr><td>Alto — accumulo o instabilità radicale</td><td class="hl-warn">7%</td></tr>
+              <tr><td>Critico — canyon convergenti / versanti ripidi</td><td class="hl-warn">5%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-curvaturainstabilita"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>DTM × PAI — Gap morfologico</h3>
+        <p>
+          Confronto tra la <strong>stabilità morfologica DTM</strong> e le <strong>perimetrazioni PAI R3/R4</strong>
+          (Piano per l'Assetto Idrogeologico — Sicilia). Le zone di <strong>gap</strong> sono aree con
+          caratteristiche geomorfologiche di instabilità non coperte dalla perimetrazione PAI.
+          Il <strong>79% delle aree morfologicamente instabili</strong> (38,7 km² su 49,0 km²) ricade fuori dai
+          perimetri PAI, suggerendo un potenziale aggiornamento della perimetrazione ufficiale del rischio idrogeologico.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Categoria</th><th>Superficie</th><th>%</th></tr></thead>
+            <tbody>
+              <tr><td>PAI R4 perimetrato (molto elevato)</td><td>3,81 km²</td><td>7,2%</td></tr>
+              <tr><td>PAI R3 perimetrato (elevato)</td><td>10,54 km²</td><td>19,9%</td></tr>
+              <tr><td>Gap critico (cl. 4–5, fuori PAI)</td><td>22,37 km²</td><td class="hl-warn">42,2%</td></tr>
+              <tr><td>Gap moderato (cl. 3, fuori PAI)</td><td>16,33 km²</td><td>30,8%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-dtmpaigap"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>DTM × Uso Suolo ISPRA — Edificato su pendenze critiche</h3>
+        <p>
+          Incrocio tra la <strong>copertura del suolo ISPRA 2023</strong> (EAGLE v5, 10 m) e la pendenza DTM.
+          Vengono evidenziate le superfici <strong>edificate</strong> (codici EAGLE 1110, 1210, 1220)
+          classificate per pendenza. Il <strong>39,9% del territorio</strong> (63,75 km²) risulta artificiale.
+          Di questo, il <strong>4,8%</strong> (3,05 km²) si trova su pendenze &gt; 15°:
+          quartieri periurbani collinari di Boccadifalco, Mezzomonreale, Altarello e le pendici dei Monti di Palermo.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe pendenza edificato</th><th>% edificato</th></tr></thead>
+            <tbody>
+              <tr><td>Pendenza bassa (≤ 15°) — rischio basso</td><td class="hl">95,2%</td></tr>
+              <tr><td>Pendenza moderata (15–30°) — rischio moderato</td><td class="hl-warn">3,5%</td></tr>
+              <tr><td>Pendenza alta (&gt; 30°) — rischio elevato</td><td class="hl-warn">1,2%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-usosuolorischio"></canvas></div>
+        </div>
+      </div>
+
+      <!-- ACCESSIBILITÀ E VISIBILITÀ -->
+      <div style="margin:28px 0 12px;border-top:2px solid rgba(36,88,200,0.12);padding-top:18px;">
+        <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;color:#8898cc;text-transform:uppercase;">Accessibilità e visibilità</span>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Accessibilità morfologica (Tobler)</h3>
+        <p>
+          La mappa mostra la <strong>velocità di percorrenza pedonale teorica</strong> secondo la funzione di Tobler:
+          V = 6 × exp(−3,5 × |tan(pendenza) + 0,05|) km/h.
+          La <strong>velocità media comunale è 3,1 km/h</strong>.
+          Il <strong>51,4%</strong> del territorio ha velocità 3,8–5,0 km/h (aree pianeggianti costiere);
+          il <strong>18,8%</strong> è sotto 1 km/h (quasi impraticabile): versanti montani di Monte Cuccio,
+          Monte Pellegrino e Monte Grifone. Utile come raster di attrito per il PUMS.
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>Classe velocità Tobler</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>&lt; 1 km/h — impraticabile (&gt; 45°)</td><td class="hl-warn">18,8%</td></tr>
+              <tr><td>1–2,5 km/h — molto difficile</td><td class="hl-warn">16,6%</td></tr>
+              <tr><td>2,5–3,8 km/h — difficile</td><td>13,0%</td></tr>
+              <tr><td>3,8–5,0 km/h — moderato / piano</td><td class="hl">51,4%</td></tr>
+              <tr><td>&gt; 5,0 km/h — facile (lieve discesa)</td><td>0,2%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-accessibilita"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>Visibilità cumulativa (Viewshed)</h3>
+        <p>
+          La mappa di <strong>visibilità cumulativa</strong> mostra, per ogni cella, da quanti dei
+          <strong>6 punti strategici</strong> di Palermo essa è visibile:
+          Monte Pellegrino, Monte Cuccio, Monte Grifone, Palazzo dei Normanni, Teatro Massimo, Belvedere Mondello.
+          Il <strong>69%</strong> del territorio è visibile da almeno un punto;
+          il 31% non è visibile da nessuno (valli montane interne, depressioni tra creste).
+          Monte Pellegrino ha il maggiore dominio visuale (2.526.309 celle).
+        </p>
+        <div class="section-data">
+          <table class="data-table">
+            <thead><tr><th>N. osservatori visibili</th><th>% territorio</th></tr></thead>
+            <tbody>
+              <tr><td>0 osservatori — non visibile</td><td class="hl-warn">31,0%</td></tr>
+              <tr><td>1 osservatore — marginale</td><td>24,4%</td></tr>
+              <tr><td>2 osservatori — bassa visibilità</td><td>17,6%</td></tr>
+              <tr><td>3 osservatori — media visibilità</td><td>13,6%</td></tr>
+              <tr><td>4 osservatori — alta visibilità</td><td>10,5%</td></tr>
+              <tr><td>5 osservatori — molto alta visibilità</td><td>2,8%</td></tr>
+            </tbody>
+          </table>
+          <div class="inline-chart"><canvas id="chart-viewshed"></canvas></div>
+        </div>
+      </div>
+
+      <!-- ANALISI INCROCIATE -->
+      <div style="margin:28px 0 12px;border-top:2px solid rgba(36,88,200,0.12);padding-top:18px;">
+        <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;color:#8898cc;text-transform:uppercase;">Analisi incrociate dataset</span>
+      </div>
+
+      <div class="analysis-section">
+        <h3>DTM × ISTAT — Elevazione × Densità abitativa</h3>
+        <p>
+          Mappa <strong>bivariate</strong> che incrocia la fascia altimetrica media DTM con la densità abitativa
+          (ab/km²) per ogni sezione di censimento ISTAT 2021 (3.600 sezioni, 635.439 ab.).
+          Il <strong>57,1% della popolazione</strong> vive in pianura costiera (0–50 m) a media-alta densità.
+          Le sezioni collinari (50–300 m) ospitano il <strong>32,7%</strong> su superficie molto maggiore (60,6 km²)
+          a densità prevalentemente bassa. I versanti alti (&gt; 300 m) sono quasi disabitati (1.119 ab. su 27,6 km²).
+        </p>
+        <table class="data-table">
+          <thead><tr><th>Combinazione</th><th>Popolazione</th><th>%</th></tr></thead>
+          <tbody>
+            <tr><td>0–50 m × Alta densità</td><td>200.388 ab.</td><td class="hl">31,5%</td></tr>
+            <tr><td>0–50 m × Media densità</td><td>162.569 ab.</td><td>25,6%</td></tr>
+            <tr><td>50–300 m × Media densità</td><td>84.661 ab.</td><td>13,3%</td></tr>
+            <tr><td>50–300 m × Bassa densità</td><td>76.778 ab.</td><td>12,1%</td></tr>
+            <tr><td>0–50 m × Bassa densità</td><td>61.633 ab.</td><td>9,7%</td></tr>
+            <tr><td>50–300 m × Alta densità</td><td>48.291 ab.</td><td>7,6%</td></tr>
+            <tr><td>&gt; 300 m × Bassa densità</td><td>1.119 ab.</td><td>0,2%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="analysis-section">
+        <h3>DTM × ISTAT — Pendenza × Densità abitativa</h3>
+        <p>
+          Mappa <strong>bivariate</strong> che incrocia la pendenza media DTM con la densità abitativa
+          per sezione di censimento ISTAT 2021. Rivela dove coesistono <strong>alta densità e terreno acclive</strong> —
+          indicatore di potenziale vulnerabilità sismica e idrogeologica.
+          Il <strong>91,5%</strong> della popolazione abita su terreni con pendenza 0–5° (pianura).
+          Tuttavia <strong>10.229 residenti</strong> occupano sezioni su versanti con pendenza &gt; 5°:
+          quartieri periurbani di Mezzomonreale, Boccadifalco e Altarello.
+        </p>
+        <table class="data-table">
+          <thead><tr><th>Combinazione</th><th>Popolazione</th><th>%</th></tr></thead>
+          <tbody>
+            <tr><td>0–5° × Alta densità</td><td>238.450 ab.</td><td class="hl">37,5%</td></tr>
+            <tr><td>0–5° × Media densità</td><td>235.617 ab.</td><td class="hl">37,1%</td></tr>
+            <tr><td>0–5° × Bassa densità</td><td>107.401 ab.</td><td>16,9%</td></tr>
+            <tr><td>5–15° × Bassa densità</td><td>27.813 ab.</td><td>4,4%</td></tr>
+            <tr><td>5–15° × Media densità</td><td>10.449 ab.</td><td>1,6%</td></tr>
+            <tr><td>5–15° × Alta densità</td><td>8.644 ab.</td><td class="hl-warn">1,4%</td></tr>
+            <tr><td>&gt; 15° × Bassa densità</td><td>4.316 ab.</td><td>0,7%</td></tr>
+            <tr><td>&gt; 15° × Alta densità</td><td>1.585 ab.</td><td class="hl-warn">0,2%</td></tr>
+          </tbody>
+        </table>
       </div>
 
       <!-- SINTESI -->
