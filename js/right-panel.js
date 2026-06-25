@@ -1387,6 +1387,48 @@
           'Le valli fluviali dell\'Oreto e del Gabriele emergono come corridoi ad alta saturazione potenziale. ' +
           'I rilievi dei Monti di Palermo presentano TWI molto bassi per l\'elevata pendenza e il drenaggio rapido.'
         );
+        // RANK:twi
+
+        var TWI_CLS = [
+          { key: 'c_molto_basso', label: '< 4.5 (molto basso)', color: '#f7fbff' },
+          { key: 'c_basso', label: '4.5÷5.7 (basso)', color: '#c6dbef' },
+          { key: 'c_medio', label: '5.7÷6.9 (medio)', color: '#6baed6' },
+          { key: 'c_alto', label: '6.9÷10.3 (alto)', color: '#2171b5' },
+          { key: 'c_molto_alto', label: '> 10.3 (molto alto)', color: '#08306b' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'TWI medio',
+          maxVal: 6.515,
+          classes: TWI_CLS,
+          items: [
+            { rank: 1, label:'I · Centro Storico', val:6.515, classi:{c_molto_basso: 9.1, c_basso: 30.9, c_medio: 31.1, c_alto: 22.9, c_molto_alto: 6.0} },
+            { rank: 2, label:'II · Resuttana', val:6.354, classi:{c_molto_basso: 16.5, c_basso: 25.8, c_medio: 27.2, c_alto: 23.9, c_molto_alto: 6.6} },
+            { rank: 3, label:'VIII · Libertà', val:6.198, classi:{c_molto_basso: 19.6, c_basso: 25.4, c_medio: 26.6, c_alto: 22.6, c_molto_alto: 5.7} },
+            { rank: 4, label:'V · Noce', val:5.948, classi:{c_molto_basso: 23.9, c_basso: 27.6, c_medio: 24.5, c_alto: 19.0, c_molto_alto: 5.0} },
+            { rank: 5, label:'VI · Nord-Ovest', val:5.928, classi:{c_molto_basso: 24.6, c_basso: 27.1, c_medio: 23.9, c_alto: 19.9, c_molto_alto: 4.5} },
+            { rank: 6, label:'IV · Mezzomonreale', val:5.893, classi:{c_molto_basso: 23.8, c_basso: 29.9, c_medio: 23.1, c_alto: 18.3, c_molto_alto: 4.8} },
+            { rank: 7, label:'VII · Mondello', val:5.792, classi:{c_molto_basso: 26.3, c_basso: 27.2, c_medio: 23.6, c_alto: 18.2, c_molto_alto: 4.6} },
+            { rank: 8, label:'III · Oreto', val:5.693, classi:{c_molto_basso: 28.9, c_basso: 28.3, c_medio: 21.5, c_alto: 16.7, c_molto_alto: 4.5} }
+        ]
+        });
+        appendRankingCard(el, {
+          title: 'Classifica Quartieri',
+          subtitle: 'TWI medio',
+          maxVal: 7.056,
+          classes: TWI_CLS,
+          items: [
+            { rank: 1, label:'Politeama', val:7.056, classi:{c_molto_basso: 2.7, c_basso: 23.6, c_medio: 34.5, c_alto: 30.7, c_molto_alto: 8.4} },
+            { rank: 2, label:'Malaspina - Palagonia', val:6.941, classi:{c_molto_basso: 2.8, c_basso: 25.0, c_medio: 35.9, c_alto: 28.0, c_molto_alto: 8.3} },
+            { rank: 3, label:'Libertà', val:6.934, classi:{c_molto_basso: 4.0, c_basso: 26.2, c_medio: 34.9, c_alto: 26.8, c_molto_alto: 8.1} },
+            { rank: 4, label:'Noce', val:6.92, classi:{c_molto_basso: 2.2, c_basso: 27.7, c_medio: 35.9, c_alto: 25.9, c_molto_alto: 8.4} },
+            { rank: 5, label:'Settecannoli', val:6.803, classi:{c_molto_basso: 6.7, c_basso: 26.7, c_medio: 31.4, c_alto: 27.4, c_molto_alto: 7.8} },
+            { rank: 6, label:'Altarello', val:6.795, classi:{c_molto_basso: 5.3, c_basso: 31.4, c_medio: 30.8, c_alto: 23.5, c_molto_alto: 9.1} },
+            { rank: 7, label:'Uditore - Passo di Rigano', val:6.769, classi:{c_molto_basso: 6.2, c_basso: 30.8, c_medio: 31.0, c_alto: 24.0, c_molto_alto: 8.1} },
+            { rank: 8, label:'Zisa', val:6.75, classi:{c_molto_basso: 5.8, c_basso: 29.5, c_medio: 32.2, c_alto: 24.5, c_molto_alto: 8.1} }
+        ]
+        });
+
       }
     },
 
@@ -1429,6 +1471,50 @@
           'Oreto, Gabriele, Eleuterio e i torrenti dei Monti di Palermo. ' +
           'Il reticolo potenziale è fondamentale per il dimensionamento dei collettori fognari.'
         );
+        // RANK:flow_acc
+
+        var FLOW_ACC_CLS = [
+          { key: 'c_disperso', label: '< 0.7 (disperso)', color: '#f7fbff' },
+          { key: 'c_rill', label: '0.7÷1.3 (rill)', color: '#c6dbef' },
+          { key: 'c_canale', label: '1.3÷2.4 (canale)', color: '#6baed6' },
+          { key: 'c_torrente', label: '2.4÷4.0 (torrente)', color: '#2171b5' },
+          { key: 'c_fiume', label: '> 4.0 (fiume)', color: '#08306b' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'Accumulo medio',
+          unit: ' log10',
+          maxVal: 0.978,
+          classes: FLOW_ACC_CLS,
+          items: [
+            { rank: 1, label:'III · Oreto', val:0.978, classi:{c_disperso: 49.4, c_rill: 24.8, c_canale: 20.6, c_torrente: 4.4, c_fiume: 0.8} },
+            { rank: 2, label:'V · Noce', val:0.978, classi:{c_disperso: 51.0, c_rill: 23.3, c_canale: 20.0, c_torrente: 4.6, c_fiume: 1.0} },
+            { rank: 3, label:'VI · Nord-Ovest', val:0.973, classi:{c_disperso: 50.0, c_rill: 24.5, c_canale: 20.2, c_torrente: 4.5, c_fiume: 0.7} },
+            { rank: 4, label:'VII · Mondello', val:0.967, classi:{c_disperso: 51.4, c_rill: 22.7, c_canale: 20.5, c_torrente: 4.7, c_fiume: 0.6} },
+            { rank: 5, label:'IV · Mezzomonreale', val:0.931, classi:{c_disperso: 53.9, c_rill: 22.4, c_canale: 18.8, c_torrente: 4.2, c_fiume: 0.6} },
+            { rank: 6, label:'VIII · Libertà', val:0.914, classi:{c_disperso: 55.1, c_rill: 23.1, c_canale: 16.8, c_torrente: 4.3, c_fiume: 0.7} },
+            { rank: 7, label:'II · Resuttana', val:0.906, classi:{c_disperso: 56.6, c_rill: 21.8, c_canale: 16.2, c_torrente: 4.7, c_fiume: 0.7} },
+            { rank: 8, label:'I · Centro Storico', val:0.8, classi:{c_disperso: 65.2, c_rill: 20.3, c_canale: 10.3, c_torrente: 3.0, c_fiume: 1.2} }
+        ]
+        });
+        appendRankingCard(el, {
+          title: 'Classifica Quartieri',
+          subtitle: 'Accumulo medio',
+          unit: ' log10',
+          maxVal: 1.079,
+          classes: FLOW_ACC_CLS,
+          items: [
+            { rank: 1, label:'Borgo Nuovo', val:1.079, classi:{c_disperso: 41.2, c_rill: 27.1, c_canale: 26.2, c_torrente: 4.8, c_fiume: 0.7} },
+            { rank: 2, label:'Boccadifalco', val:1.063, classi:{c_disperso: 40.9, c_rill: 27.1, c_canale: 27.5, c_torrente: 4.1, c_fiume: 0.4} },
+            { rank: 3, label:'Arenella - Vergine Maria', val:1.051, classi:{c_disperso: 43.7, c_rill: 25.0, c_canale: 25.9, c_torrente: 5.2, c_fiume: 0.2} },
+            { rank: 4, label:'Tommaso Natale - Sferracavallo', val:1.001, classi:{c_disperso: 50.4, c_rill: 21.8, c_canale: 21.8, c_torrente: 5.3, c_fiume: 0.7} },
+            { rank: 5, label:'Villagrazia - Falsomiele', val:0.997, classi:{c_disperso: 47.5, c_rill: 25.5, c_canale: 21.8, c_torrente: 4.4, c_fiume: 0.8} },
+            { rank: 6, label:'Brancaccio - Ciaculli', val:0.983, classi:{c_disperso: 50.2, c_rill: 24.2, c_canale: 19.7, c_torrente: 5.1, c_fiume: 0.8} },
+            { rank: 7, label:'Montepellegrino', val:0.98, classi:{c_disperso: 47.8, c_rill: 26.1, c_canale: 21.4, c_torrente: 4.2, c_fiume: 0.4} },
+            { rank: 8, label:'Resuttana - San Lorenzo', val:0.977, classi:{c_disperso: 50.0, c_rill: 23.9, c_canale: 20.8, c_torrente: 4.6, c_fiume: 0.7} }
+        ]
+        });
+
       }
     },
 
@@ -1504,6 +1590,50 @@
           'L\'SPI è usato nella progettazione di opere di difesa del suolo e nella valutazione ' +
           'del rischio di colate detritiche e trasporto solido.'
         );
+        // RANK:spi
+
+        var SPI_CLS = [
+          { key: 'c_bassa', label: '< −1 (bassa)', color: '#ffffcc' },
+          { key: 'c_medio_bassa', label: '−1÷1 (medio-bassa)', color: '#fed976' },
+          { key: 'c_media', label: '1÷3 (media)', color: '#feb24c' },
+          { key: 'c_alta', label: '3÷5.5 (alta)', color: '#f03b20' },
+          { key: 'c_molto_alta', label: '> 5.5 (molto alta)', color: '#bd0026' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'SPI medio',
+          unit: ' log',
+          maxVal: 1.471,
+          classes: SPI_CLS,
+          items: [
+            { rank: 1, label:'III · Oreto', val:1.471, classi:{c_bassa: 19.9, c_medio_bassa: 25.0, c_media: 25.0, c_alta: 24.6, c_molto_alta: 5.6} },
+            { rank: 2, label:'VII · Mondello', val:1.299, classi:{c_bassa: 23.8, c_medio_bassa: 24.6, c_media: 22.6, c_alta: 22.7, c_molto_alta: 6.4} },
+            { rank: 3, label:'VI · Nord-Ovest', val:1.203, classi:{c_bassa: 21.8, c_medio_bassa: 26.8, c_media: 26.5, c_alta: 20.0, c_molto_alta: 4.8} },
+            { rank: 4, label:'V · Noce', val:1.197, classi:{c_bassa: 23.6, c_medio_bassa: 26.1, c_media: 24.4, c_alta: 20.3, c_molto_alta: 5.6} },
+            { rank: 5, label:'IV · Mezzomonreale', val:1.005, classi:{c_bassa: 25.2, c_medio_bassa: 29.1, c_media: 22.4, c_alta: 18.5, c_molto_alta: 4.8} },
+            { rank: 6, label:'VIII · Libertà', val:0.615, classi:{c_bassa: 30.9, c_medio_bassa: 28.1, c_media: 21.7, c_alta: 15.4, c_molto_alta: 4.0} },
+            { rank: 7, label:'II · Resuttana', val:0.4, classi:{c_bassa: 34.7, c_medio_bassa: 29.6, c_media: 17.8, c_alta: 14.2, c_molto_alta: 3.8} },
+            { rank: 8, label:'I · Centro Storico', val:-0.328, classi:{c_bassa: 40.2, c_medio_bassa: 41.0, c_media: 13.2, c_alta: 3.9, c_molto_alta: 1.8} }
+        ]
+        });
+        appendRankingCard(el, {
+          title: 'Classifica Quartieri',
+          subtitle: 'SPI medio',
+          unit: ' log',
+          maxVal: 2.46,
+          classes: SPI_CLS,
+          items: [
+            { rank: 1, label:'Boccadifalco', val:2.46, classi:{c_bassa: 7.7, c_medio_bassa: 18.3, c_media: 31.9, c_alta: 34.1, c_molto_alta: 8.0} },
+            { rank: 2, label:'Borgo Nuovo', val:2.289, classi:{c_bassa: 8.1, c_medio_bassa: 20.5, c_media: 33.5, c_alta: 30.3, c_molto_alta: 7.6} },
+            { rank: 3, label:'Arenella - Vergine Maria', val:2.068, classi:{c_bassa: 13.5, c_medio_bassa: 23.1, c_media: 24.0, c_alta: 30.6, c_molto_alta: 8.8} },
+            { rank: 4, label:'Villagrazia - Falsomiele', val:1.686, classi:{c_bassa: 16.9, c_medio_bassa: 23.9, c_media: 26.4, c_alta: 26.9, c_molto_alta: 5.9} },
+            { rank: 5, label:'Partanna Mondello', val:1.6, classi:{c_bassa: 21.4, c_medio_bassa: 20.3, c_media: 24.2, c_alta: 27.1, c_molto_alta: 7.0} },
+            { rank: 6, label:'Montepellegrino', val:1.561, classi:{c_bassa: 15.9, c_medio_bassa: 24.3, c_media: 30.9, c_alta: 23.6, c_molto_alta: 5.3} },
+            { rank: 7, label:'Tommaso Natale - Sferracavallo', val:1.412, classi:{c_bassa: 20.3, c_medio_bassa: 27.1, c_media: 24.4, c_alta: 21.6, c_molto_alta: 6.6} },
+            { rank: 8, label:'Cruillas - S.Giovanni Apostolo', val:1.252, classi:{c_bassa: 20.2, c_medio_bassa: 26.9, c_media: 28.9, c_alta: 19.5, c_molto_alta: 4.6} }
+        ]
+        });
+
       }
     },
 
@@ -1547,6 +1677,40 @@
           'Le zone collinari e montane dei Monti di Palermo hanno DTW elevati (> 50 m sulle creste). ' +
           'Il metodo HAND fornisce una stima relativa — per valori assoluti servono dati piezometrici.'
         );
+        // RANK:dtw
+
+        var DTW_CLS = [
+          { key: 'c_superficiale', label: '< 0.17 m (superficiale)', color: '#00682c' },
+          { key: 'c_bassa', label: '0.17÷0.47 m (bassa)', color: '#31a354' },
+          { key: 'c_media', label: '0.47÷4.7 m (media)', color: '#aedea7' },
+          { key: 'c_alta', label: '4.7÷7.2 m (alta)', color: '#fd8d3c' },
+          { key: 'c_profonda', label: '> 7.2 m (profonda)', color: '#800026' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'Profondità media (m)',
+          unit: ' m',
+          maxVal: 3.181,
+          classes: DTW_CLS,
+          items: [
+            { rank: 1, label:'II · Resuttana', val:0.156, classi:{c_superficiale: 57.1, c_bassa: 42.9, c_media: 0.0, c_alta: 0.0, c_profonda: 0.0} },
+            { rank: 2, label:'VII · Mondello', val:2.218, classi:{c_superficiale: 0.0, c_bassa: 0.0, c_media: 100.0, c_alta: 0.0, c_profonda: 0.0} },
+            { rank: 3, label:'VIII · Libertà', val:3.181, classi:{c_superficiale: 9.7, c_bassa: 15.9, c_media: 37.4, c_alta: 29.8, c_profonda: 7.2} }
+        ]
+        });
+        appendRankingCard(el, {
+          title: 'Classifica Quartieri',
+          subtitle: 'Profondità media (m)',
+          unit: ' m',
+          maxVal: 3.181,
+          classes: DTW_CLS,
+          items: [
+            { rank: 1, label:'Settecannoli', val:0.156, classi:{c_superficiale: 57.1, c_bassa: 42.9, c_media: 0.0, c_alta: 0.0, c_profonda: 0.0} },
+            { rank: 2, label:'Arenella - Vergine Maria', val:2.218, classi:{c_superficiale: 0.0, c_bassa: 0.0, c_media: 100.0, c_alta: 0.0, c_profonda: 0.0} },
+            { rank: 3, label:'Montepellegrino', val:3.181, classi:{c_superficiale: 9.7, c_bassa: 15.9, c_media: 37.4, c_alta: 29.8, c_profonda: 7.2} }
+        ]
+        });
+
       }
     },
 
@@ -1594,6 +1758,48 @@
           'ha potenziale buono grazie all\'alta radiazione, nonostante l\'orientamento variabile dei tetti. ' +
           'Questa mappa supporta la pianificazione degli impianti FV per il PNRR — Comunità Energetiche.'
         );
+        // RANK:fv
+
+        var FV_CLS = [
+          { key: 'c_scarso', label: '< 0.31 (scarso)', color: '#440154' },
+          { key: 'c_basso', label: '0.31÷0.42 (basso)', color: '#3e6f8e' },
+          { key: 'c_medio', label: '0.42÷0.54 (medio)', color: '#26808e' },
+          { key: 'c_buono', label: '0.54÷0.61 (buono)', color: '#35b779' },
+          { key: 'c_ottimo', label: '> 0.61 (ottimo)', color: '#b4de2c' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'Indice FV medio',
+          maxVal: 0.494,
+          classes: FV_CLS,
+          items: [
+            { rank: 1, label:'I · Centro Storico', val:0.494, classi:{c_scarso: 0.1, c_basso: 27.7, c_medio: 31.8, c_buono: 29.8, c_ottimo: 10.6} },
+            { rank: 2, label:'II · Resuttana', val:0.477, classi:{c_scarso: 12.8, c_basso: 14.0, c_medio: 23.9, c_buono: 33.4, c_ottimo: 15.9} },
+            { rank: 3, label:'VII · Mondello', val:0.42, classi:{c_scarso: 18.7, c_basso: 27.1, c_medio: 28.9, c_buono: 18.0, c_ottimo: 7.3} },
+            { rank: 4, label:'VIII · Libertà', val:0.41, classi:{c_scarso: 17.4, c_basso: 39.5, c_medio: 24.2, c_buono: 13.4, c_ottimo: 5.5} },
+            { rank: 5, label:'IV · Mezzomonreale', val:0.407, classi:{c_scarso: 25.3, c_basso: 21.7, c_medio: 31.1, c_buono: 20.8, c_ottimo: 1.0} },
+            { rank: 6, label:'III · Oreto', val:0.387, classi:{c_scarso: 31.6, c_basso: 15.6, c_medio: 25.6, c_buono: 24.3, c_ottimo: 3.0} },
+            { rank: 7, label:'V · Noce', val:0.371, classi:{c_scarso: 35.6, c_basso: 21.7, c_medio: 23.9, c_buono: 17.0, c_ottimo: 1.8} },
+            { rank: 8, label:'VI · Nord-Ovest', val:0.355, classi:{c_scarso: 35.5, c_basso: 33.5, c_medio: 21.0, c_buono: 8.6, c_ottimo: 1.5} }
+        ]
+        });
+        appendRankingCard(el, {
+          title: 'Classifica Quartieri',
+          subtitle: 'Indice FV medio',
+          maxVal: 0.535,
+          classes: FV_CLS,
+          items: [
+            { rank: 1, label:'Settecannoli', val:0.535, classi:{c_scarso: 0.1, c_basso: 14.9, c_medio: 24.1, c_buono: 39.2, c_ottimo: 21.6} },
+            { rank: 2, label:'Politeama', val:0.523, classi:{c_scarso: 0.0, c_basso: 15.5, c_medio: 32.6, c_buono: 37.2, c_ottimo: 14.7} },
+            { rank: 3, label:'Noce', val:0.517, classi:{c_scarso: 0.1, c_basso: 16.3, c_medio: 36.1, c_buono: 35.7, c_ottimo: 11.9} },
+            { rank: 4, label:'Oreto - Stazione', val:0.515, classi:{c_scarso: 0.4, c_basso: 19.0, c_medio: 31.0, c_buono: 34.2, c_ottimo: 15.4} },
+            { rank: 5, label:'Pallavicino', val:0.51, classi:{c_scarso: 0.5, c_basso: 18.4, c_medio: 33.9, c_buono: 33.6, c_ottimo: 13.5} },
+            { rank: 6, label:'Malaspina - Palagonia', val:0.503, classi:{c_scarso: 0.0, c_basso: 21.2, c_medio: 38.5, c_buono: 27.7, c_ottimo: 12.6} },
+            { rank: 7, label:'Zisa', val:0.501, classi:{c_scarso: 0.3, c_basso: 19.7, c_medio: 41.2, c_buono: 31.5, c_ottimo: 7.3} },
+            { rank: 8, label:'Montegrappa - S. Rosalia', val:0.499, classi:{c_scarso: 0.5, c_basso: 20.9, c_medio: 38.9, c_buono: 31.9, c_ottimo: 7.7} }
+        ]
+        });
+
       }
     },
 
@@ -1640,6 +1846,47 @@
           '(Boccadifalco-Baida, val di Mazara) e nei canyon urbani del Centro Storico. ' +
           'Confronta con l\'ombreggiamento invernale per valutare la variazione stagionale.'
         );
+        // RANK:ombra_e
+
+        var OMBRA_E_CLS = [
+          { key: 'c_ombra_forte', label: '< 80 (forte ombra)', color: '#fff7bc' },
+          { key: 'c_ombra_parz', label: '80÷170 (parziale)', color: '#fe9929' },
+          { key: 'c_semi_luce', label: '170÷250 (semi-luce)', color: '#cc4c02' },
+          { key: 'c_piena_luce', label: '> 250 (piena luce)', color: '#7f2704' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'Irradiazione media',
+          maxVal: 66.008,
+          classes: OMBRA_E_CLS,
+          items: [
+            { rank: 1, label:'III · Oreto', val:66.008, classi:{c_ombra_forte: 77.4, c_ombra_parz: 21.8, c_semi_luce: 0.3, c_piena_luce: 0.5} },
+            { rank: 2, label:'VII · Mondello', val:59.562, classi:{c_ombra_forte: 89.5, c_ombra_parz: 8.5, c_semi_luce: 1.2, c_piena_luce: 0.8} },
+            { rank: 3, label:'II · Resuttana', val:57.769, classi:{c_ombra_forte: 92.9, c_ombra_parz: 5.4, c_semi_luce: 0.5, c_piena_luce: 1.2} },
+            { rank: 4, label:'VIII · Libertà', val:57.672, classi:{c_ombra_forte: 92.3, c_ombra_parz: 6.0, c_semi_luce: 0.4, c_piena_luce: 1.3} },
+            { rank: 5, label:'IV · Mezzomonreale', val:53.727, classi:{c_ombra_forte: 96.5, c_ombra_parz: 2.6, c_semi_luce: 0.1, c_piena_luce: 0.8} },
+            { rank: 6, label:'I · Centro Storico', val:53.461, classi:{c_ombra_forte: 98.0, c_ombra_parz: 0.3, c_semi_luce: 0.3, c_piena_luce: 1.4} },
+            { rank: 7, label:'V · Noce', val:52.316, classi:{c_ombra_forte: 97.0, c_ombra_parz: 2.9, c_semi_luce: 0.0, c_piena_luce: 0.1} },
+            { rank: 8, label:'VI · Nord-Ovest', val:51.597, classi:{c_ombra_forte: 97.3, c_ombra_parz: 2.4, c_semi_luce: 0.2, c_piena_luce: 0.2} }
+        ]
+        });
+        appendRankingCard(el, {
+          title: 'Classifica Quartieri',
+          subtitle: 'Irradiazione media',
+          maxVal: 67.795,
+          classes: OMBRA_E_CLS,
+          items: [
+            { rank: 1, label:'Villagrazia - Falsomiele', val:67.795, classi:{c_ombra_forte: 74.9, c_ombra_parz: 24.2, c_semi_luce: 0.4, c_piena_luce: 0.5} },
+            { rank: 2, label:'Partanna Mondello', val:64.209, classi:{c_ombra_forte: 82.9, c_ombra_parz: 14.0, c_semi_luce: 2.3, c_piena_luce: 0.8} },
+            { rank: 3, label:'Arenella - Vergine Maria', val:62.325, classi:{c_ombra_forte: 88.7, c_ombra_parz: 6.9, c_semi_luce: 0.9, c_piena_luce: 3.6} },
+            { rank: 4, label:'Montepellegrino', val:62.31, classi:{c_ombra_forte: 87.6, c_ombra_parz: 10.0, c_semi_luce: 0.6, c_piena_luce: 1.9} },
+            { rank: 5, label:'Brancaccio - Ciaculli', val:59.515, classi:{c_ombra_forte: 89.7, c_ombra_parz: 9.1, c_semi_luce: 0.6, c_piena_luce: 0.6} },
+            { rank: 6, label:'Boccadifalco', val:57.44, classi:{c_ombra_forte: 93.1, c_ombra_parz: 5.6, c_semi_luce: 0.2, c_piena_luce: 1.2} },
+            { rank: 7, label:'Tribunali-Castellammare', val:56.409, classi:{c_ombra_forte: 96.4, c_ombra_parz: 0.5, c_semi_luce: 0.5, c_piena_luce: 2.6} },
+            { rank: 8, label:'Settecannoli', val:55.593, classi:{c_ombra_forte: 97.2, c_ombra_parz: 0.3, c_semi_luce: 0.3, c_piena_luce: 2.2} }
+        ]
+        });
+
       }
     },
 
@@ -1689,6 +1936,47 @@
           'della giornata (ore 11-14 circa). Questo dato è fondamentale per il comfort termico ' +
           'degli spazi pubblici e la progettazione bioClimatica.'
         );
+        // RANK:ombra_i
+
+        var OMBRA_I_CLS = [
+          { key: 'c_ombra_forte', label: '< 80 (forte ombra)', color: '#c6dbef' },
+          { key: 'c_ombra_parz', label: '80÷170 (parziale)', color: '#6baed6' },
+          { key: 'c_semi_luce', label: '170÷250 (semi-luce)', color: '#2171b5' },
+          { key: 'c_piena_luce', label: '> 250 (piena luce)', color: '#084594' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'Irradiazione media',
+          maxVal: 192.06,
+          classes: OMBRA_I_CLS,
+          items: [
+            { rank: 1, label:'III · Oreto', val:192.06, classi:{c_ombra_forte: 0.0, c_ombra_parz: 17.4, c_semi_luce: 76.6, c_piena_luce: 6.0} },
+            { rank: 2, label:'II · Resuttana', val:181.243, classi:{c_ombra_forte: 0.1, c_ombra_parz: 25.5, c_semi_luce: 69.6, c_piena_luce: 4.8} },
+            { rank: 3, label:'VII · Mondello', val:174.422, classi:{c_ombra_forte: 0.6, c_ombra_parz: 41.7, c_semi_luce: 55.0, c_piena_luce: 2.8} },
+            { rank: 4, label:'V · Noce', val:171.565, classi:{c_ombra_forte: 0.3, c_ombra_parz: 50.1, c_semi_luce: 47.9, c_piena_luce: 1.7} },
+            { rank: 5, label:'I · Centro Storico', val:171.559, classi:{c_ombra_forte: 0.0, c_ombra_parz: 51.0, c_semi_luce: 47.5, c_piena_luce: 1.4} },
+            { rank: 6, label:'VI · Nord-Ovest', val:168.868, classi:{c_ombra_forte: 0.3, c_ombra_parz: 60.6, c_semi_luce: 38.6, c_piena_luce: 0.5} },
+            { rank: 7, label:'IV · Mezzomonreale', val:167.938, classi:{c_ombra_forte: 0.4, c_ombra_parz: 47.3, c_semi_luce: 50.5, c_piena_luce: 1.8} },
+            { rank: 8, label:'VIII · Libertà', val:166.848, classi:{c_ombra_forte: 0.4, c_ombra_parz: 62.1, c_semi_luce: 36.0, c_piena_luce: 1.5} }
+        ]
+        });
+        appendRankingCard(el, {
+          title: 'Classifica Quartieri',
+          subtitle: 'Irradiazione media',
+          maxVal: 194.455,
+          classes: OMBRA_I_CLS,
+          items: [
+            { rank: 1, label:'Villagrazia - Falsomiele', val:194.455, classi:{c_ombra_forte: 0.0, c_ombra_parz: 15.0, c_semi_luce: 78.4, c_piena_luce: 6.6} },
+            { rank: 2, label:'Brancaccio - Ciaculli', val:186.717, classi:{c_ombra_forte: 0.2, c_ombra_parz: 17.4, c_semi_luce: 75.6, c_piena_luce: 6.8} },
+            { rank: 3, label:'Tommaso Natale - Sferracavallo', val:182.426, classi:{c_ombra_forte: 0.3, c_ombra_parz: 27.1, c_semi_luce: 70.9, c_piena_luce: 1.7} },
+            { rank: 4, label:'Arenella - Vergine Maria', val:175.148, classi:{c_ombra_forte: 0.6, c_ombra_parz: 45.4, c_semi_luce: 49.7, c_piena_luce: 4.4} },
+            { rank: 5, label:'Resuttana - San Lorenzo', val:174.772, classi:{c_ombra_forte: 0.2, c_ombra_parz: 51.8, c_semi_luce: 47.5, c_piena_luce: 0.5} },
+            { rank: 6, label:'Settecannoli', val:173.923, classi:{c_ombra_forte: 0.0, c_ombra_parz: 34.6, c_semi_luce: 63.2, c_piena_luce: 2.2} },
+            { rank: 7, label:'Tribunali-Castellammare', val:172.7, classi:{c_ombra_forte: 0.0, c_ombra_parz: 51.0, c_semi_luce: 46.3, c_piena_luce: 2.7} },
+            { rank: 8, label:'Borgo Nuovo', val:172.277, classi:{c_ombra_forte: 0.5, c_ombra_parz: 52.1, c_semi_luce: 44.7, c_piena_luce: 2.7} }
+        ]
+        });
+
       }
     },
 
@@ -1744,6 +2032,48 @@
           'Attenzione nella pianificazione di colture sensibili al gelo tardivo ' +
           '(agrumi, ulivi fioriti) e nella localizzazione di infrastrutture critiche.'
         );
+        // RANK:frost
+
+        var FROST_CLS = [
+          { key: 'c_minimo', label: '< 0.005 (minimo)', color: '#f5f5ff' },
+          { key: 'c_basso', label: '0.005÷0.023 (basso)', color: '#c6dbef' },
+          { key: 'c_medio', label: '0.023÷0.074 (medio)', color: '#6baed6' },
+          { key: 'c_alto', label: '0.074÷0.28 (alto)', color: '#3182bd' },
+          { key: 'c_critico', label: '> 0.28 (critico)', color: '#08519c' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'Indice medio',
+          maxVal: 0.073,
+          classes: FROST_CLS,
+          items: [
+            { rank: 1, label:'VII · Mondello', val:0.073, classi:{c_minimo: 23.1, c_basso: 21.3, c_medio: 25.0, c_alto: 24.2, c_critico: 6.4} },
+            { rank: 2, label:'I · Centro Storico', val:0.072, classi:{c_minimo: 18.9, c_basso: 24.6, c_medio: 26.7, c_alto: 23.2, c_critico: 6.6} },
+            { rank: 3, label:'II · Resuttana', val:0.068, classi:{c_minimo: 23.1, c_basso: 23.8, c_medio: 24.9, c_alto: 21.9, c_critico: 6.2} },
+            { rank: 4, label:'VIII · Libertà', val:0.059, classi:{c_minimo: 25.5, c_basso: 27.6, c_medio: 24.0, c_alto: 17.6, c_critico: 5.3} },
+            { rank: 5, label:'IV · Mezzomonreale', val:0.058, classi:{c_minimo: 25.1, c_basso: 23.8, c_medio: 27.1, c_alto: 19.5, c_critico: 4.5} },
+            { rank: 6, label:'III · Oreto', val:0.055, classi:{c_minimo: 25.8, c_basso: 22.3, c_medio: 28.4, c_alto: 19.8, c_critico: 3.7} },
+            { rank: 7, label:'V · Noce', val:0.053, classi:{c_minimo: 28.0, c_basso: 27.2, c_medio: 23.6, c_alto: 16.9, c_critico: 4.3} },
+            { rank: 8, label:'VI · Nord-Ovest', val:0.051, classi:{c_minimo: 28.1, c_basso: 28.0, c_medio: 24.2, c_alto: 15.5, c_critico: 4.1} }
+        ]
+        });
+        appendRankingCard(el, {
+          title: 'Classifica Quartieri',
+          subtitle: 'Indice medio',
+          maxVal: 0.082,
+          classes: FROST_CLS,
+          items: [
+            { rank: 1, label:'Montegrappa - S. Rosalia', val:0.082, classi:{c_minimo: 18.6, c_basso: 22.1, c_medio: 25.3, c_alto: 25.9, c_critico: 8.1} },
+            { rank: 2, label:'Oreto - Stazione', val:0.082, classi:{c_minimo: 19.0, c_basso: 24.0, c_medio: 24.0, c_alto: 24.1, c_critico: 8.9} },
+            { rank: 3, label:'Arenella - Vergine Maria', val:0.081, classi:{c_minimo: 23.2, c_basso: 19.0, c_medio: 23.1, c_alto: 27.8, c_critico: 7.0} },
+            { rank: 4, label:'Settecannoli', val:0.079, classi:{c_minimo: 20.7, c_basso: 24.1, c_medio: 23.6, c_alto: 22.9, c_critico: 8.6} },
+            { rank: 5, label:'Uditore - Passo di Rigano', val:0.079, classi:{c_minimo: 19.7, c_basso: 23.9, c_medio: 24.6, c_alto: 23.3, c_critico: 8.4} },
+            { rank: 6, label:'Cuba - Calatafimi', val:0.078, classi:{c_minimo: 18.9, c_basso: 22.3, c_medio: 26.3, c_alto: 25.2, c_critico: 7.4} },
+            { rank: 7, label:'Libertà', val:0.077, classi:{c_minimo: 20.7, c_basso: 26.6, c_medio: 22.3, c_alto: 22.1, c_critico: 8.2} },
+            { rank: 8, label:'Malaspina - Palagonia', val:0.077, classi:{c_minimo: 20.4, c_basso: 26.9, c_medio: 21.9, c_alto: 22.5, c_critico: 8.3} }
+        ]
+        });
+
       }
     },
 
@@ -1796,6 +2126,47 @@
           '(l\'energia re-emessa non disperde verso il cielo) — utile per ' +
           'identificare priorità di intervento con verde urbano e materiali riflettenti.'
         );
+        // RANK:svf
+
+        var SVF_CLS = [
+          { key: 'c_incassato', label: '< 0.87 (incassato)', color: '#21252a' },
+          { key: 'c_chiuso', label: '0.87÷0.96 (chiuso)', color: '#3182bd' },
+          { key: 'c_semi_aperto', label: '0.96÷0.994 (semi-aperto)', color: '#74c476' },
+          { key: 'c_aperto', label: '> 0.994 (aperto)', color: '#c7e9c0' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'SVF medio',
+          maxVal: 0.999,
+          classes: SVF_CLS,
+          items: [
+            { rank: 1, label:'I · Centro Storico', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.2, c_semi_aperto: 4.6, c_aperto: 95.3} },
+            { rank: 2, label:'VIII · Libertà', val:0.98, classi:{c_incassato: 2.8, c_chiuso: 13.2, c_semi_aperto: 23.7, c_aperto: 60.3} },
+            { rank: 3, label:'IV · Mezzomonreale', val:0.977, classi:{c_incassato: 1.6, c_chiuso: 22.9, c_semi_aperto: 20.3, c_aperto: 55.2} },
+            { rank: 4, label:'V · Noce', val:0.977, classi:{c_incassato: 1.3, c_chiuso: 19.6, c_semi_aperto: 34.2, c_aperto: 44.9} },
+            { rank: 5, label:'VI · Nord-Ovest', val:0.977, classi:{c_incassato: 2.4, c_chiuso: 13.1, c_semi_aperto: 44.9, c_aperto: 39.6} },
+            { rank: 6, label:'II · Resuttana', val:0.974, classi:{c_incassato: 6.3, c_chiuso: 13.0, c_semi_aperto: 11.3, c_aperto: 69.3} },
+            { rank: 7, label:'III · Oreto', val:0.962, classi:{c_incassato: 4.6, c_chiuso: 32.6, c_semi_aperto: 20.7, c_aperto: 42.1} },
+            { rank: 8, label:'VII · Mondello', val:0.945, classi:{c_incassato: 12.6, c_chiuso: 24.9, c_semi_aperto: 24.1, c_aperto: 38.4} }
+        ]
+        });
+        appendRankingCard(el, {
+          title: 'Classifica Quartieri',
+          subtitle: 'SVF medio',
+          maxVal: 1.0,
+          classes: SVF_CLS,
+          items: [
+            { rank: 1, label:'Noce', val:1.0, classi:{c_incassato: 0.0, c_chiuso: 0.0, c_semi_aperto: 0.1, c_aperto: 99.9} },
+            { rank: 2, label:'Altarello', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.1, c_semi_aperto: 1.0, c_aperto: 98.9} },
+            { rank: 3, label:'Libertà', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.7, c_semi_aperto: 2.0, c_aperto: 97.3} },
+            { rank: 4, label:'Malaspina - Palagonia', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.1, c_semi_aperto: 1.1, c_aperto: 98.8} },
+            { rank: 5, label:'Politeama', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.3, c_semi_aperto: 1.5, c_aperto: 98.2} },
+            { rank: 6, label:'Settecannoli', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.1, c_semi_aperto: 2.9, c_aperto: 97.1} },
+            { rank: 7, label:'Tribunali-Castellammare', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.1, c_semi_aperto: 1.7, c_aperto: 98.2} },
+            { rank: 8, label:'Uditore - Passo di Rigano', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.1, c_semi_aperto: 2.8, c_aperto: 97.1} }
+        ]
+        });
+
       }
     },
 
@@ -1846,6 +2217,50 @@
           'nelle depressioni tra le creste e nelle zone costiere fuori dal campo visivo. ' +
           'Questa analisi è base per valutazioni di impatto paesaggistico (art. 146 D.Lgs. 42/2004).'
         );
+        // RANK:viewshed
+
+        var VIEWSHED_CLS = [
+          { key: 'c0', label: '0 (invisibile)', color: '#f0f0f0' },
+          { key: 'c1', label: '1 (scarsa)', color: '#f7fbff' },
+          { key: 'c2_3', label: '2÷3 (media)', color: '#6baed6' },
+          { key: 'c4_5', label: '4÷5 (alta)', color: '#3182bd' },
+          { key: 'c6', label: '6 (massima)', color: '#08519c' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'Visibilità media',
+          unit: ' n. vp',
+          maxVal: 2.143,
+          classes: VIEWSHED_CLS,
+          items: [
+            { rank: 1, label:'III · Oreto', val:2.143, classi:{c0: 30.2, c1: 15.5, c2_3: 28.6, c4_5: 25.6, c6: 0.0} },
+            { rank: 2, label:'VI · Nord-Ovest', val:1.977, classi:{c0: 20.0, c1: 26.4, c2_3: 38.8, c4_5: 14.8, c6: 0.0} },
+            { rank: 3, label:'V · Noce', val:1.776, classi:{c0: 20.1, c1: 32.1, c2_3: 38.2, c4_5: 9.5, c6: 0.0} },
+            { rank: 4, label:'VIII · Libertà', val:1.669, classi:{c0: 35.4, c1: 18.1, c2_3: 36.1, c4_5: 10.4, c6: 0.0} },
+            { rank: 5, label:'IV · Mezzomonreale', val:1.46, classi:{c0: 34.8, c1: 29.8, c2_3: 27.4, c4_5: 7.8, c6: 0.2} },
+            { rank: 6, label:'II · Resuttana', val:1.2, classi:{c0: 48.7, c1: 17.1, c2_3: 30.5, c4_5: 3.7, c6: 0.0} },
+            { rank: 7, label:'I · Centro Storico', val:1.164, classi:{c0: 44.0, c1: 27.2, c2_3: 25.8, c4_5: 3.0, c6: 0.0} },
+            { rank: 8, label:'VII · Mondello', val:1.132, classi:{c0: 44.5, c1: 32.7, c2_3: 13.4, c4_5: 9.4, c6: 0.0} }
+        ]
+        });
+        appendRankingCard(el, {
+          title: 'Classifica Quartieri',
+          subtitle: 'Visibilità media',
+          unit: ' n. vp',
+          maxVal: 2.281,
+          classes: VIEWSHED_CLS,
+          items: [
+            { rank: 1, label:'Villagrazia - Falsomiele', val:2.281, classi:{c0: 27.5, c1: 14.4, c2_3: 29.7, c4_5: 28.4, c6: 0.0} },
+            { rank: 2, label:'Libertà', val:2.166, classi:{c0: 14.6, c1: 24.4, c2_3: 52.3, c4_5: 8.7, c6: 0.0} },
+            { rank: 3, label:'Malaspina - Palagonia', val:2.106, classi:{c0: 5.8, c1: 37.4, c2_3: 51.4, c4_5: 5.5, c6: 0.0} },
+            { rank: 4, label:'Cruillas - S.Giovanni Apostolo', val:2.006, classi:{c0: 20.9, c1: 23.9, c2_3: 41.3, c4_5: 14.0, c6: 0.0} },
+            { rank: 5, label:'Resuttana - San Lorenzo', val:1.954, classi:{c0: 19.3, c1: 28.4, c2_3: 36.9, c4_5: 15.4, c6: 0.0} },
+            { rank: 6, label:'Borgo Nuovo', val:1.901, classi:{c0: 24.5, c1: 22.1, c2_3: 38.5, c4_5: 14.9, c6: 0.0} },
+            { rank: 7, label:'Zisa', val:1.751, classi:{c0: 11.6, c1: 44.2, c2_3: 42.1, c4_5: 2.1, c6: 0.0} },
+            { rank: 8, label:'Noce', val:1.702, classi:{c0: 8.8, c1: 49.5, c2_3: 40.6, c4_5: 1.1, c6: 0.0} }
+        ]
+        });
+
       }
     },
 
@@ -2024,7 +2439,7 @@
           }(kp.id, kp.key, kp.color, kp.alpha));
         });
 
-        appendText(el,
+        appendIntro(el,
           'I profili mostrano i transetti sul terreno reale (DTM 5m). ' +
           '<strong>Monte Pellegrino</strong>: dal livello del mare a 476 m in meno di 3 km orizzontali — ' +
           'il dislivello più drammatico del territorio comunale. ' +
@@ -2088,6 +2503,50 @@
           'le aree "corridoio buono" (verde chiaro) per stepping stone vegetali, ' +
           'le barriere moderate (giallo–arancio) richiedono interventi di ingegneria naturalistica.'
         );
+        // RANK:corridoi
+
+        var CORRIDOI_CLS = [
+          { key: 'c_barriera_crit', label: '< 0.15 (barriera critica)', color: '#b40000' },
+          { key: 'c_barriera_alta', label: '0.15÷0.30', color: '#e65520' },
+          { key: 'c_barriera_mod', label: '0.30÷0.45', color: '#fdae61' },
+          { key: 'c_corridoio_pot', label: '0.45÷0.60 (potenziale)', color: '#fee08b' },
+          { key: 'c_corridoio_ok', label: '0.60÷0.73 (buono)', color: '#a8dba8' },
+          { key: 'c_corridoio_ott', label: '0.73÷0.85 (ottimo)', color: '#3b9960' },
+          { key: 'c_nucleo', label: '> 0.85 (nucleo)', color: '#006400' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'Connettività media',
+          maxVal: 0.878,
+          classes: CORRIDOI_CLS,
+          items: [
+            { rank: 1, label:'I · Centro Storico', val:0.878, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.4, c_barriera_mod: 0.8, c_corridoio_pot: 2.0, c_corridoio_ok: 4.8, c_corridoio_ott: 16.9, c_nucleo: 75.2} },
+            { rank: 2, label:'II · Resuttana', val:0.742, classi:{c_barriera_crit: 12.8, c_barriera_alta: 3.1, c_barriera_mod: 2.4, c_corridoio_pot: 3.4, c_corridoio_ok: 4.7, c_corridoio_ott: 11.0, c_nucleo: 62.5} },
+            { rank: 3, label:'VIII · Libertà', val:0.702, classi:{c_barriera_crit: 10.7, c_barriera_alta: 6.6, c_barriera_mod: 6.0, c_corridoio_pot: 6.5, c_corridoio_ok: 7.2, c_corridoio_ott: 8.9, c_nucleo: 53.9} },
+            { rank: 4, label:'IV · Mezzomonreale', val:0.636, classi:{c_barriera_crit: 16.8, c_barriera_alta: 9.6, c_barriera_mod: 5.6, c_corridoio_pot: 4.5, c_corridoio_ok: 5.1, c_corridoio_ott: 11.2, c_nucleo: 47.3} },
+            { rank: 5, label:'VI · Nord-Ovest', val:0.627, classi:{c_barriera_crit: 7.9, c_barriera_alta: 11.6, c_barriera_mod: 13.0, c_corridoio_pot: 10.9, c_corridoio_ok: 8.6, c_corridoio_ott: 10.5, c_nucleo: 37.5} },
+            { rank: 6, label:'V · Noce', val:0.618, classi:{c_barriera_crit: 13.8, c_barriera_alta: 11.8, c_barriera_mod: 8.8, c_corridoio_pot: 7.5, c_corridoio_ok: 6.6, c_corridoio_ott: 9.5, c_nucleo: 42.0} },
+            { rank: 7, label:'VII · Mondello', val:0.582, classi:{c_barriera_crit: 22.5, c_barriera_alta: 10.0, c_barriera_mod: 5.7, c_corridoio_pot: 4.8, c_corridoio_ok: 5.8, c_corridoio_ott: 10.3, c_nucleo: 40.9} },
+            { rank: 8, label:'III · Oreto', val:0.551, classi:{c_barriera_crit: 26.5, c_barriera_alta: 9.2, c_barriera_mod: 5.3, c_corridoio_pot: 5.3, c_corridoio_ok: 6.4, c_corridoio_ott: 10.3, c_nucleo: 37.0} }
+        ]
+        });
+        appendRankingCard(el, {
+          title: 'Classifica Quartieri',
+          subtitle: 'Connettività media',
+          maxVal: 0.929,
+          classes: CORRIDOI_CLS,
+          items: [
+            { rank: 1, label:'Noce', val:0.929, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.0, c_barriera_mod: 0.0, c_corridoio_pot: 0.0, c_corridoio_ok: 0.4, c_corridoio_ott: 4.6, c_nucleo: 94.9} },
+            { rank: 2, label:'Malaspina - Palagonia', val:0.927, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.2, c_barriera_mod: 0.3, c_corridoio_pot: 0.5, c_corridoio_ok: 0.9, c_corridoio_ott: 4.1, c_nucleo: 93.9} },
+            { rank: 3, label:'Politeama', val:0.923, classi:{c_barriera_crit: 0.1, c_barriera_alta: 0.2, c_barriera_mod: 0.3, c_corridoio_pot: 0.5, c_corridoio_ok: 1.1, c_corridoio_ott: 4.3, c_nucleo: 93.5} },
+            { rank: 4, label:'Libertà', val:0.915, classi:{c_barriera_crit: 0.4, c_barriera_alta: 0.3, c_barriera_mod: 0.4, c_corridoio_pot: 0.6, c_corridoio_ok: 1.4, c_corridoio_ott: 6.2, c_nucleo: 90.7} },
+            { rank: 5, label:'Altarello', val:0.906, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.0, c_barriera_mod: 0.2, c_corridoio_pot: 0.5, c_corridoio_ok: 1.6, c_corridoio_ott: 11.3, c_nucleo: 86.4} },
+            { rank: 6, label:'Uditore - Passo di Rigano', val:0.902, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.1, c_barriera_mod: 0.5, c_corridoio_pot: 1.1, c_corridoio_ok: 2.5, c_corridoio_ott: 11.2, c_nucleo: 84.5} },
+            { rank: 7, label:'Zisa', val:0.902, classi:{c_barriera_crit: 0.1, c_barriera_alta: 0.3, c_barriera_mod: 0.5, c_corridoio_pot: 1.0, c_corridoio_ok: 2.1, c_corridoio_ott: 10.1, c_nucleo: 85.8} },
+            { rank: 8, label:'Settecannoli', val:0.901, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.2, c_barriera_mod: 0.5, c_corridoio_pot: 1.4, c_corridoio_ok: 3.6, c_corridoio_ott: 11.7, c_nucleo: 82.7} }
+        ]
+        });
+
       }
     },
 
@@ -2140,6 +2599,48 @@
           '(elevata erosività delle piogge autunnali) e K varia 0,02–0,45 ' +
           'a seconda della litologia (calcare, argille, suoli alluvionali).'
         );
+        // RANK:rusle
+
+        var RUSLE_CLS = [
+          { key: 'c_molto_bassa', label: '< 0.2 (molto bassa)', color: '#ffffe0' },
+          { key: 'c_bassa', label: '0.2÷0.52 (bassa)', color: '#fecc5c' },
+          { key: 'c_media', label: '0.52÷3.7 (media)', color: '#fd8d3c' },
+          { key: 'c_alta', label: '3.7÷7.8 (alta)', color: '#e31a1c' },
+          { key: 'c_critica', label: '> 7.8 (critica)', color: '#b10026' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'LS medio',
+          maxVal: 2.801,
+          classes: RUSLE_CLS,
+          items: [
+            { rank: 1, label:'III · Oreto', val:2.801, classi:{c_molto_bassa: 18.2, c_bassa: 22.9, c_media: 23.3, c_alta: 28.6, c_critica: 7.1} },
+            { rank: 2, label:'VII · Mondello', val:2.664, classi:{c_molto_bassa: 22.4, c_bassa: 22.7, c_media: 22.5, c_alta: 24.9, c_critica: 7.6} },
+            { rank: 3, label:'V · Noce', val:2.127, classi:{c_molto_bassa: 22.6, c_bassa: 23.0, c_media: 28.8, c_alta: 22.7, c_critica: 2.8} },
+            { rank: 4, label:'IV · Mezzomonreale', val:2.086, classi:{c_molto_bassa: 20.8, c_bassa: 31.7, c_media: 21.5, c_alta: 22.4, c_critica: 3.6} },
+            { rank: 5, label:'VI · Nord-Ovest', val:1.937, classi:{c_molto_bassa: 21.7, c_bassa: 19.5, c_media: 39.4, c_alta: 17.3, c_critica: 2.1} },
+            { rank: 6, label:'VIII · Libertà', val:1.635, classi:{c_molto_bassa: 34.0, c_bassa: 23.3, c_media: 25.7, c_alta: 13.5, c_critica: 3.6} },
+            { rank: 7, label:'II · Resuttana', val:1.538, classi:{c_molto_bassa: 36.4, c_bassa: 30.8, c_media: 16.9, c_alta: 9.9, c_critica: 6.0} },
+            { rank: 8, label:'I · Centro Storico', val:0.375, classi:{c_molto_bassa: 37.8, c_bassa: 45.7, c_media: 16.1, c_alta: 0.3, c_critica: 0.0} }
+        ]
+        });
+        appendRankingCard(el, {
+          title: 'Classifica Quartieri',
+          subtitle: 'LS medio',
+          maxVal: 4.048,
+          classes: RUSLE_CLS,
+          items: [
+            { rank: 1, label:'Boccadifalco', val:4.048, classi:{c_molto_bassa: 4.2, c_bassa: 15.0, c_media: 24.6, c_alta: 48.2, c_critica: 8.0} },
+            { rank: 2, label:'Arenella - Vergine Maria', val:3.529, classi:{c_molto_bassa: 10.6, c_bassa: 19.3, c_media: 28.0, c_alta: 30.9, c_critica: 11.3} },
+            { rank: 3, label:'Partanna Mondello', val:3.358, classi:{c_molto_bassa: 21.7, c_bassa: 16.7, c_media: 18.9, c_alta: 31.7, c_critica: 11.0} },
+            { rank: 4, label:'Borgo Nuovo', val:3.268, classi:{c_molto_bassa: 6.0, c_bassa: 11.1, c_media: 41.7, c_alta: 36.6, c_critica: 4.5} },
+            { rank: 5, label:'Villagrazia - Falsomiele', val:3.069, classi:{c_molto_bassa: 14.8, c_bassa: 21.4, c_media: 24.3, c_alta: 31.6, c_critica: 7.9} },
+            { rank: 6, label:'Montepellegrino', val:2.621, classi:{c_molto_bassa: 14.8, c_bassa: 15.4, c_media: 41.0, c_alta: 22.7, c_critica: 6.1} },
+            { rank: 7, label:'Brancaccio - Ciaculli', val:2.413, classi:{c_molto_bassa: 25.0, c_bassa: 27.1, c_media: 20.9, c_alta: 16.8, c_critica: 10.2} },
+            { rank: 8, label:'Tommaso Natale - Sferracavallo', val:2.346, classi:{c_molto_bassa: 16.2, c_bassa: 24.5, c_media: 31.7, c_alta: 23.6, c_critica: 4.1} }
+        ]
+        });
+
       }
     },
 
@@ -2192,6 +2693,48 @@
           'Sovrapponendo questa mappa al catasto degli alberi è possibile identificare ' +
           'i pini ad alto rischio per prioritizzare i controlli arboristici.'
         );
+        // RANK:curv_inst
+
+        var CURV_INST_CLS = [
+          { key: 'c_stabile', label: '< 0.002 (stabile)', color: '#e5f5e0' },
+          { key: 'c_basso', label: '0.002÷0.026 (basso)', color: '#a1d99b' },
+          { key: 'c_moderato', label: '0.026÷0.1 (moderato)', color: '#fdd058' },
+          { key: 'c_alto', label: '0.1÷0.25 (alto)', color: '#ef6548' },
+          { key: 'c_critico', label: '> 0.25 (critico)', color: '#bd0026' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'Indice medio',
+          maxVal: 0.006,
+          classes: CURV_INST_CLS,
+          items: [
+            { rank: 1, label:'VII · Mondello', val:0.006, classi:{c_stabile: 68.7, c_basso: 26.3, c_moderato: 4.2, c_alto: 0.7, c_critico: 0.2} },
+            { rank: 2, label:'III · Oreto', val:0.005, classi:{c_stabile: 70.9, c_basso: 24.2, c_moderato: 4.1, c_alto: 0.7, c_critico: 0.1} },
+            { rank: 3, label:'IV · Mezzomonreale', val:0.005, classi:{c_stabile: 68.3, c_basso: 26.5, c_moderato: 4.6, c_alto: 0.5, c_critico: 0.0} },
+            { rank: 4, label:'V · Noce', val:0.005, classi:{c_stabile: 68.6, c_basso: 26.8, c_moderato: 4.2, c_alto: 0.5, c_critico: 0.0} },
+            { rank: 5, label:'VI · Nord-Ovest', val:0.005, classi:{c_stabile: 67.8, c_basso: 27.7, c_moderato: 4.1, c_alto: 0.4, c_critico: 0.0} },
+            { rank: 6, label:'VIII · Libertà', val:0.005, classi:{c_stabile: 72.9, c_basso: 22.4, c_moderato: 3.9, c_alto: 0.7, c_critico: 0.1} },
+            { rank: 7, label:'II · Resuttana', val:0.004, classi:{c_stabile: 76.4, c_basso: 20.0, c_moderato: 2.9, c_alto: 0.6, c_critico: 0.1} },
+            { rank: 8, label:'I · Centro Storico', val:0.003, classi:{c_stabile: 75.3, c_basso: 22.1, c_moderato: 2.5, c_alto: 0.1, c_critico: 0.0} }
+        ]
+        });
+        appendRankingCard(el, {
+          title: 'Classifica Quartieri',
+          subtitle: 'Indice medio',
+          maxVal: 0.007,
+          classes: CURV_INST_CLS,
+          items: [
+            { rank: 1, label:'Boccadifalco', val:0.007, classi:{c_stabile: 65.1, c_basso: 27.5, c_moderato: 6.3, c_alto: 1.0, c_critico: 0.1} },
+            { rank: 2, label:'Borgo Nuovo', val:0.007, classi:{c_stabile: 63.7, c_basso: 29.8, c_moderato: 5.7, c_alto: 0.7, c_critico: 0.0} },
+            { rank: 3, label:'Montepellegrino', val:0.007, classi:{c_stabile: 66.2, c_basso: 26.8, c_moderato: 5.8, c_alto: 1.1, c_critico: 0.1} },
+            { rank: 4, label:'Partanna Mondello', val:0.007, classi:{c_stabile: 66.7, c_basso: 27.1, c_moderato: 4.9, c_alto: 1.0, c_critico: 0.3} },
+            { rank: 5, label:'Arenella - Vergine Maria', val:0.006, classi:{c_stabile: 68.7, c_basso: 26.3, c_moderato: 4.2, c_alto: 0.7, c_critico: 0.1} },
+            { rank: 6, label:'Brancaccio - Ciaculli', val:0.006, classi:{c_stabile: 76.6, c_basso: 18.8, c_moderato: 3.4, c_alto: 1.0, c_critico: 0.2} },
+            { rank: 7, label:'Cruillas - S.Giovanni Apostolo', val:0.006, classi:{c_stabile: 64.4, c_basso: 29.8, c_moderato: 5.2, c_alto: 0.6, c_critico: 0.1} },
+            { rank: 8, label:'Villagrazia - Falsomiele', val:0.006, classi:{c_stabile: 70.5, c_basso: 24.5, c_moderato: 4.2, c_alto: 0.8, c_critico: 0.1} }
+        ]
+        });
+
       }
     },
 
@@ -2242,6 +2785,50 @@
           'realistiche (es. servizi raggiungibili in 10/15/30 minuti a piedi) ' +
           'nell\'ambito del Piano Urbano della Mobilità Sostenibile di Palermo.'
         );
+        // RANK:tobler
+
+        var TOBLER_CLS = [
+          { key: 'c_molto_diff', label: '< 1.4 (molto difficile)', color: '#a50026' },
+          { key: 'c_difficile', label: '1.4÷3.9 (difficile)', color: '#d73027' },
+          { key: 'c_media', label: '3.9÷4.6 (media)', color: '#fd8d3c' },
+          { key: 'c_facile', label: '4.6÷4.9 (facile)', color: '#fee08b' },
+          { key: 'c_ottima', label: '> 4.9 (ottima)', color: '#1a9641' }
+        ];
+        appendRankingCard(el, {
+          title: 'Classifica Circoscrizioni',
+          subtitle: 'Velocità Tobler media',
+          unit: ' km/h',
+          maxVal: 4.311,
+          classes: TOBLER_CLS,
+          items: [
+            { rank: 1, label:'I · Centro Storico', val:4.311, classi:{c_molto_diff: 0.5, c_difficile: 16.4, c_media: 44.4, c_facile: 33.3, c_ottima: 5.4} },
+            { rank: 2, label:'II · Resuttana', val:3.67, classi:{c_molto_diff: 15.8, c_difficile: 17.1, c_media: 30.1, c_facile: 29.5, c_ottima: 7.6} },
+            { rank: 3, label:'VIII · Libertà', val:3.464, classi:{c_molto_diff: 16.9, c_difficile: 25.7, c_media: 23.5, c_facile: 27.8, c_ottima: 6.1} },
+            { rank: 4, label:'IV · Mezzomonreale', val:3.152, classi:{c_molto_diff: 26.0, c_difficile: 21.6, c_media: 30.2, c_facile: 19.0, c_ottima: 3.2} },
+            { rank: 5, label:'VI · Nord-Ovest', val:3.066, classi:{c_molto_diff: 19.0, c_difficile: 39.4, c_media: 19.4, c_facile: 18.1, c_ottima: 4.1} },
+            { rank: 6, label:'V · Noce', val:3.047, classi:{c_molto_diff: 25.0, c_difficile: 29.1, c_media: 22.5, c_facile: 19.7, c_ottima: 3.7} },
+            { rank: 7, label:'VII · Mondello', val:2.892, classi:{c_molto_diff: 32.0, c_difficile: 22.8, c_media: 22.3, c_facile: 18.7, c_ottima: 4.3} },
+            { rank: 8, label:'III · Oreto', val:2.744, classi:{c_molto_diff: 35.3, c_difficile: 23.4, c_media: 22.3, c_facile: 16.3, c_ottima: 2.7} }
+        ]
+        });
+        appendRankingCard(el, {
+          title: 'Classifica Quartieri',
+          subtitle: 'Velocità Tobler media',
+          unit: ' km/h',
+          maxVal: 4.597,
+          classes: TOBLER_CLS,
+          items: [
+            { rank: 1, label:'Noce', val:4.597, classi:{c_molto_diff: 0.0, c_difficile: 2.9, c_media: 37.4, c_facile: 51.4, c_ottima: 8.3} },
+            { rank: 2, label:'Malaspina - Palagonia', val:4.592, classi:{c_molto_diff: 0.3, c_difficile: 4.0, c_media: 31.3, c_facile: 54.2, c_ottima: 10.2} },
+            { rank: 3, label:'Politeama', val:4.57, classi:{c_molto_diff: 0.4, c_difficile: 4.0, c_media: 36.5, c_facile: 49.7, c_ottima: 9.5} },
+            { rank: 4, label:'Libertà', val:4.533, classi:{c_molto_diff: 0.7, c_difficile: 5.6, c_media: 34.9, c_facile: 49.2, c_ottima: 9.6} },
+            { rank: 5, label:'Altarello', val:4.465, classi:{c_molto_diff: 0.1, c_difficile: 8.4, c_media: 45.7, c_facile: 39.9, c_ottima: 5.9} },
+            { rank: 6, label:'Zisa', val:4.45, classi:{c_molto_diff: 0.5, c_difficile: 9.2, c_media: 41.6, c_facile: 41.3, c_ottima: 7.4} },
+            { rank: 7, label:'Settecannoli', val:4.447, classi:{c_molto_diff: 0.3, c_difficile: 11.9, c_media: 35.1, c_facile: 41.4, c_ottima: 11.3} },
+            { rank: 8, label:'Uditore - Passo di Rigano', val:4.446, classi:{c_molto_diff: 0.2, c_difficile: 10.2, c_media: 40.9, c_facile: 40.5, c_ottima: 8.2} }
+        ]
+        });
+
       }
     }
 
