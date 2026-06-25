@@ -1028,13 +1028,52 @@ document.querySelectorAll('#tb-basemaps .tb-radio').forEach(btn => {
     document.querySelectorAll('#tb-basemaps .tb-radio').forEach(b => b.classList.remove('active'));
     this.classList.add('active');
     const def = BASEMAPS[this.dataset.basemap];
-    map.getSource('basemap').setTiles(def.tiles);
+    const isDark = document.body.getAttribute('data-theme') === 'dark';
+    const tiles = (isDark && this.dataset.basemap === 'osm') ? DARK_TILES : def.tiles;
+    map.getSource('basemap').setTiles(tiles);
     map.setPaintProperty('basemap-layer', 'raster-opacity', def.opacity);
     const attribEl = document.querySelector('.maplibregl-ctrl-attrib-inner');
     if (attribEl && def.attributionNode) {
       attribEl.replaceChildren(def.attributionNode.cloneNode(true));
     }
   });
+});
+
+// ── Toolbar: Dark mode ───────────────────────────────────────────────────
+const DARK_TILES = ['https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png'];
+
+function applyDarkMode(dark, save) {
+  const moon = document.getElementById('tb-dark-moon');
+  const sun  = document.getElementById('tb-dark-sun');
+  if (dark) {
+    document.body.setAttribute('data-theme', 'dark');
+    if (moon) moon.style.display = 'none';
+    if (sun)  sun.style.display  = '';
+    const activeBasemap = document.querySelector('#tb-basemaps .tb-radio.active')?.dataset.basemap;
+    if (activeBasemap === 'osm' && map.getSource('basemap')) {
+      map.getSource('basemap').setTiles(DARK_TILES);
+    }
+  } else {
+    document.body.removeAttribute('data-theme');
+    if (moon) moon.style.display = '';
+    if (sun)  sun.style.display  = 'none';
+    const activeBasemap = document.querySelector('#tb-basemaps .tb-radio.active')?.dataset.basemap;
+    if (activeBasemap === 'osm' && map.getSource('basemap')) {
+      map.getSource('basemap').setTiles(BASEMAPS.osm.tiles);
+    }
+  }
+  if (save) localStorage.setItem('palermo-dark-mode', dark ? 'dark' : 'light');
+}
+
+document.getElementById('tb-dark').addEventListener('click', function () {
+  applyDarkMode(document.body.getAttribute('data-theme') !== 'dark', true);
+});
+
+// Applica preferenza salvata dopo style.load (la source basemap deve esistere)
+map.once('style.load', function () {
+  if (localStorage.getItem('palermo-dark-mode') === 'dark') {
+    applyDarkMode(true, false);
+  }
 });
 
 // ── Toolbar: CTR toggle ───────────────────────────────────────────────────
