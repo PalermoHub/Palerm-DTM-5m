@@ -1379,7 +1379,7 @@ body {
 .rp-punto-place { font-size: 13px; font-weight: 700; }
 .rp-punto-sub   { font-size: 10px; opacity: 0.75; margin-top: 2px; }
 .rp-punto-quota-box { text-align: right; line-height: 1.1; }
-.rp-punto-quota-val  { font-size: 22px; font-weight: 800; }
+.rp-punto-quota-val  { font-size: 22px; font-weight: 700; }
 .rp-punto-quota-unit { font-size: 10px; opacity: 0.8; display: block; }
 
 /* Sezioni nel panel */
