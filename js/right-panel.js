@@ -2877,7 +2877,7 @@
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
           'Confronto tra la <strong>stabilità morfologica derivata dal DTM</strong> e le ' +
-          '<strong>perimetrazioni PAI R3/R4</strong> (Piano per l\'Assetto Idrogeologico — Sicilia). ' +
+          '<strong>perimetrazioni PAI R3/R4</strong> (Piano per l\'Assetto Idrogeologico Sicilia). ' +
           'Le aree <strong>morfologicamente instabili</strong> (classi 3–4–5 dell\'indice di stabilità ' +
           'versanti: pendenza, curvatura, morfologia) vengono incrociate con i poligoni PAI R4 ' +
           '(rischio molto elevato) e R3 (rischio elevato). ' +
