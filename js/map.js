@@ -1122,6 +1122,8 @@ document.getElementById('tb-3d').addEventListener('click', function () {
   terrainActive = !terrainActive;
   this.classList.toggle('active', terrainActive);
   document.getElementById('tb-3d-label').textContent = terrainActive ? '3D' : '2D';
+  const badge = document.getElementById('tb-mobile-3d-badge');
+  if (badge) { badge.textContent = terrainActive ? '3D' : '2D'; badge.classList.toggle('is-2d', !terrainActive); }
 
   if (terrainActive) {
   map.dragRotate.enable();
@@ -1641,5 +1643,15 @@ map.on('click', function (e) {
     const open = panel.hidden === false;
     panel.hidden = open;
     btn.setAttribute('aria-expanded', String(!open));
+  });
+})();
+
+// ── Mobile toolbar: linguetta toggle ─────────────────────────────────────────
+(function () {
+  const tab = document.getElementById('tb-mobile-tab');
+  const wrap = document.getElementById('map-toolbar-wrap');
+  if (!tab || !wrap) return;
+  tab.addEventListener('click', function () {
+    wrap.classList.toggle('tb-open');
   });
 })();

@@ -1831,4 +1831,113 @@ body {
   flex-shrink: 0;
 }
 
+/* ════════════════════════════════════════
+   MOBILE TOOLBAR (≤640px)
+════════════════════════════════════════ */
+#tb-mobile-tab { display: none; }
+
+@media (max-width: 640px) {
+  /* Riposiziona wrap: da centro-top a left-center, slide-in */
+  #map-toolbar-wrap {
+    left: 0 !important;
+    top: 50% !important;
+    /* 26px = larghezza linguetta: wrap scorre sx lasciando solo il tab visibile */
+    transform: translateY(-50%) translateX(calc(-100% + 26px)) !important;
+    transition: transform 0.3s ease;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 0 !important;
+  }
+
+  #map-toolbar-wrap.tb-open {
+    transform: translateY(-50%) translateX(0) !important;
+  }
+
+  /* Toolbar verticale, bordo sinistro piatto */
+  #map-toolbar {
+    flex-direction: column;
+    border-radius: 0 !important;
+    padding: 8px 4px;
+    gap: 3px;
+    border-right: none !important;
+  }
+
+  /* Separatori orizzontali */
+  .tb-sep {
+    width: 70%;
+    height: 1px;
+    margin: 2px auto !important;
+  }
+
+  /* CTR opacity slider: nascosto su mobile */
+  .tb-opacity { display: none !important; }
+
+  /* Bottoni testo (OSM/SAT/CTR/3D): taglia padding */
+  #tb-3d, #tb-ctr, #tb-contour,
+  #tb-basemaps .tb-radio {
+    padding: 0 5px;
+    font-size: 8.5px;
+  }
+
+  /* Sotto-pannelli: overlay assoluto ancorato alla toolbar */
+  .tb-panel {
+    position: absolute;
+    left: 38px;
+    top: 0;
+    min-width: 200px;
+    z-index: 20;
+    border-radius: 0 12px 12px 0 !important;
+  }
+
+  /* Linguetta: sempre visibile, stacca a destra della toolbar */
+  #tb-mobile-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    min-height: 72px;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(30, 60, 160, 0.14);
+    border-left: none;
+    border-radius: 0 10px 10px 0;
+    padding: 10px 2px;
+    gap: 6px;
+    cursor: pointer;
+    box-shadow: 4px 2px 14px rgba(30, 60, 160, 0.18);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
+  }
+
+  #tb-mobile-arrow {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2a3a68;
+    line-height: 1;
+    transition: transform 0.3s ease;
+    display: block;
+  }
+
+  #map-toolbar-wrap.tb-open #tb-mobile-arrow {
+    transform: rotate(180deg);
+  }
+
+  #tb-mobile-3d-badge {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #e07800;
+    font-family: 'Titillium Web', sans-serif;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  #tb-mobile-3d-badge.is-2d {
+    color: #6a7aa8;
+  }
+}
+
 
