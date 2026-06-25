@@ -707,6 +707,24 @@ const map = new maplibregl.Map({
         }
       },
 
+      // Bivariate proxy layers — sempre visibili (opacity 0) per queryRenderedFeatures
+      {
+        id: 'bivariate-elev-proxy',
+        type: 'fill',
+        source: 'bivariate-elev-src',
+        'source-layer': 'bivariate_elev',
+        filter: ['!=', ['get', 'biv_code'], '0-0'],
+        paint: { 'fill-color': '#000', 'fill-opacity': 0 }
+      },
+      {
+        id: 'bivariate-slope-proxy',
+        type: 'fill',
+        source: 'bivariate-slope-src',
+        'source-layer': 'bivariate_slope',
+        filter: ['!=', ['get', 'biv_code'], '0-0'],
+        paint: { 'fill-color': '#000', 'fill-opacity': 0 }
+      },
+
       // Transetti profili altimetrici — vettoriale GeoJSON, disattivo di default
       {
         id: 'transects-line',
@@ -1238,7 +1256,7 @@ window.setTransectsVisible = function (visible) {
 // Griglia — apertura nel pannello destro (vista #rp-punto)
 let _grigliaLastKey = null;
 
-function openGrigliaPanel(p, upl, lngLat) {
+function openGrigliaPanel(p, upl, lngLat, bivElev, bivSlope) {
   const n = (v, d = 1) => (v != null && v !== '' && !isNaN(+v)) ? Number(v).toFixed(d) : '—';
   const pEl = id => document.getElementById(id);
 
@@ -1328,6 +1346,61 @@ function openGrigliaPanel(p, upl, lngLat) {
   if (p.viewshed != null) sMob.appendChild(row('Visibilità cumulativa', `${Math.round(p.viewshed)}/6 punti`));
   if (p.rusle != null)    sMob.appendChild(row('Erosione RUSLE LS', n(p.rusle, 2)));
 
+  // ── DTM × PAI — Gap morfologico ──
+  const PAI_INFO = {
+    0: null,
+    1: { label: 'PAI R4 — rischio molto elevato', bg: '#fce4e4', text: '#7a0000', border: '#f5a5a5' },
+    2: { label: 'PAI R3 — rischio elevato',        bg: '#fff0e0', text: '#7a3000', border: '#ffb570' },
+    3: { label: 'Gap critico — instabile, fuori PAI', bg: '#fee2e2', text: '#991b1b', border: '#fca5a5' },
+    4: { label: 'Gap moderato — instabile, fuori PAI', bg: '#fff7e0', text: '#854d0e', border: '#fde047' },
+  };
+  let sPai = null;
+  if (p.pai_gap != null) {
+    const paiKey = Math.round(p.pai_gap);
+    const paiInf = PAI_INFO[paiKey];
+    sPai = sec('DTM × PAI — Gap morfologico');
+    if (paiInf) {
+      const r2 = document.createElement('div'); r2.className = 'rp-punto-row';
+      const lEl2 = document.createElement('span'); lEl2.className = 'rp-punto-row-label'; lEl2.textContent = 'Classificazione';
+      const badge2 = document.createElement('span'); badge2.className = 'rp-punto-badge';
+      badge2.textContent = paiInf.label;
+      badge2.style.cssText = `background:${paiInf.bg};color:${paiInf.text};border-color:${paiInf.border};`;
+      r2.appendChild(lEl2); r2.appendChild(badge2); sPai.appendChild(r2);
+    } else {
+      sPai.appendChild(row('Classificazione', 'Stabile — fuori perimetro analisi'));
+    }
+  }
+
+  // ── DTM × ISTAT — Elevazione × Densità ──
+  const ELEV_LABELS  = { '1': 'bassa quota',   '2': 'media quota',   '3': 'alta quota' };
+  const DENS_LABELS  = { '1': 'bassa densità', '2': 'media densità', '3': 'alta densità' };
+  const SLOPE_LABELS = { '1': 'bassa pendenza', '2': 'media pendenza', '3': 'alta pendenza' };
+  function decodeBiv(code, xLabels, yLabels) {
+    if (!code || code === '0-0') return null;
+    const [x, y] = code.split('-');
+    return { x: xLabels[x] || x, y: yLabels[y] || y };
+  }
+
+  let sBivElev = null;
+  if (bivElev?.biv_code) {
+    const dec = decodeBiv(bivElev.biv_code, ELEV_LABELS, DENS_LABELS);
+    if (dec) {
+      sBivElev = sec('DTM × ISTAT — Elevazione × Densità');
+      sBivElev.appendChild(row('Fascia altimetrica', dec.x));
+      sBivElev.appendChild(row('Densità abitanti', dec.y));
+    }
+  }
+
+  let sBivSlope = null;
+  if (bivSlope?.biv_code) {
+    const dec = decodeBiv(bivSlope.biv_code, SLOPE_LABELS, DENS_LABELS);
+    if (dec) {
+      sBivSlope = sec('DTM × ISTAT — Pendenza × Densità');
+      sBivSlope.appendChild(row('Classe pendenza', dec.x));
+      sBivSlope.appendChild(row('Densità abitanti', dec.y));
+    }
+  }
+
   // ── Superfici UPL ──
   let sTerr = null;
   if (upl) {
@@ -1345,7 +1418,7 @@ function openGrigliaPanel(p, upl, lngLat) {
   const body = pEl('rp-punto-body');
   body.innerHTML = '';
   body.appendChild(hdr);
-  [sPend, sMorf, sRisk, sIdx, sIdro, sEn, sMob, sTerr].forEach(s => s && body.appendChild(s));
+  [sPend, sMorf, sRisk, sIdx, sIdro, sEn, sMob, sPai, sBivElev, sBivSlope, sTerr].forEach(s => s && body.appendChild(s));
   body.scrollTop = 0;
 
   // Titolo e coordinate
@@ -1430,9 +1503,11 @@ map.on('mouseleave', 'griglia-circles', () => { map.getCanvas().style.cursor = '
 map.on('click', 'griglia-circles', (e) => {
   e.originalEvent.stopPropagation();
   _grigliaLastKey = `${e.lngLat.lng.toFixed(5)},${e.lngLat.lat.toFixed(5)}`;
-  const p   = e.features[0].properties;
-  const upl = map.queryRenderedFeatures(e.point, { layers: ['upl-fill'] })[0]?.properties ?? null;
-  openGrigliaPanel(p, upl, e.lngLat);
+  const p        = e.features[0].properties;
+  const upl      = map.queryRenderedFeatures(e.point, { layers: ['upl-fill'] })[0]?.properties ?? null;
+  const bivElev  = map.queryRenderedFeatures(e.point, { layers: ['bivariate-elev-proxy'] })[0]?.properties ?? null;
+  const bivSlope = map.queryRenderedFeatures(e.point, { layers: ['bivariate-slope-proxy'] })[0]?.properties ?? null;
+  openGrigliaPanel(p, upl, e.lngLat, bivElev, bivSlope);
 });
 
 
