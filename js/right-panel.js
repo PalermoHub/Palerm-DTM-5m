@@ -2866,6 +2866,73 @@
         });
 
       }
+    },
+
+    dtmpaigap: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 20 2 20"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+      title: 'DTM × PAI — Gap morfologico',
+      layer: 'dtm-pai-gap-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'Confronto tra la <strong>stabilità morfologica derivata dal DTM</strong> e le ' +
+          '<strong>perimetrazioni PAI R3/R4</strong> (Piano per l\'Assetto Idrogeologico — Sicilia). ' +
+          'Le aree <strong>morfologicamente instabili</strong> (classi 3–4–5 dell\'indice di stabilità ' +
+          'versanti: pendenza, curvatura, morfologia) vengono incrociate con i poligoni PAI R4 ' +
+          '(rischio molto elevato) e R3 (rischio elevato). ' +
+          'Il risultato evidenzia le <strong>zone di gap</strong>: territorio con caratteristiche ' +
+          'geomorfologiche di instabilità che non risulta ancora coperto dalla perimetrazione PAI. ' +
+          'L\'analisi rivela che il <strong>79% delle aree morfologicamente instabili</strong> (38,7 km² ' +
+          'su 49,0 km² totali) ricade <strong>fuori dai perimetri PAI R3/R4</strong>, suggerendo ' +
+          'un potenziale aggiornamento della perimetrazione ufficiale del rischio idrogeologico.'
+        );
+        appendRingCard(el, {
+          canvasId: 'rp-c-dtmpaigap',
+          title: 'Distribuzione gap morfologico',
+          centerVal: '79%',
+          centerLabel: 'fuori PAI',
+          legendData: [
+            { chartLabel: 'PAI R4',       label: 'PAI R4 perimetrato — rischio molto elevato',  pct: 7.2,  color: '#b00020' },
+            { chartLabel: 'PAI R3',       label: 'PAI R3 perimetrato — rischio elevato',        pct: 19.9, color: '#ff6432' },
+            { chartLabel: 'Gap critico',  label: 'Gap critico — instabile cl.4-5, fuori PAI',   pct: 42.2, color: '#dc1e1e' },
+            { chartLabel: 'Gap moderato', label: 'Gap moderato — instabile cl.3, fuori PAI',    pct: 30.8, color: '#ffa000' }
+          ],
+          summaries: [
+            { val: '79%',    label: 'fuori PAI' },
+            { val: '22,4',   label: 'km² gap critico' },
+            { val: '14,4',   label: 'km² PAI R3+R4' }
+          ]
+        });
+        appendSectionTitle(el, 'Superfici per categoria');
+        appendTable(el,
+          ['Categoria', 'Superficie', '%'],
+          [
+            ['PAI R4 (perimetrato)',         '3,81 km²',   '7,2%'],
+            ['PAI R3 (perimetrato)',         '10,54 km²',  '19,9%'],
+            ['Gap critico (cl.4-5, fuori)', '22,37 km²',  '42,2%'],
+            ['Gap moderato (cl.3, fuori)',   '16,33 km²',  '30,8%'],
+            ['Totale (PAI R3+R4 + gap)',     '53,05 km²',  '100%',  'hl']
+          ]
+        );
+        appendSectionTitle(el, 'Interpretazione');
+        appendText(el,
+          'Le aree di gap critico (rosso intenso) corrispondono prevalentemente ai versanti ripidi ' +
+          'dei Monti di Palermo (Monte Cuccio, Monte Pellegrino, Monte Grifone) e alle valli ' +
+          'torrentizie che scendono verso la pianura. ' +
+          'Il gap moderato (arancione) include collina urbana e periurbana con instabilità di classe 3 ' +
+          'non ancora oggetto di specifica perimetrazione PAI. ' +
+          'I poligoni PAI (bordeaux/arancio-rosso) si concentrano nei fondovalle e nelle aree urbane ' +
+          'già coinvolte da eventi franosi o alluvionali storici (Bacino Oreto, aree costiere).'
+        );
+        appendText(el,
+          'Nota metodologica: l\'indice di stabilità morfologica è derivato unicamente dal DTM 5m ' +
+          '(pendenza, curvatura, rugosità) e non considera la geologia, l\'uso del suolo o la ' +
+          'vegetazione. Le aree di gap non sono automaticamente a rischio: la perimetrazione PAI ' +
+          'si basa su criteri idrologici, geologici e storico-documentali più completi. ' +
+          'L\'analisi è uno strumento preliminare di prioritizzazione per eventuali verifiche sul campo.'
+        );
+      }
     }
 
   };

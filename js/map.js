@@ -333,6 +333,12 @@ const map = new maplibregl.Map({
         tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'tms',
         attribution: 'Curvatura instabilità radicale: DTM HRDTM5m@italia'
       },
+      'dtm-pai-gap-raster': {
+        type: 'raster',
+        tiles: [`${BASE_URL}docs/tiles/dtm_pai_gap/{z}/{x}/{y}.png`],
+        tileSize: 256, minzoom: 8, maxzoom: 15, scheme: 'xyz',
+        attribution: 'DTM × PAI — Gap morfologico: DTM HRDTM5m@italia + PAI Sicilia'
+      },
       'transects-geojson': {
         type: 'geojson',
         data: `${BASE_URL}docs/transects.geojson`
@@ -638,6 +644,15 @@ const map = new maplibregl.Map({
         source: 'curvatura-instabilita-raster',
         layout: { visibility: 'none' },
         paint: { 'raster-opacity': 0.85 }
+      },
+
+      // DTM × PAI gap morfologico — disattiva di default
+      {
+        id: 'dtm-pai-gap-layer',
+        type: 'raster',
+        source: 'dtm-pai-gap-raster',
+        layout: { visibility: 'none' },
+        paint: { 'raster-opacity': 0.9 }
       },
 
       // Transetti profili altimetrici — vettoriale GeoJSON, disattivo di default

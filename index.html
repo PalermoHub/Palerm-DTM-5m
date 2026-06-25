@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -491,6 +492,15 @@
     <div class="legend-item"><div class="legend-box" style="background:#fdd058;"></div><span>moderato — potenziale accumulo detritico</span></div>
     <div class="legend-item"><div class="legend-box" style="background:#ef6548;"></div><span>alto — accumulo o instabilità radicale</span></div>
     <div class="legend-item"><div class="legend-box" style="background:#bd0026;"></div><span>critico — canyon convergenti / versanti ripidi</span></div>
+  </div>
+
+  <!-- ── DTM × PAI gap morfologico ─────────────────────────────────────────── -->
+  <div id="legend-dtmpaigap" class="map-legend legend-analysis">
+    <div class="map-legend-title">DTM × PAI — Gap morfologico</div>
+    <div class="legend-item"><div class="legend-box" style="background:#b00020;opacity:0.86;"></div><span>PAI R4 — rischio molto elevato (perimetrato)</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#ff6432;opacity:0.78;"></div><span>PAI R3 — rischio elevato (perimetrato)</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#dc1e1e;opacity:0.90;"></div><span>Gap critico — instabile cl.4-5, fuori PAI</span></div>
+    <div class="legend-item"><div class="legend-box" style="background:#ffa000;opacity:0.78;"></div><span>Gap moderato — instabile cl.3, fuori PAI</span></div>
   </div>
 
   <div id="legend-contour" class="map-legend">
@@ -1214,6 +1224,15 @@
           <div class="rp-card-line" style="background:#e07800;"></div>
           <div class="rp-card-title">Profili altimetrici</div>
           <div class="rp-card-sub">9 transetti · quota lungo assi territoriali</div>
+        </div>
+
+        <!-- ── Analisi incrociate con altri dataset ── -->
+        <div class="rp-category-header">Analisi incrociate con altri dataset</div>
+
+        <div class="rp-card" data-analysis="dtmpaigap">
+          <div class="rp-card-line" style="background:#dc1e1e;"></div>
+          <div class="rp-card-title">DTM × PAI — Gap morfologico</div>
+          <div class="rp-card-sub">Aree instabili non perimetrate PAI R3/R4 · 79% fuori PAI</div>
         </div>
 
       </div><!-- /rp-cards -->
