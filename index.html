@@ -503,6 +503,54 @@
     <div class="legend-item"><div class="legend-box" style="background:#ffa000;opacity:0.78;"></div><span>Gap moderato — instabile cl.3, fuori PAI</span></div>
   </div>
 
+  <!-- Bivariate: Elevazione × Densità -->
+  <div id="legend-bivariateElev" class="map-legend legend-analysis">
+    <div class="map-legend-title">Elevazione × Densità ab. (ISTAT 2021)</div>
+    <div style="display:grid;grid-template-columns:28px repeat(3,1fr);gap:3px;font-size:9px;margin:6px 0 3px;align-items:center;">
+      <div></div>
+      <div style="text-align:center;color:#666;font-size:8px;">0–50m</div>
+      <div style="text-align:center;color:#666;font-size:8px;">50–300m</div>
+      <div style="text-align:center;color:#666;font-size:8px;">&gt;300m</div>
+      <div style="font-size:8px;color:#666;text-align:right;padding-right:3px;">Alta</div>
+      <div style="background:#88c8b8;height:20px;border-radius:3px;" title="Bassa elev · Alta densità"></div>
+      <div style="background:#60a898;height:20px;border-radius:3px;" title="Media elev · Alta densità"></div>
+      <div style="background:#307870;height:20px;border-radius:3px;" title="Alta elev · Alta densità"></div>
+      <div style="font-size:8px;color:#666;text-align:right;padding-right:3px;">Media</div>
+      <div style="background:#d8c8d8;height:20px;border-radius:3px;"></div>
+      <div style="background:#b0b0c0;height:20px;border-radius:3px;"></div>
+      <div style="background:#8090a0;height:20px;border-radius:3px;"></div>
+      <div style="font-size:8px;color:#666;text-align:right;padding-right:3px;">Bassa</div>
+      <div style="background:#f0eaee;height:20px;border-radius:3px;"></div>
+      <div style="background:#e8c8d0;height:20px;border-radius:3px;"></div>
+      <div style="background:#c88090;height:20px;border-radius:3px;" title="Alta elev · Bassa densità"></div>
+    </div>
+    <div style="font-size:8px;color:#aaa;margin-top:2px;padding-left:28px;">↑ densità · → elevazione</div>
+  </div>
+
+  <!-- Bivariate: Pendenza × Densità -->
+  <div id="legend-bivariateSlope" class="map-legend legend-analysis">
+    <div class="map-legend-title">Pendenza × Densità ab. (ISTAT 2021)</div>
+    <div style="display:grid;grid-template-columns:28px repeat(3,1fr);gap:3px;font-size:9px;margin:6px 0 3px;align-items:center;">
+      <div></div>
+      <div style="text-align:center;color:#666;font-size:8px;">0–5°</div>
+      <div style="text-align:center;color:#666;font-size:8px;">5–15°</div>
+      <div style="text-align:center;color:#666;font-size:8px;">&gt;15°</div>
+      <div style="font-size:8px;color:#666;text-align:right;padding-right:3px;">Alta</div>
+      <div style="background:#9ab870;height:20px;border-radius:3px;" title="Pend. bassa · Alta densità"></div>
+      <div style="background:#7a9850;height:20px;border-radius:3px;"></div>
+      <div style="background:#506030;height:20px;border-radius:3px;" title="Pend. alta · Alta densità (vulnerabilità)"></div>
+      <div style="font-size:8px;color:#666;text-align:right;padding-right:3px;">Media</div>
+      <div style="background:#d8ddb8;height:20px;border-radius:3px;"></div>
+      <div style="background:#c0b898;height:20px;border-radius:3px;"></div>
+      <div style="background:#9a8058;height:20px;border-radius:3px;"></div>
+      <div style="font-size:8px;color:#666;text-align:right;padding-right:3px;">Bassa</div>
+      <div style="background:#f0eeea;height:20px;border-radius:3px;"></div>
+      <div style="background:#e8c8b0;height:20px;border-radius:3px;"></div>
+      <div style="background:#c87050;height:20px;border-radius:3px;" title="Pend. alta · Bassa densità (colline vuote)"></div>
+    </div>
+    <div style="font-size:8px;color:#aaa;margin-top:2px;padding-left:28px;">↑ densità · → pendenza</div>
+  </div>
+
   <div id="legend-contour" class="map-legend">
     <div class="map-legend-title">Curve di livello</div>
     <div class="legend-item">
@@ -1233,6 +1281,18 @@
           <div class="rp-card-line" style="background:#dc1e1e;"></div>
           <div class="rp-card-title">DTM × PAI — Gap morfologico</div>
           <div class="rp-card-sub">Aree instabili non perimetrate PAI R3/R4 · 79% fuori PAI</div>
+        </div>
+
+        <div class="rp-card" data-analysis="bivariateElev">
+          <div class="rp-card-line" style="background:linear-gradient(to right,#e8e8e8,#5698b9,#3b4994);"></div>
+          <div class="rp-card-title">DTM × ISTAT — Elevazione × Densità</div>
+          <div class="rp-card-sub">Bivariate · 3.600 sezioni ISTAT 2021 · 57% pop. in pianura</div>
+        </div>
+
+        <div class="rp-card" data-analysis="bivariateSlope">
+          <div class="rp-card-line" style="background:linear-gradient(to right,#e8e8e8,#bdb8c1,#2a5a8c);"></div>
+          <div class="rp-card-title">DTM × ISTAT — Pendenza × Densità</div>
+          <div class="rp-card-sub">Bivariate · 10.229 ab. su versanti acclivi · rischio demografico</div>
         </div>
 
       </div><!-- /rp-cards -->

@@ -342,6 +342,18 @@ const map = new maplibregl.Map({
       'transects-geojson': {
         type: 'geojson',
         data: `${BASE_URL}docs/transects.geojson`
+      },
+      'bivariate-elev-src': {
+        type: 'vector',
+        tiles: [`${BASE_URL}docs/tiles/bivariate_elev/{z}/{x}/{y}.pbf`],
+        minzoom: 8, maxzoom: 15,
+        attribution: 'DTM × ISTAT — Elevazione × Densità: HRDTM5m@italia + ISTAT 2021'
+      },
+      'bivariate-slope-src': {
+        type: 'vector',
+        tiles: [`${BASE_URL}docs/tiles/bivariate_slope/{z}/{x}/{y}.pbf`],
+        minzoom: 8, maxzoom: 15,
+        attribution: 'DTM × ISTAT — Pendenza × Densità: HRDTM5m@italia + ISTAT 2021'
       }
     },
     layers: [
@@ -653,6 +665,46 @@ const map = new maplibregl.Map({
         source: 'dtm-pai-gap-raster',
         layout: { visibility: 'none' },
         paint: { 'raster-opacity': 0.9 }
+      },
+
+      // Bivariate: Elevazione × Densità abitativa ISTAT 2021
+      {
+        id: 'bivariate-elev-layer',
+        type: 'fill',
+        source: 'bivariate-elev-src',
+        'source-layer': 'bivariate_elev',
+        layout: { visibility: 'none' },
+        filter: ['!=', ['get', 'biv_code'], '0-0'],
+        paint: {
+          'fill-color': ['match', ['get', 'biv_code'],
+            '1-3', '#88c8b8', '2-3', '#60a898', '3-3', '#307870',
+            '1-2', '#d8c8d8', '2-2', '#b0b0c0', '3-2', '#8090a0',
+            '1-1', '#f0eaee', '2-1', '#e8c8d0', '3-1', '#c88090',
+            '#cccccc'
+          ],
+          'fill-opacity': 0.80,
+          'fill-outline-color': 'rgba(255,255,255,0.15)'
+        }
+      },
+
+      // Bivariate: Pendenza × Densità abitativa ISTAT 2021
+      {
+        id: 'bivariate-slope-layer',
+        type: 'fill',
+        source: 'bivariate-slope-src',
+        'source-layer': 'bivariate_slope',
+        layout: { visibility: 'none' },
+        filter: ['!=', ['get', 'biv_code'], '0-0'],
+        paint: {
+          'fill-color': ['match', ['get', 'biv_code'],
+            '1-3', '#9ab870', '2-3', '#7a9850', '3-3', '#506030',
+            '1-2', '#d8ddb8', '2-2', '#c0b898', '3-2', '#9a8058',
+            '1-1', '#f0eeea', '2-1', '#e8c8b0', '3-1', '#c87050',
+            '#cccccc'
+          ],
+          'fill-opacity': 0.80,
+          'fill-outline-color': 'rgba(255,255,255,0.15)'
+        }
       },
 
       // Transetti profili altimetrici — vettoriale GeoJSON, disattivo di default

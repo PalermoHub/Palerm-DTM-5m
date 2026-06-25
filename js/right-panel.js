@@ -2877,7 +2877,7 @@
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
           'Confronto tra la <strong>stabilità morfologica derivata dal DTM</strong> e le ' +
-          '<strong>perimetrazioni PAI R3/R4</strong> (Piano per l\'Assetto Idrogeologico Sicilia). ' +
+          '<strong>perimetrazioni PAI R3/R4</strong> (Piano per l\'Assetto Idrogeologico — Sicilia). ' +
           'Le aree <strong>morfologicamente instabili</strong> (classi 3–4–5 dell\'indice di stabilità ' +
           'versanti: pendenza, curvatura, morfologia) vengono incrociate con i poligoni PAI R4 ' +
           '(rischio molto elevato) e R3 (rischio elevato). ' +
@@ -2933,6 +2933,272 @@
           'L\'analisi è uno strumento preliminare di prioritizzazione per eventuali verifiche sul campo.'
         );
       }
+    },
+
+    bivariateElev: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>',
+      title: 'DTM × ISTAT — Elevazione × Densità',
+      layer: 'bivariate-elev-layer',
+      hasLayer: true,
+      fillLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'Mappa <strong>bivariate</strong> che incrocia la <strong>fascia altimetrica media</strong> ' +
+          '(derivata dal DTM 5m) con la <strong>densità abitativa</strong> (ab/km²) per ogni ' +
+          '<strong>sezione di censimento ISTAT 2021</strong>. ' +
+          'Le 3.600 sezioni di Palermo vengono colorate con una matrice 3×3: asse X = elevazione, ' +
+          'asse Y = densità. Il risultato rivela dove si concentra la <strong>pressione demografica ' +
+          'in relazione all\'altitudine</strong> e al rischio geomorfologico associato.'
+        );
+        // Bivariate legend matrix
+        (function() {
+          var C = {
+            '1-3':'#88c8b8','2-3':'#60a898','3-3':'#307870',
+            '1-2':'#d8c8d8','2-2':'#b0b0c0','3-2':'#8090a0',
+            '1-1':'#f0eaee','2-1':'#e8c8d0','3-1':'#c88090'
+          };
+          var colH = ['BASSA','MEDIA','ALTA'];   // elevazione bassa→alta
+          var rowH = ['ALTA','MEDIA','BASSA'];   // densità alta→bassa (riga 1=alta)
+          // y-index: riga 0→y=3 (alta), riga 1→y=2, riga 2→y=1 (bassa)
+          var rowY = [3, 2, 1];
+
+          var wrap = document.createElement('div');
+          wrap.style.cssText = 'margin:10px 0 16px;width:100%;box-sizing:border-box;';
+
+          // Titolo
+          var title = document.createElement('div');
+          title.style.cssText = 'font-size:13px;font-weight:700;letter-spacing:0.08em;color:#444;text-transform:uppercase;margin-bottom:2px;';
+          title.textContent = 'CLASSE BIVARIATA';
+          wrap.appendChild(title);
+          var sub = document.createElement('div');
+          sub.style.cssText = 'font-size:11px;color:#aaa;margin-bottom:10px;';
+          sub.textContent = 'Elevazione DTM × Densità ab/km²';
+          wrap.appendChild(sub);
+
+          // Griglia 4 colonne: [label-riga] + [3 celle]
+          // Prima riga: vuoto + 3 intestazioni colonne
+          var grid = document.createElement('div');
+          grid.style.cssText = 'display:grid;grid-template-columns:36px repeat(3,1fr);gap:4px;width:100%;';
+
+          // header row
+          var empty = document.createElement('div'); grid.appendChild(empty);
+          colH.forEach(function(h) {
+            var d = document.createElement('div');
+            d.style.cssText = 'font-size:12px;font-weight:600;letter-spacing:0.06em;color:#888;text-align:center;text-transform:uppercase;padding-bottom:2px;';
+            d.textContent = h;
+            grid.appendChild(d);
+          });
+
+          // 3 data rows
+          rowH.forEach(function(rh, ri) {
+            var y = rowY[ri];
+            var lbl = document.createElement('div');
+            lbl.style.cssText = 'font-size:12px;font-weight:600;letter-spacing:0.05em;color:#888;text-transform:uppercase;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;';
+            lbl.textContent = rh;
+            grid.appendChild(lbl);
+            [1,2,3].forEach(function(x) {
+              var k = x+'-'+y;
+              var cell = document.createElement('div');
+              cell.style.cssText = 'background:'+C[k]+';height:64px;border-radius:6px;cursor:default;transition:transform 0.15s,box-shadow 0.15s;';
+              cell.title = colH[x-1]+' elev. · densità '+rh;
+              cell.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.boxShadow = '0 3px 10px rgba(0,0,0,0.15)';
+              });
+              cell.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+              });
+              grid.appendChild(cell);
+            });
+          });
+          wrap.appendChild(grid);
+
+          // asse X label sotto
+          var axRow = document.createElement('div');
+          axRow.style.cssText = 'display:grid;grid-template-columns:36px 1fr;gap:4px;margin-top:5px;';
+          axRow.appendChild(document.createElement('div'));
+          var axX = document.createElement('div');
+          axX.style.cssText = 'font-size:11px;color:#aaa;text-align:center;letter-spacing:0.04em;';
+          axX.textContent = 'Elevazione DTM →';
+          axRow.appendChild(axX);
+          wrap.appendChild(axRow);
+
+          // asse Y label
+          var axY = document.createElement('div');
+          axY.style.cssText = 'font-size:11px;color:#aaa;margin-top:2px;padding-left:36px;letter-spacing:0.04em;';
+          axY.textContent = '↑ Densità pop. (ab/km²)';
+          wrap.appendChild(axY);
+
+          // Nessun dato
+          var nd = document.createElement('div');
+          nd.style.cssText = 'display:flex;align-items:center;gap:6px;margin-top:8px;font-size:11px;color:#aaa;padding-left:36px;';
+          var ndBox = document.createElement('div');
+          ndBox.style.cssText = 'width:14px;height:14px;border-radius:3px;background:#cccccc;flex-shrink:0;';
+          var ndTxt = document.createElement('span'); ndTxt.textContent = 'Nessun dato';
+          nd.appendChild(ndBox); nd.appendChild(ndTxt);
+          wrap.appendChild(nd);
+
+          el.appendChild(wrap);
+        })();
+        appendSectionTitle(el, 'Distribuzione popolazione (635.439 ab.)');
+        appendTable(el,
+          ['Combinazione', 'Pop.', '%', 'Area'],
+          [
+            ['0–50m × Alta densità',   '200.388', '31,5%', '6,2 km²'],
+            ['0–50m × Media densità',  '162.569', '25,6%', '11,0 km²'],
+            ['50–300m × Bassa dens.',  '76.778',  '12,1%', '53,1 km²'],
+            ['0–50m × Bassa densità',  '61.633',  '9,7%',  '28,8 km²'],
+            ['50–300m × Media dens.',  '84.661',  '13,3%', '5,9 km²'],
+            ['50–300m × Alta dens.',   '48.291',  '7,6%',  '1,6 km²'],
+            ['>300m × Bassa dens.',    '1.119',   '0,2%',  '27,6 km²', 'hl']
+          ]
+        );
+        appendSectionTitle(el, 'Interpretazione');
+        appendText(el,
+          'Il <strong>57,1% della popolazione</strong> vive in sezioni di pianura costiera (0–50m) ' +
+          'a media-alta densità. Questo corrisponde al tessuto urbano denso del centro e dei quartieri ' +
+          'storici. Le sezioni collinari (50–300m) ospitano il <strong>32,7% della popolazione</strong> ' +
+          'su una superficie molto maggiore (60,6 km²), con densità prevalentemente bassa: ' +
+          'periferie, ville e aree residenziali a bassa densità. ' +
+          'La zona montana (>300m) ha una popolazione trascurabile (1.119 ab.) distribuita su 27,6 km², ' +
+          'confermando che i versanti alti di Monte Cuccio e Monte Pellegrino sono quasi disabitati.'
+        );
+        appendText(el,
+          'Soglie densità (terzili ISTAT 2021): bassa <8.777 ab/km² · media 8.777–22.389 ab/km² · ' +
+          'alta >22.389 ab/km². Elevazione: media DTM 5m per sezione. ' +
+          'Sezioni fuori DTM (nessun pixel valido) escluse dalla classificazione.'
+        );
+      }
+    },
+
+    bivariateSlope: {
+      icon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>',
+      title: 'DTM × ISTAT — Pendenza × Densità',
+      layer: 'bivariate-slope-layer',
+      hasLayer: true,
+      fillLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'Mappa <strong>bivariate</strong> che incrocia la <strong>pendenza media</strong> ' +
+          '(in gradi, derivata dal DTM 5m) con la <strong>densità abitativa</strong> (ab/km²) ' +
+          'per ogni sezione di censimento ISTAT 2021. ' +
+          'La combinazione rivela dove coesistono <strong>alta densità e terreno acclive</strong>, ' +
+          'indicatore di potenziale vulnerabilità sismica e idrogeologica nelle aree urbanizzate.'
+        );
+        // Bivariate legend matrix
+        (function() {
+          var C = {
+            '1-3':'#9ab870','2-3':'#7a9850','3-3':'#506030',
+            '1-2':'#d8ddb8','2-2':'#c0b898','3-2':'#9a8058',
+            '1-1':'#f0eeea','2-1':'#e8c8b0','3-1':'#c87050'
+          };
+          var colH = ['BASSA','MEDIA','ALTA'];   // pendenza bassa→alta
+          var rowH = ['ALTA','MEDIA','BASSA'];   // densità alta→bassa
+          var rowY = [3, 2, 1];
+
+          var wrap = document.createElement('div');
+          wrap.style.cssText = 'margin:10px 0 16px;width:100%;box-sizing:border-box;';
+
+          var title = document.createElement('div');
+          title.style.cssText = 'font-size:13px;font-weight:700;letter-spacing:0.08em;color:#444;text-transform:uppercase;margin-bottom:2px;';
+          title.textContent = 'CLASSE BIVARIATA';
+          wrap.appendChild(title);
+          var sub = document.createElement('div');
+          sub.style.cssText = 'font-size:11px;color:#aaa;margin-bottom:10px;';
+          sub.textContent = 'Pendenza DTM × Densità ab/km²';
+          wrap.appendChild(sub);
+
+          var grid = document.createElement('div');
+          grid.style.cssText = 'display:grid;grid-template-columns:36px repeat(3,1fr);gap:4px;width:100%;';
+
+          var empty = document.createElement('div'); grid.appendChild(empty);
+          colH.forEach(function(h) {
+            var d = document.createElement('div');
+            d.style.cssText = 'font-size:12px;font-weight:600;letter-spacing:0.06em;color:#888;text-align:center;text-transform:uppercase;padding-bottom:2px;';
+            d.textContent = h;
+            grid.appendChild(d);
+          });
+
+          rowH.forEach(function(rh, ri) {
+            var y = rowY[ri];
+            var lbl = document.createElement('div');
+            lbl.style.cssText = 'font-size:12px;font-weight:600;letter-spacing:0.05em;color:#888;text-transform:uppercase;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;';
+            lbl.textContent = rh;
+            grid.appendChild(lbl);
+            [1,2,3].forEach(function(x) {
+              var k = x+'-'+y;
+              var cell = document.createElement('div');
+              cell.style.cssText = 'background:'+C[k]+';height:64px;border-radius:6px;cursor:default;transition:transform 0.15s,box-shadow 0.15s;';
+              cell.title = colH[x-1]+' pendenza · densità '+rh;
+              cell.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.boxShadow = '0 3px 10px rgba(0,0,0,0.15)';
+              });
+              cell.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+              });
+              grid.appendChild(cell);
+            });
+          });
+          wrap.appendChild(grid);
+
+          var axRow = document.createElement('div');
+          axRow.style.cssText = 'display:grid;grid-template-columns:36px 1fr;gap:4px;margin-top:5px;';
+          axRow.appendChild(document.createElement('div'));
+          var axX = document.createElement('div');
+          axX.style.cssText = 'font-size:11px;color:#aaa;text-align:center;letter-spacing:0.04em;';
+          axX.textContent = 'Pendenza DTM →';
+          axRow.appendChild(axX);
+          wrap.appendChild(axRow);
+
+          var axY = document.createElement('div');
+          axY.style.cssText = 'font-size:11px;color:#aaa;margin-top:2px;padding-left:36px;letter-spacing:0.04em;';
+          axY.textContent = '↑ Densità pop. (ab/km²)';
+          wrap.appendChild(axY);
+
+          var nd = document.createElement('div');
+          nd.style.cssText = 'display:flex;align-items:center;gap:6px;margin-top:8px;font-size:11px;color:#aaa;padding-left:36px;';
+          var ndBox = document.createElement('div');
+          ndBox.style.cssText = 'width:14px;height:14px;border-radius:3px;background:#cccccc;flex-shrink:0;';
+          var ndTxt = document.createElement('span'); ndTxt.textContent = 'Nessun dato';
+          nd.appendChild(ndBox); nd.appendChild(ndTxt);
+          wrap.appendChild(nd);
+
+          el.appendChild(wrap);
+        })();
+        appendSectionTitle(el, 'Distribuzione popolazione per pendenza');
+        appendTable(el,
+          ['Combinazione', 'Pop.', '%', 'Area'],
+          [
+            ['0–5° × Alta dens.',   '238.450', '37,5%', '7,5 km²'],
+            ['0–5° × Media dens.',  '235.617', '37,1%', '16,1 km²'],
+            ['0–5° × Bassa dens.', '107.401', '16,9%', '48,5 km²'],
+            ['5–15° × Bassa dens.', '27.813',  '4,4%',  '15,5 km²'],
+            ['5–15° × Media dens.', '10.449',  '1,6%',  '0,7 km²'],
+            ['>15° × Bassa dens.',  '4.316',   '0,7%',  '45,5 km²'],
+            ['5–15° × Alta dens.',  '8.644',   '1,4%',  '0,3 km²', 'hl'],
+            ['>15° × Alta dens.',   '1.585',   '0,2%',  '0,1 km²', 'hl']
+          ]
+        );
+        appendSectionTitle(el, 'Interpretazione — Vulnerabilità demografica');
+        appendText(el,
+          'Il <strong>91,5% della popolazione</strong> abita su terreni con pendenza 0–5° (pianura): ' +
+          'la città di Palermo è prevalentemente costruita sulla piana alluvionale. ' +
+          'Tuttavia, <strong>10.229 residenti</strong> occupano sezioni con pendenza >5°, ' +
+          'incluse <strong>10.229 ab. su versanti ripidi</strong> (5–15° e >15°). ' +
+          'Le celle colorate in arancione-marrone (alta pendenza × alta densità) — 1.585 ab. — ' +
+          'corrispondono a edifici su versanti ripidi nei quartieri periurbani di Mezzomonreale, ' +
+          'Boccadifalco e Altarello, dove la densità edilizia si combina con l\'acclività del suolo.'
+        );
+        appendText(el,
+          'Soglie pendenza: pianeggiante <5° · moderato 5–15° · ripido >15°. ' +
+          'Soglie densità (terzili): bassa <8.777 · media 8.777–22.389 · alta >22.389 ab/km².'
+        );
+      }
     }
 
   };
@@ -2974,7 +3240,7 @@
   function appendText(parent, text) {
     var div = document.createElement('div');
     div.className = 'rp-text';
-    div.textContent = text;
+    parseStrongText(div, text);
     parent.appendChild(div);
   }
 
@@ -3399,7 +3665,10 @@
     if (analysis.hasLayer && !analysis.noOpacity) {
       rpOpacityBar.classList.remove('hidden');
       var currentOpacity = 1.0;
-      try { currentOpacity = map.getPaintProperty(analysis.layer, 'raster-opacity') || 1.0; } catch(e) {}
+      try {
+        var opKey = analysis.fillLayer ? 'fill-opacity' : 'raster-opacity';
+        currentOpacity = map.getPaintProperty(analysis.layer, opKey) || 1.0;
+      } catch(e) {}
       rpOpacity.value = currentOpacity;
       rpOpacityVal.textContent = currentOpacity.toFixed(2);
     } else {
@@ -3467,7 +3736,8 @@
     var analysis = ANALYSES[currentAnalysis];
     if (!analysis || !analysis.hasLayer) return;
     try {
-      map.setPaintProperty(analysis.layer, 'raster-opacity', val);
+      var opProp = (analysis.fillLayer) ? 'fill-opacity' : 'raster-opacity';
+      map.setPaintProperty(analysis.layer, opProp, val);
       // Sync slider nel pannello controlli
       var syncSlider = document.getElementById(currentAnalysis + '-opacity-slider');
       if (syncSlider) {
