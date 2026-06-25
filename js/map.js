@@ -1168,46 +1168,139 @@ window.setTransectsVisible = function (visible) {
   });
 }());
 
-// Popup griglia — custom fixed div (bypassa il container MapLibre)
+// Griglia — apertura nel pannello destro (vista #rp-punto)
 let _grigliaLastKey = null;
-let _grigliaPopEl = null;
 
-function grigliaPopShow(wrap, clientX, clientY) {
-  grigliaPopClose();
-  const pop = document.createElement('div');
-  pop.id = 'griglia-pop-fixed';
-  pop.appendChild(wrap);
+function openGrigliaPanel(p, upl, lngLat) {
+  const n = (v, d = 1) => (v != null && v !== '' && !isNaN(+v)) ? Number(v).toFixed(d) : '—';
+  const pEl = id => document.getElementById(id);
 
-  const closeBtn = document.createElement('button');
-  closeBtn.className = 'gp-close-btn';
-  closeBtn.textContent = '✕';
-  closeBtn.addEventListener('click', grigliaPopClose);
-  const hdr = wrap.querySelector('.gp-header');
-  if (hdr) hdr.appendChild(closeBtn);
-  else pop.insertBefore(closeBtn, pop.firstChild);
+  // Helpers locali (classi rp-punto-*)
+  function sec(label) {
+    const s = document.createElement('div'); s.className = 'rp-punto-sec';
+    const l = document.createElement('div'); l.className = 'rp-punto-sec-label'; l.textContent = label;
+    s.appendChild(l); return s;
+  }
+  function row(label, value) {
+    const r = document.createElement('div'); r.className = 'rp-punto-row';
+    const lEl = document.createElement('span'); lEl.className = 'rp-punto-row-label'; lEl.textContent = label;
+    const vEl = document.createElement('span'); vEl.className = 'rp-punto-row-value'; vEl.textContent = value;
+    r.appendChild(lEl); r.appendChild(vEl); return r;
+  }
+  function badgeRow(label, nome) {
+    const r = document.createElement('div'); r.className = 'rp-punto-row';
+    const lEl = document.createElement('span'); lEl.className = 'rp-punto-row-label'; lEl.textContent = label;
+    const c = classColor(nome);
+    const badge = document.createElement('span'); badge.className = 'rp-punto-badge';
+    badge.textContent = nome || '—';
+    if (c) { badge.style.background = c.bg; badge.style.color = c.text; badge.style.borderColor = c.border; }
+    r.appendChild(lEl); r.appendChild(badge); return r;
+  }
 
-  document.body.appendChild(pop);
-  _grigliaPopEl = pop;
+  // ── Intestazione quota ──
+  const hdr = document.createElement('div'); hdr.className = 'rp-punto-hdr';
+  const left = document.createElement('div');
+  const placeEl = document.createElement('div'); placeEl.className = 'rp-punto-place';
+  placeEl.textContent = upl ? (upl.Quartiere || upl.UPL || 'Palermo') : 'Palermo';
+  left.appendChild(placeEl);
+  if (upl) {
+    const sub = document.createElement('div'); sub.className = 'rp-punto-sub';
+    sub.textContent = `Circoscrizione ${upl.circoscrizione}`;
+    left.appendChild(sub);
+  }
+  hdr.appendChild(left);
+  const qBox = document.createElement('div'); qBox.className = 'rp-punto-quota-box';
+  const qVal = document.createElement('span'); qVal.className = 'rp-punto-quota-val'; qVal.textContent = n(p.quota, 0);
+  const qUnit = document.createElement('span'); qUnit.className = 'rp-punto-quota-unit'; qUnit.textContent = 'm s.l.m.';
+  qBox.appendChild(qVal); qBox.appendChild(qUnit); hdr.appendChild(qBox);
 
-  // Posiziona: default sopra-sinistra del click, poi aggiusta se esce dallo schermo
-  const W = window.innerWidth, H = window.innerHeight;
-  const PW = 350, PH = Math.min(pop.scrollHeight || 520, H * 1.2);
-  let left = clientX + 12;
-  let top  = clientY - PH - 12;
-  if (left + PW > W - 8)  left = clientX - PW - 12;
-  if (top < 8)             top  = clientY + 12;
-  if (top + PH > H - 8)   top  = H - PH - 8;
-  pop.style.left = left + 'px';
-  pop.style.top  = top  + 'px';
+  // ── Pendenza ──
+  const sPend = sec('Pendenza');
+  sPend.appendChild(row('Gradi', `${n(p.slope_deg)}°`));
+  sPend.appendChild(row('Percentuale', `${n(p.slope_pct)} %`));
+
+  // ── Morfologia ──
+  const sMorf = sec('Morfologia');
+  sMorf.appendChild(row('Esposizione', p.aspetto_nome || '—'));
+  sMorf.appendChild(row('Forma terreno', p.geomorf_nome || '—'));
+
+  // ── Rischio ──
+  const sRisk = sec('Rischio versanti');
+  sRisk.appendChild(badgeRow('Stabilità', p.stabilita_nome));
+  sRisk.appendChild(badgeRow('Costruibilità', p.costr_nome));
+
+  // ── Indici morfometrici ──
+  const sIdx = sec('Indici morfometrici');
+  const idxGrid = document.createElement('div'); idxGrid.className = 'rp-punto-idx-grid';
+  [['TRI', n(p.tri, 2)], ['TPI', n(p.tpi, 2)], ['SRI', n(p.sri, 2)], ['HS', n(p.hillshade, 0)]].forEach(([k, v]) => {
+    const cell = document.createElement('div'); cell.className = 'rp-punto-idx-cell';
+    const vEl = document.createElement('div'); vEl.className = 'rp-punto-idx-val'; vEl.textContent = v;
+    const kEl = document.createElement('div'); kEl.className = 'rp-punto-idx-key'; kEl.textContent = k;
+    cell.appendChild(vEl); cell.appendChild(kEl); idxGrid.appendChild(cell);
+  });
+  sIdx.appendChild(idxGrid);
+
+  // ── Idrologia ──
+  const sIdro = sec('Idrologia');
+  sIdro.appendChild(row('TWI — Umidità topografica', p.twi != null ? n(p.twi, 1) : '—'));
+  sIdro.appendChild(row('SPI — Stream Power', p.spi != null ? n(p.spi, 2) : '—'));
+  if (p.flow_acc != null) sIdro.appendChild(row('Flow Acc. (log)', n(p.flow_acc, 2)));
+  if (p.dtw != null)      sIdro.appendChild(row('DTW — Profondità falda', `${n(p.dtw, 1)} m`));
+
+  // ── Energia e clima ──
+  const sEn = sec('Energia e clima');
+  if (p.svf != null)      sEn.appendChild(row('SVF — Cielo visibile', `${Math.round(p.svf * 100)} %`));
+  if (p.fv != null)       sEn.appendChild(row('Potenziale FV', `${Math.round(p.fv * 100)} %`));
+  if (p.ombra_est != null) sEn.appendChild(row('Ombra estiva', `${Math.round(p.ombra_est / 2.55)} %`));
+  if (p.ombra_inv != null) sEn.appendChild(row('Ombra invernale', `${Math.round(p.ombra_inv / 2.55)} %`));
+  if (p.frost != null)    sEn.appendChild(row('Rischio gelata', n(p.frost, 3)));
+
+  // ── Accessibilità ed erosione ──
+  const sMob = sec('Accessibilità ed erosione');
+  if (p.tobler != null)   sMob.appendChild(row('Velocità Tobler', `${n(p.tobler, 1)} km/h`));
+  if (p.viewshed != null) sMob.appendChild(row('Visibilità cumulativa', `${Math.round(p.viewshed)}/6 punti`));
+  if (p.rusle != null)    sMob.appendChild(row('Erosione RUSLE LS', n(p.rusle, 2)));
+
+  // ── Superfici UPL ──
+  let sTerr = null;
+  if (upl) {
+    const fmtHa = v => v != null ? v.toLocaleString('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' ha' : '—';
+    const uplHa   = upl.area != null ? fmtHa(upl.area / 10000) : '—';
+    const quartHa = fmtHa(uplAreas.quartiere?.[upl.Quartiere]);
+    const circHa  = fmtHa(uplAreas.circoscrizione?.[upl.circoscrizione]);
+    sTerr = sec('Superfici');
+    sTerr.appendChild(row(`UPL · ${upl.UPL}`, uplHa));
+    sTerr.appendChild(row(`Quartiere · ${upl.Quartiere}`, quartHa));
+    sTerr.appendChild(row(`Circoscrizione ${upl.circoscrizione}`, circHa));
+  }
+
+  // Popola body
+  const body = pEl('rp-punto-body');
+  body.innerHTML = '';
+  body.appendChild(hdr);
+  [sPend, sMorf, sRisk, sIdx, sIdro, sEn, sMob, sTerr].forEach(s => s && body.appendChild(s));
+  body.scrollTop = 0;
+
+  // Titolo e coordinate
+  pEl('rp-punto-title').textContent = upl ? (upl.Quartiere || upl.UPL || 'Punto') : 'Punto';
+  if (lngLat) {
+    pEl('rp-punto-coords').textContent = `${lngLat.lat.toFixed(4)}° N  ${lngLat.lng.toFixed(4)}° E`;
+  }
+
+  // Mostra vista
+  document.getElementById('rp-gallery').style.display = 'none';
+  document.getElementById('rp-detail').style.display  = 'none';
+  document.getElementById('rp-punto').style.display   = '';
+
+  // Apri pannello se chiuso (icona gestita via CSS .open)
+  const rpWrap = document.getElementById('rp-wrap');
+  if (!rpWrap.classList.contains('open')) rpWrap.classList.add('open');
 }
 
-function grigliaPopClose() {
-  if (_grigliaPopEl) { _grigliaPopEl.remove(); _grigliaPopEl = null; }
-}
-
-// Chiudi popup griglia cliccando fuori
-document.addEventListener('click', function (e) {
-  if (_grigliaPopEl && !_grigliaPopEl.contains(e.target)) grigliaPopClose();
+// Back button: torna alla galleria
+document.getElementById('rp-punto-back').addEventListener('click', function () {
+  document.getElementById('rp-punto').style.display   = 'none';
+  document.getElementById('rp-gallery').style.display = '';
 });
 
 // Colore badge per classi stabilità / costruibilità (1=migliore, 5=peggiore)
@@ -1269,85 +1362,10 @@ map.on('mouseleave', 'griglia-circles', () => { map.getCanvas().style.cursor = '
 
 map.on('click', 'griglia-circles', (e) => {
   e.originalEvent.stopPropagation();
-  const key = `${e.lngLat.lng.toFixed(5)},${e.lngLat.lat.toFixed(5)}`;
-  _grigliaLastKey = key;
-  const p = e.features[0].properties;
-  const n = (v, d = 1) => (v != null && v !== '' && !isNaN(v)) ? Number(v).toFixed(d) : '—';
-
-  // Query UPL al punto corrente
-  const uplFeats = map.queryRenderedFeatures(e.point, { layers: ['upl-fill'] });
-  const upl = uplFeats.length ? uplFeats[0].properties : null;
-
-  const wrap = el('div', 'griglia-popup');
-
-  // ── Header ──
-  const hdr = el('div', 'gp-header');
-  const hdrLeft = el('div', 'gp-header-left');
-  hdrLeft.appendChild(txt('div', upl ? (upl.Quartiere || upl.UPL) : 'Palermo', 'gp-header-label'));
-  if (upl) {
-    hdrLeft.appendChild(txt('div', `Circoscrizione ${upl.circoscrizione}`, 'gp-header-sub'));
-  }
-  hdr.appendChild(hdrLeft);
-  const quotaBox = el('div', 'gp-quota');
-  quotaBox.appendChild(txt('span', n(p.quota, 0), 'gp-quota-value'));
-  quotaBox.appendChild(txt('span', ' m s.l.m.', 'gp-quota-unit'));
-  hdr.appendChild(quotaBox);
-  wrap.appendChild(hdr);
-
-  // ── Pendenza ──
-  const secPend = makeSection('Pendenza');
-  const pendVal = `${n(p.slope_deg)}°`;
-  const pendPct = `${n(p.slope_pct)} %`;
-  const pendRow = el('div', 'gp-row');
-  pendRow.appendChild(txt('span', pendVal, 'gp-pend-main'));
-  pendRow.appendChild(txt('span', pendPct, 'gp-pend-sub'));
-  secPend.appendChild(pendRow);
-  wrap.appendChild(secPend);
-
-  // ── Morfologia ──
-  const secMorf = makeSection('Morfologia');
-  secMorf.appendChild(makeRow('Esposizione', p.aspetto_nome || '—'));
-  secMorf.appendChild(makeRow('Forma terreno', p.geomorf_nome || '—'));
-  wrap.appendChild(secMorf);
-
-  // ── Rischio ──
-  const secRisk = makeSection('Rischio');
-  secRisk.appendChild(makeBadgeRow('Stabilità', p.stabilita_nome));
-  secRisk.appendChild(makeBadgeRow('Costruibilità', p.costr_nome));
-  wrap.appendChild(secRisk);
-
-  // ── Indici ──
-  const secIdx = makeSection('Indici');
-  const grid = el('div', 'gp-index-grid');
-  [['TRI', n(p.tri, 2)], ['TPI', n(p.tpi, 2)], ['SRI', n(p.sri, 2)], ['HS', n(p.hillshade, 0)]].forEach(([k, v]) => {
-    const cell = el('div', 'gp-index-cell');
-    cell.appendChild(txt('div', v, 'gp-index-val'));
-    cell.appendChild(txt('div', k, 'gp-index-key'));
-    grid.appendChild(cell);
-  });
-  secIdx.appendChild(grid);
-  wrap.appendChild(secIdx);
-
-  // ── Territorio (aree in ha) ──
-  if (upl) {
-    const ha = v => {
-      const val = uplAreas[Object.keys(uplAreas).find(k => uplAreas[k][v] !== undefined) || '']?.[v];
-      return val != null ? val.toLocaleString('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' ha' : '—';
-    };
-    const uplHa  = upl.area != null ? (upl.area / 10000).toLocaleString('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' ha' : '—';
-    const quartHa = uplAreas.quartiere[upl.Quartiere]
-      ? uplAreas.quartiere[upl.Quartiere].toLocaleString('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' ha' : '—';
-    const circHa  = uplAreas.circoscrizione[upl.circoscrizione]
-      ? uplAreas.circoscrizione[upl.circoscrizione].toLocaleString('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' ha' : '—';
-
-    const secTerr = makeSection('Superfici');
-    secTerr.appendChild(makeRow(`UPL · ${upl.UPL}`, uplHa));
-    secTerr.appendChild(makeRow(`Quartiere · ${upl.Quartiere}`, quartHa));
-    secTerr.appendChild(makeRow(`Circoscrizione ${upl.circoscrizione}`, circHa));
-    wrap.appendChild(secTerr);
-  }
-
-  grigliaPopShow(wrap, e.originalEvent.clientX, e.originalEvent.clientY);
+  _grigliaLastKey = `${e.lngLat.lng.toFixed(5)},${e.lngLat.lat.toFixed(5)}`;
+  const p   = e.features[0].properties;
+  const upl = map.queryRenderedFeatures(e.point, { layers: ['upl-fill'] })[0]?.properties ?? null;
+  openGrigliaPanel(p, upl, e.lngLat);
 });
 
 
