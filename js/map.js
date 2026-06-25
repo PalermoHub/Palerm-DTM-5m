@@ -1102,7 +1102,7 @@ document.addEventListener('fullscreenchange', () => {
 // ── Toolbar: Nord / orientamento ──────────────────────────────────────────
 const compassSvg = document.getElementById('compass-svg');
 function updateCompass() {
-  if (compassSvg) compassSvg.style.transform = `rotate(${map.getBearing()}deg)`;
+  if (compassSvg) compassSvg.style.transform = `rotate(${-map.getBearing()}deg)`;
 }
 map.on('rotate', updateCompass);
 map.on('rotateend', updateCompass);

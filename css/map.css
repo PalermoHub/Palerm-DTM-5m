@@ -124,6 +124,7 @@ body {
 }
 
 .tb-btn svg { width: 13px; height: 13px; }
+#tb-north svg { width: 22px; height: 22px; }
 
 .tb-btn:hover {
   background: rgba(255, 153, 0, 0.12);
