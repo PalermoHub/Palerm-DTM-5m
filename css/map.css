@@ -186,6 +186,97 @@ body {
 /* Opacità inline CTR: nascosta (non ha senso in verticale) */
 .tb-opacity { display: none; }
 
+/* Controlli ombreggiatura inline nella toolbar */
+.tb-shadow-inline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0 6px;
+  width: 100%;
+}
+
+.tb-si-sliders {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+}
+
+.tb-si-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.tb-si-label {
+  font-size: 8px;
+  font-weight: 700;
+  color: #4a5a88;
+  text-align: center;
+  font-family: 'Titillium Web', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.tb-si-val {
+  font-size: 8px;
+  font-weight: 700;
+  color: #2458c8;
+  text-align: center;
+  font-family: 'Titillium Web', sans-serif;
+  min-width: 22px;
+}
+
+.tb-shadow-inline input[type="range"] {
+  writing-mode: vertical-lr;
+  direction: rtl;
+  width: 18px;
+  height: 72px;
+  accent-color: #2458c8;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.tb-si-btn {
+  font-size: 13px;
+  padding: 3px 0;
+  background: rgba(36, 88, 200, 0.08);
+  border: 1px solid rgba(36, 88, 200, 0.2);
+  border-radius: 6px;
+  color: #2458c8;
+  font-family: 'Titillium Web', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  width: 80%;
+  text-align: center;
+  transition: background 0.15s;
+}
+
+.tb-si-btn:hover { background: rgba(36, 88, 200, 0.18); }
+
+/* Pulsante chiudi sezioni inline toolbar */
+.tb-inline-close {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin: 2px auto 0;
+  border: none;
+  background: rgba(30, 60, 160, 0.06);
+  border-radius: 50%;
+  color: #8898c8;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  text-align: center;
+  transition: background 0.15s, color 0.15s;
+  font-family: sans-serif;
+}
+.tb-inline-close:hover { background: rgba(200, 50, 50, 0.12); color: #c43030; }
+
 /* Separatore orizzontale */
 .tb-sep {
   width: 70%;
@@ -1980,6 +2071,17 @@ body {
   color: #5080e0;
 }
 [data-theme="dark"] .tbp-btn:hover { background: rgba(70,110,220,0.25); }
+[data-theme="dark"] .tb-si-label { color: #7888b8; }
+[data-theme="dark"] .tb-si-val { color: #5080e0; }
+[data-theme="dark"] .tb-shadow-inline input[type="range"] { accent-color: #5080e0; }
+[data-theme="dark"] .tb-si-btn {
+  background: rgba(70,110,220,0.14);
+  border-color: rgba(70,110,220,0.3);
+  color: #5080e0;
+}
+[data-theme="dark"] .tb-si-btn:hover { background: rgba(70,110,220,0.25); }
+[data-theme="dark"] .tb-inline-close { background: rgba(60,80,160,0.15); color: #6070a8; }
+[data-theme="dark"] .tb-inline-close:hover { background: rgba(180,50,50,0.2); color: #e06060; }
 
 /* Linguetta mobile dark */
 [data-theme="dark"] #tb-mobile-tab {

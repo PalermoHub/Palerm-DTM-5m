@@ -98,6 +98,7 @@
   </button>
   <div class="tb-opacity" id="tb-ctr-opacity" style="display:none;">
     <input type="range" id="tb-ctr-opacity-slider" min="0.1" max="1" step="0.05" value="0.7" title="Opacità CTR" />
+    <button class="tb-inline-close" id="tb-ctr-opacity-close" title="Chiudi">×</button>
   </div>
 
   <div class="tb-sep"></div>
@@ -165,6 +166,24 @@
     </svg>
   </button>
 
+  <!-- Controlli ombreggiatura inline (come CTR opacity) -->
+  <div id="tb-panel-shadow" class="tb-shadow-inline" style="display:none;">
+    <div class="tb-si-sliders">
+      <div class="tb-si-col">
+        <span class="tb-si-label">Int.</span>
+        <input type="range" id="tbp-shadow-intensity" min="0" max="1" step="0.05" value="0.35" orient="vertical" title="Intensità ombreggiatura" />
+        <span class="tb-si-val" id="tbp-shadow-intensity-val">0.35</span>
+      </div>
+      <div class="tb-si-col">
+        <span class="tb-si-label">Ora</span>
+        <input type="range" id="tbp-shadow-time" min="360" max="1080" step="5" value="720" orient="vertical" title="Ora solare" />
+        <span class="tb-si-val" id="tbp-shadow-time-val">12:00</span>
+      </div>
+    </div>
+    <button class="tb-si-btn" id="tbp-btn-now" title="Imposta ora locale">⏱</button>
+    <button class="tb-inline-close" id="tb-shadow-inline-close" title="Chiudi">×</button>
+  </div>
+
   <div class="tb-sep"></div>
 
   <!-- Toggle 3D / Piano -->
@@ -187,21 +206,6 @@
 <div id="tb-mobile-tab" title="Apri/chiudi strumenti mappa">
   <span id="tb-mobile-arrow">›</span>
   <span id="tb-mobile-3d-badge">3D</span>
-</div>
-
-<!-- Sotto-pannello ombreggiatura -->
-<div id="tb-panel-shadow" class="tb-panel" style="display:none;">
-  <div class="tbp-row">
-    <span class="tbp-label">Intensità</span>
-    <input type="range" id="tbp-shadow-intensity" min="0" max="1" step="0.05" value="0.35" />
-    <span class="tbp-val" id="tbp-shadow-intensity-val">0.35</span>
-  </div>
-  <div class="tbp-row">
-    <span class="tbp-label">☀️ Ora solare</span>
-    <input type="range" id="tbp-shadow-time" min="360" max="1080" step="5" value="720" />
-    <span class="tbp-val" id="tbp-shadow-time-val">12:00</span>
-  </div>
-  <button class="tbp-btn" id="tbp-btn-now">⏱ Ora locale</button>
 </div>
 
 <!-- Sotto-pannello 3D -->
