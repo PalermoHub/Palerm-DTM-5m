@@ -328,12 +328,13 @@ body {
 #map-legends {
   position: absolute;
   bottom: 20px;
-  left: 20px;
+  left: 64px; /* toolbar ~54px + 10px gap */
   z-index: 10;
   display: flex;
   flex-direction: column;
   gap: 8px;
   align-items: flex-start;
+  transition: left 0.3s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .map-legend {
@@ -2019,6 +2020,16 @@ body {
   .section-data-wide {
     grid-template-columns: 1fr;
   }
+
+  /* Legende: spostale a destra del tab (28px) quando toolbar chiusa */
+  #map-legends {
+    left: 38px; /* tab 28px + 10px gap */
+  }
+}
+
+/* Legende: spostale a destra quando toolbar mobile è aperta */
+body:has(#map-toolbar-wrap.tb-open) #map-legends {
+  left: 64px; /* toolbar ~54px + 10px gap */
 }
 
 /* ════════════════════════════════════════
