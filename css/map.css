@@ -21,7 +21,7 @@ body {
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10;
+  z-index: 100;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1843,9 +1843,9 @@ body {
   /* Riposiziona wrap: da centro-top a left-center, slide-in */
   #map-toolbar-wrap {
     left: 0 !important;
-    top: 50% !important;
+    top: 50px !important;
     /* 26px = larghezza linguetta: wrap scorre sx lasciando solo il tab visibile */
-    transform: translateY(-50%) translateX(calc(-100% + 26px)) !important;
+    transform: translateX(calc(-100% + 26px)) !important;
     transition: transform 0.3s ease;
     flex-direction: row !important;
     align-items: flex-start !important;
@@ -1853,7 +1853,7 @@ body {
   }
 
   #map-toolbar-wrap.tb-open {
-    transform: translateY(-50%) translateX(0) !important;
+    transform: translateX(0) !important;
   }
 
   /* Toolbar verticale, bordo sinistro piatto */
@@ -1888,7 +1888,7 @@ body {
     left: 38px;
     top: 0;
     min-width: 200px;
-    z-index: 20;
+    z-index: 110;
     border-radius: 0 12px 12px 0 !important;
   }
 
@@ -1940,6 +1940,12 @@ body {
 
   #tb-mobile-3d-badge.is-2d {
     color: #6a7aa8;
+  }
+
+  /* Analisi DTM: tabella sopra, grafico sotto */
+  .section-data,
+  .section-data-wide {
+    grid-template-columns: 1fr;
   }
 }
 
