@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -92,6 +94,15 @@
       <line x1="15" y1="6" x2="15" y2="21"/>
     </svg>
     <span class="tb-lbl">UPL</span>
+  </button>
+
+  <!-- Edificato — altezza edifici -->
+  <button class="tb-btn tb-toggle" id="tb-edificato" title="Edificato · altezza edifici (Altezza_2)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <path d="M3 22V10l6-5 6 5v12H3zm6-7H7v4h2v-4zm4 0h-2v4h2v-4z"/>
+      <path d="M15 22V11l5 4v7h-5z" opacity="0.55"/>
+    </svg>
+    <span class="tb-lbl">Edif.</span>
   </button>
   <div class="tb-opacity" id="tb-ctr-opacity" style="display:none;">
     <input type="range" id="tb-ctr-opacity-slider" min="0.1" max="1" step="0.05" value="0.7" title="Opacità CTR" />
@@ -583,6 +594,38 @@
     <div style="font-size:8px;color:#aaa;margin-top:2px;padding-left:28px;">↑ densità · → pendenza</div>
   </div>
 
+  <!-- ── Edificato: switch Altezza / Destinazione ───────────────────── -->
+  <div id="legend-edificato" class="map-legend">
+    <div class="map-legend-title">Edificato</div>
+    <div class="legend-switch">
+      <button class="ls-btn active" data-edif="altezza">Altezza</button>
+      <button class="ls-btn" data-edif="occupancy">Tipo di Occupazione</button>
+    </div>
+
+    <div class="ls-panel" id="ls-panel-altezza">
+      <div class="legend-item"><div class="legend-box" style="background:#bdbdbd;"></div><span>0 m (n.d.)</span></div>
+      <div class="legend-item"><div class="legend-box" style="background:#ffffb2;"></div><span>0 – 5 m (1-2 piani)</span></div>
+      <div class="legend-item"><div class="legend-box" style="background:#fecc5c;"></div><span>5 – 10 m (2-3 piani)</span></div>
+      <div class="legend-item"><div class="legend-box" style="background:#fd8d3c;"></div><span>10 – 20 m (3-6 piani)</span></div>
+      <div class="legend-item"><div class="legend-box" style="background:#f03b20;"></div><span>20 – 40 m (6-12 piani)</span></div>
+      <div class="legend-item"><div class="legend-box" style="background:#bd0026;"></div><span>&gt; 40 m (&gt;12 piani)</span></div>
+    </div>
+
+    <div class="ls-panel" id="ls-panel-occupancy" style="display:none;">
+      <div class="legend-item"><div class="legend-box" style="background:#3498db;"></div><span>Residenziale</span></div>
+      <div class="legend-item"><div class="legend-box" style="background:#3498db;opacity:.7;"></div><span>Residenziale unifamiliare</span></div>
+      <div class="legend-item"><div class="legend-box" style="background:#2980b9;"></div><span>Residenziale multifamiliare</span></div>
+      <div class="legend-item"><div class="legend-box" style="background:#e74c3c;"></div><span>Commerciale</span></div>
+      <div class="legend-item"><div class="legend-box" style="background:#9b59b6;"></div><span>Uso misto</span></div>
+      <div class="legend-item"><div class="legend-box" style="background:#f39c12;"></div><span>Industriale</span></div>
+      <div class="legend-item"><div class="legend-box" style="background:#27ae60;"></div><span>Agricoltura</span></div>
+      <div class="legend-item"><div class="legend-box" style="background:#16a085;"></div><span>Assemblea</span></div>
+      <div class="legend-item"><div class="legend-box" style="background:#34495e;"></div><span>Governo</span></div>
+      <div class="legend-item"><div class="legend-box" style="background:#e67e22;"></div><span>Istruzione</span></div>
+      <div class="legend-item"><div class="legend-box" style="background:#bdc3c7;"></div><span>Sconosciuto</span></div>
+    </div>
+  </div>
+
   <div id="legend-contour" class="map-legend">
     <div class="map-legend-title">Curve di livello</div>
     <div class="legend-item">
@@ -619,6 +662,7 @@
     <nav id="panel-nav">
       <button class="ptab active" data-tab="analisi"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg> Analisi DTM</button>
 	 <button class="ptab" data-tab="mappa"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> QGIS headless</button>
+	       <button class="ptab" data-tab="building"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18"/><path d="M9 21V9"/></svg> Building</button>
 	       <button class="ptab" data-tab="credits"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Credits</button>
     </nav>
 
@@ -1651,6 +1695,30 @@
               <a href="https://sinacloud.isprambiente.it/arcgisadv/rest/services/Consumo_Suolo/copertura_suolo_2018_2023_v5/ImageServer" target="_blank" rel="noopener noreferrer">sinacloud.isprambiente.it</a>
             </div>
           </div>
+          <div class="credit-item">
+            <span class="ci-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></span>
+            <div>
+              <strong title="Dataset open di footprint edifici, strade, POI e confini amministrativi rilasciati dalla Overture Maps Foundation sotto licenza aperta">Overture Maps Foundation</strong>
+              Dataset open di footprint edifici, strade e POI a copertura globale, aggiornati da Microsoft, Meta, Amazon, TomTom e OSM.<br>
+              <a href="https://overturemaps.org/" target="_blank" rel="noopener noreferrer" title="Sito ufficiale Overture Maps Foundation — dataset open globali per mappe">overturemaps.org</a>
+            </div>
+          </div>
+          <div class="credit-item">
+            <span class="ci-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
+            <div>
+              <strong title="Catalogo comunitario di dataset GEE — OpenBuildingMap: footprint di edifici derivati da immagini satellitari ad alta risoluzione tramite machine learning">Awesome GEE Community Catalog — OpenBuildingMap</strong>
+              Footprint globali di edifici estratti con ML da immagini ad alta risoluzione, disponibili su Google Earth Engine.<br>
+              <a href="https://gee-community-catalog.org/projects/obm/" target="_blank" rel="noopener noreferrer" title="Scheda OpenBuildingMap nel catalogo GEE Community Catalog">gee-community-catalog.org/projects/obm</a>
+            </div>
+          </div>
+          <div class="credit-item">
+            <span class="ci-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
+            <div>
+              <strong title="Atlante globale degli edifici — mappa mondiale degli insediamenti costruiti derivata da EO e dati cadastrali, prodotta dal DLR/TUM">Global Building Atlas — DLR / TU München</strong>
+              Atlante mondiale degli edifici basato su Earth Observation: densità, altezza media e stock edilizio per area urbana.<br>
+              <a href="https://tubvsig-so2sat-vm1.srv.mwn.de/" target="_blank" rel="noopener noreferrer" title="Portale Global Building Atlas — DLR/TUM So2Sat">tubvsig-so2sat-vm1.srv.mwn.de</a>
+            </div>
+          </div>
         </div>
 
         <div class="credits-section">
@@ -1686,6 +1754,11 @@
         </div>
 
       </div>
+    </div>
+
+    <!-- Tab: Building -->
+    <div id="tab-building" class="tab-pane">
+      <p class="analysis-intro" style="text-align:center;padding:2rem 1rem;color:#888;font-style:italic;">Work in progress</p>
     </div>
 
     <!-- Tab: QGIS headless WSL2 -->

@@ -93,6 +93,11 @@ const map = new maplibregl.Map({
         maxzoom: 15,
         attribution: 'Analisi DTM: HRDTM5m@italia'
       },
+      'edificato': {
+        type: 'vector',
+        url: 'pmtiles://https://palermohub.github.io/Palerm-DTM-5m/docs/tiles/edificato.pmtiles',
+        attribution: 'Edificato: Microsoft Building Footprints'
+      },
       'elevation-raster': {
         type: 'raster',
         tiles: [`${BASE_URL}docs/tiles/elevazione/{z}/{x}/{y}.png`],
@@ -780,6 +785,42 @@ const map = new maplibregl.Map({
         paint: { 'raster-opacity': 1.0 }
       },
 
+      // Edificato — volumi 3D colorati per classi di altezza (Altezza_2)
+      {
+        id: 'edificato-fill',
+        type: 'fill-extrusion',
+        source: 'edificato',
+        'source-layer': 'edificato',
+        minzoom: 10,
+        layout: { visibility: 'none' },
+        paint: {
+          'fill-extrusion-color': [
+            'step', ['get', 'Altezza_2'],
+            '#bdbdbd',       // 0 m (< 0.1)
+            0.1, '#ffffb2',  // 0–5 m
+            5,   '#fecc5c',  // 5–10 m
+            10,  '#fd8d3c',  // 10–20 m
+            20,  '#f03b20',  // 20–40 m
+            40,  '#bd0026'   // > 40 m
+          ],
+          'fill-extrusion-height': ['get', 'Altezza_2'],
+          'fill-extrusion-base': 0,
+          'fill-extrusion-opacity': 0.85
+        }
+      },
+      {
+        id: 'edificato-outline',
+        type: 'line',
+        source: 'edificato',
+        'source-layer': 'edificato',
+        minzoom: 14,
+        layout: { visibility: 'none' },
+        paint: {
+          'line-color': 'rgba(0,0,0,0.25)',
+          'line-width': 0.5
+        }
+      },
+
       // UPL — confini amministrativi (fill invisibile per query + linee visibili)
       {
         id: 'upl-fill',
@@ -1094,6 +1135,52 @@ document.getElementById('tb-upl').addEventListener('click', function () {
   this.classList.toggle('on');
   const vis = this.classList.contains('on') ? 'visible' : 'none';
   map.setLayoutProperty('upl-line', 'visibility', vis);
+});
+
+// ── Toolbar: Edificato ────────────────────────────────────────────────────
+const EDIF_COLOR_ALTEZZA = [
+  'step', ['get', 'Altezza_2'],
+  '#bdbdbd',
+  0.1, '#ffffb2',
+  5,   '#fecc5c',
+  10,  '#fd8d3c',
+  20,  '#f03b20',
+  40,  '#bd0026'
+];
+const EDIF_COLOR_OCCUPANCY = [
+  'match', ['get', 'occupancy'],
+  ['RES','RES1'],                                                                '#3498db',
+  ['RES2','RES2A','RES3','RES4'],                                                '#2980b9',
+  ['COM','COM1','COM2','COM3','COM4','COM5','COM6','COM7','COM9','COM10','COM11'],'#e74c3c',
+  ['MIX1','MIX5'],                                                               '#9b59b6',
+  ['IND','IND1','IND2'],                                                         '#f39c12',
+  ['AGR','AGR3'],                                                                '#27ae60',
+  ['ASS1','ASS2','ASS3','ASS4'],                                                 '#16a085',
+  ['GOV','GOV1','GOV2'],                                                         '#34495e',
+  ['EDU1','EDU2','EDU3','EDU4'],                                                 '#e67e22',
+  '#bdc3c7'
+];
+
+document.getElementById('tb-edificato').addEventListener('click', function () {
+  this.classList.toggle('on');
+  const on = this.classList.contains('on');
+  const vis = on ? 'visible' : 'none';
+  map.setLayoutProperty('edificato-fill', 'visibility', vis);
+  map.setLayoutProperty('edificato-outline', 'visibility', vis);
+  document.getElementById('legend-edificato').classList.toggle('visible', on);
+});
+
+// Switch tematizzazione nella legenda edificato
+document.querySelectorAll('.ls-btn').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    document.querySelectorAll('.ls-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const theme = this.dataset.edif;
+    document.getElementById('ls-panel-altezza').style.display   = theme === 'altezza'   ? '' : 'none';
+    document.getElementById('ls-panel-occupancy').style.display = theme === 'occupancy' ? '' : 'none';
+    map.setPaintProperty('edificato-fill', 'fill-extrusion-color',
+      theme === 'altezza' ? EDIF_COLOR_ALTEZZA : EDIF_COLOR_OCCUPANCY);
+  });
 });
 
 // ── Toolbar: Curve di livello ─────────────────────────────────────────────

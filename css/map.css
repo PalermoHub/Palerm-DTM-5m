@@ -350,6 +350,31 @@ body {
 
 .map-legend.visible { display: block; }
 
+/* Switch tematizzazione legenda edificato */
+.legend-switch {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.ls-btn {
+  flex: 1;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 0;
+  border: 1px solid rgba(30,60,160,0.18);
+  border-radius: 5px;
+  background: transparent;
+  color: #8898c8;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.ls-btn.active {
+  background: rgba(36,88,200,0.12);
+  color: #2458c8;
+  border-color: rgba(36,88,200,0.35);
+}
+.ls-btn:hover:not(.active) { background: rgba(30,60,160,0.06); }
+
 /* Legenda aspetto — cerchio conic-gradient + etichette cardinali */
 .legend-aspect-wrap {
   position: relative;
@@ -2107,6 +2132,9 @@ body:has(#map-toolbar-wrap.tb-open) #map-legends {
 [data-theme="dark"] .map-legend-title { color: #5868a0; }
 [data-theme="dark"] .legend-item { color: #7888b8; }
 [data-theme="dark"] .legend-box { border-color: rgba(70,110,220,0.25); }
+[data-theme="dark"] .ls-btn { color: #5868a0; border-color: rgba(70,110,220,0.2); }
+[data-theme="dark"] .ls-btn.active { background: rgba(70,110,220,0.18); color: #7898e0; border-color: rgba(70,110,220,0.45); }
+[data-theme="dark"] .ls-btn:hover:not(.active) { background: rgba(70,110,220,0.08); }
 
 /* Popup griglia */
 [data-theme="dark"] #griglia-pop-fixed {
