@@ -1032,12 +1032,37 @@ function minutesToHHMM(minutes) {
   return `${h}:${m}`;
 }
 
+function applyBuildingLight() {
+  try {
+    const az = sunAzimuth(sunMinutes);
+    if (az === null) {
+      map.setLights([{ id: 'ambient', type: 'ambient', properties: { intensity: 0.3, color: '#ffffff' } }]);
+      return;
+    }
+    const h = sunMinutes / 60;
+    const progress = (h - 6) / 12;
+    const elev = Math.sin(progress * Math.PI) * 72;
+    const polar = Math.max(10, 90 - elev);
+    map.setLights([
+      { id: 'ambient', type: 'ambient', properties: { intensity: 0.4, color: '#ffffff' } },
+      { id: 'sun', type: 'directional', properties: {
+        direction: [az, polar],
+        intensity: Math.min(1, shadowIntensity * 2.2),
+        color: '#ffffff'
+      }}
+    ]);
+  } catch (e) {
+    // setLights non supportato in questa build
+  }
+}
+
 function applyHillshade() {
   const az = sunAzimuth(sunMinutes);
   if (az !== null) {
     map.setPaintProperty('hillshade-layer', 'hillshade-illumination-direction', az);
   }
   map.setPaintProperty('hillshade-layer', 'hillshade-exaggeration', shadowIntensity);
+  applyBuildingLight();
 }
 
 // ── Lookup aree UPL/Quartiere/Circoscrizione (ha) ────────────────────────
