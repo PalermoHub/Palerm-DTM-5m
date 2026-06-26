@@ -1481,6 +1481,17 @@ body {
 }
 #rp-punto-back:hover { background: rgba(224, 120, 0, 0.1); }
 
+#rp-punto-icon { flex-shrink: 0; display: flex; align-items: center; color: #2458c8; }
+
+#rp-punto-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1a2a50;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .rp-punto-coords {
   font-size: 10px;
   color: #1f2937;
@@ -2247,6 +2258,8 @@ body:has(#map-toolbar-wrap.tb-open) #map-legends {
 [data-theme="dark"] .rp-punto-row-label { color: #7080a8; }
 [data-theme="dark"] .rp-punto-row-value { color: #c0cce8; }
 [data-theme="dark"] .rp-punto-coords { color: #7080a8; }
+[data-theme="dark"] #rp-punto-icon { color: #5080e0; }
+[data-theme="dark"] #rp-punto-title { color: #c0cce8; }
 [data-theme="dark"] .rp-punto-idx-cell { background: linear-gradient(135deg, #162040 0%, #1a2a4a 100%); }
 [data-theme="dark"] .rp-punto-idx-val { color: #c0cce8; }
 [data-theme="dark"] .rp-punto-idx-key { color: #485a82; }
