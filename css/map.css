@@ -257,26 +257,6 @@ body {
 
 .tb-si-btn:hover { background: rgba(36, 88, 200, 0.18); }
 
-/* Pulsante chiudi sezioni inline toolbar */
-.tb-inline-close {
-  display: block;
-  width: 20px;
-  height: 20px;
-  margin: 2px auto 0;
-  border: none;
-  background: rgba(30, 60, 160, 0.06);
-  border-radius: 50%;
-  color: #8898c8;
-  font-size: 13px;
-  line-height: 1;
-  cursor: pointer;
-  padding: 0;
-  text-align: center;
-  transition: background 0.15s, color 0.15s;
-  font-family: sans-serif;
-}
-.tb-inline-close:hover { background: rgba(200, 50, 50, 0.12); color: #c43030; }
-
 /* Separatore orizzontale */
 .tb-sep {
   width: 70%;
@@ -2080,8 +2060,6 @@ body {
   color: #5080e0;
 }
 [data-theme="dark"] .tb-si-btn:hover { background: rgba(70,110,220,0.25); }
-[data-theme="dark"] .tb-inline-close { background: rgba(60,80,160,0.15); color: #6070a8; }
-[data-theme="dark"] .tb-inline-close:hover { background: rgba(180,50,50,0.2); color: #e06060; }
 
 /* Linguetta mobile dark */
 [data-theme="dark"] #tb-mobile-tab {

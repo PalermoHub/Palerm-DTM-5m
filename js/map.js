@@ -1088,10 +1088,6 @@ document.getElementById('tb-ctr-opacity-slider').addEventListener('input', funct
   map.setPaintProperty('ctr2k-layer', 'raster-opacity', parseFloat(this.value));
 });
 
-document.getElementById('tb-ctr-opacity-close').addEventListener('click', function () {
-  document.getElementById('tb-ctr-opacity').style.display = 'none';
-});
-
 // ── Toolbar: UPL confini quartieri ────────────────────────────────────────
 // upl-fill rimane sempre visibile (opacity 0) per queryRenderedFeatures nel popup
 document.getElementById('tb-upl').addEventListener('click', function () {
@@ -1246,9 +1242,21 @@ document.getElementById('tbp-btn-now').addEventListener('click', () => {
   if (shadowActive) applyHillshade();
 });
 
-document.getElementById('tb-shadow-inline-close').addEventListener('click', function () {
-  document.getElementById('tb-panel-shadow').style.display = 'none';
-  document.getElementById('tb-shadow').classList.remove('on');
+// ── Click fuori dalla toolbar: chiude sezioni inline aperte ──────────────
+document.addEventListener('click', function (e) {
+  const wrap = document.getElementById('map-toolbar-wrap');
+  if (wrap && wrap.contains(e.target)) return;
+
+  const ctrOpacity = document.getElementById('tb-ctr-opacity');
+  if (ctrOpacity && ctrOpacity.style.display !== 'none') {
+    ctrOpacity.style.display = 'none';
+  }
+
+  const shadowInline = document.getElementById('tb-panel-shadow');
+  if (shadowInline && shadowInline.style.display !== 'none') {
+    shadowInline.style.display = 'none';
+    document.getElementById('tb-shadow').classList.remove('on');
+  }
 });
 
 // ── Toolbar: Griglia analisi DTM ──────────────────────────────────────────
