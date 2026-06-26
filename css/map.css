@@ -18,14 +18,13 @@ body {
 ════════════════════════════════════════ */
 #map-toolbar-wrap {
   position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  top: 50px;
   z-index: 100;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0;
 }
 
 #map-toolbar {
@@ -33,28 +32,33 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(30, 60, 160, 0.14);
-  border-radius: 30px;
-  padding: 3px 7px;
+  border-left: none;
+  border-radius: 0 14px 14px 0;
+  padding: 8px 5px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 2px;
-  box-shadow: 0 3px 18px rgba(30, 60, 160, 0.13), 0 1px 4px rgba(0,0,0,0.05);
-  white-space: nowrap;
+  gap: 3px;
+  box-shadow: 4px 2px 18px rgba(30, 60, 160, 0.13);
 }
 
-/* Sotto-pannelli toolbar */
+/* Sotto-pannelli toolbar — appaiono a destra della toolbar */
 .tb-panel {
+  position: absolute;
+  left: 54px;
+  top: 0;
   background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(30, 60, 160, 0.14);
-  border-radius: 12px;
+  border-radius: 0 12px 12px 12px;
   padding: 10px 14px;
-  box-shadow: 0 4px 20px rgba(30, 60, 160, 0.13);
+  box-shadow: 4px 4px 20px rgba(30, 60, 160, 0.13);
   min-width: 240px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  z-index: 110;
 }
 
 .tbp-row {
@@ -104,27 +108,56 @@ body {
 .tbp-btn:hover { background: rgba(36, 88, 200, 0.16); }
 
 .tb-btn {
-  width: 28px;
-  height: 28px;
+  width: 40px;
+  height: 40px;
   border: none;
   background: transparent;
-  border-radius: 50%;
+  border-radius: 10px;
   cursor: pointer;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 2px;
   color: #2a3a68;
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 700;
   font-family: 'Titillium Web', sans-serif;
   letter-spacing: 0.04em;
-  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  transition: background 0.15s, color 0.15s;
   flex-shrink: 0;
   padding: 0;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.tb-btn svg { width: 13px; height: 13px; }
+.tb-btn svg { width: 16px; height: 16px; }
 #tb-north svg { width: 22px; height: 22px; }
+
+/* Label testo sotto l'icona */
+.tb-lbl {
+  font-size: 7.5px;
+  font-weight: 700;
+  font-family: 'Titillium Web', sans-serif;
+  letter-spacing: 0.04em;
+  color: inherit;
+  opacity: 0.7;
+  line-height: 1;
+}
+
+/* Badge verde: layer attivo */
+.tb-btn.tb-toggle.on::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2acf80;
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  pointer-events: none;
+}
 
 .tb-btn:hover {
   background: rgba(255, 153, 0, 0.12);
@@ -135,7 +168,6 @@ body {
 .tb-btn.tb-toggle.on {
   background: rgba(255, 153, 0, 0.08);
   color: #e07800;
-  box-shadow: none;
 }
 
 .tb-btn.tb-3d.active {
@@ -143,42 +175,39 @@ body {
   color: #e07800;
 }
 
-/* Basemap group radio */
+/* Basemap group: verticale */
 .tb-group {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 1px;
 }
 
-/* Opacità inline CTR */
-.tb-opacity {
-  display: flex;
-  align-items: center;
-  padding: 0 3px;
-}
-.tb-opacity input[type="range"] {
-  width: 60px;
-  height: 3px;
-  accent-color: #2458c8;
-  cursor: pointer;
-}
+/* Opacità inline CTR: nascosta (non ha senso in verticale) */
+.tb-opacity { display: none; }
 
-/* Separatore verticale */
+/* Separatore orizzontale */
 .tb-sep {
-  width: 1px;
-  height: 18px;
+  width: 70%;
+  height: 1px;
   background: rgba(30, 60, 160, 0.15);
-  margin: 0 4px;
+  margin: 2px auto;
   flex-shrink: 0;
 }
 
-/* Bottoni con solo testo (CTR, OSM, SAT, 3D, CdL) */
-#tb-3d, #tb-ctr, #tb-contour,
+/* Bottoni testo (OSM, SAT, CTR, 3D) */
+#tb-3d, #tb-ctr,
 #tb-basemaps .tb-radio {
-  width: auto;
-  padding: 0 8px;
-  border-radius: 14px;
+  width: 40px;
+  padding: 0;
+  border-radius: 10px;
   font-size: 9.5px;
+}
+
+/* Curve di livello: icona+lbl come gli altri */
+#tb-contour {
+  width: 40px;
+  border-radius: 10px;
 }
 
 .legend-item {
@@ -1837,77 +1866,49 @@ body {
 /* ════════════════════════════════════════
    MOBILE TOOLBAR (≤640px)
 ════════════════════════════════════════ */
+/* Linguetta mobile: nascosta su desktop */
 #tb-mobile-tab { display: none; }
 
 @media (max-width: 640px) {
-  /* Riposiziona wrap: da centro-top a left-center, slide-in */
   #map-toolbar-wrap {
-    left: 0 !important;
     top: 50px !important;
-    /* 26px = larghezza linguetta: wrap scorre sx lasciando solo il tab visibile */
-    transform: translateX(calc(-100% + 26px)) !important;
-    transition: transform 0.3s ease;
-    flex-direction: row !important;
-    align-items: flex-start !important;
-    gap: 0 !important;
+    transform: translateX(calc(-100% + 28px)) !important;
+    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   #map-toolbar-wrap.tb-open {
     transform: translateX(0) !important;
   }
 
-  /* Toolbar verticale, bordo sinistro piatto */
+  /* Nessuna ombra a destra: non proietta linea sul tab */
   #map-toolbar {
-    flex-direction: column;
-    border-radius: 0 !important;
-    padding: 8px 4px;
-    gap: 3px;
+    border-radius: 0 0 14px 0 !important;
     border-right: none !important;
+    box-shadow: none !important;
   }
 
-  /* Separatori orizzontali */
-  .tb-sep {
-    width: 70%;
-    height: 1px;
-    margin: 2px auto !important;
-  }
-
-  /* CTR opacity slider: nascosto su mobile */
-  .tb-opacity { display: none !important; }
-
-  /* Bottoni testo (OSM/SAT/CTR/3D): taglia padding */
-  #tb-3d, #tb-ctr, #tb-contour,
-  #tb-basemaps .tb-radio {
-    padding: 0 5px;
-    font-size: 8.5px;
-  }
-
-  /* Sotto-pannelli: overlay assoluto ancorato alla toolbar */
+  /* Sotto-pannelli: a destra della toolbar */
   .tb-panel {
-    position: absolute;
-    left: 38px;
-    top: 0;
-    min-width: 200px;
-    z-index: 110;
-    border-radius: 0 12px 12px 0 !important;
+    left: 54px;
+    border-radius: 0 12px 12px 12px !important;
   }
 
-  /* Linguetta: sempre visibile, stacca a destra della toolbar */
+  /* Linguetta: piccola, proprio sfondo e ombra */
   #tb-mobile-tab {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 26px;
-    min-height: 72px;
+    width: 28px;
+    min-height: 80px;
     background: rgba(255, 255, 255, 0.97);
-    backdrop-filter: blur(12px);
+    /*backdrop-filter: blur(12px);*/
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(30, 60, 160, 0.14);
     border-left: none;
     border-radius: 0 10px 10px 0;
-    padding: 10px 2px;
-    gap: 6px;
+    padding: 10px 3px;
+    gap: 8px;
     cursor: pointer;
     box-shadow: 4px 2px 14px rgba(30, 60, 160, 0.18);
     user-select: none;
@@ -1969,6 +1970,7 @@ body {
 [data-theme="dark"] .tb-btn.active,
 [data-theme="dark"] .tb-btn.tb-toggle.on,
 [data-theme="dark"] .tb-btn.tb-3d.active { background: rgba(224,120,0,0.15); color: #e07800; }
+[data-theme="dark"] .tb-btn.tb-toggle.on::after { border-color: rgba(15,23,46,0.9); }
 [data-theme="dark"] .tb-sep { background: rgba(70,110,220,0.2); }
 [data-theme="dark"] .tbp-label { color: #7888b8; }
 [data-theme="dark"] .tbp-val { color: #5080e0; }
@@ -1979,10 +1981,10 @@ body {
 }
 [data-theme="dark"] .tbp-btn:hover { background: rgba(70,110,220,0.25); }
 
-/* Linguetta mobile */
+/* Linguetta mobile dark */
 [data-theme="dark"] #tb-mobile-tab {
-  background: rgba(15,23,46,0.97);
-  border-color: rgba(70,110,220,0.22);
+  background: rgba(15, 23, 46, 0.97);
+  border-color: rgba(70, 110, 220, 0.22);
 }
 [data-theme="dark"] #tb-mobile-arrow { color: #a0b0d8; }
 
