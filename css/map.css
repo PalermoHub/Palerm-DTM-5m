@@ -622,7 +622,7 @@ body {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%) translateY(calc(100% - 20px));
-  width: 90%;
+  width: 900px;
   height: 80vh;
   background: transparent;
   border: none;
@@ -1978,6 +1978,9 @@ body {
 #tb-mobile-tab { display: none; }
 
 @media (max-width: 640px) {
+  #info-panel {
+    width: 90%;
+  }
   #map-toolbar-wrap {
     top: 25px !important;
     transform: translateX(calc(-100% + 28px)) !important;
