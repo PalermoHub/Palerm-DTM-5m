@@ -2011,7 +2011,7 @@ body {
     flex-shrink: 0;
   }
   #map-toolbar-wrap {
-    top: 40px !important;
+    top: 35px !important;
     transform: translateX(calc(-100% + 28px)) !important;
     transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
   }
@@ -2142,7 +2142,7 @@ body:has(#map-toolbar-wrap.tb-open) #map-legends {
     align-items: center;
     gap: 5px;
     position: absolute;
-    top: 40px;
+    top: 35px;
     right: 10px;
     z-index: 200;
     background: rgba(255, 255, 255, 0.97);

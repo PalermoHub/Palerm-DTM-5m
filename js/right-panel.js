@@ -1390,11 +1390,11 @@
         // RANK:twi
 
         var TWI_CLS = [
-          { key: 'c_molto_basso', label: '< 4.5 (molto basso)', color: '#f7fbff' },
-          { key: 'c_basso', label: '4.5÷5.7 (basso)', color: '#c6dbef' },
-          { key: 'c_medio', label: '5.7÷6.9 (medio)', color: '#6baed6' },
-          { key: 'c_alto', label: '6.9÷10.3 (alto)', color: '#2171b5' },
-          { key: 'c_molto_alto', label: '> 10.3 (molto alto)', color: '#08306b' }
+          { key: 'c_molto_basso', label: '< 4.5 (molto basso)', color: '#ffffcc' },
+          { key: 'c_basso', label: '4.5÷5.7 (basso)', color: '#a1dab4' },
+          { key: 'c_medio', label: '5.7÷6.9 (medio)', color: '#41b6c4' },
+          { key: 'c_alto', label: '6.9÷10.3 (alto)', color: '#2c7fb8' },
+          { key: 'c_molto_alto', label: '> 10.3 (molto alto)', color: '#253494' }
         ];
         appendRankingCard(el, {
           title: 'Classifica Circoscrizioni',
@@ -1478,7 +1478,7 @@
           { key: 'c_rill', label: '0.7÷1.3 (rill)', color: '#c6dbef' },
           { key: 'c_canale', label: '1.3÷2.4 (canale)', color: '#6baed6' },
           { key: 'c_torrente', label: '2.4÷4.0 (torrente)', color: '#2171b5' },
-          { key: 'c_fiume', label: '> 4.0 (fiume)', color: '#08306b' }
+          { key: 'c_fiume', label: '> 4.0 (fiume)', color: '#084594' }
         ];
         appendRankingCard(el, {
           title: 'Classifica Circoscrizioni',
@@ -1593,11 +1593,11 @@
         // RANK:spi
 
         var SPI_CLS = [
-          { key: 'c_bassa', label: '< −1 (bassa)', color: '#ffffcc' },
-          { key: 'c_medio_bassa', label: '−1÷1 (medio-bassa)', color: '#fed976' },
-          { key: 'c_media', label: '1÷3 (media)', color: '#feb24c' },
-          { key: 'c_alta', label: '3÷5.5 (alta)', color: '#f03b20' },
-          { key: 'c_molto_alta', label: '> 5.5 (molto alta)', color: '#bd0026' }
+          { key: 'c_bassa', label: '< -1 (bassa)', color: '#2166ac' },
+          { key: 'c_medio_bassa', label: '−1÷1 (medio-bassa)', color: '#74add1' },
+          { key: 'c_media', label: '1÷3 (media)', color: '#fee090' },
+          { key: 'c_alta', label: '3÷5.5 (alta)', color: '#f46d43' },
+          { key: 'c_molto_alta', label: '> 5.5 (molto alta)', color: '#d73027' }
         ];
         appendRankingCard(el, {
           title: 'Classifica Circoscrizioni',
@@ -1680,11 +1680,11 @@
         // RANK:dtw
 
         var DTW_CLS = [
-          { key: 'c_superficiale', label: '< 0.17 m (superficiale)', color: '#00682c' },
-          { key: 'c_bassa', label: '0.17÷0.47 m (bassa)', color: '#31a354' },
-          { key: 'c_media', label: '0.47÷4.7 m (media)', color: '#aedea7' },
-          { key: 'c_alta', label: '4.7÷7.2 m (alta)', color: '#fd8d3c' },
-          { key: 'c_profonda', label: '> 7.2 m (profonda)', color: '#800026' }
+          { key: 'c_superficiale', label: '< 0.17 m (superficiale)', color: '#253494' },
+          { key: 'c_bassa', label: '0.17÷0.47 m (bassa)', color: '#2c7fb8' },
+          { key: 'c_media', label: '0.47÷4.7 m (media)', color: '#41b6c4' },
+          { key: 'c_alta', label: '4.7÷7.2 m (alta)', color: '#a1dab4' },
+          { key: 'c_profonda', label: '> 7.2 m (profonda)', color: '#ffffcc' }
         ];
         appendRankingCard(el, {
           title: 'Classifica Circoscrizioni',
@@ -1761,11 +1761,11 @@
         // RANK:fv
 
         var FV_CLS = [
-          { key: 'c_scarso', label: '< 0.31 (scarso)', color: '#440154' },
-          { key: 'c_basso', label: '0.31÷0.42 (basso)', color: '#3e6f8e' },
-          { key: 'c_medio', label: '0.42÷0.54 (medio)', color: '#26808e' },
-          { key: 'c_buono', label: '0.54÷0.61 (buono)', color: '#35b779' },
-          { key: 'c_ottimo', label: '> 0.61 (ottimo)', color: '#b4de2c' }
+          { key: 'c_scarso', label: '< 0.31 (scarso)', color: '#d73027' },
+          { key: 'c_basso', label: '0.31÷0.42 (basso)', color: '#fc8d59' },
+          { key: 'c_medio', label: '0.42÷0.54 (medio)', color: '#fee090' },
+          { key: 'c_buono', label: '0.54÷0.61 (buono)', color: '#91cf60' },
+          { key: 'c_ottimo', label: '> 0.61 (ottimo)', color: '#1a9850' }
         ];
         appendRankingCard(el, {
           title: 'Classifica Circoscrizioni',
@@ -1849,10 +1849,10 @@
         // RANK:ombra_e
 
         var OMBRA_E_CLS = [
-          { key: 'c_ombra_forte', label: '< 80 (forte ombra)', color: '#fff7bc' },
-          { key: 'c_ombra_parz', label: '80÷170 (parziale)', color: '#fe9929' },
-          { key: 'c_semi_luce', label: '170÷250 (semi-luce)', color: '#cc4c02' },
-          { key: 'c_piena_luce', label: '> 250 (piena luce)', color: '#7f2704' }
+          { key: 'c_ombra_forte', label: '< 80 (forte ombra)', color: '#2166ac' },
+          { key: 'c_ombra_parz', label: '80÷170 (parziale)', color: '#74add1' },
+          { key: 'c_semi_luce', label: '170÷250 (semi-luce)', color: '#fdae61' },
+          { key: 'c_piena_luce', label: '> 250 (piena luce)', color: '#d73027' }
         ];
         appendRankingCard(el, {
           title: 'Classifica Circoscrizioni',
@@ -1860,14 +1860,14 @@
           maxVal: 66.008,
           classes: OMBRA_E_CLS,
           items: [
-            { rank: 1, label:'III · Oreto', val:66.008, classi:{c_ombra_forte: 77.4, c_ombra_parz: 21.8, c_semi_luce: 0.3, c_piena_luce: 0.5} },
-            { rank: 2, label:'VII · Mondello', val:59.562, classi:{c_ombra_forte: 89.5, c_ombra_parz: 8.5, c_semi_luce: 1.2, c_piena_luce: 0.8} },
-            { rank: 3, label:'II · Resuttana', val:57.769, classi:{c_ombra_forte: 92.9, c_ombra_parz: 5.4, c_semi_luce: 0.5, c_piena_luce: 1.2} },
-            { rank: 4, label:'VIII · Libertà', val:57.672, classi:{c_ombra_forte: 92.3, c_ombra_parz: 6.0, c_semi_luce: 0.4, c_piena_luce: 1.3} },
-            { rank: 5, label:'IV · Mezzomonreale', val:53.727, classi:{c_ombra_forte: 96.5, c_ombra_parz: 2.6, c_semi_luce: 0.1, c_piena_luce: 0.8} },
-            { rank: 6, label:'I · Centro Storico', val:53.461, classi:{c_ombra_forte: 98.0, c_ombra_parz: 0.3, c_semi_luce: 0.3, c_piena_luce: 1.4} },
-            { rank: 7, label:'V · Noce', val:52.316, classi:{c_ombra_forte: 97.0, c_ombra_parz: 2.9, c_semi_luce: 0.0, c_piena_luce: 0.1} },
-            { rank: 8, label:'VI · Nord-Ovest', val:51.597, classi:{c_ombra_forte: 97.3, c_ombra_parz: 2.4, c_semi_luce: 0.2, c_piena_luce: 0.2} }
+            { rank: 1, label:'III · Oreto', val:66.008, classi:{c_ombra_forte: 77.4, c_ombra_parz: 21.8, c_semi_luce: 0.3, c_piena_luce: 0.6} },
+            { rank: 2, label:'VII · Mondello', val:59.559, classi:{c_ombra_forte: 89.6, c_ombra_parz: 8.3, c_semi_luce: 1.1, c_piena_luce: 0.9} },
+            { rank: 3, label:'II · Resuttana', val:57.764, classi:{c_ombra_forte: 93.0, c_ombra_parz: 5.3, c_semi_luce: 0.3, c_piena_luce: 1.4} },
+            { rank: 4, label:'VIII · Libertà', val:57.672, classi:{c_ombra_forte: 92.4, c_ombra_parz: 5.8, c_semi_luce: 0.2, c_piena_luce: 1.5} },
+            { rank: 5, label:'IV · Mezzomonreale', val:53.72, classi:{c_ombra_forte: 96.5, c_ombra_parz: 2.5, c_semi_luce: 0.0, c_piena_luce: 1.0} },
+            { rank: 6, label:'I · Centro Storico', val:53.451, classi:{c_ombra_forte: 98.2, c_ombra_parz: 0.0, c_semi_luce: 0.0, c_piena_luce: 1.7} },
+            { rank: 7, label:'V · Noce', val:52.314, classi:{c_ombra_forte: 96.9, c_ombra_parz: 3.0, c_semi_luce: 0.0, c_piena_luce: 0.1} },
+            { rank: 8, label:'VI · Nord-Ovest', val:51.599, classi:{c_ombra_forte: 97.3, c_ombra_parz: 2.4, c_semi_luce: 0.1, c_piena_luce: 0.2} }
         ]
         });
         appendRankingCard(el, {
@@ -1876,14 +1876,14 @@
           maxVal: 67.795,
           classes: OMBRA_E_CLS,
           items: [
-            { rank: 1, label:'Villagrazia - Falsomiele', val:67.795, classi:{c_ombra_forte: 74.9, c_ombra_parz: 24.2, c_semi_luce: 0.4, c_piena_luce: 0.5} },
-            { rank: 2, label:'Partanna Mondello', val:64.209, classi:{c_ombra_forte: 82.9, c_ombra_parz: 14.0, c_semi_luce: 2.3, c_piena_luce: 0.8} },
-            { rank: 3, label:'Arenella - Vergine Maria', val:62.325, classi:{c_ombra_forte: 88.7, c_ombra_parz: 6.9, c_semi_luce: 0.9, c_piena_luce: 3.6} },
-            { rank: 4, label:'Montepellegrino', val:62.31, classi:{c_ombra_forte: 87.6, c_ombra_parz: 10.0, c_semi_luce: 0.6, c_piena_luce: 1.9} },
-            { rank: 5, label:'Brancaccio - Ciaculli', val:59.515, classi:{c_ombra_forte: 89.7, c_ombra_parz: 9.1, c_semi_luce: 0.6, c_piena_luce: 0.6} },
-            { rank: 6, label:'Boccadifalco', val:57.44, classi:{c_ombra_forte: 93.1, c_ombra_parz: 5.6, c_semi_luce: 0.2, c_piena_luce: 1.2} },
-            { rank: 7, label:'Tribunali-Castellammare', val:56.409, classi:{c_ombra_forte: 96.4, c_ombra_parz: 0.5, c_semi_luce: 0.5, c_piena_luce: 2.6} },
-            { rank: 8, label:'Settecannoli', val:55.593, classi:{c_ombra_forte: 97.2, c_ombra_parz: 0.3, c_semi_luce: 0.3, c_piena_luce: 2.2} }
+            { rank: 1, label:'Villagrazia - Falsomiele', val:67.795, classi:{c_ombra_forte: 74.8, c_ombra_parz: 24.3, c_semi_luce: 0.3, c_piena_luce: 0.6} },
+            { rank: 2, label:'Partanna Mondello', val:64.209, classi:{c_ombra_forte: 83.1, c_ombra_parz: 13.8, c_semi_luce: 2.1, c_piena_luce: 1.0} },
+            { rank: 3, label:'Arenella - Vergine Maria', val:62.332, classi:{c_ombra_forte: 89.1, c_ombra_parz: 6.4, c_semi_luce: 0.4, c_piena_luce: 4.1} },
+            { rank: 4, label:'Montepellegrino', val:62.302, classi:{c_ombra_forte: 87.7, c_ombra_parz: 9.8, c_semi_luce: 0.4, c_piena_luce: 2.1} },
+            { rank: 5, label:'Brancaccio - Ciaculli', val:59.519, classi:{c_ombra_forte: 89.7, c_ombra_parz: 9.1, c_semi_luce: 0.5, c_piena_luce: 0.7} },
+            { rank: 6, label:'Boccadifalco', val:57.424, classi:{c_ombra_forte: 93.1, c_ombra_parz: 5.5, c_semi_luce: 0.1, c_piena_luce: 1.3} },
+            { rank: 7, label:'Tribunali-Castellammare', val:56.39, classi:{c_ombra_forte: 96.8, c_ombra_parz: 0.0, c_semi_luce: 0.0, c_piena_luce: 3.2} },
+            { rank: 8, label:'Settecannoli', val:55.576, classi:{c_ombra_forte: 97.5, c_ombra_parz: 0.0, c_semi_luce: 0.0, c_piena_luce: 2.5} }
         ]
         });
 
@@ -1939,41 +1939,41 @@
         // RANK:ombra_i
 
         var OMBRA_I_CLS = [
-          { key: 'c_ombra_forte', label: '< 80 (forte ombra)', color: '#c6dbef' },
-          { key: 'c_ombra_parz', label: '80÷170 (parziale)', color: '#6baed6' },
-          { key: 'c_semi_luce', label: '170÷250 (semi-luce)', color: '#2171b5' },
-          { key: 'c_piena_luce', label: '> 250 (piena luce)', color: '#084594' }
+          { key: 'c_ombra_forte', label: '< 80 (forte ombra)', color: '#2166ac' },
+          { key: 'c_ombra_parz', label: '80÷170 (parziale)', color: '#74add1' },
+          { key: 'c_semi_luce', label: '170÷250 (semi-luce)', color: '#fdae61' },
+          { key: 'c_piena_luce', label: '> 250 (piena luce)', color: '#d73027' }
         ];
         appendRankingCard(el, {
           title: 'Classifica Circoscrizioni',
           subtitle: 'Irradiazione media',
-          maxVal: 192.06,
+          maxVal: 192.063,
           classes: OMBRA_I_CLS,
           items: [
-            { rank: 1, label:'III · Oreto', val:192.06, classi:{c_ombra_forte: 0.0, c_ombra_parz: 17.4, c_semi_luce: 76.6, c_piena_luce: 6.0} },
-            { rank: 2, label:'II · Resuttana', val:181.243, classi:{c_ombra_forte: 0.1, c_ombra_parz: 25.5, c_semi_luce: 69.6, c_piena_luce: 4.8} },
-            { rank: 3, label:'VII · Mondello', val:174.422, classi:{c_ombra_forte: 0.6, c_ombra_parz: 41.7, c_semi_luce: 55.0, c_piena_luce: 2.8} },
-            { rank: 4, label:'V · Noce', val:171.565, classi:{c_ombra_forte: 0.3, c_ombra_parz: 50.1, c_semi_luce: 47.9, c_piena_luce: 1.7} },
-            { rank: 5, label:'I · Centro Storico', val:171.559, classi:{c_ombra_forte: 0.0, c_ombra_parz: 51.0, c_semi_luce: 47.5, c_piena_luce: 1.4} },
-            { rank: 6, label:'VI · Nord-Ovest', val:168.868, classi:{c_ombra_forte: 0.3, c_ombra_parz: 60.6, c_semi_luce: 38.6, c_piena_luce: 0.5} },
-            { rank: 7, label:'IV · Mezzomonreale', val:167.938, classi:{c_ombra_forte: 0.4, c_ombra_parz: 47.3, c_semi_luce: 50.5, c_piena_luce: 1.8} },
-            { rank: 8, label:'VIII · Libertà', val:166.848, classi:{c_ombra_forte: 0.4, c_ombra_parz: 62.1, c_semi_luce: 36.0, c_piena_luce: 1.5} }
+            { rank: 1, label:'III · Oreto', val:192.063, classi:{c_ombra_forte: 0.0, c_ombra_parz: 16.5, c_semi_luce: 77.3, c_piena_luce: 6.3} },
+            { rank: 2, label:'II · Resuttana', val:181.241, classi:{c_ombra_forte: 0.1, c_ombra_parz: 23.5, c_semi_luce: 71.3, c_piena_luce: 5.1} },
+            { rank: 3, label:'VII · Mondello', val:174.42, classi:{c_ombra_forte: 0.6, c_ombra_parz: 40.2, c_semi_luce: 56.2, c_piena_luce: 3.0} },
+            { rank: 4, label:'V · Noce', val:171.563, classi:{c_ombra_forte: 0.4, c_ombra_parz: 48.2, c_semi_luce: 49.6, c_piena_luce: 1.8} },
+            { rank: 5, label:'I · Centro Storico', val:171.557, classi:{c_ombra_forte: 0.0, c_ombra_parz: 48.8, c_semi_luce: 49.5, c_piena_luce: 1.7} },
+            { rank: 6, label:'VI · Nord-Ovest', val:168.867, classi:{c_ombra_forte: 0.3, c_ombra_parz: 59.0, c_semi_luce: 40.1, c_piena_luce: 0.6} },
+            { rank: 7, label:'IV · Mezzomonreale', val:167.935, classi:{c_ombra_forte: 0.4, c_ombra_parz: 45.7, c_semi_luce: 52.0, c_piena_luce: 1.9} },
+            { rank: 8, label:'VIII · Libertà', val:166.85, classi:{c_ombra_forte: 0.4, c_ombra_parz: 59.8, c_semi_luce: 38.0, c_piena_luce: 1.8} }
         ]
         });
         appendRankingCard(el, {
           title: 'Classifica Quartieri',
           subtitle: 'Irradiazione media',
-          maxVal: 194.455,
+          maxVal: 194.459,
           classes: OMBRA_I_CLS,
           items: [
-            { rank: 1, label:'Villagrazia - Falsomiele', val:194.455, classi:{c_ombra_forte: 0.0, c_ombra_parz: 15.0, c_semi_luce: 78.4, c_piena_luce: 6.6} },
-            { rank: 2, label:'Brancaccio - Ciaculli', val:186.717, classi:{c_ombra_forte: 0.2, c_ombra_parz: 17.4, c_semi_luce: 75.6, c_piena_luce: 6.8} },
-            { rank: 3, label:'Tommaso Natale - Sferracavallo', val:182.426, classi:{c_ombra_forte: 0.3, c_ombra_parz: 27.1, c_semi_luce: 70.9, c_piena_luce: 1.7} },
-            { rank: 4, label:'Arenella - Vergine Maria', val:175.148, classi:{c_ombra_forte: 0.6, c_ombra_parz: 45.4, c_semi_luce: 49.7, c_piena_luce: 4.4} },
-            { rank: 5, label:'Resuttana - San Lorenzo', val:174.772, classi:{c_ombra_forte: 0.2, c_ombra_parz: 51.8, c_semi_luce: 47.5, c_piena_luce: 0.5} },
-            { rank: 6, label:'Settecannoli', val:173.923, classi:{c_ombra_forte: 0.0, c_ombra_parz: 34.6, c_semi_luce: 63.2, c_piena_luce: 2.2} },
-            { rank: 7, label:'Tribunali-Castellammare', val:172.7, classi:{c_ombra_forte: 0.0, c_ombra_parz: 51.0, c_semi_luce: 46.3, c_piena_luce: 2.7} },
-            { rank: 8, label:'Borgo Nuovo', val:172.277, classi:{c_ombra_forte: 0.5, c_ombra_parz: 52.1, c_semi_luce: 44.7, c_piena_luce: 2.7} }
+            { rank: 1, label:'Villagrazia - Falsomiele', val:194.459, classi:{c_ombra_forte: 0.0, c_ombra_parz: 14.2, c_semi_luce: 78.8, c_piena_luce: 7.0} },
+            { rank: 2, label:'Brancaccio - Ciaculli', val:186.718, classi:{c_ombra_forte: 0.2, c_ombra_parz: 16.1, c_semi_luce: 76.6, c_piena_luce: 7.1} },
+            { rank: 3, label:'Tommaso Natale - Sferracavallo', val:182.42, classi:{c_ombra_forte: 0.3, c_ombra_parz: 26.0, c_semi_luce: 71.8, c_piena_luce: 1.9} },
+            { rank: 4, label:'Arenella - Vergine Maria', val:175.149, classi:{c_ombra_forte: 0.6, c_ombra_parz: 44.0, c_semi_luce: 50.4, c_piena_luce: 4.9} },
+            { rank: 5, label:'Resuttana - San Lorenzo', val:174.768, classi:{c_ombra_forte: 0.3, c_ombra_parz: 50.4, c_semi_luce: 48.7, c_piena_luce: 0.5} },
+            { rank: 6, label:'Settecannoli', val:173.917, classi:{c_ombra_forte: 0.0, c_ombra_parz: 31.8, c_semi_luce: 65.7, c_piena_luce: 2.5} },
+            { rank: 7, label:'Tribunali-Castellammare', val:172.695, classi:{c_ombra_forte: 0.0, c_ombra_parz: 48.6, c_semi_luce: 48.2, c_piena_luce: 3.2} },
+            { rank: 8, label:'Borgo Nuovo', val:172.274, classi:{c_ombra_forte: 0.6, c_ombra_parz: 51.5, c_semi_luce: 45.1, c_piena_luce: 2.8} }
         ]
         });
 
@@ -2035,11 +2035,11 @@
         // RANK:frost
 
         var FROST_CLS = [
-          { key: 'c_minimo', label: '< 0.005 (minimo)', color: '#f5f5ff' },
-          { key: 'c_basso', label: '0.005÷0.023 (basso)', color: '#c6dbef' },
-          { key: 'c_medio', label: '0.023÷0.074 (medio)', color: '#6baed6' },
-          { key: 'c_alto', label: '0.074÷0.28 (alto)', color: '#3182bd' },
-          { key: 'c_critico', label: '> 0.28 (critico)', color: '#08519c' }
+          { key: 'c_minimo', label: '< 0.005 (minimo)', color: '#ffffcc' },
+          { key: 'c_basso', label: '0.005÷0.023 (basso)', color: '#a1dab4' },
+          { key: 'c_medio', label: '0.023÷0.074 (medio)', color: '#41b6c4' },
+          { key: 'c_alto', label: '0.074÷0.28 (alto)', color: '#2c7fb8' },
+          { key: 'c_critico', label: '> 0.28 (critico)', color: '#253494' }
         ];
         appendRankingCard(el, {
           title: 'Classifica Circoscrizioni',
@@ -2129,10 +2129,10 @@
         // RANK:svf
 
         var SVF_CLS = [
-          { key: 'c_incassato', label: '< 0.87 (incassato)', color: '#21252a' },
-          { key: 'c_chiuso', label: '0.87÷0.96 (chiuso)', color: '#3182bd' },
-          { key: 'c_semi_aperto', label: '0.96÷0.994 (semi-aperto)', color: '#74c476' },
-          { key: 'c_aperto', label: '> 0.994 (aperto)', color: '#c7e9c0' }
+          { key: 'c_incassato', label: '< 0.87 (incassato)', color: '#d73027' },
+          { key: 'c_chiuso', label: '0.87÷0.96 (chiuso)', color: '#fc8d59' },
+          { key: 'c_semi_aperto', label: '0.96÷0.994 (semi-aperto)', color: '#fee090' },
+          { key: 'c_aperto', label: '> 0.994 (aperto)', color: '#1a9850' }
         ];
         appendRankingCard(el, {
           title: 'Classifica Circoscrizioni',
@@ -2140,13 +2140,13 @@
           maxVal: 0.999,
           classes: SVF_CLS,
           items: [
-            { rank: 1, label:'I · Centro Storico', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.2, c_semi_aperto: 4.6, c_aperto: 95.3} },
-            { rank: 2, label:'VIII · Libertà', val:0.98, classi:{c_incassato: 2.8, c_chiuso: 13.2, c_semi_aperto: 23.7, c_aperto: 60.3} },
-            { rank: 3, label:'IV · Mezzomonreale', val:0.977, classi:{c_incassato: 1.6, c_chiuso: 22.9, c_semi_aperto: 20.3, c_aperto: 55.2} },
-            { rank: 4, label:'V · Noce', val:0.977, classi:{c_incassato: 1.3, c_chiuso: 19.6, c_semi_aperto: 34.2, c_aperto: 44.9} },
-            { rank: 5, label:'VI · Nord-Ovest', val:0.977, classi:{c_incassato: 2.4, c_chiuso: 13.1, c_semi_aperto: 44.9, c_aperto: 39.6} },
-            { rank: 6, label:'II · Resuttana', val:0.974, classi:{c_incassato: 6.3, c_chiuso: 13.0, c_semi_aperto: 11.3, c_aperto: 69.3} },
-            { rank: 7, label:'III · Oreto', val:0.962, classi:{c_incassato: 4.6, c_chiuso: 32.6, c_semi_aperto: 20.7, c_aperto: 42.1} },
+            { rank: 1, label:'I · Centro Storico', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.2, c_semi_aperto: 4.6, c_aperto: 95.2} },
+            { rank: 2, label:'VIII · Libertà', val:0.98, classi:{c_incassato: 2.8, c_chiuso: 13.0, c_semi_aperto: 23.7, c_aperto: 60.5} },
+            { rank: 3, label:'IV · Mezzomonreale', val:0.977, classi:{c_incassato: 1.6, c_chiuso: 22.8, c_semi_aperto: 20.3, c_aperto: 55.3} },
+            { rank: 4, label:'V · Noce', val:0.977, classi:{c_incassato: 1.3, c_chiuso: 19.5, c_semi_aperto: 34.2, c_aperto: 44.9} },
+            { rank: 5, label:'VI · Nord-Ovest', val:0.977, classi:{c_incassato: 2.4, c_chiuso: 13.1, c_semi_aperto: 44.8, c_aperto: 39.7} },
+            { rank: 6, label:'II · Resuttana', val:0.974, classi:{c_incassato: 6.3, c_chiuso: 13.0, c_semi_aperto: 11.3, c_aperto: 69.4} },
+            { rank: 7, label:'III · Oreto', val:0.962, classi:{c_incassato: 4.6, c_chiuso: 32.5, c_semi_aperto: 20.7, c_aperto: 42.2} },
             { rank: 8, label:'VII · Mondello', val:0.945, classi:{c_incassato: 12.6, c_chiuso: 24.9, c_semi_aperto: 24.1, c_aperto: 38.4} }
         ]
         });
@@ -2158,11 +2158,11 @@
           items: [
             { rank: 1, label:'Noce', val:1.0, classi:{c_incassato: 0.0, c_chiuso: 0.0, c_semi_aperto: 0.1, c_aperto: 99.9} },
             { rank: 2, label:'Altarello', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.1, c_semi_aperto: 1.0, c_aperto: 98.9} },
-            { rank: 3, label:'Libertà', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.7, c_semi_aperto: 2.0, c_aperto: 97.3} },
+            { rank: 3, label:'Libertà', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.7, c_semi_aperto: 1.9, c_aperto: 97.4} },
             { rank: 4, label:'Malaspina - Palagonia', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.1, c_semi_aperto: 1.1, c_aperto: 98.8} },
             { rank: 5, label:'Politeama', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.3, c_semi_aperto: 1.5, c_aperto: 98.2} },
-            { rank: 6, label:'Settecannoli', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.1, c_semi_aperto: 2.9, c_aperto: 97.1} },
-            { rank: 7, label:'Tribunali-Castellammare', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.1, c_semi_aperto: 1.7, c_aperto: 98.2} },
+            { rank: 6, label:'Settecannoli', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.1, c_semi_aperto: 2.9, c_aperto: 97.0} },
+            { rank: 7, label:'Tribunali-Castellammare', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.1, c_semi_aperto: 1.8, c_aperto: 98.1} },
             { rank: 8, label:'Uditore - Passo di Rigano', val:0.999, classi:{c_incassato: 0.0, c_chiuso: 0.1, c_semi_aperto: 2.8, c_aperto: 97.1} }
         ]
         });
@@ -2220,11 +2220,11 @@
         // RANK:viewshed
 
         var VIEWSHED_CLS = [
-          { key: 'c0', label: '0 (invisibile)', color: '#f0f0f0' },
-          { key: 'c1', label: '1 (scarsa)', color: '#f7fbff' },
-          { key: 'c2_3', label: '2÷3 (media)', color: '#6baed6' },
-          { key: 'c4_5', label: '4÷5 (alta)', color: '#3182bd' },
-          { key: 'c6', label: '6 (massima)', color: '#08519c' }
+          { key: 'c0', label: '0 (invisibile)', color: '#f7f7f7' },
+          { key: 'c1', label: '1 (scarsa)', color: '#cccccc' },
+          { key: 'c2_3', label: '2÷3 (media)', color: '#969696' },
+          { key: 'c4_5', label: '4÷5 (alta)', color: '#636363' },
+          { key: 'c6', label: '6 (massima)', color: '#252525' }
         ];
         appendRankingCard(el, {
           title: 'Classifica Circoscrizioni',
@@ -2233,14 +2233,14 @@
           maxVal: 2.143,
           classes: VIEWSHED_CLS,
           items: [
-            { rank: 1, label:'III · Oreto', val:2.143, classi:{c0: 30.2, c1: 15.5, c2_3: 28.6, c4_5: 25.6, c6: 0.0} },
-            { rank: 2, label:'VI · Nord-Ovest', val:1.977, classi:{c0: 20.0, c1: 26.4, c2_3: 38.8, c4_5: 14.8, c6: 0.0} },
-            { rank: 3, label:'V · Noce', val:1.776, classi:{c0: 20.1, c1: 32.1, c2_3: 38.2, c4_5: 9.5, c6: 0.0} },
-            { rank: 4, label:'VIII · Libertà', val:1.669, classi:{c0: 35.4, c1: 18.1, c2_3: 36.1, c4_5: 10.4, c6: 0.0} },
-            { rank: 5, label:'IV · Mezzomonreale', val:1.46, classi:{c0: 34.8, c1: 29.8, c2_3: 27.4, c4_5: 7.8, c6: 0.2} },
-            { rank: 6, label:'II · Resuttana', val:1.2, classi:{c0: 48.7, c1: 17.1, c2_3: 30.5, c4_5: 3.7, c6: 0.0} },
-            { rank: 7, label:'I · Centro Storico', val:1.164, classi:{c0: 44.0, c1: 27.2, c2_3: 25.8, c4_5: 3.0, c6: 0.0} },
-            { rank: 8, label:'VII · Mondello', val:1.132, classi:{c0: 44.5, c1: 32.7, c2_3: 13.4, c4_5: 9.4, c6: 0.0} }
+            { rank: 1, label:'III · Oreto', val:2.143, classi:{c0: 26.8, c1: 15.5, c2_3: 30.2, c4_5: 27.5, c6: 0.0} },
+            { rank: 2, label:'VI · Nord-Ovest', val:1.977, classi:{c0: 17.7, c1: 24.1, c2_3: 39.9, c4_5: 18.3, c6: 0.0} },
+            { rank: 3, label:'V · Noce', val:1.776, classi:{c0: 17.3, c1: 27.8, c2_3: 43.3, c4_5: 11.6, c6: 0.0} },
+            { rank: 4, label:'VIII · Libertà', val:1.669, classi:{c0: 33.3, c1: 16.2, c2_3: 36.3, c4_5: 14.2, c6: 0.0} },
+            { rank: 5, label:'IV · Mezzomonreale', val:1.46, classi:{c0: 30.2, c1: 28.9, c2_3: 31.1, c4_5: 9.6, c6: 0.2} },
+            { rank: 6, label:'II · Resuttana', val:1.2, classi:{c0: 44.9, c1: 16.5, c2_3: 32.9, c4_5: 5.6, c6: 0.0} },
+            { rank: 7, label:'I · Centro Storico', val:1.164, classi:{c0: 38.3, c1: 27.6, c2_3: 29.1, c4_5: 5.0, c6: 0.0} },
+            { rank: 8, label:'VII · Mondello', val:1.132, classi:{c0: 39.5, c1: 33.6, c2_3: 16.8, c4_5: 10.0, c6: 0.0} }
         ]
         });
         appendRankingCard(el, {
@@ -2250,14 +2250,14 @@
           maxVal: 2.281,
           classes: VIEWSHED_CLS,
           items: [
-            { rank: 1, label:'Villagrazia - Falsomiele', val:2.281, classi:{c0: 27.5, c1: 14.4, c2_3: 29.7, c4_5: 28.4, c6: 0.0} },
-            { rank: 2, label:'Libertà', val:2.166, classi:{c0: 14.6, c1: 24.4, c2_3: 52.3, c4_5: 8.7, c6: 0.0} },
-            { rank: 3, label:'Malaspina - Palagonia', val:2.106, classi:{c0: 5.8, c1: 37.4, c2_3: 51.4, c4_5: 5.5, c6: 0.0} },
-            { rank: 4, label:'Cruillas - S.Giovanni Apostolo', val:2.006, classi:{c0: 20.9, c1: 23.9, c2_3: 41.3, c4_5: 14.0, c6: 0.0} },
-            { rank: 5, label:'Resuttana - San Lorenzo', val:1.954, classi:{c0: 19.3, c1: 28.4, c2_3: 36.9, c4_5: 15.4, c6: 0.0} },
-            { rank: 6, label:'Borgo Nuovo', val:1.901, classi:{c0: 24.5, c1: 22.1, c2_3: 38.5, c4_5: 14.9, c6: 0.0} },
-            { rank: 7, label:'Zisa', val:1.751, classi:{c0: 11.6, c1: 44.2, c2_3: 42.1, c4_5: 2.1, c6: 0.0} },
-            { rank: 8, label:'Noce', val:1.702, classi:{c0: 8.8, c1: 49.5, c2_3: 40.6, c4_5: 1.1, c6: 0.0} }
+            { rank: 1, label:'Villagrazia - Falsomiele', val:2.281, classi:{c0: 24.6, c1: 14.3, c2_3: 30.8, c4_5: 30.3, c6: 0.0} },
+            { rank: 2, label:'Libertà', val:2.166, classi:{c0: 12.5, c1: 20.2, c2_3: 52.3, c4_5: 15.0, c6: 0.0} },
+            { rank: 3, label:'Malaspina - Palagonia', val:2.106, classi:{c0: 3.8, c1: 30.1, c2_3: 52.9, c4_5: 13.1, c6: 0.0} },
+            { rank: 4, label:'Cruillas - S.Giovanni Apostolo', val:2.006, classi:{c0: 18.8, c1: 21.2, c2_3: 43.1, c4_5: 16.9, c6: 0.0} },
+            { rank: 5, label:'Resuttana - San Lorenzo', val:1.954, classi:{c0: 16.8, c1: 26.4, c2_3: 37.3, c4_5: 19.4, c6: 0.0} },
+            { rank: 6, label:'Borgo Nuovo', val:1.901, classi:{c0: 22.5, c1: 20.1, c2_3: 40.2, c4_5: 17.1, c6: 0.1} },
+            { rank: 7, label:'Zisa', val:1.751, classi:{c0: 7.7, c1: 37.5, c2_3: 49.6, c4_5: 5.2, c6: 0.0} },
+            { rank: 8, label:'Noce', val:1.703, classi:{c0: 5.2, c1: 40.5, c2_3: 50.7, c4_5: 3.7, c6: 0.0} }
         ]
         });
 
@@ -2542,13 +2542,13 @@
         // RANK:corridoi
 
         var CORRIDOI_CLS = [
-          { key: 'c_barriera_crit', label: '< 0.15 (barriera critica)', color: '#b40000' },
-          { key: 'c_barriera_alta', label: '0.15÷0.30', color: '#e65520' },
-          { key: 'c_barriera_mod', label: '0.30÷0.45', color: '#fdae61' },
-          { key: 'c_corridoio_pot', label: '0.45÷0.60 (potenziale)', color: '#fee08b' },
-          { key: 'c_corridoio_ok', label: '0.60÷0.73 (buono)', color: '#a8dba8' },
-          { key: 'c_corridoio_ott', label: '0.73÷0.85 (ottimo)', color: '#3b9960' },
-          { key: 'c_nucleo', label: '> 0.85 (nucleo)', color: '#006400' }
+          { key: 'c_barriera_crit', label: '< 0.15 (barriera critica)', color: '#b2182b' },
+          { key: 'c_barriera_alta', label: '0.15÷0.30', color: '#ef8a62' },
+          { key: 'c_barriera_mod', label: '0.30÷0.45', color: '#fddbc7' },
+          { key: 'c_corridoio_pot', label: '0.45÷0.60 (potenziale)', color: '#d9f0a3' },
+          { key: 'c_corridoio_ok', label: '0.60÷0.73 (buono)', color: '#78c679' },
+          { key: 'c_corridoio_ott', label: '0.73÷0.85 (ottimo)', color: '#31a354' },
+          { key: 'c_nucleo', label: '> 0.85 (nucleo)', color: '#006837' }
         ];
         appendRankingCard(el, {
           title: 'Classifica Circoscrizioni',
@@ -2556,14 +2556,14 @@
           maxVal: 0.878,
           classes: CORRIDOI_CLS,
           items: [
-            { rank: 1, label:'I · Centro Storico', val:0.878, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.4, c_barriera_mod: 0.8, c_corridoio_pot: 2.0, c_corridoio_ok: 4.8, c_corridoio_ott: 16.9, c_nucleo: 75.2} },
-            { rank: 2, label:'II · Resuttana', val:0.742, classi:{c_barriera_crit: 12.8, c_barriera_alta: 3.1, c_barriera_mod: 2.4, c_corridoio_pot: 3.4, c_corridoio_ok: 4.7, c_corridoio_ott: 11.0, c_nucleo: 62.5} },
-            { rank: 3, label:'VIII · Libertà', val:0.702, classi:{c_barriera_crit: 10.7, c_barriera_alta: 6.6, c_barriera_mod: 6.0, c_corridoio_pot: 6.5, c_corridoio_ok: 7.2, c_corridoio_ott: 8.9, c_nucleo: 53.9} },
-            { rank: 4, label:'IV · Mezzomonreale', val:0.636, classi:{c_barriera_crit: 16.8, c_barriera_alta: 9.6, c_barriera_mod: 5.6, c_corridoio_pot: 4.5, c_corridoio_ok: 5.1, c_corridoio_ott: 11.2, c_nucleo: 47.3} },
-            { rank: 5, label:'VI · Nord-Ovest', val:0.627, classi:{c_barriera_crit: 7.9, c_barriera_alta: 11.6, c_barriera_mod: 13.0, c_corridoio_pot: 10.9, c_corridoio_ok: 8.6, c_corridoio_ott: 10.5, c_nucleo: 37.5} },
-            { rank: 6, label:'V · Noce', val:0.618, classi:{c_barriera_crit: 13.8, c_barriera_alta: 11.8, c_barriera_mod: 8.8, c_corridoio_pot: 7.5, c_corridoio_ok: 6.6, c_corridoio_ott: 9.5, c_nucleo: 42.0} },
-            { rank: 7, label:'VII · Mondello', val:0.582, classi:{c_barriera_crit: 22.5, c_barriera_alta: 10.0, c_barriera_mod: 5.7, c_corridoio_pot: 4.8, c_corridoio_ok: 5.8, c_corridoio_ott: 10.3, c_nucleo: 40.9} },
-            { rank: 8, label:'III · Oreto', val:0.551, classi:{c_barriera_crit: 26.5, c_barriera_alta: 9.2, c_barriera_mod: 5.3, c_corridoio_pot: 5.3, c_corridoio_ok: 6.4, c_corridoio_ott: 10.3, c_nucleo: 37.0} }
+            { rank: 1, label:'I · Centro Storico', val:0.878, classi:{c_barriera_crit: 0.1, c_barriera_alta: 0.4, c_barriera_mod: 0.8, c_corridoio_pot: 2.0, c_corridoio_ok: 4.9, c_corridoio_ott: 16.7, c_nucleo: 75.2} },
+            { rank: 2, label:'II · Resuttana', val:0.742, classi:{c_barriera_crit: 12.9, c_barriera_alta: 3.1, c_barriera_mod: 2.4, c_corridoio_pot: 3.5, c_corridoio_ok: 4.8, c_corridoio_ott: 11.0, c_nucleo: 62.3} },
+            { rank: 3, label:'VIII · Libertà', val:0.702, classi:{c_barriera_crit: 10.8, c_barriera_alta: 6.5, c_barriera_mod: 6.0, c_corridoio_pot: 6.5, c_corridoio_ok: 7.2, c_corridoio_ott: 8.9, c_nucleo: 53.9} },
+            { rank: 4, label:'IV · Mezzomonreale', val:0.636, classi:{c_barriera_crit: 16.9, c_barriera_alta: 9.5, c_barriera_mod: 5.5, c_corridoio_pot: 4.5, c_corridoio_ok: 5.1, c_corridoio_ott: 11.2, c_nucleo: 47.3} },
+            { rank: 5, label:'VI · Nord-Ovest', val:0.627, classi:{c_barriera_crit: 8.1, c_barriera_alta: 11.6, c_barriera_mod: 12.8, c_corridoio_pot: 10.9, c_corridoio_ok: 8.6, c_corridoio_ott: 10.4, c_nucleo: 37.6} },
+            { rank: 6, label:'V · Noce', val:0.618, classi:{c_barriera_crit: 14.0, c_barriera_alta: 11.7, c_barriera_mod: 8.8, c_corridoio_pot: 7.4, c_corridoio_ok: 6.5, c_corridoio_ott: 9.5, c_nucleo: 42.0} },
+            { rank: 7, label:'VII · Mondello', val:0.582, classi:{c_barriera_crit: 22.6, c_barriera_alta: 9.9, c_barriera_mod: 5.7, c_corridoio_pot: 4.8, c_corridoio_ok: 5.8, c_corridoio_ott: 10.2, c_nucleo: 41.0} },
+            { rank: 8, label:'III · Oreto', val:0.551, classi:{c_barriera_crit: 26.5, c_barriera_alta: 9.2, c_barriera_mod: 5.2, c_corridoio_pot: 5.3, c_corridoio_ok: 6.4, c_corridoio_ott: 10.3, c_nucleo: 37.1} }
         ]
         });
         appendRankingCard(el, {
@@ -2572,14 +2572,14 @@
           maxVal: 0.929,
           classes: CORRIDOI_CLS,
           items: [
-            { rank: 1, label:'Noce', val:0.929, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.0, c_barriera_mod: 0.0, c_corridoio_pot: 0.0, c_corridoio_ok: 0.4, c_corridoio_ott: 4.6, c_nucleo: 94.9} },
-            { rank: 2, label:'Malaspina - Palagonia', val:0.927, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.2, c_barriera_mod: 0.3, c_corridoio_pot: 0.5, c_corridoio_ok: 0.9, c_corridoio_ott: 4.1, c_nucleo: 93.9} },
-            { rank: 3, label:'Politeama', val:0.923, classi:{c_barriera_crit: 0.1, c_barriera_alta: 0.2, c_barriera_mod: 0.3, c_corridoio_pot: 0.5, c_corridoio_ok: 1.1, c_corridoio_ott: 4.3, c_nucleo: 93.5} },
-            { rank: 4, label:'Libertà', val:0.915, classi:{c_barriera_crit: 0.4, c_barriera_alta: 0.3, c_barriera_mod: 0.4, c_corridoio_pot: 0.6, c_corridoio_ok: 1.4, c_corridoio_ott: 6.2, c_nucleo: 90.7} },
-            { rank: 5, label:'Altarello', val:0.906, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.0, c_barriera_mod: 0.2, c_corridoio_pot: 0.5, c_corridoio_ok: 1.6, c_corridoio_ott: 11.3, c_nucleo: 86.4} },
-            { rank: 6, label:'Uditore - Passo di Rigano', val:0.902, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.1, c_barriera_mod: 0.5, c_corridoio_pot: 1.1, c_corridoio_ok: 2.5, c_corridoio_ott: 11.2, c_nucleo: 84.5} },
-            { rank: 7, label:'Zisa', val:0.902, classi:{c_barriera_crit: 0.1, c_barriera_alta: 0.3, c_barriera_mod: 0.5, c_corridoio_pot: 1.0, c_corridoio_ok: 2.1, c_corridoio_ott: 10.1, c_nucleo: 85.8} },
-            { rank: 8, label:'Settecannoli', val:0.901, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.2, c_barriera_mod: 0.5, c_corridoio_pot: 1.4, c_corridoio_ok: 3.6, c_corridoio_ott: 11.7, c_nucleo: 82.7} }
+            { rank: 1, label:'Noce', val:0.929, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.0, c_barriera_mod: 0.0, c_corridoio_pot: 0.0, c_corridoio_ok: 0.5, c_corridoio_ott: 5.0, c_nucleo: 94.5} },
+            { rank: 2, label:'Malaspina - Palagonia', val:0.926, classi:{c_barriera_crit: 0.1, c_barriera_alta: 0.2, c_barriera_mod: 0.3, c_corridoio_pot: 0.5, c_corridoio_ok: 0.9, c_corridoio_ott: 4.4, c_nucleo: 93.6} },
+            { rank: 3, label:'Politeama', val:0.923, classi:{c_barriera_crit: 0.1, c_barriera_alta: 0.2, c_barriera_mod: 0.3, c_corridoio_pot: 0.5, c_corridoio_ok: 1.1, c_corridoio_ott: 4.4, c_nucleo: 93.3} },
+            { rank: 4, label:'Libertà', val:0.915, classi:{c_barriera_crit: 0.4, c_barriera_alta: 0.3, c_barriera_mod: 0.4, c_corridoio_pot: 0.6, c_corridoio_ok: 1.4, c_corridoio_ott: 6.3, c_nucleo: 90.6} },
+            { rank: 5, label:'Altarello', val:0.906, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.1, c_barriera_mod: 0.2, c_corridoio_pot: 0.5, c_corridoio_ok: 1.7, c_corridoio_ott: 11.5, c_nucleo: 86.0} },
+            { rank: 6, label:'Uditore - Passo di Rigano', val:0.902, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.1, c_barriera_mod: 0.6, c_corridoio_pot: 1.2, c_corridoio_ok: 2.6, c_corridoio_ott: 11.2, c_nucleo: 84.3} },
+            { rank: 7, label:'Zisa', val:0.902, classi:{c_barriera_crit: 0.1, c_barriera_alta: 0.4, c_barriera_mod: 0.5, c_corridoio_pot: 1.1, c_corridoio_ok: 2.1, c_corridoio_ott: 10.3, c_nucleo: 85.5} },
+            { rank: 8, label:'Settecannoli', val:0.901, classi:{c_barriera_crit: 0.0, c_barriera_alta: 0.2, c_barriera_mod: 0.5, c_corridoio_pot: 1.4, c_corridoio_ok: 3.6, c_corridoio_ott: 11.6, c_nucleo: 82.6} }
         ]
         });
 
@@ -2638,11 +2638,11 @@
         // RANK:rusle
 
         var RUSLE_CLS = [
-          { key: 'c_molto_bassa', label: '< 0.2 (molto bassa)', color: '#ffffe0' },
+          { key: 'c_molto_bassa', label: '< 0.2 (molto bassa)', color: '#ffffb2' },
           { key: 'c_bassa', label: '0.2÷0.52 (bassa)', color: '#fecc5c' },
           { key: 'c_media', label: '0.52÷3.7 (media)', color: '#fd8d3c' },
-          { key: 'c_alta', label: '3.7÷7.8 (alta)', color: '#e31a1c' },
-          { key: 'c_critica', label: '> 7.8 (critica)', color: '#b10026' }
+          { key: 'c_alta', label: '3.7÷7.8 (alta)', color: '#f03b20' },
+          { key: 'c_critica', label: '> 7.8 (critica)', color: '#bd0026' }
         ];
         appendRankingCard(el, {
           title: 'Classifica Circoscrizioni',
@@ -2650,14 +2650,14 @@
           maxVal: 2.801,
           classes: RUSLE_CLS,
           items: [
-            { rank: 1, label:'III · Oreto', val:2.801, classi:{c_molto_bassa: 18.2, c_bassa: 22.9, c_media: 23.3, c_alta: 28.6, c_critica: 7.1} },
-            { rank: 2, label:'VII · Mondello', val:2.664, classi:{c_molto_bassa: 22.4, c_bassa: 22.7, c_media: 22.5, c_alta: 24.9, c_critica: 7.6} },
-            { rank: 3, label:'V · Noce', val:2.127, classi:{c_molto_bassa: 22.6, c_bassa: 23.0, c_media: 28.8, c_alta: 22.7, c_critica: 2.8} },
-            { rank: 4, label:'IV · Mezzomonreale', val:2.086, classi:{c_molto_bassa: 20.8, c_bassa: 31.7, c_media: 21.5, c_alta: 22.4, c_critica: 3.6} },
-            { rank: 5, label:'VI · Nord-Ovest', val:1.937, classi:{c_molto_bassa: 21.7, c_bassa: 19.5, c_media: 39.4, c_alta: 17.3, c_critica: 2.1} },
-            { rank: 6, label:'VIII · Libertà', val:1.635, classi:{c_molto_bassa: 34.0, c_bassa: 23.3, c_media: 25.7, c_alta: 13.5, c_critica: 3.6} },
-            { rank: 7, label:'II · Resuttana', val:1.538, classi:{c_molto_bassa: 36.4, c_bassa: 30.8, c_media: 16.9, c_alta: 9.9, c_critica: 6.0} },
-            { rank: 8, label:'I · Centro Storico', val:0.375, classi:{c_molto_bassa: 37.8, c_bassa: 45.7, c_media: 16.1, c_alta: 0.3, c_critica: 0.0} }
+            { rank: 1, label:'III · Oreto', val:2.801, classi:{c_molto_bassa: 18.6, c_bassa: 22.5, c_media: 23.3, c_alta: 28.4, c_critica: 7.2} },
+            { rank: 2, label:'VII · Mondello', val:2.664, classi:{c_molto_bassa: 22.8, c_bassa: 22.3, c_media: 22.5, c_alta: 24.6, c_critica: 7.7} },
+            { rank: 3, label:'V · Noce', val:2.127, classi:{c_molto_bassa: 23.1, c_bassa: 22.6, c_media: 28.8, c_alta: 22.5, c_critica: 2.9} },
+            { rank: 4, label:'IV · Mezzomonreale', val:2.086, classi:{c_molto_bassa: 21.6, c_bassa: 30.9, c_media: 21.5, c_alta: 22.2, c_critica: 3.7} },
+            { rank: 5, label:'VI · Nord-Ovest', val:1.936, classi:{c_molto_bassa: 22.1, c_bassa: 19.3, c_media: 39.2, c_alta: 17.3, c_critica: 2.2} },
+            { rank: 6, label:'VIII · Libertà', val:1.635, classi:{c_molto_bassa: 34.3, c_bassa: 23.1, c_media: 25.6, c_alta: 13.3, c_critica: 3.6} },
+            { rank: 7, label:'II · Resuttana', val:1.538, classi:{c_molto_bassa: 37.0, c_bassa: 30.2, c_media: 16.9, c_alta: 10.0, c_critica: 5.9} },
+            { rank: 8, label:'I · Centro Storico', val:0.375, classi:{c_molto_bassa: 38.4, c_bassa: 45.2, c_media: 16.0, c_alta: 0.4, c_critica: 0.0} }
         ]
         });
         appendRankingCard(el, {
@@ -2666,14 +2666,14 @@
           maxVal: 4.048,
           classes: RUSLE_CLS,
           items: [
-            { rank: 1, label:'Boccadifalco', val:4.048, classi:{c_molto_bassa: 4.2, c_bassa: 15.0, c_media: 24.6, c_alta: 48.2, c_critica: 8.0} },
-            { rank: 2, label:'Arenella - Vergine Maria', val:3.529, classi:{c_molto_bassa: 10.6, c_bassa: 19.3, c_media: 28.0, c_alta: 30.9, c_critica: 11.3} },
-            { rank: 3, label:'Partanna Mondello', val:3.358, classi:{c_molto_bassa: 21.7, c_bassa: 16.7, c_media: 18.9, c_alta: 31.7, c_critica: 11.0} },
-            { rank: 4, label:'Borgo Nuovo', val:3.268, classi:{c_molto_bassa: 6.0, c_bassa: 11.1, c_media: 41.7, c_alta: 36.6, c_critica: 4.5} },
-            { rank: 5, label:'Villagrazia - Falsomiele', val:3.069, classi:{c_molto_bassa: 14.8, c_bassa: 21.4, c_media: 24.3, c_alta: 31.6, c_critica: 7.9} },
-            { rank: 6, label:'Montepellegrino', val:2.621, classi:{c_molto_bassa: 14.8, c_bassa: 15.4, c_media: 41.0, c_alta: 22.7, c_critica: 6.1} },
-            { rank: 7, label:'Brancaccio - Ciaculli', val:2.413, classi:{c_molto_bassa: 25.0, c_bassa: 27.1, c_media: 20.9, c_alta: 16.8, c_critica: 10.2} },
-            { rank: 8, label:'Tommaso Natale - Sferracavallo', val:2.346, classi:{c_molto_bassa: 16.2, c_bassa: 24.5, c_media: 31.7, c_alta: 23.6, c_critica: 4.1} }
+            { rank: 1, label:'Boccadifalco', val:4.048, classi:{c_molto_bassa: 4.5, c_bassa: 14.8, c_media: 24.5, c_alta: 47.9, c_critica: 8.2} },
+            { rank: 2, label:'Arenella - Vergine Maria', val:3.53, classi:{c_molto_bassa: 11.0, c_bassa: 19.1, c_media: 27.8, c_alta: 30.4, c_critica: 11.6} },
+            { rank: 3, label:'Partanna Mondello', val:3.358, classi:{c_molto_bassa: 22.0, c_bassa: 16.6, c_media: 19.0, c_alta: 31.3, c_critica: 11.2} },
+            { rank: 4, label:'Borgo Nuovo', val:3.268, classi:{c_molto_bassa: 6.3, c_bassa: 11.1, c_media: 41.5, c_alta: 36.3, c_critica: 4.7} },
+            { rank: 5, label:'Villagrazia - Falsomiele', val:3.068, classi:{c_molto_bassa: 15.2, c_bassa: 21.1, c_media: 24.3, c_alta: 31.5, c_critica: 8.0} },
+            { rank: 6, label:'Montepellegrino', val:2.621, classi:{c_molto_bassa: 15.2, c_bassa: 15.4, c_media: 40.8, c_alta: 22.5, c_critica: 6.2} },
+            { rank: 7, label:'Brancaccio - Ciaculli', val:2.413, classi:{c_molto_bassa: 25.4, c_bassa: 26.7, c_media: 20.9, c_alta: 16.9, c_critica: 10.1} },
+            { rank: 8, label:'Tommaso Natale - Sferracavallo', val:2.346, classi:{c_molto_bassa: 16.8, c_bassa: 24.1, c_media: 31.4, c_alta: 23.5, c_critica: 4.2} }
         ]
         });
 
@@ -2732,11 +2732,11 @@
         // RANK:curv_inst
 
         var CURV_INST_CLS = [
-          { key: 'c_stabile', label: '< 0.002 (stabile)', color: '#e5f5e0' },
-          { key: 'c_basso', label: '0.002÷0.026 (basso)', color: '#a1d99b' },
-          { key: 'c_moderato', label: '0.026÷0.1 (moderato)', color: '#fdd058' },
-          { key: 'c_alto', label: '0.1÷0.25 (alto)', color: '#ef6548' },
-          { key: 'c_critico', label: '> 0.25 (critico)', color: '#bd0026' }
+          { key: 'c_stabile', label: '< 0.002 (stabile)', color: '#1a9641' },
+          { key: 'c_basso', label: '0.002÷0.026 (basso)', color: '#a6d96a' },
+          { key: 'c_moderato', label: '0.026÷0.1 (moderato)', color: '#ffffbf' },
+          { key: 'c_alto', label: '0.1÷0.25 (alto)', color: '#fdae61' },
+          { key: 'c_critico', label: '> 0.25 (critico)', color: '#d7191c' }
         ];
         appendRankingCard(el, {
           title: 'Classifica Circoscrizioni',
@@ -2744,14 +2744,14 @@
           maxVal: 0.006,
           classes: CURV_INST_CLS,
           items: [
-            { rank: 1, label:'VII · Mondello', val:0.006, classi:{c_stabile: 68.7, c_basso: 26.3, c_moderato: 4.2, c_alto: 0.7, c_critico: 0.2} },
-            { rank: 2, label:'III · Oreto', val:0.005, classi:{c_stabile: 70.9, c_basso: 24.2, c_moderato: 4.1, c_alto: 0.7, c_critico: 0.1} },
-            { rank: 3, label:'IV · Mezzomonreale', val:0.005, classi:{c_stabile: 68.3, c_basso: 26.5, c_moderato: 4.6, c_alto: 0.5, c_critico: 0.0} },
-            { rank: 4, label:'V · Noce', val:0.005, classi:{c_stabile: 68.6, c_basso: 26.8, c_moderato: 4.2, c_alto: 0.5, c_critico: 0.0} },
-            { rank: 5, label:'VI · Nord-Ovest', val:0.005, classi:{c_stabile: 67.8, c_basso: 27.7, c_moderato: 4.1, c_alto: 0.4, c_critico: 0.0} },
-            { rank: 6, label:'VIII · Libertà', val:0.005, classi:{c_stabile: 72.9, c_basso: 22.4, c_moderato: 3.9, c_alto: 0.7, c_critico: 0.1} },
-            { rank: 7, label:'II · Resuttana', val:0.004, classi:{c_stabile: 76.4, c_basso: 20.0, c_moderato: 2.9, c_alto: 0.6, c_critico: 0.1} },
-            { rank: 8, label:'I · Centro Storico', val:0.003, classi:{c_stabile: 75.3, c_basso: 22.1, c_moderato: 2.5, c_alto: 0.1, c_critico: 0.0} }
+            { rank: 1, label:'VII · Mondello', val:0.006, classi:{c_stabile: 74.6, c_basso: 20.1, c_moderato: 4.4, c_alto: 0.7, c_critico: 0.2} },
+            { rank: 2, label:'III · Oreto', val:0.005, classi:{c_stabile: 75.9, c_basso: 19.1, c_moderato: 4.1, c_alto: 0.8, c_critico: 0.2} },
+            { rank: 3, label:'IV · Mezzomonreale', val:0.005, classi:{c_stabile: 74.4, c_basso: 20.2, c_moderato: 4.7, c_alto: 0.7, c_critico: 0.1} },
+            { rank: 4, label:'V · Noce', val:0.005, classi:{c_stabile: 74.3, c_basso: 20.6, c_moderato: 4.4, c_alto: 0.6, c_critico: 0.1} },
+            { rank: 5, label:'VI · Nord-Ovest', val:0.005, classi:{c_stabile: 73.7, c_basso: 21.4, c_moderato: 4.4, c_alto: 0.5, c_critico: 0.1} },
+            { rank: 6, label:'VIII · Libertà', val:0.005, classi:{c_stabile: 77.7, c_basso: 17.5, c_moderato: 3.9, c_alto: 0.8, c_critico: 0.1} },
+            { rank: 7, label:'II · Resuttana', val:0.004, classi:{c_stabile: 80.7, c_basso: 15.6, c_moderato: 2.9, c_alto: 0.6, c_critico: 0.2} },
+            { rank: 8, label:'I · Centro Storico', val:0.003, classi:{c_stabile: 79.9, c_basso: 17.1, c_moderato: 2.8, c_alto: 0.2, c_critico: 0.0} }
         ]
         });
         appendRankingCard(el, {
@@ -2760,14 +2760,14 @@
           maxVal: 0.007,
           classes: CURV_INST_CLS,
           items: [
-            { rank: 1, label:'Boccadifalco', val:0.007, classi:{c_stabile: 65.1, c_basso: 27.5, c_moderato: 6.3, c_alto: 1.0, c_critico: 0.1} },
-            { rank: 2, label:'Borgo Nuovo', val:0.007, classi:{c_stabile: 63.7, c_basso: 29.8, c_moderato: 5.7, c_alto: 0.7, c_critico: 0.0} },
-            { rank: 3, label:'Montepellegrino', val:0.007, classi:{c_stabile: 66.2, c_basso: 26.8, c_moderato: 5.8, c_alto: 1.1, c_critico: 0.1} },
-            { rank: 4, label:'Partanna Mondello', val:0.007, classi:{c_stabile: 66.7, c_basso: 27.1, c_moderato: 4.9, c_alto: 1.0, c_critico: 0.3} },
-            { rank: 5, label:'Arenella - Vergine Maria', val:0.006, classi:{c_stabile: 68.7, c_basso: 26.3, c_moderato: 4.2, c_alto: 0.7, c_critico: 0.1} },
-            { rank: 6, label:'Brancaccio - Ciaculli', val:0.006, classi:{c_stabile: 76.6, c_basso: 18.8, c_moderato: 3.4, c_alto: 1.0, c_critico: 0.2} },
-            { rank: 7, label:'Cruillas - S.Giovanni Apostolo', val:0.006, classi:{c_stabile: 64.4, c_basso: 29.8, c_moderato: 5.2, c_alto: 0.6, c_critico: 0.1} },
-            { rank: 8, label:'Villagrazia - Falsomiele', val:0.006, classi:{c_stabile: 70.5, c_basso: 24.5, c_moderato: 4.2, c_alto: 0.8, c_critico: 0.1} }
+            { rank: 1, label:'Boccadifalco', val:0.007, classi:{c_stabile: 71.2, c_basso: 21.4, c_moderato: 6.0, c_alto: 1.2, c_critico: 0.2} },
+            { rank: 2, label:'Borgo Nuovo', val:0.007, classi:{c_stabile: 70.2, c_basso: 22.9, c_moderato: 5.9, c_alto: 0.9, c_critico: 0.1} },
+            { rank: 3, label:'Montepellegrino', val:0.007, classi:{c_stabile: 72.2, c_basso: 20.7, c_moderato: 5.6, c_alto: 1.3, c_critico: 0.2} },
+            { rank: 4, label:'Partanna Mondello', val:0.007, classi:{c_stabile: 73.0, c_basso: 20.6, c_moderato: 5.0, c_alto: 1.0, c_critico: 0.3} },
+            { rank: 5, label:'Arenella - Vergine Maria', val:0.006, classi:{c_stabile: 74.8, c_basso: 19.9, c_moderato: 4.3, c_alto: 0.8, c_critico: 0.2} },
+            { rank: 6, label:'Brancaccio - Ciaculli', val:0.006, classi:{c_stabile: 80.5, c_basso: 15.0, c_moderato: 3.2, c_alto: 0.9, c_critico: 0.3} },
+            { rank: 7, label:'Cruillas - S.Giovanni Apostolo', val:0.006, classi:{c_stabile: 71.2, c_basso: 22.5, c_moderato: 5.5, c_alto: 0.7, c_critico: 0.1} },
+            { rank: 8, label:'Villagrazia - Falsomiele', val:0.006, classi:{c_stabile: 75.5, c_basso: 19.4, c_moderato: 4.1, c_alto: 0.8, c_critico: 0.2} }
         ]
         });
 
@@ -2824,11 +2824,11 @@
         // RANK:tobler
 
         var TOBLER_CLS = [
-          { key: 'c_molto_diff', label: '< 1.4 (molto difficile)', color: '#a50026' },
-          { key: 'c_difficile', label: '1.4÷3.9 (difficile)', color: '#d73027' },
-          { key: 'c_media', label: '3.9÷4.6 (media)', color: '#fd8d3c' },
-          { key: 'c_facile', label: '4.6÷4.9 (facile)', color: '#fee08b' },
-          { key: 'c_ottima', label: '> 4.9 (ottima)', color: '#1a9641' }
+          { key: 'c_molto_diff', label: '< 1.4 (molto difficile)', color: '#d73027' },
+          { key: 'c_difficile', label: '1.4÷3.9 (difficile)', color: '#fc8d59' },
+          { key: 'c_media', label: '3.9÷4.6 (media)', color: '#fee090' },
+          { key: 'c_facile', label: '4.6÷4.9 (facile)', color: '#91cf60' },
+          { key: 'c_ottima', label: '> 4.9 (ottima)', color: '#1a9850' }
         ];
         appendRankingCard(el, {
           title: 'Classifica Circoscrizioni',
