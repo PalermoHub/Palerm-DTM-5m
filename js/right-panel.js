@@ -25,7 +25,7 @@
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
           'Quota massima <strong>1.050 m</strong> (Monte Cuccio / Pizzuta, quartiere Boccadifalco·Baida). ' +
-          'Quota media comunale <strong>183 m</strong> s.l.m. su un\'area di 158,9 km². ' +
+          'Quota media comunale <strong>183 m</strong> s.l.m. su un\'area di 159,5 km². ' +
           'Quasi il <strong>70% della superficie</strong> ricade sotto i 200 m: la Conca d\'Oro e le zone ' +
           'costiere dominano il profilo basso. Il territorio si estende però verticalmente per oltre un chilometro — ' +
           'dalla riva del mare fino ai rilievi dei Monti di Palermo. ' +
@@ -36,17 +36,17 @@
         appendRingCard(el, {
           canvasId: 'rp-c-elev',
           title: 'Distribuzione classi',
-          centerVal: '158.9',
+          centerVal: '159.5',
           centerLabel: 'km²',
           legendData: [
-            { chartLabel: '0–50m', label: '0–50 m  costiera e pianura', val: '56.6', pct: 35.6, color: '#00cb9b' },
-            { chartLabel: '50–200m', label: '50–200 m  bassa collina', val: '53.9', pct: 33.9, color: '#00ef2f' },
-            { chartLabel: '200–500m', label: '200–500 m  media collina', val: '30.5', pct: 19.2, color: '#e2ff00' },
-            { chartLabel: '500–800m', label: '500–800 m  alta collina', val: '14.9', pct: 9.4, color: '#fe7f01' },
+            { chartLabel: '0–50m', label: '0–50 m  costiera e pianura', val: '56.8', pct: 35.6, color: '#00cb9b' },
+            { chartLabel: '50–200m', label: '50–200 m  bassa collina', val: '54.1', pct: 33.9, color: '#00ef2f' },
+            { chartLabel: '200–500m', label: '200–500 m  media collina', val: '30.6', pct: 19.2, color: '#e2ff00' },
+            { chartLabel: '500–800m', label: '500–800 m  alta collina', val: '15.0', pct: 9.4, color: '#fe7f01' },
             { chartLabel: '800–1051m', label: '800–1051 m  montagna', val: '2.9', pct: 1.8, color: '#505050' }
           ],
           summaries: [
-            { val: '158.9', label: 'km² area' },
+            { val: '159.5', label: 'km² area' },
             { val: '183', label: 'm media' },
             { val: '1.050', label: 'm max' }
           ]
@@ -68,7 +68,7 @@
           classes: ELEV_CLASSES,
           items: [
             { rank:1, label:'VI · Nord-Ovest',    val:271.0, classi:{c0_50:19.0, c50_200:35.4, c200_500:21.4, c500_800:22.8, c800:1.4} },
-            { rank:2, label:'V · Noce',            val:258.3, classi:{c0_50:14.7, c50_200:43.2, c200_500:19.6, c500_800:20.7, c800:1.8} },
+            { rank:2, label:'V · Noce',            val:259.1, classi:{c0_50:14.7, c50_200:43.2, c200_500:19.6, c500_800:20.7, c800:1.8} },
             { rank:3, label:'IV · Mezzomonreale',  val:241.7, classi:{c0_50:8.6,  c50_200:59.8, c200_500:14.5, c500_800:8.6,  c800:8.5} },
             { rank:4, label:'III · Oreto',         val:197.9, classi:{c0_50:17.4, c50_200:47.0, c200_500:26.2, c500_800:9.3,  c800:0.0} },
             { rank:5, label:'VIII · Libertà',      val:156.0, classi:{c0_50:59.9, c50_200:3.3,  c200_500:34.6, c500_800:2.2,  c800:0.0} },
@@ -141,7 +141,7 @@
             { chartLabel: '>45° subvert.', label: '>45°  subverticale', pct: 2.1, color: '#f44336' }
           ],
           summaries: [
-            { val: '158.9', label: 'km² area' },
+            { val: '159.5', label: 'km² area' },
             { val: '11,4°', label: 'pendenza media' },
             { val: '13,6°', label: 'dev. standard' }
           ]
@@ -297,7 +297,7 @@
         appendRingCard(el, {
           canvasId: 'rp-c-geomorph',
           title: 'Unità geomorfologiche',
-          centerVal: '158.9',
+          centerVal: '159.5',
           centerLabel: 'km²',
           legendData: [
             { chartLabel: 'Pianure', label: '1 - Pianure e fondovalle', pct: 0.2, color: '#4fc3f7' },
@@ -407,7 +407,7 @@
             { rank:5, label:'VI · Nord-Ovest',     val:30.7, classi:{c1:44.5, c2:24.8, c3:19.9, c4:8.0,  c5:2.8}  },
             { rank:6, label:'VIII · Libertà',      val:22.2, classi:{c1:59.5, c2:17.7, c3:9.9,  c4:7.7,  c5:4.6}  },
             { rank:7, label:'II · Resuttana',      val:17.9, classi:{c1:69.7, c2:11.9, c3:4.3,  c4:6.3,  c5:7.3}  },
-            { rank:8, label:'I · Centro Storico',  val:1.5,  classi:{c1:88.4, c2:8.8,  c3:1.5,  c4:0.0,  c5:0.0}  }
+            { rank:8, label:'I · Centro Storico',  val:1.2,  classi:{c1:87.0, c2:11.1, c3:1.0,  c4:0.2,  c5:0.0}  }
           ]
         });
 
@@ -475,10 +475,10 @@
           title: 'Classifica Circoscrizioni',
           subtitle: '% ottima (classe 1)',
           unit: '%',
-          maxVal: 89.7,
+          maxVal: 87.7,
           classes: BUILD_CLASSES,
           items: [
-            { rank:1, label:'I · Centro Storico',  val:89.7, classi:{c1:89.7, c2:8.8,  c3:1.5,  c4:0.0,  c5:0.0}  },
+            { rank:1, label:'I · Centro Storico',  val:87.7, classi:{c1:87.7, c2:11.1, c3:1.0,  c4:0.2,  c5:0.0}  },
             { rank:2, label:'II · Resuttana',      val:70.0, classi:{c1:70.0, c2:12.0, c3:4.1,  c4:5.8,  c5:8.2}  },
             { rank:3, label:'VIII · Libertà',      val:55.2, classi:{c1:55.2, c2:4.5,  c3:17.5, c4:18.2, c5:4.6}  },
             { rank:4, label:'VII · Mondello',      val:47.9, classi:{c1:47.9, c2:12.7, c3:10.6, c4:19.6, c5:9.3}  },
@@ -2883,14 +2883,14 @@
           '(rischio molto elevato) e R3 (rischio elevato). ' +
           'Il risultato evidenzia le <strong>zone di gap</strong>: territorio con caratteristiche ' +
           'geomorfologiche di instabilità che non risulta ancora coperto dalla perimetrazione PAI. ' +
-          'L\'analisi rivela che il <strong>79% delle aree morfologicamente instabili</strong> (38,7 km² ' +
-          'su 49,0 km² totali) ricade <strong>fuori dai perimetri PAI R3/R4</strong>, suggerendo ' +
+          'L\'analisi rivela che il <strong>73% delle aree morfologicamente instabili</strong> (38,7 km² ' +
+          'su 53,05 km² totali) ricade <strong>fuori dai perimetri PAI R3/R4</strong>, suggerendo ' +
           'un potenziale aggiornamento della perimetrazione ufficiale del rischio idrogeologico.'
         );
         appendRingCard(el, {
           canvasId: 'rp-c-dtmpaigap',
           title: 'Distribuzione gap morfologico',
-          centerVal: '79%',
+          centerVal: '73%',
           centerLabel: 'fuori PAI',
           legendData: [
             { chartLabel: 'PAI R4',       label: 'PAI R4 perimetrato — rischio molto elevato',  pct: 7.2,  color: '#b00020' },
@@ -2899,7 +2899,7 @@
             { chartLabel: 'Gap moderato', label: 'Gap moderato — instabile cl.3, fuori PAI',    pct: 30.8, color: '#ffa000' }
           ],
           summaries: [
-            { val: '79%',    label: 'fuori PAI' },
+            { val: '73%',    label: 'fuori PAI' },
             { val: '22,4',   label: 'km² gap critico' },
             { val: '14,4',   label: 'km² PAI R3+R4' }
           ]
@@ -3520,7 +3520,7 @@
 
       var val = document.createElement('div');
       val.className = 'ring-legend-val';
-      val.textContent = item.val !== undefined ? item.val : (158.9 * item.pct / 100).toFixed(1);
+      val.textContent = item.val !== undefined ? item.val : (159.5 * item.pct / 100).toFixed(1);
       itemEl.appendChild(val);
 
       var pct = document.createElement('div');
