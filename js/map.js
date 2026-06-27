@@ -785,7 +785,7 @@ const map = new maplibregl.Map({
         paint: { 'raster-opacity': 1.0 }
       },
 
-      // Edificato — volumi 3D colorati per classi di altezza (Altezza_2)
+      // Edificato — volumi 3D colorati per classi di altezza
       {
         id: 'edificato-fill',
         type: 'fill-extrusion',
@@ -795,7 +795,7 @@ const map = new maplibregl.Map({
         layout: { visibility: 'none' },
         paint: {
           'fill-extrusion-color': [
-            'step', ['get', 'Altezza_2'],
+            'step', ['get', 'altezza'],
             '#bdbdbd',       // 0 m (< 0.1)
             0.1, '#ffffb2',  // 0–5 m
             5,   '#fecc5c',  // 5–10 m
@@ -803,7 +803,7 @@ const map = new maplibregl.Map({
             20,  '#f03b20',  // 20–40 m
             40,  '#bd0026'   // > 40 m
           ],
-          'fill-extrusion-height': ['get', 'Altezza_2'],
+          'fill-extrusion-height': ['get', 'altezza'],
           'fill-extrusion-base': 0,
           'fill-extrusion-opacity': 0.85
         }
@@ -1164,7 +1164,7 @@ document.getElementById('tb-upl').addEventListener('click', function () {
 
 // ── Toolbar: Edificato ────────────────────────────────────────────────────
 const EDIF_COLOR_ALTEZZA = [
-  'step', ['get', 'Altezza_2'],
+  'step', ['get', 'altezza'],
   '#bdbdbd',
   0.1, '#ffffb2',
   5,   '#fecc5c',
