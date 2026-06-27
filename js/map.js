@@ -808,19 +808,6 @@ const map = new maplibregl.Map({
           'fill-extrusion-opacity': 0.85
         }
       },
-      {
-        id: 'edificato-outline',
-        type: 'line',
-        source: 'edificato',
-        'source-layer': 'edificato',
-        minzoom: 14,
-        layout: { visibility: 'none' },
-        paint: {
-          'line-color': 'rgba(0,0,0,0.25)',
-          'line-width': 0.5
-        }
-      },
-
       // UPL — confini amministrativi (fill invisibile per query + linee visibili)
       {
         id: 'upl-fill',
@@ -1191,7 +1178,6 @@ document.getElementById('tb-edificato').addEventListener('click', function () {
   const on = this.classList.contains('on');
   const vis = on ? 'visible' : 'none';
   map.setLayoutProperty('edificato-fill', 'visibility', vis);
-  map.setLayoutProperty('edificato-outline', 'visibility', vis);
   document.getElementById('legend-edificato').classList.toggle('visible', on);
 });
 
@@ -1310,8 +1296,10 @@ document.getElementById('tb-shadow-toggle').addEventListener('click', function (
   this.classList.toggle('on');
   shadowActive = this.classList.contains('on');
   map.setLayoutProperty('hillshade-layer', 'visibility', shadowActive ? 'visible' : 'none');
-  // Se si spegne l'ombreggiatura chiudi anche il pannello impostazioni
-  if (!shadowActive) {
+  if (shadowActive) {
+    applyBuildingLight();
+  } else {
+    try { map.setLights([{ id: 'ambient', type: 'ambient', properties: { intensity: 0.4, color: '#ffffff' } }]); } catch (e) {}
     document.getElementById('tb-panel-shadow').style.display = 'none';
     document.getElementById('tb-shadow').classList.remove('on');
   }
