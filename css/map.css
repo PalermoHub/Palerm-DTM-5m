@@ -1979,7 +1979,18 @@ body {
 
 @media (max-width: 640px) {
   #info-panel {
-    width: 90%;
+    width: 100%;
+    left: 0 !important;
+    transform: translateY(calc(100% - 20px));
+  }
+  #info-panel.open {
+    transform: translateY(0);
+  }
+  #panel-body {
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    box-shadow: 0 -6px 32px rgba(30, 60, 160, 0.20);
   }
 
   /* Nav tab scorrevole orizzontalmente — evita che Credits venga tagliato */
@@ -2196,7 +2207,7 @@ body:has(#map-toolbar-wrap.tb-open) #map-legends {
   #right-panel {
     width: 100% !important;
     height: 65vh !important;
-    border-radius: 16px 16px 0 0 !important;
+  /*/  border-radius: 16px 16px 0 0 !important;*/
     border-left: none !important;
     border-right: none !important;
     border-bottom: none !important;
