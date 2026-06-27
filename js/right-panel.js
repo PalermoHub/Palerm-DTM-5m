@@ -3697,11 +3697,13 @@
 
   function setPanel(open) {
     panelOpen = open;
+    if (open && typeof window.closeMobilePanels === 'function') window.closeMobilePanels('rp-wrap');
     rpWrap.classList.toggle('open', panelOpen);
     if (rpMobileBtn) rpMobileBtn.classList.toggle('panel-open', panelOpen);
     if (rpBackdrop)  rpBackdrop.classList.toggle('visible', panelOpen && isMobile);
     if (!isMobile) updateMapControlsPosition();
   }
+  window.rpSetPanel = setPanel;
 
   // Quando map.js aggiunge/rimuove .open direttamente (es. click su griglia),
   // sincronizza panelOpen e backdrop senza passare per setPanel.

@@ -1637,7 +1637,10 @@ function openGrigliaPanel(p, upl, lngLat, bivElev, bivSlope) {
 
   // Apri pannello se chiuso (icona gestita via CSS .open)
   const rpWrap = document.getElementById('rp-wrap');
-  if (!rpWrap.classList.contains('open')) rpWrap.classList.add('open');
+  if (!rpWrap.classList.contains('open')) {
+    closeMobilePanels('rp-wrap');
+    rpWrap.classList.add('open');
+  }
 }
 
 // Back button: torna alla galleria
@@ -1798,6 +1801,7 @@ map.on('click', function (e) {
     const open = panel.hidden === false;
     panel.hidden = open;
     btn.setAttribute('aria-expanded', String(!open));
+    if (!open) closeMobilePanels('attrib-panel');
   });
 })();
 
@@ -1810,3 +1814,18 @@ map.on('click', function (e) {
     wrap.classList.toggle('tb-open');
   });
 })();
+
+// ── Mutua esclusione modali su mobile ────────────────────────────────────────
+window.closeMobilePanels = function (except) {
+  if (window.innerWidth >= 640) return;
+  if (except !== 'info-panel' && typeof window.panelClose === 'function') window.panelClose();
+  if (except !== 'rp-wrap'    && typeof window.rpSetPanel  === 'function') window.rpSetPanel(false);
+  if (except !== 'attrib-panel') {
+    var ap = document.getElementById('attrib-panel');
+    var ab = document.getElementById('attrib-btn');
+    if (ap && !ap.hidden) {
+      ap.hidden = true;
+      if (ab) ab.setAttribute('aria-expanded', 'false');
+    }
+  }
+};

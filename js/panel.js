@@ -7,11 +7,18 @@
 
   window.panelToggle = function () {
     isOpen = !isOpen;
+    if (isOpen && typeof window.closeMobilePanels === 'function') window.closeMobilePanels('info-panel');
     panel.classList.toggle('open', isOpen);
     if (isOpen && !chartsReady) {
       chartsReady = true;
       setTimeout(initCharts, 80);
     }
+  };
+
+  window.panelClose = function () {
+    if (!isOpen) return;
+    isOpen = false;
+    panel.classList.remove('open');
   };
 
   // Tab switching
