@@ -3686,18 +3686,52 @@
   var rpDetailIcon = document.getElementById('rp-detail-icon');
   var rpDetailName = document.getElementById('rp-detail-name');
 
-  var isMobile = window.innerWidth < 768;
+  var isMobile = window.innerWidth < 640;
   var panelOpen = !isMobile;
   var currentAnalysis = null;
+  var rpMobileBtn = document.getElementById('rp-mobile-btn');
+  var rpBackdrop  = document.getElementById('rp-backdrop');
+
   if (panelOpen) rpWrap.classList.add('open');
   updateMapControlsPosition(true);
 
-  // Apri/chiudi pannello
-  rpToggle.addEventListener('click', function () {
-    panelOpen = !panelOpen;
+  function setPanel(open) {
+    panelOpen = open;
     rpWrap.classList.toggle('open', panelOpen);
-    updateMapControlsPosition();
+    if (rpMobileBtn) rpMobileBtn.classList.toggle('panel-open', panelOpen);
+    if (rpBackdrop)  rpBackdrop.classList.toggle('visible', panelOpen && isMobile);
+    if (!isMobile) updateMapControlsPosition();
+  }
+
+  // Quando map.js aggiunge/rimuove .open direttamente (es. click su griglia),
+  // sincronizza panelOpen e backdrop senza passare per setPanel.
+  if (isMobile) {
+    new MutationObserver(function () {
+      var isOpen = rpWrap.classList.contains('open');
+      if (isOpen === panelOpen) return;
+      panelOpen = isOpen;
+      if (rpMobileBtn) rpMobileBtn.classList.toggle('panel-open', isOpen);
+      if (rpBackdrop)  rpBackdrop.classList.toggle('visible', isOpen);
+    }).observe(rpWrap, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  // Toggle laterale desktop
+  rpToggle.addEventListener('click', function () { setPanel(!panelOpen); });
+
+  // Bottone mobile: apre sempre sulla gallery (non sulla vista punto)
+  if (rpMobileBtn) rpMobileBtn.addEventListener('click', function () {
+    var isOpen = rpWrap.classList.contains('open');
+    if (!isOpen) {
+      var rpPunto = document.getElementById('rp-punto');
+      rpGallery.style.display = '';
+      rpDetail.style.display  = 'none';
+      if (rpPunto) rpPunto.style.display = 'none';
+    }
+    setPanel(!isOpen);
   });
+
+  // Backdrop chiude il pannello
+  if (rpBackdrop) rpBackdrop.addEventListener('click', function () { setPanel(false); });
 
   function updateMapControlsPosition(instant) {
     var scale  = document.getElementById('map-scale');

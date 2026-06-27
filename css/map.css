@@ -1981,6 +1981,24 @@ body {
   #info-panel {
     width: 90%;
   }
+
+  /* Nav tab scorrevole orizzontalmente — evita che Credits venga tagliato */
+  #panel-nav {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex-wrap: nowrap;
+    padding: 8px 8px 0;
+    gap: 0;
+  }
+  #panel-nav::-webkit-scrollbar { display: none; }
+
+  .ptab {
+    padding: 8px 10px 9px;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
   #map-toolbar-wrap {
     top: 25px !important;
     transform: translateX(calc(-100% + 28px)) !important;
@@ -2069,6 +2087,121 @@ body {
 /* Legende: spostale a destra quando toolbar mobile è aperta */
 body:has(#map-toolbar-wrap.tb-open) #map-legends {
   left: 64px; /* toolbar ~54px + 10px gap */
+}
+
+/* ════════════════════════════════════════
+   PANNELLO ANALISI — MOBILE BOTTOM SHEET
+════════════════════════════════════════ */
+
+/* Bottone apertura — nascosto su desktop */
+#rp-mobile-btn {
+  display: none;
+}
+
+/* Handle bar — nascosta su desktop */
+#rp-sheet-handle-bar {
+  display: none;
+  justify-content: center;
+  padding: 8px 0 4px;
+  flex-shrink: 0;
+  cursor: grab;
+}
+#rp-sheet-handle-bar > div {
+  width: 36px;
+  height: 4px;
+  background: #c0cce8;
+  border-radius: 2px;
+}
+
+/* Backdrop — nascosto di default */
+#rp-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 20, 60, 0.38);
+  z-index: 849;
+  cursor: pointer;
+}
+#rp-backdrop.visible { display: block; }
+
+@media (max-width: 640px) {
+  /* Bottone top-right, stessa altezza della toolbar (top: 25px) */
+  #rp-mobile-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: absolute;
+    top: 25px;
+    right: 10px;
+    z-index: 200;
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid rgba(30, 60, 160, 0.14);
+    border-radius: 8px;
+    padding: 6px 11px 6px 8px;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #2a3a68;
+    cursor: pointer;
+    box-shadow: 2px 2px 12px rgba(30, 60, 160, 0.15);
+    -webkit-tap-highlight-color: transparent;
+  }
+  #rp-mobile-btn:active {
+    background: #f0f5ff;
+    color: #e07800;
+  }
+  #rp-mobile-btn.panel-open {
+    background: #2458c8;
+    color: #fff;
+    border-color: #2458c8;
+  }
+
+  /* Handle bar visibile su mobile */
+  #rp-sheet-handle-bar { display: flex; }
+
+  /* rp-wrap diventa bottom sheet: esce da destra e scivola dal basso */
+  #rp-wrap {
+    position: fixed !important;
+    top: auto !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    height: auto !important;
+    width: 100% !important;
+    transform: translateY(110%) !important;
+    transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  #rp-wrap.open {
+    transform: translateY(0) !important;
+  }
+
+  /* Nasconde il tab laterale su mobile */
+  #rp-toggle { display: none !important; }
+
+  /* Logo, scala e attribution nascosti sotto il pannello quando aperto */
+  body:has(#rp-wrap.open) #ods-logo,
+  body:has(#rp-wrap.open) #attrib-wrap,
+  body:has(#rp-wrap.open) #map-scale {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  /* right-panel: larghezza piena, 65vh, angoli arrotondati in alto */
+  #right-panel {
+    width: 100% !important;
+    height: 65vh !important;
+    border-radius: 16px 16px 0 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    border-top: 1px solid rgba(30, 60, 160, 0.14) !important;
+    box-shadow: 0 -6px 32px rgba(30, 60, 160, 0.20) !important;
+  }
 }
 
 /* ════════════════════════════════════════
