@@ -2610,7 +2610,7 @@
           canvasId: 'rp-c-rusle',
           title: 'Potenziale erosivo LS',
           centerVal: 'LS 3,7',
-          centerLabel: 'mediana',
+          centerLabel: 'p75 (75° perc.)',
           legendData: [
             { chartLabel: 'Molto basso',  label: 'LS < 0,20  molto basso (fondovalle/pianura)',  pct: 25, color: '#ffffe0' },
             { chartLabel: 'Basso',        label: 'LS 0,20–0,52  basso',                          pct: 25, color: '#fecc5c' },
@@ -2703,26 +2703,26 @@
         appendRingCard(el, {
           canvasId: 'rp-c-instab',
           title: 'Instabilità curvatura',
-          centerVal: '5%',
-          centerLabel: 'critico',
+          centerVal: '0,2%',
+          centerLabel: 'critico (> 0,25)',
           legendData: [
-            { chartLabel: 'Stabile',           label: 'stabile — pianura/divergente',              pct: 60, color: '#e5f5e0' },
-            { chartLabel: 'Basso',             label: 'basso — lieve convergenza',                 pct: 15, color: '#a1d99b' },
-            { chartLabel: 'Moderato',          label: 'moderato — potenziale accumulo detritico',  pct: 13, color: '#fdd058' },
-            { chartLabel: 'Alto',              label: 'alto — accumulo o instabilità radicale',    pct:  7, color: '#ef6548' },
-            { chartLabel: 'Critico',           label: 'critico — canyon convergenti/versanti ripidi', pct: 5, color: '#bd0026' }
+            { chartLabel: 'Stabile',           label: 'stabile < 0,002 — pianura/divergente',              pct: 75.7, color: '#e5f5e0' },
+            { chartLabel: 'Basso',             label: 'basso 0,002–0,026 — lieve convergenza',             pct: 19.3, color: '#a1d99b' },
+            { chartLabel: 'Moderato',          label: 'moderato 0,026–0,10 — potenziale accumulo',         pct:  4.2, color: '#fdd058' },
+            { chartLabel: 'Alto',              label: 'alto 0,10–0,25 — accumulo o instabilità radicale',  pct:  0.7, color: '#ef6548' },
+            { chartLabel: 'Critico',           label: 'critico > 0,25 — canyon convergenti/versanti ripidi', pct: 0.2, color: '#bd0026' }
           ],
           summaries: [
-            { val: '5%',   label: 'critico' },
-            { val: '60%',  label: 'stabile' },
-            { val: '20%',  label: 'accumulo/instab.' }
+            { val: '0,2%',  label: 'critico' },
+            { val: '75,7%', label: 'stabile' },
+            { val: '5,1%',  label: 'moderato+alto+critico' }
           ]
         });
         appendText(el,
-          'Le aree critiche (5%, rosso) corrispondono alle incisioni torrentizie, ' +
+          'Le aree critiche (0,2%, rosso) corrispondono alle incisioni torrentizie, ' +
           'alle forre calcaree e ai canyon dei Monti di Palermo, dove la doppia convergenza ' +
           '(planare + di profilo) concentra acqua e sedimenti. ' +
-          'Rilevante per la gestione forestale urbana: i pini in zone "alto" (7%) ' +
+          'Rilevante per la gestione forestale urbana: i pini in zone "alto" (0,7%) ' +
           'sono soggetti a stress radicale combinato (suolo discontinuo, radici espanse ' +
           'su versante convesso + apporto idrico laterale convergente) che ne aumenta ' +
           'il rischio di schianto in caso di piogge intense. ' +
