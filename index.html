@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="it">
 <head>
     <meta charset="utf-8">
@@ -661,6 +662,7 @@
       <button class="ptab active" data-tab="analisi"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg> Analisi DTM</button>
 	 <button class="ptab" data-tab="mappa"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> QGIS headless</button>
 	       <button class="ptab" data-tab="building"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18"/><path d="M9 21V9"/></svg> Building</button>
+	       <button class="ptab" data-tab="guida"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Guida</button>
 	       <button class="ptab" data-tab="credits"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Credits</button>
     </nav>
 
@@ -1882,6 +1884,245 @@
     </div>
 
     <!-- Tab: QGIS headless WSL2 -->
+    <!-- Tab: Guida -->
+    <div id="tab-guida" class="tab-pane">
+      <div class="qh-page">
+
+        <div class="qh-hero">
+          <div class="qh-hero-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div>
+            <div class="qh-hero-title">Come usare la mappa</div>
+            <div class="qh-hero-sub">Una guida per esplorare Palermo attraverso i dati morfologici</div>
+          </div>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Cos'e questa mappa
+          </div>
+          <p class="qh-text">Questa applicazione mostra il territorio del Comune di Palermo attraverso dati altimetrici ad alta risoluzione (5 metri per pixel). Dal semplice dato di quota si ricavano decine di informazioni: dove il terreno e ripido, dove si concentra l'acqua, quanto sole riceve ogni zona, quali aree sono a rischio frana.</p>
+          <p class="qh-text">Tutti i dati vengono direttamente dal <strong>DTM 5m di Palermo</strong>, un modello digitale del terreno prodotto dall'ISPRA e distribuito in modo aperto su Zenodo. Non si tratta di una mappa statica: puoi esplorare ogni punto del territorio, cambiare visualizzazione, confrontare diversi temi.</p>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Come muoversi nella mappa
+          </div>
+          <ul class="qh-list">
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Zoom</strong> — rotella del mouse, gesto pinch su touch, o tasti + e -</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Spostamento</strong> — trascina con il mouse o il dito</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Rotazione e inclinazione</strong> — tasto destro del mouse + trascina (o due dita in torsione su touch) per ruotare e inclinare la vista 3D</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Clic su un punto della griglia</strong> — apre nel pannello a destra i valori di tutte le analisi per quel punto preciso</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Clic su un transetto</strong> — apre il grafico del profilo altimetrico lungo quella sezione</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Clic su un edificio</strong> — se il layer edificato e attivo, mostra quota, altezza e destinazione d'uso</li>
+          </ul>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            Pannello laterale destro (Analisi del territorio)
+          </div>
+          <p class="qh-text">Il pannello a destra elenca tutte le <strong>36 analisi morfologiche</strong>, raggruppate per tema. Cliccando su una scheda si attiva il layer sulla mappa e si legge la spiegazione dei dati, le statistiche per circoscrizione e quartiere, e un cursore per regolare la trasparenza del layer.</p>
+          <p class="qh-text">Su mobile si apre con il pulsante <strong>Analisi</strong> in alto a destra; su desktop ha una linguetta laterale sempre visibile.</p>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+            Pannello inferiore (schede)
+          </div>
+          <p class="qh-text">Si apre cliccando la linguetta al centro del bordo inferiore. Contiene cinque schede: <strong>Analisi DTM</strong> (testi e grafici sul territorio), <strong>QGIS headless</strong> (come e stato prodotto il DTM), <strong>Building</strong> (come e nato il layer edifici), <strong>Guida</strong> (questa pagina), <strong>Credits</strong> (fonti e licenze).</p>
+        </div>
+
+        <div class="qh-section" style="border-top:2px solid var(--border,#2a2a2a);margin-top:1rem;padding-top:1rem;">
+          <div class="qh-section-title" style="font-size:0.92rem;font-weight:700;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><rect x="2" y="10" width="20" height="5" rx="1"/><rect x="2" y="17" width="20" height="5" rx="1"/></svg>
+            Barra degli strumenti della mappa
+          </div>
+          <p class="qh-text">La barra verticale a sinistra (o in alto su mobile) raccoglie tutti i controlli. Ecco cosa fa ogni pulsante:</p>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 3L2 12h3v8h5v-5h4v5h5v-8h3L12 3z"/></svg> Home</div>
+          <p class="qh-text">Riporta la mappa alla posizione e allo zoom iniziali, reimposta inclinazione e orientamento.</p>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg> OSM / SAT — mappa di sfondo</div>
+          <p class="qh-text"><strong>OSM</strong>: OpenStreetMap con stile scuro. Mostra strade, edifici, nomi di luoghi — ideale per leggere le analisi sovrapposte.<br><strong>SAT</strong>: immagine satellitare Google. Mostra il territorio reale visto dall'alto, utile per confrontare con la realta visibile.</p>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg> CTR — Carta Tecnica Regionale</div>
+          <p class="qh-text">Sovrappone la <strong>Carta Tecnica Regionale 2K</strong> alla mappa di sfondo. E una cartografia di precisione con strade, quote e dettagli topografici. Quando e attiva compare un <strong>cursore di opacita</strong> per regolarne la trasparenza.</p>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg> UPL — Confini dei quartieri</div>
+          <p class="qh-text">Mostra o nasconde i confini dei quartieri e delle circoscrizioni. Cliccando su un quartiere il pannello laterale mostra le statistiche morfologiche specifiche di quella zona.</p>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M3 22V10l6-5 6 5v12H3z"/></svg> Edif. — Edifici 3D</div>
+          <p class="qh-text">Attiva gli edifici in <strong>tre dimensioni</strong> con altezza proporzionale a quella reale. I colori indicano l'altezza in metri. Dalla legenda puoi passare alla colorazione per <em>destinazione d'uso</em> (residenziale, commerciale, istruzione…). Funziona meglio in vista 3D.</p>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M3 3h6v2H5v4H3V3zm12 0h6v6h-2V5h-4V3zM3 15h2v4h4v2H3v-6zm16 4h-4v2h6v-6h-2v4z"/></svg> Full — Schermo intero</div>
+          <p class="qh-text">Espande la mappa a tutto schermo. Premi di nuovo per uscire.</p>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,2 14.5,11 12,9.5 9.5,11" fill="currentColor"/></svg> Nord — Bussola</div>
+          <p class="qh-text">L'icona ruota in tempo reale mostrando dove e il Nord. <strong>Cliccando</strong> si reimposta l'orientamento con il Nord in alto.</p>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg> Grid — Griglia di analisi</div>
+          <p class="qh-text">Mostra o nasconde la <strong>griglia a 50 metri</strong>. Ogni cella e cliccabile: tocca un punto per vedere nel pannello laterale tutti i valori morfologici per quella posizione precisa.</p>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7 Q6 4 9 7 Q12 10 15 7 Q18 4 21 7"/><path d="M3 12 Q7 8 11 12 Q15 16 19 12"/></svg> CdL — Curve di livello</div>
+          <p class="qh-text">Sovrappone le curve di livello. Linee principali ogni <strong>50 m</strong> di dislivello; linee secondarie ogni <strong>10 m</strong> visibili solo ad alto zoom.</p>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="none"><path d="M12 3a9 9 0 1 0 0 18A9 9 0 0 0 12 3z" fill="currentColor" opacity="0.3"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor"/></svg> Ombreggiatura — accendi/spegni</div>
+          <p class="qh-text">Attiva o disattiva l'ombra del rilievo. Con l'ombra attiva le valli e i versanti esposti a nord appaiono piu scuri, rendendo il terreno tridimensionale anche in vista piatta.</p>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg> Impostazioni ombreggiatura</div>
+          <p class="qh-text">Apre un pannello con due cursori:<br>
+          — <strong>Int.</strong> (Intensita): quanto e marcata l'ombra, da quasi invisibile a molto netta.<br>
+          — <strong>Ora</strong>: simula l'ora del giorno. La luce cambia direzione: mattina (da est), mezzogiorno (dall'alto), pomeriggio (da ovest).<br>
+          Il pulsante <strong>&#x23F1;</strong> imposta automaticamente l'ora solare corrente.</p>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><polyline points="16 3 12 7 8 3"/></svg> 3D / Piano</div>
+          <p class="qh-text">Alterna tra <strong>vista 3D</strong> (il rilievo si solleva) e <strong>vista piatta</strong>. In 3D compare un cursore di <strong>esagerazione verticale</strong>: con 1x il rilievo e in scala reale, con 3x i monti sembrano tre volte piu alti — utile per apprezzare le zone montuose.</p>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> Dark — tema scuro / chiaro</div>
+          <p class="qh-text">Cambia il tema dell'interfaccia tra scuro e chiaro. La scelta viene salvata e ripristinata alle visite successive.</p>
+        </div>
+
+        <div class="qh-section" style="border-top:2px solid var(--border,#2a2a2a);margin-top:1rem;padding-top:1rem;">
+          <div class="qh-section-title" style="font-size:0.92rem;font-weight:700;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            Tutti i layer disponibili
+          </div>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title" style="color:var(--text-muted,#888);">Cartografia e layer vettoriali di base</div>
+          <table style="width:100%;border-collapse:collapse;font-size:0.81rem;">
+            <thead><tr style="border-bottom:1px solid var(--border,#333);">
+              <th style="text-align:left;padding:0.3rem 0.4rem;color:var(--text-muted,#aaa);font-weight:600;">Layer</th>
+              <th style="text-align:left;padding:0.3rem 0.4rem;color:var(--text-muted,#aaa);font-weight:600;">Tipo</th>
+              <th style="text-align:left;padding:0.3rem 0.4rem;color:var(--text-muted,#aaa);font-weight:600;">Come si attiva</th>
+            </tr></thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border,#2a2a2a);"><td style="padding:0.3rem 0.4rem;"><strong>OpenStreetMap (CartoDB Dark)</strong></td><td style="padding:0.3rem 0.4rem;color:var(--text-muted,#888);">Sfondo raster</td><td style="padding:0.3rem 0.4rem;">Pulsante <strong>OSM</strong></td></tr>
+              <tr style="border-bottom:1px solid var(--border,#2a2a2a);"><td style="padding:0.3rem 0.4rem;"><strong>Satellite (Google)</strong></td><td style="padding:0.3rem 0.4rem;color:var(--text-muted,#888);">Sfondo raster</td><td style="padding:0.3rem 0.4rem;">Pulsante <strong>SAT</strong></td></tr>
+              <tr style="border-bottom:1px solid var(--border,#2a2a2a);"><td style="padding:0.3rem 0.4rem;"><strong>Carta Tecnica Regionale 2K</strong></td><td style="padding:0.3rem 0.4rem;color:var(--text-muted,#888);">Raster sovrapposto</td><td style="padding:0.3rem 0.4rem;">Pulsante <strong>CTR</strong> + opacita</td></tr>
+              <tr style="border-bottom:1px solid var(--border,#2a2a2a);"><td style="padding:0.3rem 0.4rem;"><strong>Confini UPL / Quartieri</strong></td><td style="padding:0.3rem 0.4rem;color:var(--text-muted,#888);">Vettoriale poligoni</td><td style="padding:0.3rem 0.4rem;">Pulsante <strong>UPL</strong></td></tr>
+              <tr style="border-bottom:1px solid var(--border,#2a2a2a);"><td style="padding:0.3rem 0.4rem;"><strong>Edificato 3D</strong> — altezza + uso</td><td style="padding:0.3rem 0.4rem;color:var(--text-muted,#888);">Vettoriale 3D (PMTiles)</td><td style="padding:0.3rem 0.4rem;">Pulsante <strong>Edif.</strong></td></tr>
+              <tr style="border-bottom:1px solid var(--border,#2a2a2a);"><td style="padding:0.3rem 0.4rem;"><strong>Griglia analisi 50m</strong></td><td style="padding:0.3rem 0.4rem;color:var(--text-muted,#888);">Vettoriale griglia</td><td style="padding:0.3rem 0.4rem;">Pulsante <strong>Grid</strong></td></tr>
+              <tr><td style="padding:0.3rem 0.4rem;"><strong>Curve di livello</strong> — 10m e 50m</td><td style="padding:0.3rem 0.4rem;color:var(--text-muted,#888);">Vettoriale linee (PMTiles)</td><td style="padding:0.3rem 0.4rem;">Pulsante <strong>CdL</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title" style="color:#7B5535;">Morfometria di base (5 analisi)</div>
+          <ul class="qh-list">
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7B5535" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Elevazione</strong> — la quota del terreno da 0 a 1.050 m</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7B5535" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Pendenza</strong> — quanto e inclinato il terreno, in gradi</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7B5535" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Esposizione</strong> — verso quale punto cardinale e orientato ogni versante</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7B5535" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Rugosita (TRI)</strong> — quanto e irregolare il terreno tra celle vicine</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7B5535" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Heatmap complessita</strong> — combinazione di pendenza, rugosita e irregolarita</li>
+          </ul>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title" style="color:#5046A0;">Struttura e forma del paesaggio (6 analisi)</div>
+          <ul class="qh-list">
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5046A0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Geomorfologia</strong> — pianura, versante, cresta, impluvio, depressione</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5046A0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>TPI locale (100 m)</strong> — se un punto e piu alto o piu basso del terreno circostante</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5046A0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>TPI regionale (300 m)</strong> — stessa informazione su scala piu ampia: collina, pianura, crinale</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5046A0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Curvatura planare</strong> — se il flusso d'acqua tende a concentrarsi o disperdersi</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5046A0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Curvatura profilo</strong> — se il versante accelera o frena il flusso d'acqua in discesa</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5046A0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Curvatura totale</strong> — sintesi delle due curvature, indice morfologico generale</li>
+          </ul>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title" style="color:#1255A4;">Idrologia e rischio idraulico (6 analisi)</div>
+          <ul class="qh-list">
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1255A4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>TWI — Wetness Index</strong> — dove l'acqua tende ad accumularsi, aree a rischio allagamento</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1255A4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Flow Accumulation</strong> — dove scorre l'acqua piovana: il reticolo idrografico potenziale</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1255A4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Bacini idrografici</strong> — i 28 sottobacini versanti del territorio comunale</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1255A4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>SPI — Stream Power Index</strong> — la forza erosiva dei corsi d'acqua in ogni punto</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1255A4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Depth-to-Water (HAND)</strong> — a quanta profondita si trova la falda freatica</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1255A4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Erosione potenziale RUSLE</strong> — il rischio di erosione del suolo (fattore LS)</li>
+          </ul>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title" style="color:#B71C1C;">Rischio e pianificazione territoriale (4 analisi)</div>
+          <ul class="qh-list">
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B71C1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Stabilita versanti</strong> — dove il terreno e a rischio frana (scala 1–5)</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B71C1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Indice di vulnerabilita</strong> — rischio combinato di pendenza, instabilita e morfologia</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B71C1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Costruibilita</strong> — idoneita morfologica del terreno alla costruzione</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B71C1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Curvatura — instabilita radicale</strong> — zone dove la forma favorisce scivolamenti o accumulo di detriti</li>
+          </ul>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title" style="color:#BF6000;">Energia, clima e microclima (7 analisi)</div>
+          <ul class="qh-list">
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#BF6000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Radiazione solare</strong> — quanto sole riceve ogni zona durante l'anno</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#BF6000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Solare raffinato</strong> — stima piu precisa che considera anche esposizione e pendenza</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#BF6000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Potenziale fotovoltaico</strong> — dove conviene installare pannelli solari</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#BF6000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Ombreggiamento estivo</strong> — quante ore di ombra riceve ogni punto il 21 giugno</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#BF6000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Ombreggiamento invernale</strong> — quante ore di ombra riceve ogni punto il 21 dicembre</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#BF6000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Frost hollow</strong> — dove l'aria fredda si accumula nelle notti invernali</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#BF6000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Sky View Factor</strong> — quanto cielo si vede da ogni punto: basso nelle valli, alto sulle creste</li>
+          </ul>
+        </div>
+
+        <div class="qh-section">
+          <div class="qh-section-title" style="color:#1E7A2A;">Verde urbano, mobilita e paesaggio (4 analisi)</div>
+          <ul class="qh-list">
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1E7A2A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Corridoi ecologici</strong> — dove il terreno permette o ostacola il movimento della fauna</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1E7A2A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Visibilita / Viewshed</strong> — da quanti dei 6 punti panoramici si riesce a vedere ogni zona</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1E7A2A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Accessibilita morfologica</strong> — velocita a piedi stimata su ogni punto (formula di Tobler)</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1E7A2A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>Profili altimetrici</strong> — 9 sezioni trasversali del territorio con grafico della quota</li>
+          </ul>
+        </div>
+
+        <div class="qh-section" style="border-bottom:none;">
+          <div class="qh-section-title" style="color:#364F5A;">Analisi incrociate con altri dataset (4 analisi)</div>
+          <ul class="qh-list">
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#364F5A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>DTM x PAI — Gap morfologico</strong> — aree instabili non ancora perimetrate dal Piano di Assetto Idrogeologico</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#364F5A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>DTM x ISTAT — Elevazione x Densita</strong> — dove vivono le persone in relazione alla quota (dati ISTAT 2021)</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#364F5A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>DTM x ISTAT — Pendenza x Densita</strong> — dove vivono le persone in relazione alla pendenza del terreno</li>
+            <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#364F5A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><strong>DTM x ISPRA — Edificato su pendenze critiche</strong> — edifici su terreni ripidi secondo la mappa uso suolo ISPRA 2023</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
     <div id="tab-mappa" class="tab-pane">
       <div class="qh-page">
 
