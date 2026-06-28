@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
     <TileMap version="1.0.0" tilemapservice="http://tms.osgeo.org/1.0.0">
-      <Title>papercut_webapp.tif</Title>
+      <Title>papercut_fullres.tif</Title>
       <Abstract></Abstract>
       <SRS>EPSG:3857</SRS>
-      <BoundingBox minx="13.24134276858252" miny="38.04846063441918" maxx="13.45476933342637" maxy="38.22537681802757"/>
-      <Origin x="13.24134276858252" y="38.04846063441918"/>
+      <BoundingBox minx="13.24134200686259" miny="38.04841542512835" maxx="13.45471150349263" maxy="38.22537681802757"/>
+      <Origin x="13.24134200686259" y="38.04841542512835"/>
       <TileFormat width="256" height="256" mime-type="image/png" extension="png"/>
       <TileSets profile="mercator">
         <TileSet href="8" units-per-pixel="611.49622617187504" order="8"/>
