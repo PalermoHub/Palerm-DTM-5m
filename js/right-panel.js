@@ -118,7 +118,34 @@
       title: 'Carta Topografica 3D',
       layer: 'papercut-vector-layer',
       hasLayer: true,
-      extraLayers: ['papercut-vector-lines'],
+      extraLayers: [],
+      onActivate: function() {
+        if (typeof map.getTerrain === 'function' && map.getTerrain()) {
+          window._papercutTerrainSave = map.getTerrain();
+          map.setTerrain(null);
+        }
+        var cdlLayers = ['contours-10m-layer','contours-50m-layer','contours-10m-labels','contours-50m-labels'];
+        window._papercutCdlSave = {};
+        cdlLayers.forEach(function(lyr) {
+          try {
+            var vis = map.getLayoutProperty(lyr, 'visibility');
+            window._papercutCdlSave[lyr] = vis;
+            map.setLayoutProperty(lyr, 'visibility', 'none');
+          } catch(e) {}
+        });
+      },
+      onDeactivate: function() {
+        if (window._papercutTerrainSave) {
+          map.setTerrain(window._papercutTerrainSave);
+          window._papercutTerrainSave = null;
+        }
+        if (window._papercutCdlSave) {
+          Object.keys(window._papercutCdlSave).forEach(function(lyr) {
+            try { map.setLayoutProperty(lyr, 'visibility', window._papercutCdlSave[lyr]); } catch(e) {}
+          });
+          window._papercutCdlSave = null;
+        }
+      },
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
@@ -126,8 +153,7 @@
           'Il modello digitale del terreno viene <strong>quantizzato a gradini di 10 m</strong>: ' +
           'l\'hillshade calcolato su questa superficie a gradini genera ombre nette ai bordi di ogni strato, ' +
           'simulando l\'effetto di strati di carta sovrapposti. ' +
-          'La palette colori è identica alla Mappa Elevazione; ' +
-          'le curve di livello sono colorate per banda altimetrica (ogni 10 m · maestre alle soglie palette). ' +
+          'La palette colori è identica alla Mappa Elevazione. ' +
           'Illuminazione solare NW 40°, esagerazione verticale ×22.'
         );
 
@@ -162,9 +188,7 @@
         appendIntro(el,
           '<strong>DTM quantizzato</strong> — ogni quota arrotondata al multiplo di 10 m crea gradini netti. ' +
           '<strong>Hillshade su gradini</strong> — le scarpate artificiali tra strati producono ombre forti. ' +
-          '<strong>Blend Multiply</strong> — luce × colore, mantiene ombre scure e colori vividi sulle superfici piane. ' +
-          '<strong>Curve colorate</strong> — linee minori ogni 10 m in grigio scuro; ' +
-          'maestre alle soglie palette (0, 50, 100, 200, 300, 400, 500, 600, 800 m) nel colore della banda scurito al 45%.'
+          '<strong>Blend Multiply</strong> — luce × colore, mantiene ombre scure e colori vividi sulle superfici piane.'
         );
 
         appendSectionTitle(el, 'Legenda altimetrica');
@@ -3878,13 +3902,17 @@
         Object.keys(ANALYSES).forEach(function (key) {
           var a = ANALYSES[key];
           if (!a.hasLayer || !a.layer) return;
-          map.setLayoutProperty(a.layer, 'visibility', key === id ? 'visible' : 'none');
+          var becoming = key === id;
+          map.setLayoutProperty(a.layer, 'visibility', becoming ? 'visible' : 'none');
           // extra layers (es. transects-label per profili)
           if (a.extraLayers) {
             a.extraLayers.forEach(function(lyr) {
-              try { map.setLayoutProperty(lyr, 'visibility', key === id ? 'visible' : 'none'); } catch(e){}
+              try { map.setLayoutProperty(lyr, 'visibility', becoming ? 'visible' : 'none'); } catch(e){}
             });
           }
+          // lifecycle hooks (es. papercut disattiva terrain)
+          if (becoming && typeof a.onActivate === 'function') { try { a.onActivate(); } catch(e){} }
+          if (!becoming && typeof a.onDeactivate === 'function') { try { a.onDeactivate(); } catch(e){} }
         });
         // Sync toggle in controls panel se esiste
         var toggleEl = document.getElementById('toggle-' + id);

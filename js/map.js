@@ -453,61 +453,9 @@ const map = new maplibregl.Map({
             950, '#141414',
            1000, '#0a0a0a'
           ],
-          'fill-extrusion-height': ['*', ['to-number', ['get', 'ELEV_MAX']], 1.2],
+          'fill-extrusion-height': ['*', ['to-number', ['get', 'ELEV_MAX']], 1.5],
           'fill-extrusion-base': 0,
           'fill-extrusion-opacity': 0.92
-        }
-      },
-
-      // Bordi bande papercut — stessa geometria del fill, allineamento perfetto
-      {
-        id: 'papercut-vector-lines',
-        type: 'line',
-        source: 'papercut-vector',
-        'source-layer': 'contour_polygons',
-        layout: { visibility: 'none' },
-        paint: {
-          'line-color': 'rgba(0,0,0,0.35)',
-          'line-width': ['interpolate', ['linear'], ['zoom'], 8, 0.3, 12, 0.6, 15, 0.9]
-        }
-      },
-
-      // Overlay vettoriale curve minori 10m per paper-cut
-      {
-        id: 'papercut-contours-minor',
-        type: 'line',
-        source: 'contours',
-        'source-layer': 'contours_10m',
-        layout: { visibility: 'none' },
-        paint: {
-          'line-color': '#2a2a2a',
-          'line-width': ['interpolate', ['linear'], ['zoom'], 12, 0.4, 15, 0.7, 16, 0.9],
-          'line-opacity': ['interpolate', ['linear'], ['zoom'], 12, 0, 13, 0.55, 15, 0.75]
-        },
-        minzoom: 12
-      },
-
-      // Overlay vettoriale curve maestre 50m colorate per paper-cut
-      {
-        id: 'papercut-contours-major',
-        type: 'line',
-        source: 'contours',
-        'source-layer': 'contours_50m',
-        layout: { visibility: 'none' },
-        paint: {
-          'line-color': ['step', ['get', 'elevation'],
-            '#008563',
-            50,  '#008d4d',
-            100, '#009c1e',
-            200, '#17a700',
-            300, '#55a700',
-            400, '#93a700',
-            500, '#a69100',
-            600, '#a65301',
-            800, '#0d0d0d'
-          ],
-          'line-width': ['interpolate', ['linear'], ['zoom'], 8, 1.0, 12, 1.5, 15, 2.2],
-          'line-opacity': 0.9
         }
       },
 
@@ -1310,11 +1258,12 @@ document.querySelectorAll('.ls-btn').forEach(function (btn) {
 document.getElementById('tb-contour').addEventListener('click', function () {
   this.classList.toggle('on');
   contourActive = this.classList.contains('on');
-  const vis = contourActive ? 'visible' : 'none';
+  const papercutOn = map.getLayoutProperty('papercut-vector-layer', 'visibility') === 'visible';
+  const vis = (contourActive && !papercutOn) ? 'visible' : 'none';
   ['contours-10m-layer','contours-50m-layer','contours-10m-labels','contours-50m-labels'].forEach(id => {
     map.setLayoutProperty(id, 'visibility', vis);
   });
-  document.getElementById('legend-contour').classList.toggle('visible', contourActive);
+  document.getElementById('legend-contour').classList.toggle('visible', contourActive && !papercutOn);
 });
 
 // ── Toolbar: Fullscreen ───────────────────────────────────────────────────
@@ -1392,7 +1341,7 @@ document.getElementById('tb-3d').addEventListener('click', function () {
 function updatePapercutVectorExag(exag) {
   try {
     map.setPaintProperty('papercut-vector-layer', 'fill-extrusion-height',
-      ['*', ['to-number', ['get', 'ELEV_MAX']], exag * 0.8]);
+      ['*', ['to-number', ['get', 'ELEV_MAX']], exag]);
   } catch (e) {}
 }
 
