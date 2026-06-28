@@ -417,6 +417,45 @@ const map = new maplibregl.Map({
         paint: { 'raster-opacity': 1.0 }
       },
 
+      // Overlay vettoriale curve minori 10m per paper-cut
+      {
+        id: 'papercut-contours-minor',
+        type: 'line',
+        source: 'contours',
+        'source-layer': 'contours_10m',
+        layout: { visibility: 'none' },
+        paint: {
+          'line-color': '#2a2a2a',
+          'line-width': ['interpolate', ['linear'], ['zoom'], 12, 0.4, 15, 0.7, 16, 0.9],
+          'line-opacity': ['interpolate', ['linear'], ['zoom'], 12, 0, 13, 0.55, 15, 0.75]
+        },
+        minzoom: 12
+      },
+
+      // Overlay vettoriale curve maestre 50m colorate per paper-cut
+      {
+        id: 'papercut-contours-major',
+        type: 'line',
+        source: 'contours',
+        'source-layer': 'contours_50m',
+        layout: { visibility: 'none' },
+        paint: {
+          'line-color': ['step', ['get', 'elevation'],
+            '#008563',
+            50,  '#008d4d',
+            100, '#009c1e',
+            200, '#17a700',
+            300, '#55a700',
+            400, '#93a700',
+            500, '#a69100',
+            600, '#a65301',
+            800, '#0d0d0d'
+          ],
+          'line-width': ['interpolate', ['linear'], ['zoom'], 8, 1.0, 12, 1.5, 15, 2.2],
+          'line-opacity': 0.9
+        }
+      },
+
       // Mappa pendenza — disattiva di default
       {
         id: 'pendenza-layer',

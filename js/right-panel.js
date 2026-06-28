@@ -118,6 +118,7 @@
       title: 'Carta Topografica 3D',
       layer: 'papercut-layer',
       hasLayer: true,
+      extraLayers: ['papercut-contours-minor', 'papercut-contours-major'],
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
         appendIntro(el,
