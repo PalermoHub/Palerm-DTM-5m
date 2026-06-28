@@ -116,7 +116,7 @@
     papercut: {
       icon: SVG_ICONS.elevation,
       title: 'Carta Topografica 3D',
-      layer: 'elevation-layer',
+      layer: 'papercut-layer',
       hasLayer: true,
       render: function (el) {
         while (el.firstChild) el.removeChild(el.firstChild);
@@ -133,13 +133,29 @@
         appendSectionTitle(el, 'Carta topografica — palette elevazione');
 
         var imgWrap = document.createElement('div');
-        imgWrap.style.cssText = 'margin:8px 0 12px;border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.35);';
+        imgWrap.style.cssText = 'margin:8px 0 4px;border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.35);';
         var img = document.createElement('img');
         img.src = 'docs/img/mappa_papercut.png';
         img.alt = 'Carta topografica 3D paper-cut Palermo';
         img.style.cssText = 'width:100%;display:block;';
         imgWrap.appendChild(img);
         el.appendChild(imgWrap);
+
+        var dlLink = document.createElement('a');
+        dlLink.href = 'docs/img/mappa_papercut_hires.png';
+        dlLink.download = 'carta_topografica_3d_palermo.png';
+        dlLink.style.cssText = 'display:flex;align-items:center;gap:6px;margin:0 0 12px;padding:6px 10px;' +
+          'background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:5px;' +
+          'color:#ccc;font-size:11px;text-decoration:none;transition:background .2s;';
+        dlLink.onmouseover = function(){this.style.background='rgba(255,255,255,.13)';};
+        dlLink.onmouseout  = function(){this.style.background='rgba(255,255,255,.07)';};
+        var dlIcon = document.createElement('span');
+        dlIcon.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+        var dlText = document.createElement('span');
+        dlText.textContent = 'Scarica hi-res PNG (10 MB · 5.500 × 5.800 px)';
+        dlLink.appendChild(dlIcon);
+        dlLink.appendChild(dlText);
+        el.appendChild(dlLink);
 
         appendSectionTitle(el, 'Tecnica');
         appendIntro(el,

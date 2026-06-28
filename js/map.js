@@ -107,6 +107,15 @@ const map = new maplibregl.Map({
         scheme: 'tms',
         attribution: 'Analisi elevazione: DTM HRDTM5m@italia'
       },
+      'papercut-raster': {
+        type: 'raster',
+        tiles: ['https://palermohub.github.io/Palerm-DTM-5m/docs/tiles/papercut/{z}/{x}/{y}.png'],
+        tileSize: 256,
+        minzoom: 8,
+        maxzoom: 15,
+        scheme: 'tms',
+        attribution: 'Carta topografica 3D paper-cut: DTM HRDTM5m@italia'
+      },
       'pendenza-raster': {
         type: 'raster',
         tiles: [`${BASE_URL}docs/tiles/pendenza/{z}/{x}/{y}.png`],
@@ -396,6 +405,15 @@ const map = new maplibregl.Map({
         type: 'raster',
         source: 'elevation-raster',
         layout: { visibility: 'visible' },
+        paint: { 'raster-opacity': 1.0 }
+      },
+
+      // Carta topografica 3D paper-cut
+      {
+        id: 'papercut-layer',
+        type: 'raster',
+        source: 'papercut-raster',
+        layout: { visibility: 'none' },
         paint: { 'raster-opacity': 1.0 }
       },
 
