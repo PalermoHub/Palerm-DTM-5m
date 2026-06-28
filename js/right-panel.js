@@ -113,6 +113,72 @@
       }
     },
 
+    papercut: {
+      icon: SVG_ICONS.elevation,
+      title: 'Carta Topografica 3D',
+      layer: 'elevation-layer',
+      hasLayer: true,
+      render: function (el) {
+        while (el.firstChild) el.removeChild(el.firstChild);
+        appendIntro(el,
+          'Visualizzazione <strong>paper-cut 3D</strong> del DTM 5m di Palermo. ' +
+          'Il modello digitale del terreno viene <strong>quantizzato a gradini di 10 m</strong>: ' +
+          'l\'hillshade calcolato su questa superficie a gradini genera ombre nette ai bordi di ogni strato, ' +
+          'simulando l\'effetto di strati di carta sovrapposti. ' +
+          'La palette colori è identica alla Mappa Elevazione; ' +
+          'le curve di livello sono colorate per banda altimetrica (ogni 10 m · maestre alle soglie palette). ' +
+          'Illuminazione solare NW 40°, esagerazione verticale ×22.'
+        );
+
+        appendSectionTitle(el, 'Carta topografica — palette elevazione');
+
+        var imgWrap = document.createElement('div');
+        imgWrap.style.cssText = 'margin:8px 0 12px;border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.35);';
+        var img = document.createElement('img');
+        img.src = 'docs/img/mappa_papercut.png';
+        img.alt = 'Carta topografica 3D paper-cut Palermo';
+        img.style.cssText = 'width:100%;display:block;';
+        imgWrap.appendChild(img);
+        el.appendChild(imgWrap);
+
+        appendSectionTitle(el, 'Tecnica');
+        appendIntro(el,
+          '<strong>DTM quantizzato</strong> — ogni quota arrotondata al multiplo di 10 m crea gradini netti. ' +
+          '<strong>Hillshade su gradini</strong> — le scarpate artificiali tra strati producono ombre forti. ' +
+          '<strong>Blend Multiply</strong> — luce × colore, mantiene ombre scure e colori vividi sulle superfici piane. ' +
+          '<strong>Curve colorate</strong> — linee minori ogni 10 m in grigio scuro; ' +
+          'maestre alle soglie palette (0, 50, 100, 200, 300, 400, 500, 600, 800 m) nel colore della banda scurito al 45%.'
+        );
+
+        appendSectionTitle(el, 'Legenda altimetrica');
+        var legendData = [
+          { label: '0–50 m  costiera e pianura',   color: '#00cb9b' },
+          { label: '50–100 m  bassa collina',       color: '#00d777' },
+          { label: '100–200 m  collina',            color: '#00ef2f' },
+          { label: '200–300 m  media collina',      color: '#22ff00' },
+          { label: '300–400 m  alta collina',       color: '#82ff00' },
+          { label: '400–500 m  alta collina',       color: '#e2ff00' },
+          { label: '500–600 m  montagna bassa',     color: '#ffdd00' },
+          { label: '600–800 m  montagna',           color: '#fe7f01' },
+          { label: '> 800 m   alta montagna',       color: '#141414' }
+        ];
+        var legWrap = document.createElement('div');
+        legWrap.style.cssText = 'margin:4px 0 8px;';
+        legendData.forEach(function (item) {
+          var row = document.createElement('div');
+          row.style.cssText = 'display:flex;align-items:center;gap:8px;margin:3px 0;font-size:11px;';
+          var swatch = document.createElement('div');
+          swatch.style.cssText = 'width:22px;height:10px;border-radius:2px;flex-shrink:0;border:1px solid rgba(255,255,255,.15);background:' + item.color + ';';
+          var label = document.createElement('span');
+          label.textContent = item.label;
+          row.appendChild(swatch);
+          row.appendChild(label);
+          legWrap.appendChild(row);
+        });
+        el.appendChild(legWrap);
+      }
+    },
+
     slope: {
       icon: SVG_ICONS.slope,
       title: 'Pendenze',
