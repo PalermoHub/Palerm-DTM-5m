@@ -86,6 +86,11 @@ const map = new maplibregl.Map({
         url: 'pmtiles://https://palermohub.github.io/Palerm-DTM-5m/docs/tiles/contours.pmtiles',
         attribution: 'Curve di livello: DTM HRDTM5m@italia'
       },
+      'papercut-vector': {
+        type: 'vector',
+        url: 'pmtiles://https://palermohub.github.io/Palerm-DTM-5m/docs/tiles/papercut_vector.pmtiles',
+        attribution: 'Carta topografica 3D vettoriale: DTM HRDTM5m@italia'
+      },
       'griglia-dtm': {
         type: 'vector',
         tiles: [`${BASE_URL}docs/tiles/griglia_pbf/{z}/{x}/{y}.pbf`],
@@ -415,6 +420,43 @@ const map = new maplibregl.Map({
         source: 'papercut-raster',
         layout: { visibility: 'none' },
         paint: { 'raster-opacity': 1.0 }
+      },
+
+      // Carta topografica 3D vettoriale — fill-extrusion per banda di quota
+      {
+        id: 'papercut-vector-layer',
+        type: 'fill-extrusion',
+        source: 'papercut-vector',
+        'source-layer': 'contour_polygons',
+        layout: { visibility: 'none' },
+        paint: {
+          'fill-extrusion-color': ['step', ['get', 'ELEV_MIN'],
+            '#00cb9b',
+             50, '#00d777',
+            100, '#00ef2f',
+            150, '#16f418',
+            200, '#22ff00',
+            250, '#54ff00',
+            300, '#82ff00',
+            350, '#b4ff00',
+            400, '#e2ff00',
+            450, '#f0ee00',
+            500, '#ffdd00',
+            550, '#ffbb00',
+            600, '#fe7f01',
+            650, '#f06000',
+            700, '#e04400',
+            750, '#c03000',
+            800, '#8b1a00',
+            850, '#5a0f00',
+            900, '#2d0800',
+            950, '#141414',
+           1000, '#0a0a0a'
+          ],
+          'fill-extrusion-height': ['*', ['to-number', ['get', 'ELEV_MAX']], 1.2],
+          'fill-extrusion-base': 0,
+          'fill-extrusion-opacity': 0.92
+        }
       },
 
       // Overlay vettoriale curve minori 10m per paper-cut
@@ -1334,10 +1376,18 @@ document.getElementById('tb-3d').addEventListener('click', function () {
 });
 
 // ── Sotto-pannello 3D: slider esagerazione ────────────────────────────────
+function updatePapercutVectorExag(exag) {
+  try {
+    map.setPaintProperty('papercut-vector-layer', 'fill-extrusion-height',
+      ['*', ['to-number', ['get', 'ELEV_MAX']], exag * 0.8]);
+  } catch (e) {}
+}
+
 document.getElementById('tbp-exag').addEventListener('input', function () {
   currentExag = parseFloat(this.value);
   document.getElementById('tbp-exag-val').textContent = currentExag.toFixed(1) + '×';
   if (terrainActive) map.setTerrain({ source: 'terrain-dem', exaggeration: currentExag });
+  updatePapercutVectorExag(currentExag);
 });
 
 

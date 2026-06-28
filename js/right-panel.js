@@ -116,7 +116,7 @@
     papercut: {
       icon: SVG_ICONS.elevation,
       title: 'Carta Topografica 3D',
-      layer: 'papercut-layer',
+      layer: 'papercut-vector-layer',
       hasLayer: true,
       extraLayers: ['papercut-contours-minor', 'papercut-contours-major'],
       render: function (el) {
