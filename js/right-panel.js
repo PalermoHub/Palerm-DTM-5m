@@ -1070,14 +1070,14 @@
           maxVal: 33.9,
           classes: CP_CLASSES,
           items: [
-            { rank:1, label:'I · Centro Storico',  val:33.9, classi:{c_conv:33.9, c_plan:33.4, c_div:32.7} },
-            { rank:2, label:'VIII · Libertà',      val:30.8, classi:{c_conv:30.8, c_plan:40.5, c_div:28.7} },
-            { rank:3, label:'V · Noce',            val:29.0, classi:{c_conv:29.0, c_plan:42.0, c_div:29.0} },
-            { rank:4, label:'VII · Mondello',      val:28.5, classi:{c_conv:28.5, c_plan:42.5, c_div:29.0} },
-            { rank:5, label:'II · Resuttana',      val:26.8, classi:{c_conv:26.8, c_plan:46.2, c_div:27.0} },
-            { rank:6, label:'VI · Nord-Ovest',     val:26.4, classi:{c_conv:26.4, c_plan:47.5, c_div:26.1} },
-            { rank:7, label:'III · Oreto',         val:26.2, classi:{c_conv:26.2, c_plan:47.5, c_div:26.3} },
-            { rank:8, label:'IV · Mezzomonreale',  val:26.0, classi:{c_conv:26.0, c_plan:47.2, c_div:26.7} }
+            { rank:1, label:'I · Centro Storico',  val:33.9, classi:{c_conv:33.9, c_plan:33.2, c_div:32.9} },
+            { rank:2, label:'II · Resuttana',      val:28.0, classi:{c_conv:28.0, c_plan:43.0, c_div:29.0} },
+            { rank:3, label:'VIII · Libertà',      val:26.4, classi:{c_conv:26.4, c_plan:48.2, c_div:25.4} },
+            { rank:4, label:'IV · Mezzomonreale',  val:26.3, classi:{c_conv:26.3, c_plan:47.2, c_div:26.5} },
+            { rank:5, label:'VII · Mondello',      val:24.2, classi:{c_conv:24.2, c_plan:51.2, c_div:24.6} },
+            { rank:6, label:'V · Noce',            val:23.9, classi:{c_conv:23.9, c_plan:52.3, c_div:23.8} },
+            { rank:7, label:'VI · Nord-Ovest',     val:23.7, classi:{c_conv:23.7, c_plan:52.4, c_div:23.9} },
+            { rank:8, label:'III · Oreto',         val:22.4, classi:{c_conv:22.4, c_plan:55.3, c_div:22.4} }
           ]
         });
         appendRankingCard(el, {
@@ -1087,14 +1087,14 @@
           maxVal: 36.0,
           classes: CP_CLASSES,
           items: [
-            { rank:1, label:'Noce',                               val:36.0, classi:{c_conv:36.0, c_plan:27.8, c_div:36.2} },
-            { rank:2, label:'Palazzo Reale - Monte di Pietà',     val:35.5, classi:{c_conv:35.5, c_plan:29.3, c_div:35.2} },
-            { rank:3, label:'Oreto - Stazione',                   val:32.5, classi:{c_conv:32.5, c_plan:33.3, c_div:34.2} },
-            { rank:4, label:'Cuba - Calatafimi',                  val:32.0, classi:{c_conv:32.0, c_plan:35.4, c_div:32.7} },
-            { rank:5, label:'Brancaccio - Ciaculli',              val:31.7, classi:{c_conv:31.7, c_plan:37.8, c_div:30.5} },
-            { rank:6, label:'Villagrazia - Falsomiele',           val:30.4, classi:{c_conv:30.4, c_plan:38.5, c_div:31.1} },
-            { rank:7, label:'Cruillas - S.Giovanni Apostolo',     val:29.7, classi:{c_conv:29.7, c_plan:41.0, c_div:29.3} },
-            { rank:8, label:'Montepellegrino',                    val:29.6, classi:{c_conv:29.6, c_plan:41.4, c_div:29.0} }
+            { rank:1, label:'Noce',                            val:36.0, classi:{c_conv:36.0, c_plan:28.4, c_div:35.5} },
+            { rank:2, label:'Oreto - Stazione',                val:35.9, classi:{c_conv:35.9, c_plan:28.6, c_div:35.5} },
+            { rank:3, label:'Malaspina - Palagonia',           val:35.5, classi:{c_conv:35.5, c_plan:29.6, c_div:34.9} },
+            { rank:4, label:'Uditore - Passo di Rigano',       val:35.5, classi:{c_conv:35.5, c_plan:28.0, c_div:36.5} },
+            { rank:5, label:'Montegrappa - S. Rosalia',        val:34.9, classi:{c_conv:34.9, c_plan:30.9, c_div:34.2} },
+            { rank:6, label:'Libertà',                         val:34.9, classi:{c_conv:34.9, c_plan:29.5, c_div:35.6} },
+            { rank:7, label:'Settecannoli',                    val:34.8, classi:{c_conv:34.8, c_plan:29.9, c_div:35.4} },
+            { rank:8, label:'Zisa',                            val:34.5, classi:{c_conv:34.5, c_plan:30.5, c_div:35.0} }
           ]
         });
       }
@@ -1149,14 +1149,14 @@
           maxVal: 25.8,
           classes: CPR_CLASSES,
           items: [
-            { rank:1, label:'VI · Nord-Ovest',     val:25.8, classi:{c_conv:24.2, c_lin:50.0, c_cvx:25.8} },
-            { rank:2, label:'III · Oreto',         val:25.7, classi:{c_conv:25.6, c_lin:48.7, c_cvx:25.7} },
-            { rank:3, label:'VII · Mondello',      val:25.3, classi:{c_conv:24.3, c_lin:50.4, c_cvx:25.3} },
-            { rank:4, label:'IV · Mezzomonreale',  val:25.1, classi:{c_conv:25.1, c_lin:49.8, c_cvx:25.1} },
-            { rank:5, label:'II · Resuttana',      val:24.9, classi:{c_conv:24.6, c_lin:50.5, c_cvx:24.9} },
-            { rank:6, label:'V · Noce',            val:24.9, classi:{c_conv:25.2, c_lin:49.9, c_cvx:24.9} },
-            { rank:7, label:'VIII · Libertà',      val:24.4, classi:{c_conv:23.8, c_lin:51.8, c_cvx:24.4} },
-            { rank:8, label:'I · Centro Storico',  val:23.3, classi:{c_conv:23.0, c_lin:53.7, c_cvx:23.3} }
+            { rank:1, label:'VI · Nord-Ovest',     val:25.8, classi:{c_conv:27.1, c_lin:47.1, c_cvx:25.8} },
+            { rank:2, label:'V · Noce',            val:24.6, classi:{c_conv:26.2, c_lin:49.2, c_cvx:24.6} },
+            { rank:3, label:'IV · Mezzomonreale',  val:24.2, classi:{c_conv:25.0, c_lin:50.9, c_cvx:24.2} },
+            { rank:4, label:'VII · Mondello',      val:24.2, classi:{c_conv:26.8, c_lin:48.9, c_cvx:24.2} },
+            { rank:5, label:'III · Oreto',         val:23.0, classi:{c_conv:25.0, c_lin:52.0, c_cvx:23.0} },
+            { rank:6, label:'VIII · Libertà',      val:21.7, classi:{c_conv:21.7, c_lin:56.7, c_cvx:21.7} },
+            { rank:7, label:'II · Resuttana',      val:18.0, classi:{c_conv:20.1, c_lin:61.9, c_cvx:18.0} },
+            { rank:8, label:'I · Centro Storico',  val:17.2, classi:{c_conv:18.6, c_lin:64.1, c_cvx:17.2} }
           ]
         });
         appendRankingCard(el, {
@@ -1166,14 +1166,14 @@
           maxVal: 29.2,
           classes: CPR_CLASSES,
           items: [
-            { rank:1, label:'Borgo Nuovo',                        val:29.2, classi:{c_conv:27.8, c_lin:43.0, c_cvx:29.2} },
-            { rank:2, label:'Boccadifalco',                       val:28.6, classi:{c_conv:28.4, c_lin:43.0, c_cvx:28.6} },
-            { rank:3, label:'Montepellegrino',                    val:27.8, classi:{c_conv:25.6, c_lin:46.6, c_cvx:27.8} },
-            { rank:4, label:'Partanna Mondello',                  val:27.5, classi:{c_conv:25.5, c_lin:47.0, c_cvx:27.5} },
-            { rank:5, label:'Arenella - Vergine Maria',           val:27.4, classi:{c_conv:27.2, c_lin:45.4, c_cvx:27.4} },
-            { rank:6, label:'Villagrazia - Falsomiele',           val:26.5, classi:{c_conv:26.3, c_lin:47.2, c_cvx:26.5} },
-            { rank:7, label:'Resuttana - San Lorenzo',            val:26.3, classi:{c_conv:26.5, c_lin:47.2, c_cvx:26.3} },
-            { rank:8, label:'Tommaso Natale - Sferracavallo',     val:25.6, classi:{c_conv:25.8, c_lin:48.6, c_cvx:25.6} }
+            { rank:1, label:'Borgo Nuovo',                        val:29.2, classi:{c_conv:31.7, c_lin:39.1, c_cvx:29.2} },
+            { rank:2, label:'Cruillas - S.Giovanni Apostolo',     val:28.1, classi:{c_conv:29.2, c_lin:42.7, c_cvx:28.1} },
+            { rank:3, label:'Montepellegrino',                    val:28.0, classi:{c_conv:27.9, c_lin:44.1, c_cvx:28.0} },
+            { rank:4, label:'Boccadifalco',                       val:26.8, classi:{c_conv:28.6, c_lin:44.5, c_cvx:26.8} },
+            { rank:5, label:'Tommaso Natale - Sferracavallo',     val:25.5, classi:{c_conv:26.6, c_lin:47.9, c_cvx:25.5} },
+            { rank:6, label:'Partanna Mondello',                  val:25.4, classi:{c_conv:28.5, c_lin:46.1, c_cvx:25.4} },
+            { rank:7, label:'Resuttana - San Lorenzo',            val:23.9, classi:{c_conv:25.5, c_lin:50.5, c_cvx:23.9} },
+            { rank:8, label:'Villagrazia - Falsomiele',           val:23.5, classi:{c_conv:25.7, c_lin:50.8, c_cvx:23.5} }
           ]
         });
       }
@@ -1232,14 +1232,14 @@
           maxVal: 55.8,
           classes: CT_CLASSES,
           items: [
-            { rank:1, label:'III · Oreto',        val:55.8, classi:{c_concava:4.2,  c_lbassa:19.5, c_piano:55.8, c_lalta:15.2, c_convessa:5.3} },
-            { rank:2, label:'I · Centro Storico', val:55.0, classi:{c_concava:4.5,  c_lbassa:18.0, c_piano:55.0, c_lalta:16.0, c_convessa:6.5} },
-            { rank:3, label:'V · Noce',           val:52.8, classi:{c_concava:5.1,  c_lbassa:18.8, c_piano:52.8, c_lalta:17.4, c_convessa:5.9} },
-            { rank:4, label:'VIII · Libertà',     val:52.5, classi:{c_concava:4.8,  c_lbassa:19.3, c_piano:52.5, c_lalta:17.5, c_convessa:5.9} },
-            { rank:5, label:'II · Resuttana',     val:52.0, classi:{c_concava:4.6,  c_lbassa:19.8, c_piano:52.0, c_lalta:17.9, c_convessa:5.7} },
-            { rank:6, label:'IV · Mezzomonreale', val:50.2, classi:{c_concava:4.6,  c_lbassa:21.6, c_piano:50.2, c_lalta:17.5, c_convessa:6.1} },
-            { rank:7, label:'VI · Nord-Ovest',    val:47.0, classi:{c_concava:5.9,  c_lbassa:21.9, c_piano:47.0, c_lalta:18.6, c_convessa:6.5} },
-            { rank:8, label:'VII · Mondello',     val:44.1, classi:{c_concava:7.0,  c_lbassa:22.1, c_piano:44.1, c_lalta:19.8, c_convessa:7.1} }
+            { rank:1, label:'III · Oreto',        val:55.8, classi:{c_concava:3.9,  c_lbassa:18.1, c_piano:55.8, c_lalta:18.4, c_convessa:3.8} },
+            { rank:2, label:'VI · Nord-Ovest',    val:53.1, classi:{c_concava:4.5,  c_lbassa:19.0, c_piano:53.1, c_lalta:19.0, c_convessa:4.5} },
+            { rank:3, label:'V · Noce',           val:52.7, classi:{c_concava:4.7,  c_lbassa:19.0, c_piano:52.7, c_lalta:18.7, c_convessa:4.9} },
+            { rank:4, label:'VII · Mondello',     val:51.7, classi:{c_concava:5.0,  c_lbassa:19.1, c_piano:51.7, c_lalta:19.3, c_convessa:4.9} },
+            { rank:5, label:'VIII · Libertà',     val:48.5, classi:{c_concava:5.4,  c_lbassa:20.7, c_piano:48.5, c_lalta:20.2, c_convessa:5.2} },
+            { rank:6, label:'IV · Mezzomonreale', val:47.3, classi:{c_concava:5.2,  c_lbassa:21.0, c_piano:47.3, c_lalta:21.3, c_convessa:5.1} },
+            { rank:7, label:'II · Resuttana',     val:42.6, classi:{c_concava:6.4,  c_lbassa:21.9, c_piano:42.6, c_lalta:22.7, c_convessa:6.4} },
+            { rank:8, label:'I · Centro Storico', val:32.2, classi:{c_concava:7.3,  c_lbassa:27.4, c_piano:32.2, c_lalta:25.7, c_convessa:7.4} }
           ]
         });
         appendRankingCard(el, {
@@ -1249,14 +1249,14 @@
           maxVal: 69.0,
           classes: CT_CLASSES,
           items: [
-            { rank:1, label:'Boccadifalco',                       val:69.0, classi:{c_concava:3.0, c_lbassa:10.8, c_piano:69.0, c_lalta:12.5, c_convessa:4.7} },
-            { rank:2, label:'Oreto - Stazione',                   val:65.3, classi:{c_concava:3.2, c_lbassa:13.5, c_piano:65.3, c_lalta:13.4, c_convessa:4.6} },
-            { rank:3, label:'Cuba - Calatafimi',                   val:58.1, classi:{c_concava:4.8, c_lbassa:17.0, c_piano:58.1, c_lalta:14.5, c_convessa:5.5} },
-            { rank:4, label:'Palazzo Reale - Monte di Pietà',     val:57.2, classi:{c_concava:4.6, c_lbassa:16.8, c_piano:57.2, c_lalta:15.2, c_convessa:6.2} },
-            { rank:5, label:'Noce',                               val:55.9, classi:{c_concava:5.1, c_lbassa:16.0, c_piano:55.9, c_lalta:17.0, c_convessa:6.1} },
-            { rank:6, label:'Cruillas - S.Giovanni Apostolo',     val:54.8, classi:{c_concava:5.0, c_lbassa:18.2, c_piano:54.8, c_lalta:16.0, c_convessa:6.0} },
-            { rank:7, label:'Villagrazia - Falsomiele',           val:53.5, classi:{c_concava:4.8, c_lbassa:19.5, c_piano:53.5, c_lalta:17.0, c_convessa:5.2} },
-            { rank:8, label:'Resuttana - San Lorenzo',            val:53.5, classi:{c_concava:5.3, c_lbassa:19.4, c_piano:53.5, c_lalta:16.6, c_convessa:5.2} }
+            { rank:1, label:'Boccadifalco',                       val:69.0, classi:{c_concava:1.8, c_lbassa:13.9, c_piano:69.0, c_lalta:13.5, c_convessa:1.8} },
+            { rank:2, label:'Borgo Nuovo',                        val:68.4, classi:{c_concava:2.0, c_lbassa:14.1, c_piano:68.4, c_lalta:13.3, c_convessa:2.2} },
+            { rank:3, label:'Montepellegrino',                    val:61.3, classi:{c_concava:3.3, c_lbassa:16.7, c_piano:61.3, c_lalta:15.9, c_convessa:2.9} },
+            { rank:4, label:'Arenella - Vergine Maria',           val:60.6, classi:{c_concava:3.1, c_lbassa:17.1, c_piano:60.6, c_lalta:16.4, c_convessa:2.8} },
+            { rank:5, label:'Villagrazia - Falsomiele',           val:58.8, classi:{c_concava:3.4, c_lbassa:17.1, c_piano:58.8, c_lalta:17.5, c_convessa:3.2} },
+            { rank:6, label:'Partanna Mondello',                  val:55.6, classi:{c_concava:4.6, c_lbassa:17.7, c_piano:55.6, c_lalta:17.6, c_convessa:4.5} },
+            { rank:7, label:'Resuttana - San Lorenzo',            val:54.1, classi:{c_concava:4.5, c_lbassa:18.3, c_piano:54.1, c_lalta:18.5, c_convessa:4.6} },
+            { rank:8, label:'Tommaso Natale - Sferracavallo',     val:53.3, classi:{c_concava:4.6, c_lbassa:18.5, c_piano:53.3, c_lalta:19.1, c_convessa:4.5} }
           ]
         });
       }
