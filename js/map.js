@@ -459,6 +459,19 @@ const map = new maplibregl.Map({
         }
       },
 
+      // Bordi bande papercut — stessa geometria del fill, allineamento perfetto
+      {
+        id: 'papercut-vector-lines',
+        type: 'line',
+        source: 'papercut-vector',
+        'source-layer': 'contour_polygons',
+        layout: { visibility: 'none' },
+        paint: {
+          'line-color': 'rgba(0,0,0,0.35)',
+          'line-width': ['interpolate', ['linear'], ['zoom'], 8, 0.3, 12, 0.6, 15, 0.9]
+        }
+      },
+
       // Overlay vettoriale curve minori 10m per paper-cut
       {
         id: 'papercut-contours-minor',
