@@ -11,6 +11,19 @@ const BOUNDS  = [13.10, 37.94, 13.60, 38.33];
 // che su GitHub Pages, sia in sottocartella che in radice.
 const BASE_URL = new URL('.', document.baseURI).href;
 
+// Se incorporata in iframe su palermohub.opendatasicilia.it, tiene sincronizzata
+// la barra indirizzi del parent (#zoom/lat/lng) via postMessage.
+(function () {
+  const PARENT_ORIGIN = 'https://palermohub.opendatasicilia.it';
+  function notifyParentRoute() {
+    if (window.parent === window) return;
+    try {
+      window.parent.postMessage({ type: 'hash:route', hash: window.location.hash }, PARENT_ORIGIN);
+    } catch (e) { /* iframe non raggiungibile, ignora */ }
+  }
+  window.addEventListener('hashchange', notifyParentRoute);
+})();
+
 // Costruisce un nodo attributione con link sicuro (niente innerHTML)
 function makeAttribNode(text, href) {
   const frag = document.createDocumentFragment();
