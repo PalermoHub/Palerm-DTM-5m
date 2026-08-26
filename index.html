@@ -72,7 +72,7 @@
 
   <!-- Basemap selector -->
   <div class="tb-group" id="tb-basemaps" role="group" aria-label="Cartografia di base">
-    <button class="tb-btn tb-radio active" data-basemap="osm" title="OpenStreetMap">OSM</button>
+    <button class="tb-btn tb-radio active" data-basemap="osm" title="OpenFreeMap (Positron / Fiord)">OSM</button>
     <button class="tb-btn tb-radio" data-basemap="satellite" title="Google Satellite">SAT</button>
   </div>
 
@@ -2040,7 +2040,7 @@
               <th style="text-align:left;padding:0.3rem 0.4rem;color:var(--text-muted,#aaa);font-weight:600;">Come si attiva</th>
             </tr></thead>
             <tbody>
-              <tr style="border-bottom:1px solid var(--border,#2a2a2a);"><td style="padding:0.3rem 0.4rem;"><strong>OpenStreetMap (CartoDB Dark)</strong></td><td style="padding:0.3rem 0.4rem;color:var(--text-muted,#888);">Sfondo raster</td><td style="padding:0.3rem 0.4rem;">Pulsante <strong>OSM</strong></td></tr>
+              <tr style="border-bottom:1px solid var(--border,#2a2a2a);"><td style="padding:0.3rem 0.4rem;"><strong>OpenFreeMap (Positron / Fiord in dark mode)</strong></td><td style="padding:0.3rem 0.4rem;color:var(--text-muted,#888);">Sfondo vettoriale</td><td style="padding:0.3rem 0.4rem;">Pulsante <strong>OSM</strong></td></tr>
               <tr style="border-bottom:1px solid var(--border,#2a2a2a);"><td style="padding:0.3rem 0.4rem;"><strong>Satellite (Google)</strong></td><td style="padding:0.3rem 0.4rem;color:var(--text-muted,#888);">Sfondo raster</td><td style="padding:0.3rem 0.4rem;">Pulsante <strong>SAT</strong></td></tr>
               <tr style="border-bottom:1px solid var(--border,#2a2a2a);"><td style="padding:0.3rem 0.4rem;"><strong>Carta Tecnica Regionale 2K</strong></td><td style="padding:0.3rem 0.4rem;color:var(--text-muted,#888);">Raster sovrapposto</td><td style="padding:0.3rem 0.4rem;">Pulsante <strong>CTR</strong> + opacita</td></tr>
               <tr style="border-bottom:1px solid var(--border,#2a2a2a);"><td style="padding:0.3rem 0.4rem;"><strong>Confini UPL / Quartieri</strong></td><td style="padding:0.3rem 0.4rem;color:var(--text-muted,#888);">Vettoriale poligoni</td><td style="padding:0.3rem 0.4rem;">Pulsante <strong>UPL</strong></td></tr>
@@ -2600,6 +2600,7 @@
 <script src="https://unpkg.com/pmtiles@3.2.0/dist/pmtiles.js"
         integrity="sha384-QfbOCebHNw8pQiPAOd2IFee2v2A5VYZxBk0+JGZ5H+3mfzVIp6zsQNkTsfGJot93"
         crossorigin="anonymous"></script>
+<script src="js/basemap-styles.js"></script>
 <script src="js/map.js"></script>
 <script src="js/panel.js"></script>
 <script src="js/right-panel.js"></script>

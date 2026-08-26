@@ -11,19 +11,6 @@ const BOUNDS  = [13.10, 37.94, 13.60, 38.33];
 // che su GitHub Pages, sia in sottocartella che in radice.
 const BASE_URL = new URL('.', document.baseURI).href;
 
-// Se incorporata in iframe su palermohub.opendatasicilia.it, tiene sincronizzata
-// la barra indirizzi del parent (#zoom/lat/lng) via postMessage.
-(function () {
-  const PARENT_ORIGIN = 'https://palermohub.opendatasicilia.it';
-  function notifyParentRoute() {
-    if (window.parent === window) return;
-    try {
-      window.parent.postMessage({ type: 'hash:route', hash: window.location.hash }, PARENT_ORIGIN);
-    } catch (e) { /* iframe non raggiungibile, ignora */ }
-  }
-  window.addEventListener('hashchange', notifyParentRoute);
-})();
-
 // Costruisce un nodo attributione con link sicuro (niente innerHTML)
 function makeAttribNode(text, href) {
   const frag = document.createDocumentFragment();
@@ -42,15 +29,15 @@ function makeAttribNode(text, href) {
 }
 
 // Sorgenti basemap
-// opacity: trasparenza del layer raster — lascia trasparire l'hillshade sotto
+// osm: basemap vettoriale OpenFreeMap (Positron in chiaro, Fiord in dark mode) — vedi js/basemap-styles.js
+const OFM_ATTRIBUTION = '© OpenFreeMap © OpenMapTiles © OpenStreetMap contributors';
 const BASEMAPS = {
   osm: {
-    type: 'raster',
-    tiles: ['https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png'],
-    tileSize: 256,
-    attribution: '© OpenStreetMap contributors © CartoDB',
-    attributionNode: makeAttribNode('© OpenStreetMap contributors © CartoDB', 'https://www.openstreetmap.org/copyright'),
-    maxzoom: 18,
+    type: 'vector-style',
+    lightStyle: 'positron',
+    darkStyle: 'fiord',
+    attribution: OFM_ATTRIBUTION,
+    attributionNode: makeAttribNode(OFM_ATTRIBUTION, 'https://www.openstreetmap.org/copyright'),
     opacity: 1.0
   },
   satellite: {
@@ -76,8 +63,9 @@ const map = new maplibregl.Map({
   style: {
     version: 8,
     glyphs: 'https://fonts.openmaptiles.org/{fontstack}/{range}.pbf',
+    sprite: OFM_STYLES.sprite,
     sources: {
-      basemap: BASEMAPS.osm,
+      ...OFM_STYLES.sources,
       'ctr2k': {
         type: 'raster',
         tiles: ['https://siciliahub.github.io/Tiles/ctr_pa_2k/{z}/{x}/{y}.png'],
@@ -395,9 +383,6 @@ const map = new maplibregl.Map({
       }
     },
     layers: [
-      // Background bianco (visibile dove non ci sono tile)
-      { id: 'background', type: 'background', paint: { 'background-color': '#ffffff' } },
-
       // Hillshade — SOTTO il basemap, fornisce profondità al terreno
       {
         id: 'hillshade-layer',
@@ -414,8 +399,8 @@ const map = new maplibregl.Map({
         }
       },
 
-      // Basemap raster — SOPRA hillshade, con opacità per far trasparire il rilievo
-      { id: 'basemap-layer', type: 'raster', source: 'basemap', paint: { 'raster-opacity': 1.0 } },
+      // Basemap vettoriale OpenFreeMap (Positron di default) — SOPRA hillshade
+      ...OFM_STYLES.positron.map(l => ({ ...l })),
 
       // Mappa elevazione colorata — analisi DTM, visibile di default
       {
@@ -1148,16 +1133,54 @@ document.getElementById('tb-home').addEventListener('click', () => {
   map.flyTo({ center: CENTER, zoom: ZOOM, pitch: 60, bearing: -84.5, duration: 900 });
 });
 
+// ── Basemap vettoriale OpenFreeMap — swap layer set (Positron ↔ Fiord) ─────
+// Positron e Fiord non condividono gli stessi id di layer (es. le label usano
+// nomi diversi), quindi si tiene traccia degli id effettivamente aggiunti.
+let activeOfmStyle = 'positron'; // già presente nello style iniziale della mappa
+let currentOfmLayerIds = OFM_STYLES.positron.map(l => l.id);
+
+function removeOfmLayers() {
+  currentOfmLayerIds.forEach(id => { if (map.getLayer(id)) map.removeLayer(id); });
+  currentOfmLayerIds = [];
+  activeOfmStyle = null;
+}
+
+function addOfmLayers(styleName) {
+  if (activeOfmStyle === styleName) return;
+  removeOfmLayers();
+  OFM_STYLES[styleName].forEach(layer => map.addLayer({ ...layer }, 'elevation-layer'));
+  currentOfmLayerIds = OFM_STYLES[styleName].map(l => l.id);
+  activeOfmStyle = styleName;
+}
+
+function ensureSatelliteLayer() {
+  if (!map.getSource('satellite-basemap')) {
+    map.addSource('satellite-basemap', { type: 'raster', tiles: BASEMAPS.satellite.tiles, tileSize: 256, maxzoom: 18 });
+  }
+  if (!map.getLayer('satellite-basemap-layer')) {
+    map.addLayer({ id: 'satellite-basemap-layer', type: 'raster', source: 'satellite-basemap', paint: { 'raster-opacity': BASEMAPS.satellite.opacity } }, 'elevation-layer');
+  }
+}
+
+function removeSatelliteLayer() {
+  if (map.getLayer('satellite-basemap-layer')) map.removeLayer('satellite-basemap-layer');
+}
+
 // ── Toolbar: Basemap ──────────────────────────────────────────────────────
 document.querySelectorAll('#tb-basemaps .tb-radio').forEach(btn => {
   btn.addEventListener('click', function () {
     document.querySelectorAll('#tb-basemaps .tb-radio').forEach(b => b.classList.remove('active'));
     this.classList.add('active');
-    const def = BASEMAPS[this.dataset.basemap];
+    const key = this.dataset.basemap;
+    const def = BASEMAPS[key];
     const isDark = document.body.getAttribute('data-theme') === 'dark';
-    const tiles = (isDark && this.dataset.basemap === 'osm') ? DARK_TILES : def.tiles;
-    map.getSource('basemap').setTiles(tiles);
-    map.setPaintProperty('basemap-layer', 'raster-opacity', def.opacity);
+    if (key === 'osm') {
+      removeSatelliteLayer();
+      addOfmLayers(isDark ? def.darkStyle : def.lightStyle);
+    } else if (key === 'satellite') {
+      removeOfmLayers();
+      ensureSatelliteLayer();
+    }
     const attribEl = document.querySelector('.maplibregl-ctrl-attrib-inner');
     if (attribEl && def.attributionNode) {
       attribEl.replaceChildren(def.attributionNode.cloneNode(true));
@@ -1166,27 +1189,20 @@ document.querySelectorAll('#tb-basemaps .tb-radio').forEach(btn => {
 });
 
 // ── Toolbar: Dark mode ───────────────────────────────────────────────────
-const DARK_TILES = ['https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png'];
-
 function applyDarkMode(dark, save) {
   const moon = document.getElementById('tb-dark-moon');
   const sun  = document.getElementById('tb-dark-sun');
+  const activeBasemap = document.querySelector('#tb-basemaps .tb-radio.active')?.dataset.basemap;
   if (dark) {
     document.body.setAttribute('data-theme', 'dark');
     if (moon) moon.style.display = 'none';
     if (sun)  sun.style.display  = '';
-    const activeBasemap = document.querySelector('#tb-basemaps .tb-radio.active')?.dataset.basemap;
-    if (activeBasemap === 'osm' && map.getSource('basemap')) {
-      map.getSource('basemap').setTiles(DARK_TILES);
-    }
+    if (activeBasemap === 'osm') addOfmLayers(BASEMAPS.osm.darkStyle);
   } else {
     document.body.removeAttribute('data-theme');
     if (moon) moon.style.display = '';
     if (sun)  sun.style.display  = 'none';
-    const activeBasemap = document.querySelector('#tb-basemaps .tb-radio.active')?.dataset.basemap;
-    if (activeBasemap === 'osm' && map.getSource('basemap')) {
-      map.getSource('basemap').setTiles(BASEMAPS.osm.tiles);
-    }
+    if (activeBasemap === 'osm') addOfmLayers(BASEMAPS.osm.lightStyle);
   }
   if (save) localStorage.setItem('palermo-dark-mode', dark ? 'dark' : 'light');
 }
