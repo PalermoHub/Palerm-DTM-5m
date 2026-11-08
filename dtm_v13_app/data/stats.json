@@ -1,0 +1,604 @@
+{
+ "celle_comune": 6380165,
+ "area_km2": 159.49,
+ "dz": {
+  "media": 0.127,
+  "std": 1.738,
+  "min": -84.1,
+  "max": 164.7,
+  "breaks": [
+   -5,
+   -2,
+   -0.5,
+   0.5,
+   2,
+   5
+  ],
+  "classi_pct": [
+   0.22,
+   0.68,
+   7.39,
+   76.24,
+   14.13,
+   1.05,
+   0.29
+  ],
+  "oltre": {
+   "0.5": 23.76,
+   "1": 11.73,
+   "2": 2.24,
+   "5": 0.51
+  }
+ },
+ "ds": {
+  "media": 0.022,
+  "std": 1.43,
+  "pendenza_media_v11": 11.44,
+  "pendenza_media_v13": 11.46,
+  "breaks": [
+   -8,
+   -3,
+   -1,
+   1,
+   3,
+   8
+  ],
+  "classi_pct": [
+   0.19,
+   1.72,
+   7.22,
+   81.53,
+   7.23,
+   1.84,
+   0.27
+  ]
+ },
+ "fuori_comune": {
+  "celle_v13_valide": 2902967,
+  "quota_media": 417.7,
+  "quota_<=1m_pct": 0.25
+ },
+ "fasce_quota": [
+  {
+   "da": -50,
+   "a": 5,
+   "celle": 170293,
+   "media": 0.0,
+   "p95_abs": 0.4
+  },
+  {
+   "da": 5,
+   "a": 50,
+   "celle": 2102515,
+   "media": 0.02,
+   "p95_abs": 0.41
+  },
+  {
+   "da": 50,
+   "a": 200,
+   "celle": 2164770,
+   "media": 0.13,
+   "p95_abs": 1.21
+  },
+  {
+   "da": 200,
+   "a": 500,
+   "celle": 1226897,
+   "media": 0.26,
+   "p95_abs": 2.42
+  },
+  {
+   "da": 500,
+   "a": 1100,
+   "celle": 715690,
+   "media": 0.23,
+   "p95_abs": 1.73
+  }
+ ],
+ "upl": [
+  {
+   "upl": "Vergine Maria",
+   "circ": "VII",
+   "area_km2": 0.92,
+   "dz_media": 0.99,
+   "dz_abs_media": 1.23,
+   "pct_oltre2m": 10.07,
+   "ds_media": 0.2
+  },
+  {
+   "upl": "Partanna Mondello",
+   "circ": "VII",
+   "area_km2": 16.57,
+   "dz_media": 0.28,
+   "dz_abs_media": 1.07,
+   "pct_oltre2m": 7.58,
+   "ds_media": 0.04
+  },
+  {
+   "upl": "Arenella",
+   "circ": "VII",
+   "area_km2": 1.31,
+   "dz_media": 0.43,
+   "dz_abs_media": 0.65,
+   "pct_oltre2m": 6.25,
+   "ds_media": 0.2
+  },
+  {
+   "upl": "Montepellegrino",
+   "circ": "VIII",
+   "area_km2": 7.51,
+   "dz_media": -0.27,
+   "dz_abs_media": 0.56,
+   "pct_oltre2m": 4.15,
+   "ds_media": -0.0
+  },
+  {
+   "upl": "Ciaculli Croce Verde",
+   "circ": "II",
+   "area_km2": 10.71,
+   "dz_media": 0.45,
+   "dz_abs_media": 0.51,
+   "pct_oltre2m": 3.72,
+   "ds_media": 0.05
+  },
+  {
+   "upl": "Borgo Nuovo",
+   "circ": "V",
+   "area_km2": 10.78,
+   "dz_media": 0.28,
+   "dz_abs_media": 0.6,
+   "pct_oltre2m": 3.11,
+   "ds_media": 0.02
+  },
+  {
+   "upl": "San Giovanni Apostolo",
+   "circ": "VI",
+   "area_km2": 5.32,
+   "dz_media": 0.1,
+   "dz_abs_media": 0.46,
+   "pct_oltre2m": 2.82,
+   "ds_media": 0.03
+  },
+  {
+   "upl": "Boccadifalco - Baida",
+   "circ": "IV",
+   "area_km2": 11.54,
+   "dz_media": 0.16,
+   "dz_abs_media": 0.65,
+   "pct_oltre2m": 2.65,
+   "ds_media": 0.03
+  },
+  {
+   "upl": "Chiavelli - S.Maria di Gesù",
+   "circ": "III",
+   "area_km2": 7.46,
+   "dz_media": 0.25,
+   "dz_abs_media": 0.45,
+   "pct_oltre2m": 2.65,
+   "ds_media": 0.01
+  },
+  {
+   "upl": "Resuttana",
+   "circ": "VI",
+   "area_km2": 4.04,
+   "dz_media": -0.21,
+   "dz_abs_media": 0.28,
+   "pct_oltre2m": 2.51,
+   "ds_media": -0.03
+  },
+  {
+   "upl": "Acquasanta",
+   "circ": "VIII",
+   "area_km2": 0.45,
+   "dz_media": -0.11,
+   "dz_abs_media": 0.29,
+   "pct_oltre2m": 1.72,
+   "ds_media": -0.1
+  },
+  {
+   "upl": null,
+   "circ": null,
+   "area_km2": 0.3,
+   "dz_media": 0.19,
+   "dz_abs_media": 0.45,
+   "pct_oltre2m": 1.41,
+   "ds_media": 0.13
+  },
+  {
+   "upl": "Tommaso Natale - Sant'Ambrogio - Cardillo",
+   "circ": "VII",
+   "area_km2": 7.73,
+   "dz_media": -0.0,
+   "dz_abs_media": 0.33,
+   "pct_oltre2m": 1.16,
+   "ds_media": 0.01
+  },
+  {
+   "upl": "Pallavicino",
+   "circ": "VII",
+   "area_km2": 2.29,
+   "dz_media": -0.06,
+   "dz_abs_media": 0.15,
+   "pct_oltre2m": 0.99,
+   "ds_media": -0.01
+  },
+  {
+   "upl": "Villagrazia",
+   "circ": "III",
+   "area_km2": 8.16,
+   "dz_media": 0.16,
+   "dz_abs_media": 0.47,
+   "pct_oltre2m": 0.93,
+   "ds_media": 0.01
+  },
+  {
+   "upl": "San Lorenzo",
+   "circ": "VI",
+   "area_km2": 9.34,
+   "dz_media": 0.27,
+   "dz_abs_media": 0.45,
+   "pct_oltre2m": 0.71,
+   "ds_media": 0.01
+  },
+  {
+   "upl": "Cruillas",
+   "circ": "VI",
+   "area_km2": 5.29,
+   "dz_media": -0.02,
+   "dz_abs_media": 0.21,
+   "pct_oltre2m": 0.57,
+   "ds_media": 0.01
+  },
+  {
+   "upl": "Villa Sperlinga",
+   "circ": "VIII",
+   "area_km2": 0.65,
+   "dz_media": 0.03,
+   "dz_abs_media": 0.08,
+   "pct_oltre2m": 0.49,
+   "ds_media": 0.01
+  },
+  {
+   "upl": "S.Rosalia",
+   "circ": "IV",
+   "area_km2": 1.89,
+   "dz_media": 0.03,
+   "dz_abs_media": 0.15,
+   "pct_oltre2m": 0.31,
+   "ds_media": -0.0
+  },
+  {
+   "upl": "Sferracavallo",
+   "circ": "VII",
+   "area_km2": 1.33,
+   "dz_media": -0.14,
+   "dz_abs_media": 0.2,
+   "pct_oltre2m": 0.24,
+   "ds_media": -0.0
+  },
+  {
+   "upl": "Falsomiele Borgo Ulivia",
+   "circ": "III",
+   "area_km2": 1.62,
+   "dz_media": 0.06,
+   "dz_abs_media": 0.1,
+   "pct_oltre2m": 0.16,
+   "ds_media": -0.02
+  },
+  {
+   "upl": "Cantieri",
+   "circ": "VIII",
+   "area_km2": 0.8,
+   "dz_media": -0.01,
+   "dz_abs_media": 0.07,
+   "pct_oltre2m": 0.12,
+   "ds_media": 0.06
+  },
+  {
+   "upl": "S.Francesco di Paola - Terrasanta",
+   "circ": "VIII",
+   "area_km2": 0.79,
+   "dz_media": 0.05,
+   "dz_abs_media": 0.08,
+   "pct_oltre2m": 0.11,
+   "ds_media": 0.0
+  },
+  {
+   "upl": "Oreto Guadagna",
+   "circ": "III",
+   "area_km2": 0.9,
+   "dz_media": 0.06,
+   "dz_abs_media": 0.09,
+   "pct_oltre2m": 0.07,
+   "ds_media": -0.02
+  },
+  {
+   "upl": "Castellammare o Loggia",
+   "circ": "I",
+   "area_km2": 0.54,
+   "dz_media": 0.01,
+   "dz_abs_media": 0.09,
+   "pct_oltre2m": 0.05,
+   "ds_media": 0.03
+  },
+  {
+   "upl": "Borgo Vecchio - Principe Scordia",
+   "circ": "VIII",
+   "area_km2": 1.01,
+   "dz_media": 0.02,
+   "dz_abs_media": 0.07,
+   "pct_oltre2m": 0.04,
+   "ds_media": 0.02
+  },
+  {
+   "upl": "Marchese di Villabianca - Sampolo",
+   "circ": "VIII",
+   "area_km2": 0.73,
+   "dz_media": -0.0,
+   "dz_abs_media": 0.07,
+   "pct_oltre2m": 0.04,
+   "ds_media": -0.04
+  },
+  {
+   "upl": "Malaspina - Leonardo da Vinci",
+   "circ": "VIII",
+   "area_km2": 0.54,
+   "dz_media": 0.04,
+   "dz_abs_media": 0.06,
+   "pct_oltre2m": 0.03,
+   "ds_media": -0.02
+  },
+  {
+   "upl": "Oreto Perez",
+   "circ": "III",
+   "area_km2": 1.13,
+   "dz_media": 0.03,
+   "dz_abs_media": 0.1,
+   "pct_oltre2m": 0.02,
+   "ds_media": 0.01
+  },
+  {
+   "upl": "Corso dei Mille - S.Erasmo",
+   "circ": "II",
+   "area_km2": 0.83,
+   "dz_media": 0.02,
+   "dz_abs_media": 0.07,
+   "pct_oltre2m": 0.01,
+   "ds_media": 0.02
+  },
+  {
+   "upl": "Palazzo Reale o Albergaria",
+   "circ": "I",
+   "area_km2": 0.6,
+   "dz_media": 0.04,
+   "dz_abs_media": 0.1,
+   "pct_oltre2m": 0.01,
+   "ds_media": 0.0
+  },
+  {
+   "upl": "Roccella Acqua dei Corsari",
+   "circ": "II",
+   "area_km2": 6.36,
+   "dz_media": 0.03,
+   "dz_abs_media": 0.07,
+   "pct_oltre2m": 0.01,
+   "ds_media": 0.01
+  },
+  {
+   "upl": "Brancaccio Conte Federico",
+   "circ": "II",
+   "area_km2": 1.67,
+   "dz_media": 0.04,
+   "dz_abs_media": 0.07,
+   "pct_oltre2m": 0.01,
+   "ds_media": 0.0
+  },
+  {
+   "upl": "Mezzomonreale",
+   "circ": "IV",
+   "area_km2": 7.71,
+   "dz_media": 0.05,
+   "dz_abs_media": 0.1,
+   "pct_oltre2m": 0.01,
+   "ds_media": 0.01
+  },
+  {
+   "upl": "Montegrappa",
+   "circ": "IV",
+   "area_km2": 0.77,
+   "dz_media": 0.05,
+   "dz_abs_media": 0.07,
+   "pct_oltre2m": 0.01,
+   "ds_media": 0.01
+  },
+  {
+   "upl": "Zisa - Ingastone",
+   "circ": "V",
+   "area_km2": 0.59,
+   "dz_media": 0.04,
+   "dz_abs_media": 0.08,
+   "pct_oltre2m": 0.0,
+   "ds_media": 0.02
+  },
+  {
+   "upl": "Monte di Pietà  o Seralcadi",
+   "circ": "I",
+   "area_km2": 0.54,
+   "dz_media": 0.03,
+   "dz_abs_media": 0.11,
+   "pct_oltre2m": 0.0,
+   "ds_media": -0.0
+  },
+  {
+   "upl": "San Filippo Neri",
+   "circ": "VII",
+   "area_km2": 1.25,
+   "dz_media": -0.02,
+   "dz_abs_media": 0.06,
+   "pct_oltre2m": 0.0,
+   "ds_media": -0.01
+  },
+  {
+   "upl": "Croci - Ruggero Settimo",
+   "circ": "VIII",
+   "area_km2": 0.53,
+   "dz_media": 0.04,
+   "dz_abs_media": 0.06,
+   "pct_oltre2m": 0.0,
+   "ds_media": -0.0
+  },
+  {
+   "upl": "Parlatore - Serradifalco",
+   "circ": "V",
+   "area_km2": 0.44,
+   "dz_media": 0.04,
+   "dz_abs_media": 0.06,
+   "pct_oltre2m": 0.0,
+   "ds_media": -0.01
+  },
+  {
+   "upl": "Vittorio Veneto",
+   "circ": "VIII",
+   "area_km2": 0.66,
+   "dz_media": 0.01,
+   "dz_abs_media": 0.05,
+   "pct_oltre2m": 0.0,
+   "ds_media": 0.0
+  },
+  {
+   "upl": "Settecannoli",
+   "circ": "II",
+   "area_km2": 1.59,
+   "dz_media": 0.04,
+   "dz_abs_media": 0.08,
+   "pct_oltre2m": 0.0,
+   "ds_media": 0.01
+  },
+  {
+   "upl": "Tribunali o Kalsa",
+   "circ": "I",
+   "area_km2": 0.8,
+   "dz_media": 0.02,
+   "dz_abs_media": 0.08,
+   "pct_oltre2m": 0.0,
+   "ds_media": 0.02
+  },
+  {
+   "upl": "Olivuzza",
+   "circ": "V",
+   "area_km2": 0.41,
+   "dz_media": 0.04,
+   "dz_abs_media": 0.05,
+   "pct_oltre2m": 0.0,
+   "ds_media": -0.0
+  },
+  {
+   "upl": "Cuba - Calatafimi",
+   "circ": "IV",
+   "area_km2": 1.77,
+   "dz_media": 0.05,
+   "dz_abs_media": 0.1,
+   "pct_oltre2m": 0.0,
+   "ds_media": -0.0
+  },
+  {
+   "upl": "Zisa - 4 Camere",
+   "circ": "V",
+   "area_km2": 0.63,
+   "dz_media": 0.05,
+   "dz_abs_media": 0.09,
+   "pct_oltre2m": 0.0,
+   "ds_media": 0.0
+  },
+  {
+   "upl": "Noce",
+   "circ": "V",
+   "area_km2": 0.61,
+   "dz_media": 0.04,
+   "dz_abs_media": 0.06,
+   "pct_oltre2m": 0.0,
+   "ds_media": -0.0
+  },
+  {
+   "upl": "Principe di Palagonia",
+   "circ": "VIII",
+   "area_km2": 0.83,
+   "dz_media": 0.03,
+   "dz_abs_media": 0.05,
+   "pct_oltre2m": 0.0,
+   "ds_media": -0.0
+  },
+  {
+   "upl": "Notarbartolo - Giardino Inglese",
+   "circ": "VIII",
+   "area_km2": 0.46,
+   "dz_media": 0.03,
+   "dz_abs_media": 0.08,
+   "pct_oltre2m": 0.0,
+   "ds_media": 0.02
+  },
+  {
+   "upl": "Passo di Rigano",
+   "circ": "V",
+   "area_km2": 1.48,
+   "dz_media": 0.06,
+   "dz_abs_media": 0.09,
+   "pct_oltre2m": 0.0,
+   "ds_media": 0.0
+  },
+  {
+   "upl": "Altarello - Tasca Lanza",
+   "circ": "IV",
+   "area_km2": 1.76,
+   "dz_media": 0.06,
+   "dz_abs_media": 0.07,
+   "pct_oltre2m": 0.0,
+   "ds_media": 0.0
+  },
+  {
+   "upl": "Leonardo da Vinci - Di Blasi",
+   "circ": "V",
+   "area_km2": 1.12,
+   "dz_media": 0.05,
+   "dz_abs_media": 0.08,
+   "pct_oltre2m": 0.0,
+   "ds_media": 0.0
+  },
+  {
+   "upl": "Uditore",
+   "circ": "V",
+   "area_km2": 1.38,
+   "dz_media": 0.03,
+   "dz_abs_media": 0.06,
+   "pct_oltre2m": 0.0,
+   "ds_media": 0.0
+  },
+  {
+   "upl": "Villa Tasca",
+   "circ": "IV",
+   "area_km2": 0.48,
+   "dz_media": 0.04,
+   "dz_abs_media": 0.07,
+   "pct_oltre2m": 0.0,
+   "ds_media": 0.0
+  },
+  {
+   "upl": "Patti - Villaggio Ruffini",
+   "circ": "VII",
+   "area_km2": 1.32,
+   "dz_media": -0.05,
+   "dz_abs_media": 0.08,
+   "pct_oltre2m": 0.0,
+   "ds_media": 0.01
+  },
+  {
+   "upl": "Bonagia",
+   "circ": "III",
+   "area_km2": 0.59,
+   "dz_media": 0.04,
+   "dz_abs_media": 0.07,
+   "pct_oltre2m": 0.0,
+   "ds_media": -0.0
+  }
+ ]
+}
