@@ -58,5 +58,11 @@ def chip(x,big,small,w=170):
     d.text((x+14,514),big,font=font("Bold",28),fill=(255,255,255)); d.text((x+14,553),small,font=font("Regular",16),fill=(170,182,212))
 chip(60,"6,4 M","celle confrontate",168); chip(240,"+165/−84 m","variazione quota",190); chip(442,"24 %","celle oltre ±0,5 m",172)
 d.text((60,596),"OpenDataSicilia.it  ·  mappa interattiva su dati aperti",font=font("Bold",18),fill=(150,164,200))
+# logo OpenDataSicilia (esagono) in alto a destra, con ombra
+logo = Image.open(f"{ROOT}/img/opendatasicilia.png").convert("RGBA"); lh = 150
+logo = logo.resize((int(logo.width*lh/logo.height), lh), Image.LANCZOS)
+lx, ly = W-logo.width-44, 40
+sh = Image.new("RGBA",(W,H),(0,0,0,0)); sh.paste((0,0,0,150),(lx,ly+4),logo.split()[3]); card.alpha_composite(sh.filter(ImageFilter.GaussianBlur(8)))
+card.alpha_composite(logo,(lx,ly))
 card.convert("RGB").save(f"{ROOT}/img/social_card.jpg",quality=90)
 print("ok")

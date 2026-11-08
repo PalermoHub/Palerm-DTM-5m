@@ -34,6 +34,15 @@
 <body>
 
 <div id="map"></div>
+<div id="map-a" class="map-ov" aria-hidden="true"></div>
+<div id="map-b" class="map-ov" aria-hidden="true"></div>
+<div id="cmp" hidden>
+  <div id="cmp-line"></div>
+  <button id="cmp-handle" type="button" role="slider" aria-label="Confronto rilievo v1.1 e v1.3" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
+  </button>
+  <span class="cmp-tag cmp-l">v1.1</span><span class="cmp-tag cmp-r">v1.3</span>
+</div>
 
 <!-- titolo -->
 <header id="titlebar">
@@ -130,9 +139,16 @@
         <div class="ctl-row"><input id="op-range" type="range" min="10" max="100" value="85" aria-label="Opacità del layer"><span id="op-val">85%</span></div>
         <div id="mix-wrap" hidden>
           <div class="rp-label" style="margin-top:10px">Confronto rilievo</div>
+          <div class="seg" role="group" aria-label="Tipo di confronto" style="margin-bottom:10px">
+            <button class="seg-btn active" data-cmp="fade">Dissolvenza</button>
+            <button class="seg-btn" data-cmp="slider">Slider</button>
+          </div>
+          <p class="note" id="cmp-note" hidden style="margin-top:0">Trascina la maniglia sulla mappa (o usa le frecce da tastiera): a sinistra la v1.1, a destra la v1.3. Nel ranking delle zone, il pulsante ⇆ apre il confronto già centrato su quell’area.</p>
+          <div id="fade-ctl">
           <div class="mix-ends"><span>v1.1</span><span>v1.3</span></div>
           <input id="mix-range" type="range" min="0" max="100" value="100" aria-label="Dissolvenza tra v1.1 e v1.3">
           <button id="btn-blink" class="pill">Alterna v1.1 / v1.3</button>
+          </div>
         </div>
       </section>
 

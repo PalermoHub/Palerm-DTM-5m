@@ -129,12 +129,21 @@ function syncPanelPos(open) { ['map-scale', 'attrib-wrap', 'ods-logo'].forEach(i
 const el = id => document.getElementById(id);
 let opacity = 0.85;
 let mix = 1;
+let cmpOn = false;   // confronto a slider scelto (solo modalità Rilievo)
+let cmpPct = 50;     // posizione maniglia in %
+let ovA = null, ovB = null;
+const cmpActive = () => mode === 'rilievo' && cmpOn && !is3d;
 
 function applyMode() {
   const on = new Set(MODES[mode].layers);
-  ALL_LAYERS.forEach(id => map.setLayoutProperty(id, 'visibility', on.has(id) ? 'visible' : 'none'));
+  const cmp = cmpActive();
+  ALL_LAYERS.forEach(id => map.setLayoutProperty(id, 'visibility', on.has(id) && !(cmp && (id === 'rel11' || id === 'rel13')) ? 'visible' : 'none'));
   const rilievo = mode === 'rilievo';
   el('mix-wrap').hidden = !rilievo;
+  el('fade-ctl').hidden = cmpOn;
+  el('cmp-note').hidden = !cmpOn;
+  document.querySelectorAll('[data-cmp]').forEach(b => b.classList.toggle('active', (b.dataset.cmp === 'slider') === cmpOn));
+  setCompare(cmp);
   applyOpacity();
   document.querySelectorAll('.rp-card').forEach(c => {
     const a = c.dataset.mode === mode;
@@ -146,6 +155,7 @@ function applyMode() {
 
 function applyOpacity() {
   if (mode === 'rilievo') {
+    [ovA, ovB].forEach(o => o && o.isStyleLoaded() && o.setPaintProperty('rel', 'raster-opacity', opacity));
     map.setPaintProperty('rel11', 'raster-opacity', opacity);
     map.setPaintProperty('rel13', 'raster-opacity', opacity * mix);
   } else {
@@ -164,7 +174,7 @@ function legendData() {
   }
   if (mode === 'rilievo') {
     return { title: 'Rilievo ombreggiato', items: [],
-      note: 'Trascina il cursore per sfumare dalla v1.1 alla v1.3. Le differenze di ombreggiatura sono sottili: la v1.3 appare più liscia sui versanti e senza gli artefatti di allineamento della v1.2.' };
+      note: (cmpOn ? '' : 'Trascina il cursore per sfumare dalla v1.1 alla v1.3. ') + 'Le differenze di ombreggiatura sono sottili: la v1.3 appare più liscia sui versanti e senza gli artefatti di allineamento della v1.2.' };
   }
   const names = new Map();
   (map.querySourceFeatures('fonti') || []).forEach(f => names.set(f.properties.Name, f.properties.Date));
@@ -244,6 +254,7 @@ function buildUpl() {
   const box = el('upl-list'); box.replaceChildren();
   const rows = showAll ? stats.upl : stats.upl.slice(0, 8);
   rows.forEach(r => {
+    const wrap = document.createElement('div'); wrap.className = 'upl-wrap';
     const b = document.createElement('button'); b.className = 'upl-row'; b.type = 'button';
     const n = document.createElement('span'); n.className = 'upl-name'; n.textContent = r.upl;
     const v = document.createElement('span'); v.className = 'upl-val'; v.textContent = fmt(r.pct_oltre2m) + '%';
@@ -251,16 +262,32 @@ function buildUpl() {
     m.textContent = `Circ. ${r.circ} · Δ medio ${sgn(r.dz_media, 2)} m · ${fmt(r.area_km2)} km²`;
     b.append(n, v, m);
     b.addEventListener('click', () => focusUpl(r.upl));
-    box.append(b);
+    const c = document.createElement('button'); c.className = 'upl-cmp'; c.type = 'button'; c.textContent = '⇆';
+    c.title = 'Confronta v1.1 / v1.3 su questa zona'; c.setAttribute('aria-label', 'Confronta v1.1 e v1.3 su ' + r.upl);
+    c.addEventListener('click', () => compareUpl(r.upl));
+    wrap.append(b, c); box.append(wrap);
   });
   el('upl-more').textContent = showAll ? 'Mostra solo le prime 8' : 'Mostra tutte le zone';
+}
+
+function setSel(fid) {
+  const f = ['==', ['get', 'fid'], fid];
+  map.setFilter('upl-sel', f);
+  [ovA, ovB].forEach(o => o && o.isStyleLoaded() && o.setFilter('upl-sel', f));
+}
+
+function compareUpl(name) {
+  if (is3d) set3d(false);
+  mode = 'rilievo'; cmpOn = true; cmpPct = 50;
+  applyMode();
+  focusUpl(name);
 }
 
 function focusUpl(name) {
   if (!uplGeo) return;
   const f = uplGeo.features.find(x => x.properties.UPL === name);
   if (!f) return;
-  map.setFilter('upl-sel', ['==', ['get', 'fid'], f.properties.fid]);
+  setSel(f.properties.fid);
   const b = new maplibregl.LngLatBounds();
   const walk = c => (typeof c[0] === 'number' ? b.extend(c) : c.forEach(walk));
   walk(f.geometry.coordinates);
@@ -295,6 +322,7 @@ function bindPopup() {
   map.on('mouseenter', 'upl-hit', () => { map.getCanvas().style.cursor = 'pointer'; });
   map.on('mouseleave', 'upl-hit', () => { map.getCanvas().style.cursor = ''; });
   map.on('click', 'upl-hit', e => {
+    if (cmpActive()) { setSel(e.features[0].properties.fid); return; }
     const p = e.features[0].properties;
     const r = stats && stats.upl.find(x => x.upl === p.UPL);
     const pop = new maplibregl.Popup({ maxWidth: '280px' }).setLngLat(e.lngLat);
@@ -311,8 +339,69 @@ function bindPopup() {
       add('Area', fmt(r.area_km2) + ' km²');
     } else add('Dati', 'non disponibili');
     pop.setDOMContent(root).addTo(map);
-    map.setFilter('upl-sel', ['==', ['get', 'fid'], p.fid]);
+    setSel(p.fid);
   });
+}
+
+// ── Confronto a slider (due mappe trasparenti sincronizzate sopra la principale) ──
+function makeOverlay(container, path) {
+  const o = new maplibregl.Map({
+    container, interactive: false, attributionControl: false, fadeDuration: 0,
+    center: map.getCenter(), zoom: map.getZoom(), bearing: map.getBearing(), pitch: 0,
+    style: {
+      version: 8,
+      sources: { rel: tms(path), upl: { type: 'geojson', data: `${BASE_URL}../docs/geojson/upl.geojson`, promoteId: 'fid' } },
+      layers: [
+        { id: 'rel', type: 'raster', source: 'rel', paint: { 'raster-opacity': opacity, 'raster-fade-duration': 0 } },
+        { id: 'upl-line', type: 'line', source: 'upl', layout: { visibility: el('tb-upl').classList.contains('on') ? 'visible' : 'none' },
+          paint: { 'line-color': '#1a2a50', 'line-opacity': 0.35, 'line-width': 0.8 } },
+        { id: 'upl-sel', type: 'line', source: 'upl', filter: map.getFilter('upl-sel'), paint: { 'line-color': '#e07800', 'line-width': 3 } },
+      ],
+    },
+  });
+  o.on('load', () => { applyOpacity(); o.setFilter('upl-sel', map.getFilter('upl-sel')); });
+  return o;
+}
+function syncOverlays() {
+  const v = { center: map.getCenter(), zoom: map.getZoom(), bearing: map.getBearing(), pitch: 0 };
+  [ovA, ovB].forEach(o => o && o.jumpTo(v));
+}
+function setCmpPos(pct) {
+  cmpPct = Math.max(2, Math.min(98, pct));
+  el('map-a').style.clipPath = `inset(0 ${100 - cmpPct}% 0 0)`;
+  el('map-b').style.clipPath = `inset(0 0 0 ${cmpPct}%)`;
+  el('cmp-line').style.left = el('cmp-handle').style.left = cmpPct + '%';
+  el('cmp-handle').setAttribute('aria-valuenow', Math.round(cmpPct));
+}
+function setCompare(on) {
+  if (on && !ovA) {
+    ovA = makeOverlay('map-a', '../docs/tiles/rilievo');
+    ovB = makeOverlay('map-b', 'tiles/rilievo_v13');
+    map.on('move', syncOverlays);
+    map.on('resize', () => { ovA.resize(); ovB.resize(); });
+  }
+  el('cmp').hidden = !on;
+  el('map-a').classList.toggle('on', on);
+  el('map-b').classList.toggle('on', on);
+  if (on) { ovA.resize(); ovB.resize(); syncOverlays(); setCmpPos(cmpPct); }
+}
+function bindCompare() {
+  const h = el('cmp-handle');
+  const pos = e => setCmpPos(e.clientX / window.innerWidth * 100);
+  h.addEventListener('pointerdown', e => { h.setPointerCapture(e.pointerId); h.dataset.drag = '1'; e.preventDefault(); });
+  h.addEventListener('pointermove', e => { if (h.dataset.drag) pos(e); });
+  h.addEventListener('pointerup', () => { delete h.dataset.drag; });
+  h.addEventListener('pointercancel', () => { delete h.dataset.drag; });
+  h.addEventListener('keydown', e => {
+    const d = { ArrowLeft: -2, ArrowDown: -2, ArrowRight: 2, ArrowUp: 2, Home: -100, End: 100 }[e.key];
+    if (d !== undefined) { e.preventDefault(); setCmpPos(cmpPct + d); }
+  });
+  document.querySelectorAll('[data-cmp]').forEach(b => b.addEventListener('click', () => {
+    cmpOn = b.dataset.cmp === 'slider';
+    if (cmpOn && is3d) set3d(false);
+    applyMode();
+    renderLegend();
+  }));
 }
 
 // ── Terreno 3D ─────────────────────────────────────────────
@@ -320,11 +409,12 @@ let is3d = false, dem = 'v13', exag = 1.5;
 function applyTerrain() { map.setTerrain({ source: dem === 'v13' ? 'terrain13' : 'terrain11', exaggeration: exag }); }
 function set3d(on) {
   is3d = on;
+  if (on) applyMode();
   el('tb-3d').classList.toggle('active', on);
   el('tb-3d').setAttribute('aria-pressed', on);
   el('sec-3d').hidden = !on;
   if (on) { applyTerrain(); map.easeTo({ pitch: 62, bearing: -25, duration: 1200 }); }
-  else { map.setTerrain(null); map.easeTo({ pitch: 0, bearing: 0, duration: 800 }); }
+  else { map.setTerrain(null); map.easeTo({ pitch: 0, bearing: 0, duration: 800 }); applyMode(); }
 }
 
 // ── Toolbar e pannello ─────────────────────────────────────
@@ -344,6 +434,7 @@ function bindUi() {
     const on = e.currentTarget.classList.toggle('on');
     e.currentTarget.setAttribute('aria-pressed', on);
     map.setLayoutProperty('upl-line', 'visibility', on ? 'visible' : 'none');
+    [ovA, ovB].forEach(o => o && o.isStyleLoaded() && o.setLayoutProperty('upl-line', 'visibility', on ? 'visible' : 'none'));
   });
   el('tb-ctr').addEventListener('click', e => {
     const on = e.currentTarget.classList.toggle('on');
@@ -363,7 +454,7 @@ function bindUi() {
   }));
   el('ex-range').addEventListener('input', e => { exag = e.target.value / 10; el('ex-val').textContent = '×' + fmt(exag); if (is3d) applyTerrain(); });
   el('tb-home').addEventListener('click', () => {
-    map.setFilter('upl-sel', ['==', ['get', 'fid'], -1]);
+    setSel(-1);
     map.flyTo({ center: CENTER, zoom: ZOOM, pitch: 0, bearing: 0 });
   });
   el('rp-toggle').addEventListener('click', () => {
@@ -398,6 +489,7 @@ function toast(msg) { const t = el('toast'); t.textContent = msg; t.hidden = fal
 // ── Avvio ──────────────────────────────────────────────────
 buildCards();
 bindUi();
+bindCompare();
 map.on('load', async () => {
   applyMode();
   bindPopup();
