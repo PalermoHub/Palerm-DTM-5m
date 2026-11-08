@@ -159,6 +159,11 @@
           <button class="seg-btn" data-dem="v11">DEM v1.1</button>
         </div>
         <div class="ctl-row" style="margin-top:10px"><input id="ex-range" type="range" min="10" max="40" value="15" aria-label="Esagerazione verticale"><span id="ex-val">×1,5</span></div>
+        <div class="seg" role="group" aria-label="Aspetto del terreno" style="margin-top:10px">
+          <button class="seg-btn active" data-photo="off">Mappe</button>
+          <button class="seg-btn" data-photo="on">Foto satellitare</button>
+        </div>
+        <div id="shade-ctl" hidden><div class="rp-label" style="margin-top:10px">Ombreggiatura del rilievo</div><div class="ctl-row"><input id="shade-range" type="range" min="0" max="100" value="35" aria-label="Ombreggiatura del rilievo"><span id="shade-val">35%</span></div></div>
         <p class="note">Le mappe si adagiano sul rilievo. Passa da DEM v1.1 a v1.3 per vedere le differenze di forma. Trascina con il tasto destro per inclinare e ruotare.</p>
       </section>
 
