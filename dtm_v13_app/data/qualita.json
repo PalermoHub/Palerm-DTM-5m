@@ -1,0 +1,1722 @@
+{
+ "confronto": {
+  "celle_comuni": 9287903,
+  "solo_x": 1200,
+  "solo_y": 0,
+  "identiche_pct": 95.22713577004411,
+  "diverse_pct": 4.610717833724147,
+  "oltre": {
+   "0.5": 1.6216792961769735,
+   "1": 0.6733059120018803,
+   "2": 0.2602955694089398,
+   "5": 0.12052236118314327
+  },
+  "media": 0.026205220751134104,
+  "std": 1.3141792876039426,
+  "min": -48.4381103515625,
+  "max": 168.73694610595703
+ },
+ "origine": {
+  "file": "HRDTM5m",
+  "record": "https://zenodo.org/records/18872933",
+  "md5_sorgente": "0edd85d1e7cb50ff5f98cd8faa6b00d2",
+  "bbox": [
+   7108790.0,
+   4207540.0,
+   7127195.0,
+   4226900.0
+  ],
+  "crs": "EPSG:6875",
+  "md5_ritaglio": "8cf4ed7c67fb8845525c2989bb8faaa9",
+  "generato_il": "2026-11-09",
+  "script": "scripts/genera_qualita.py",
+  "v13": {
+   "record": "https://zenodo.org/records/24009736",
+   "file": "HRDM5m_20261030_cog.tif",
+   "md5_sorgente": "24071f2a3cbbedece5650454579f660e",
+   "ritaglio": "dati/dtm_v1.3/palermo_dtm5m_v1.3.tif"
+  },
+  "maschera": {
+   "file": "HRDTM5m_Mask_20mres.gpkg",
+   "md5": "3538391dd319878f2fafcae58c36d961"
+  },
+  "dsm": {
+   "file": "dati/relief/ndsm/dsm_32633.tif",
+   "crs": "EPSG:32633",
+   "risoluzione_m": 2
+  },
+  "griglia": {
+   "crs": "EPSG:6875",
+   "cella_m": 5.0,
+   "righe": 3872,
+   "colonne": 3681,
+   "origine_x": 7108790.0,
+   "origine_y": 4226900.0,
+   "bbox_wgs84": [
+    13.24426,
+    38.04836,
+    13.45125,
+    38.22541
+   ]
+  },
+  "soglie": {
+   "diversa_m": 0.01,
+   "blocco_celle": 100,
+   "blocco_min_celle": 2000,
+   "blocco_frazione": 0.5,
+   "cluster_m": 5.0,
+   "bordo_celle": 20
+  },
+  "calcolato_il": "2026-11-09"
+ },
+ "concentrazione": {
+  "blocchi": 962,
+  "sotto_1pct": 847,
+  "sopra_20pct": 59,
+  "sopra_50pct": 44,
+  "mediana_pct": 0.0,
+  "quota_celle_nel_10pct_top": 99.04262329276906
+ },
+ "regioni": [
+  {
+   "id": 1,
+   "celle_blocchi": 370000,
+   "blocchi": 37,
+   "celle_valide": 370000,
+   "area_km2": 9.25,
+   "lon": 13.26457,
+   "lat": 38.15295,
+   "quota_media": 522.9243478169931,
+   "media_d": 0.01417737963392928,
+   "std_d": 0.8560168883647319,
+   "oltre05_pct": 28.055945945945947,
+   "diverse_pct": 88.55567567567567,
+   "bbox_wgs84": [
+    13.2435,
+    38.12569,
+    13.28825,
+    38.1803
+   ]
+  },
+  {
+   "id": 2,
+   "celle_blocchi": 40000,
+   "blocchi": 4,
+   "celle_valide": 33004,
+   "area_km2": 0.8251,
+   "lon": 13.3082,
+   "lat": 38.21685,
+   "quota_media": 335.1539186083007,
+   "media_d": 7.269987182439984,
+   "std_d": 20.05104796222262,
+   "oltre05_pct": 61.51375590837475,
+   "diverse_pct": 73.20324809114047,
+   "bbox_wgs84": [
+    13.30144,
+    38.21113,
+    13.31263,
+    38.22479
+   ]
+  },
+  {
+   "id": 3,
+   "celle_blocchi": 20000,
+   "blocchi": 2,
+   "celle_valide": 10517,
+   "area_km2": 0.262925,
+   "lon": 13.32652,
+   "lat": 38.20967,
+   "quota_media": 20.456077533805974,
+   "media_d": 0.061975778041542647,
+   "std_d": 0.3799495925650446,
+   "oltre05_pct": 9.460872872492155,
+   "diverse_pct": 56.41342588190549,
+   "bbox_wgs84": [
+    13.32414,
+    38.20643,
+    13.32969,
+    38.21551
+   ]
+  },
+  {
+   "id": 4,
+   "celle_blocchi": 10000,
+   "blocchi": 1,
+   "celle_valide": 5196,
+   "area_km2": 0.1299,
+   "lon": 13.25814,
+   "lat": 38.1994,
+   "quota_media": 27.266855254657482,
+   "media_d": -0.18715027965993938,
+   "std_d": 1.2751247892570376,
+   "oltre05_pct": 28.310238645111625,
+   "diverse_pct": 77.44418783679754,
+   "bbox_wgs84": [
+    13.25531,
+    38.19816,
+    13.26095,
+    38.20273
+   ]
+  }
+ ],
+ "traslazione": {
+  "dx_m": -1.0000000000000009,
+  "dy_m": -1.0000000000000009,
+  "rmse_0": 0.8628102106995877,
+  "rmse_min": 0.5726283365549739,
+  "regione_id": 1
+ },
+ "pendenza": [
+  {
+   "da": 0,
+   "a": 2,
+   "celle": 2211313,
+   "diverse_pct": 0.6713658355917954,
+   "oltre2_pct": 0.007054632247899777
+  },
+  {
+   "da": 2,
+   "a": 5,
+   "celle": 1476660,
+   "diverse_pct": 1.9132366286078042,
+   "oltre2_pct": 0.015304809502525971
+  },
+  {
+   "da": 5,
+   "a": 10,
+   "celle": 987254,
+   "diverse_pct": 5.474680274782376,
+   "oltre2_pct": 0.026133092395675277
+  },
+  {
+   "da": 10,
+   "a": 20,
+   "celle": 1578650,
+   "diverse_pct": 7.751686567636905,
+   "oltre2_pct": 0.13783929306686094
+  },
+  {
+   "da": 20,
+   "a": 30,
+   "celle": 1665151,
+   "diverse_pct": 7.724044245837164,
+   "oltre2_pct": 0.29312656930212333
+  },
+  {
+   "da": 30,
+   "a": 90,
+   "celle": 1351443,
+   "diverse_pct": 5.316391442332381,
+   "oltre2_pct": 1.197534783191004
+  }
+ ],
+ "bordi": [
+  {
+   "da": 0,
+   "a": 2,
+   "celle": 17432,
+   "diverse_pct": 47.355438274437816,
+   "oltre2_pct": 1.6922900413033501
+  },
+  {
+   "da": 2,
+   "a": 5,
+   "celle": 26681,
+   "diverse_pct": 44.33866796596829,
+   "oltre2_pct": 3.747985457816424
+  },
+  {
+   "da": 5,
+   "a": 20,
+   "celle": 108707,
+   "diverse_pct": 17.988721977425556,
+   "oltre2_pct": 4.024579833865344
+  },
+  {
+   "da": 20,
+   "a": null,
+   "celle": 9135083,
+   "diverse_pct": 4.253918656239905,
+   "oltre2_pct": 0.2025816295265188
+  }
+ ],
+ "fonti": [
+  {
+   "nome": "DTM 2m - ATA 2012 2013",
+   "data": "2012-2013",
+   "celle": 9262246,
+   "area_pct": 99.72375895829231,
+   "diverse_pct": 4.591748049015325,
+   "oltre05_pct": 1.615742013330244,
+   "oltre2_pct": 0.2597426153440537
+  },
+  {
+   "nome": "(fuori dalla maschera fonti)",
+   "data": null,
+   "celle": 24595,
+   "area_pct": 0.2648068137662506,
+   "diverse_pct": 9.461272616385445,
+   "oltre05_pct": 2.9477536084570035,
+   "oltre2_pct": 0.357796300060988
+  },
+  {
+   "nome": "TINITALY 1.1",
+   "data": null,
+   "celle": 1062,
+   "area_pct": 0.01143422794144168,
+   "diverse_pct": 57.72128060263653,
+   "oltre05_pct": 22.693032015065913,
+   "oltre2_pct": 2.824858757062147
+  }
+ ],
+ "caso1": {
+  "cluster_celle": 6079,
+  "area_km2": 0.151975,
+  "media_d": 36.31374528859473,
+  "lon": 13.30722,
+  "lat": 38.21997,
+  "bbox_wgs84": [
+   13.30189,
+   38.21836,
+   13.31139,
+   38.2214
+  ],
+  "quota_x": 213.47057109625055,
+  "quota_y": 249.78431638484528,
+  "quota_dsm": 201.8177181560951,
+  "profilo": {
+   "riga": 105,
+   "dist_m": [
+    0.0,
+    25.0,
+    50.0,
+    75.0,
+    100.0,
+    125.0,
+    150.0,
+    175.0,
+    200.0,
+    225.0,
+    250.0,
+    275.0,
+    300.0,
+    325.0,
+    350.0,
+    375.0,
+    400.0,
+    425.0,
+    450.0,
+    475.0,
+    500.0,
+    525.0,
+    550.0,
+    575.0,
+    600.0,
+    625.0,
+    650.0,
+    675.0,
+    700.0,
+    725.0,
+    750.0,
+    775.0,
+    800.0,
+    825.0,
+    850.0,
+    875.0,
+    900.0,
+    925.0,
+    950.0,
+    975.0
+   ],
+   "v11": [
+    null,
+    null,
+    null,
+    7.4,
+    23.9,
+    28.8,
+    48.0,
+    66.4,
+    83.7,
+    97.1,
+    107.7,
+    114.6,
+    182.8,
+    197.6,
+    196.3,
+    188.6,
+    189.6,
+    201.2,
+    237.3,
+    273.3,
+    278.1,
+    254.7,
+    279.7,
+    333.1,
+    345.0,
+    357.8,
+    360.4,
+    361.5,
+    356.6,
+    354.5,
+    347.8,
+    333.2,
+    327.5,
+    290.5,
+    234.2,
+    237.1,
+    258.0,
+    236.8,
+    190.4,
+    132.7
+   ],
+   "v13": [
+    null,
+    null,
+    null,
+    7.3,
+    37.7,
+    51.7,
+    79.9,
+    109.8,
+    133.5,
+    153.5,
+    167.0,
+    179.8,
+    198.6,
+    207.0,
+    212.4,
+    218.8,
+    229.1,
+    243.6,
+    263.3,
+    282.0,
+    295.7,
+    303.2,
+    312.6,
+    340.1,
+    362.6,
+    367.7,
+    365.3,
+    362.2,
+    357.7,
+    352.0,
+    345.6,
+    337.7,
+    330.4,
+    316.6,
+    295.8,
+    280.7,
+    258.0,
+    236.8,
+    190.4,
+    132.7
+   ],
+   "dsm": [
+    0.0,
+    0.9,
+    0.9,
+    7.8,
+    7.8,
+    15.3,
+    32.9,
+    45.5,
+    59.7,
+    68.1,
+    85.1,
+    90.3,
+    178.6,
+    195.0,
+    193.0,
+    184.7,
+    181.1,
+    195.7,
+    229.0,
+    269.5,
+    273.1,
+    243.9,
+    274.2,
+    328.5,
+    341.3,
+    356.2,
+    359.3,
+    360.4,
+    356.1,
+    354.8,
+    349.8,
+    332.4,
+    330.6,
+    289.8,
+    194.3,
+    162.5,
+    138.4,
+    138.9,
+    137.0,
+    133.8
+   ]
+  },
+  "dsm": {
+   "celle": 6079,
+   "media_x": 213.47057109625055,
+   "media_y": 249.78431638484528,
+   "media_dsm": 201.8177181560951,
+   "dsm_meno_x": -11.652852940155421,
+   "dsm_meno_y": -47.96659822875015,
+   "anello_celle": 4726,
+   "anello_dsm_meno_x": -8.057812268003486,
+   "anello_dsm_meno_y": -8.22491717484862
+  }
+ },
+ "idro": {
+  "n": 9287903,
+  "flusso_diverso_pct": 4.262286115606504,
+  "flusso_fattore2_pct": 2.6916194107539666,
+  "twi_oltre1_pct": 2.0580349074224857,
+  "rete_jaccard": 0.9597102782680537,
+  "bacini_accordo_pct": 99.38532385743312,
+  "per_zona": {
+   "vicino": {
+    "n": 530263,
+    "flusso_diverso_pct": 70.87124690955243,
+    "flusso_fattore2_pct": 46.23064403890145,
+    "twi_oltre1_pct": 35.86480140124368,
+    "rete_jaccard": 0.3508329947175945
+   },
+   "lontano": {
+    "n": 8757640,
+    "flusso_diverso_pct": 0.2292055850662964,
+    "flusso_fattore2_pct": 0.05539163518938892,
+    "twi_oltre1_pct": 0.038809035446994315,
+    "rete_jaccard": 0.9970357749580275
+   }
+  },
+  "bacini_a": 74,
+  "bacini_b": 75,
+  "area_min_km2": 0.25,
+  "soglia_rete_celle": 1000,
+  "vicino_distanza_m": 50
+ },
+ "controllo_rumore": {
+  "n": 9289103,
+  "flusso_diverso_pct": 78.0462656082078,
+  "flusso_fattore2_pct": 62.247000598443144,
+  "twi_oltre1_pct": 52.52421999462065,
+  "rete_jaccard": 0.15000345214006128,
+  "bacini_accordo_pct": 84.61814047365644,
+  "per_zona": {
+   "vicino": {
+    "n": 531458,
+    "flusso_diverso_pct": 83.32191819485266,
+    "flusso_fattore2_pct": 65.31052312694511,
+    "twi_oltre1_pct": 54.16611825477214,
+    "rete_jaccard": 0.17602767602767602
+   },
+   "lontano": {
+    "n": 8757645,
+    "flusso_diverso_pct": 77.72611244232895,
+    "flusso_fattore2_pct": 62.06109062424887,
+    "twi_oltre1_pct": 52.42591250608889,
+    "rete_jaccard": 0.148943167622901
+   }
+  },
+  "bacini_n": 69,
+  "sigma_m": 0.25,
+  "seme": 42
+ },
+ "palette_diff": {
+  "titolo": "La v1.3 rispetto alla v1.1",
+  "breaks": [
+   -5,
+   -2,
+   -0.5,
+   0.5,
+   2,
+   5
+  ],
+  "cols": [
+   [
+    5,
+    48,
+    97
+   ],
+   [
+    33,
+    102,
+    172
+   ],
+   [
+    146,
+    197,
+    222
+   ],
+   [
+    170,
+    170,
+    170
+   ],
+   [
+    244,
+    165,
+    130
+   ],
+   [
+    214,
+    96,
+    77
+   ],
+   [
+    103,
+    0,
+    31
+   ]
+  ],
+  "etichette": [
+   "più bassa di oltre 5 m",
+   "più bassa di 2–5 m",
+   "più bassa di 0,5–2 m",
+   "differenza piccola (sotto 0,5 m)",
+   "più alta di 0,5–2 m",
+   "più alta di 2–5 m",
+   "più alta di oltre 5 m"
+  ],
+  "identica": {
+   "col": [
+    190,
+    225,
+    205
+   ],
+   "alpha": 0,
+   "etichetta": "Identica (si vede il rilievo)"
+  },
+  "nota": "Dove non c'è colore la quota è la stessa nelle due versioni e si vede il rilievo del DEM. Blu: la v1.3 è più bassa. Rosso: la v1.3 è più alta."
+ },
+ "non_dimostrato": [
+  "Nessuna quota di riferimento esterna (GNSS, caposaldi IGM): non si può dire quale versione sia più accurata.",
+  "La causa delle differenze (riallineamento delle griglie regionali dichiarato nel changelog v1.3) non è provata.",
+  "La natura del caso 1 (cava, scarpata, riporto) non è verificata.",
+  "Il DSM 2013 proviene verosimilmente dalla stessa campagna LiDAR del DTM: è indipendente dalla procedura a 5 m, non dalla fonte.",
+  "Il rumore bianco di 0,25 m è un limite superiore pessimistico dell'incertezza: gli errori veri sono correlati nello spazio."
+ ],
+ "numeri": [
+  {
+   "chiave": "confronto.celle_comuni",
+   "etichetta": "Celle confrontate",
+   "valore": 9287903,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "v1.3 meno v1.1 originale sulla stessa griglia (Zenodo 24009736 e 18872933, ritaglio Palermo)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave confronto.celle_comuni",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "confronto.identiche_pct",
+   "etichetta": "Celle identiche",
+   "valore": 95.22713577004411,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "v1.3 meno v1.1 originale sulla stessa griglia (Zenodo 24009736 e 18872933, ritaglio Palermo): d esattamente 0",
+   "comando": "python scripts/genera_qualita.py --completo --chiave confronto.identiche_pct",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "confronto.diverse_pct",
+   "etichetta": "Celle diverse (|Δ| > 0,01 m)",
+   "valore": 4.610717833724147,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "v1.3 meno v1.1 originale sulla stessa griglia (Zenodo 24009736 e 18872933, ritaglio Palermo): |d| > 0,01 m",
+   "comando": "python scripts/genera_qualita.py --completo --chiave confronto.diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "confronto.oltre_05",
+   "etichetta": "Celle con |Δ| > 0,5 m",
+   "valore": 1.6216792961769735,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "v1.3 meno v1.1 originale sulla stessa griglia (Zenodo 24009736 e 18872933, ritaglio Palermo): |d| > 0.5 m",
+   "comando": "python scripts/genera_qualita.py --completo --chiave confronto.oltre_05",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "confronto.oltre_2",
+   "etichetta": "Celle con |Δ| > 2 m",
+   "valore": 0.2602955694089398,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "v1.3 meno v1.1 originale sulla stessa griglia (Zenodo 24009736 e 18872933, ritaglio Palermo): |d| > 2 m",
+   "comando": "python scripts/genera_qualita.py --completo --chiave confronto.oltre_2",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "confronto.oltre_5",
+   "etichetta": "Celle con |Δ| > 5 m",
+   "valore": 0.12052236118314327,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "v1.3 meno v1.1 originale sulla stessa griglia (Zenodo 24009736 e 18872933, ritaglio Palermo): |d| > 5 m",
+   "comando": "python scripts/genera_qualita.py --completo --chiave confronto.oltre_5",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "confronto.media",
+   "etichetta": "Δ medio (v1.3 − v1.1)",
+   "valore": 0.026205220751134104,
+   "unita": "m",
+   "decimali": 3,
+   "origine": "v1.3 meno v1.1 originale sulla stessa griglia (Zenodo 24009736 e 18872933, ritaglio Palermo)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave confronto.media",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "confronto.std",
+   "etichetta": "Deviazione standard di Δ",
+   "valore": 1.3141792876039426,
+   "unita": "m",
+   "decimali": 2,
+   "origine": "v1.3 meno v1.1 originale sulla stessa griglia (Zenodo 24009736 e 18872933, ritaglio Palermo)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave confronto.std",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "confronto.min",
+   "etichetta": "Δ minimo",
+   "valore": -48.4381103515625,
+   "unita": "m",
+   "decimali": 1,
+   "origine": "v1.3 meno v1.1 originale sulla stessa griglia (Zenodo 24009736 e 18872933, ritaglio Palermo)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave confronto.min",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "confronto.max",
+   "etichetta": "Δ massimo",
+   "valore": 168.73694610595703,
+   "unita": "m",
+   "decimali": 1,
+   "origine": "v1.3 meno v1.1 originale sulla stessa griglia (Zenodo 24009736 e 18872933, ritaglio Palermo)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave confronto.max",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "concentrazione.blocchi",
+   "etichetta": "Blocchi da 500 m confrontati",
+   "valore": 962,
+   "unita": "blocchi",
+   "decimali": 0,
+   "origine": "blocchi da 500 m con almeno 2000 celle valide",
+   "comando": "python scripts/genera_qualita.py --completo --chiave concentrazione.blocchi",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "concentrazione.blocchi_sotto_1pct",
+   "etichetta": "Blocchi con meno dell'1% di celle diverse",
+   "valore": 847,
+   "unita": "blocchi",
+   "decimali": 0,
+   "origine": "blocchi da 500 m con almeno 2000 celle valide, meno dell'1% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave concentrazione.blocchi_sotto_1pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "concentrazione.blocchi_sopra_50pct",
+   "etichetta": "Blocchi con più del 50% di celle diverse",
+   "valore": 44,
+   "unita": "blocchi",
+   "decimali": 0,
+   "origine": "blocchi da 500 m con almeno 2000 celle valide, più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave concentrazione.blocchi_sopra_50pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "concentrazione.quota_top10",
+   "etichetta": "Celle diverse nel 10% di blocchi più colpiti",
+   "valore": 99.04262329276906,
+   "unita": "%",
+   "decimali": 1,
+   "origine": "blocchi da 500 m con almeno 2000 celle valide: quota delle celle diverse nel 10% di blocchi più colpiti",
+   "comando": "python scripts/genera_qualita.py --completo --chiave concentrazione.quota_top10",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione1.celle_blocchi",
+   "etichetta": "Regione 1: celle nei blocchi",
+   "valore": 370000,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "regione 1: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione1.celle_blocchi",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "regione1.blocchi",
+   "etichetta": "Regione 1: blocchi da 500 m",
+   "valore": 37,
+   "unita": "blocchi",
+   "decimali": 0,
+   "origine": "regione 1: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione1.blocchi",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione1.area_km2",
+   "etichetta": "Regione 1: area",
+   "valore": 9.25,
+   "unita": "km²",
+   "decimali": 2,
+   "origine": "regione 1: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione1.area_km2",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione1.quota_media",
+   "etichetta": "Regione 1: quota media v1.1",
+   "valore": 522,
+   "unita": "m",
+   "decimali": 0,
+   "origine": "regione 1: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione1.quota_media",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione1.media_d",
+   "etichetta": "Regione 1: Δ medio",
+   "valore": 0.01417737963392928,
+   "unita": "m",
+   "decimali": 2,
+   "origine": "regione 1: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione1.media_d",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione1.std",
+   "etichetta": "Regione 1: deviazione standard di Δ",
+   "valore": 0.8560168883647319,
+   "unita": "m",
+   "decimali": 2,
+   "origine": "regione 1: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione1.std",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione1.oltre05_pct",
+   "etichetta": "Regione 1: celle con |Δ| > 0,5 m",
+   "valore": 28,
+   "unita": "%",
+   "decimali": 0,
+   "origine": "regione 1: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione1.oltre05_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione1.diverse_pct",
+   "etichetta": "Regione 1: celle diverse",
+   "valore": 88,
+   "unita": "%",
+   "decimali": 0,
+   "origine": "regione 1: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione1.diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione2.celle_blocchi",
+   "etichetta": "Regione 2: celle nei blocchi",
+   "valore": 40000,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "regione 2: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione2.celle_blocchi",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione2.blocchi",
+   "etichetta": "Regione 2: blocchi da 500 m",
+   "valore": 4,
+   "unita": "blocchi",
+   "decimali": 0,
+   "origine": "regione 2: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione2.blocchi",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione2.area_km2",
+   "etichetta": "Regione 2: area",
+   "valore": 0.8251,
+   "unita": "km²",
+   "decimali": 2,
+   "origine": "regione 2: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione2.area_km2",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione2.quota_media",
+   "etichetta": "Regione 2: quota media v1.1",
+   "valore": 335,
+   "unita": "m",
+   "decimali": 0,
+   "origine": "regione 2: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione2.quota_media",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione2.media_d",
+   "etichetta": "Regione 2: Δ medio",
+   "valore": 7.269987182439984,
+   "unita": "m",
+   "decimali": 2,
+   "origine": "regione 2: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione2.media_d",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione2.std",
+   "etichetta": "Regione 2: deviazione standard di Δ",
+   "valore": 20.05104796222262,
+   "unita": "m",
+   "decimali": 2,
+   "origine": "regione 2: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione2.std",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione2.oltre05_pct",
+   "etichetta": "Regione 2: celle con |Δ| > 0,5 m",
+   "valore": 61,
+   "unita": "%",
+   "decimali": 0,
+   "origine": "regione 2: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione2.oltre05_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione2.diverse_pct",
+   "etichetta": "Regione 2: celle diverse",
+   "valore": 73,
+   "unita": "%",
+   "decimali": 0,
+   "origine": "regione 2: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione2.diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione3.celle_blocchi",
+   "etichetta": "Regione 3: celle nei blocchi",
+   "valore": 20000,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "regione 3: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione3.celle_blocchi",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione3.blocchi",
+   "etichetta": "Regione 3: blocchi da 500 m",
+   "valore": 2,
+   "unita": "blocchi",
+   "decimali": 0,
+   "origine": "regione 3: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione3.blocchi",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione3.area_km2",
+   "etichetta": "Regione 3: area",
+   "valore": 0.262925,
+   "unita": "km²",
+   "decimali": 2,
+   "origine": "regione 3: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione3.area_km2",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione3.quota_media",
+   "etichetta": "Regione 3: quota media v1.1",
+   "valore": 20,
+   "unita": "m",
+   "decimali": 0,
+   "origine": "regione 3: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione3.quota_media",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione3.media_d",
+   "etichetta": "Regione 3: Δ medio",
+   "valore": 0.061975778041542647,
+   "unita": "m",
+   "decimali": 2,
+   "origine": "regione 3: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione3.media_d",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione3.std",
+   "etichetta": "Regione 3: deviazione standard di Δ",
+   "valore": 0.3799495925650446,
+   "unita": "m",
+   "decimali": 2,
+   "origine": "regione 3: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione3.std",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione3.oltre05_pct",
+   "etichetta": "Regione 3: celle con |Δ| > 0,5 m",
+   "valore": 9,
+   "unita": "%",
+   "decimali": 0,
+   "origine": "regione 3: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione3.oltre05_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione3.diverse_pct",
+   "etichetta": "Regione 3: celle diverse",
+   "valore": 56,
+   "unita": "%",
+   "decimali": 0,
+   "origine": "regione 3: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione3.diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione4.celle_blocchi",
+   "etichetta": "Regione 4: celle nei blocchi",
+   "valore": 10000,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "regione 4: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione4.celle_blocchi",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione4.blocchi",
+   "etichetta": "Regione 4: blocchi da 500 m",
+   "valore": 1,
+   "unita": "blocchi",
+   "decimali": 0,
+   "origine": "regione 4: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione4.blocchi",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione4.area_km2",
+   "etichetta": "Regione 4: area",
+   "valore": 0.1299,
+   "unita": "km²",
+   "decimali": 2,
+   "origine": "regione 4: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione4.area_km2",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione4.quota_media",
+   "etichetta": "Regione 4: quota media v1.1",
+   "valore": 27,
+   "unita": "m",
+   "decimali": 0,
+   "origine": "regione 4: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione4.quota_media",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione4.media_d",
+   "etichetta": "Regione 4: Δ medio",
+   "valore": -0.18715027965993938,
+   "unita": "m",
+   "decimali": 2,
+   "origine": "regione 4: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione4.media_d",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione4.std",
+   "etichetta": "Regione 4: deviazione standard di Δ",
+   "valore": 1.2751247892570376,
+   "unita": "m",
+   "decimali": 2,
+   "origine": "regione 4: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione4.std",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione4.oltre05_pct",
+   "etichetta": "Regione 4: celle con |Δ| > 0,5 m",
+   "valore": 28,
+   "unita": "%",
+   "decimali": 0,
+   "origine": "regione 4: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione4.oltre05_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "regione4.diverse_pct",
+   "etichetta": "Regione 4: celle diverse",
+   "valore": 77,
+   "unita": "%",
+   "decimali": 0,
+   "origine": "regione 4: componente di blocchi con più del 50% di celle diverse",
+   "comando": "python scripts/genera_qualita.py --completo --chiave regione4.diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "traslazione.dx_m",
+   "etichetta": "Traslazione stimata in x (regione 1)",
+   "valore": -1.0000000000000009,
+   "unita": "m",
+   "decimali": 1,
+   "origine": "traslazione di v1.3 che minimizza l'RMSE rispetto a v1.1 nella regione maggiore (ricerca esaustiva, bilineare)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave traslazione.dx_m",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "traslazione.dy_m",
+   "etichetta": "Traslazione stimata in y (regione 1)",
+   "valore": -1.0000000000000009,
+   "unita": "m",
+   "decimali": 1,
+   "origine": "traslazione di v1.3 che minimizza l'RMSE rispetto a v1.1 nella regione maggiore (ricerca esaustiva, bilineare)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave traslazione.dy_m",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "traslazione.rmse_0",
+   "etichetta": "Errore quadratico medio senza traslazione",
+   "valore": 0.8628102106995877,
+   "unita": "m",
+   "decimali": 3,
+   "origine": "traslazione di v1.3 che minimizza l'RMSE rispetto a v1.1 nella regione maggiore (ricerca esaustiva, bilineare)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave traslazione.rmse_0",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "traslazione.rmse_min",
+   "etichetta": "Errore quadratico medio con la traslazione migliore",
+   "valore": 0.5726283365549739,
+   "unita": "m",
+   "decimali": 3,
+   "origine": "traslazione di v1.3 che minimizza l'RMSE rispetto a v1.1 nella regione maggiore (ricerca esaustiva, bilineare)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave traslazione.rmse_min",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "pendenza.0_2_celle",
+   "etichetta": "Pendenza 0–2°: celle",
+   "valore": 2211313,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "celle per pendenza della v1.1 (0–2°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.0_2_celle",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.0_2_diverse_pct",
+   "etichetta": "Pendenza 0–2°: celle diverse",
+   "valore": 0.6713658355917954,
+   "unita": "%",
+   "decimali": 1,
+   "origine": "celle per pendenza della v1.1 (0–2°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.0_2_diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.0_2_oltre2_pct",
+   "etichetta": "Pendenza 0–2°: celle con |Δ| > 2 m",
+   "valore": 0.007054632247899777,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "celle per pendenza della v1.1 (0–2°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.0_2_oltre2_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.2_5_celle",
+   "etichetta": "Pendenza 2–5°: celle",
+   "valore": 1476660,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "celle per pendenza della v1.1 (2–5°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.2_5_celle",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.2_5_diverse_pct",
+   "etichetta": "Pendenza 2–5°: celle diverse",
+   "valore": 1.9132366286078042,
+   "unita": "%",
+   "decimali": 1,
+   "origine": "celle per pendenza della v1.1 (2–5°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.2_5_diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.2_5_oltre2_pct",
+   "etichetta": "Pendenza 2–5°: celle con |Δ| > 2 m",
+   "valore": 0.015304809502525971,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "celle per pendenza della v1.1 (2–5°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.2_5_oltre2_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.5_10_celle",
+   "etichetta": "Pendenza 5–10°: celle",
+   "valore": 987254,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "celle per pendenza della v1.1 (5–10°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.5_10_celle",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.5_10_diverse_pct",
+   "etichetta": "Pendenza 5–10°: celle diverse",
+   "valore": 5.474680274782376,
+   "unita": "%",
+   "decimali": 1,
+   "origine": "celle per pendenza della v1.1 (5–10°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.5_10_diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.5_10_oltre2_pct",
+   "etichetta": "Pendenza 5–10°: celle con |Δ| > 2 m",
+   "valore": 0.026133092395675277,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "celle per pendenza della v1.1 (5–10°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.5_10_oltre2_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.10_20_celle",
+   "etichetta": "Pendenza 10–20°: celle",
+   "valore": 1578650,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "celle per pendenza della v1.1 (10–20°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.10_20_celle",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.10_20_diverse_pct",
+   "etichetta": "Pendenza 10–20°: celle diverse",
+   "valore": 7.751686567636905,
+   "unita": "%",
+   "decimali": 1,
+   "origine": "celle per pendenza della v1.1 (10–20°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.10_20_diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.10_20_oltre2_pct",
+   "etichetta": "Pendenza 10–20°: celle con |Δ| > 2 m",
+   "valore": 0.13783929306686094,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "celle per pendenza della v1.1 (10–20°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.10_20_oltre2_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.20_30_celle",
+   "etichetta": "Pendenza 20–30°: celle",
+   "valore": 1665151,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "celle per pendenza della v1.1 (20–30°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.20_30_celle",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.20_30_diverse_pct",
+   "etichetta": "Pendenza 20–30°: celle diverse",
+   "valore": 7.724044245837164,
+   "unita": "%",
+   "decimali": 1,
+   "origine": "celle per pendenza della v1.1 (20–30°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.20_30_diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.20_30_oltre2_pct",
+   "etichetta": "Pendenza 20–30°: celle con |Δ| > 2 m",
+   "valore": 0.29312656930212333,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "celle per pendenza della v1.1 (20–30°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.20_30_oltre2_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.30_90_celle",
+   "etichetta": "Pendenza 30–90°: celle",
+   "valore": 1351443,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "celle per pendenza della v1.1 (30–90°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.30_90_celle",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.30_90_diverse_pct",
+   "etichetta": "Pendenza 30–90°: celle diverse",
+   "valore": 5.316391442332381,
+   "unita": "%",
+   "decimali": 1,
+   "origine": "celle per pendenza della v1.1 (30–90°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.30_90_diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "pendenza.30_90_oltre2_pct",
+   "etichetta": "Pendenza 30–90°: celle con |Δ| > 2 m",
+   "valore": 1.197534783191004,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "celle per pendenza della v1.1 (30–90°), escluso il bordo",
+   "comando": "python scripts/genera_qualita.py --completo --chiave pendenza.30_90_oltre2_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "bordi.celle",
+   "etichetta": "Celle entro 100 m dal bordo dei dati",
+   "valore": 152820,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "celle valide entro 20 celle (100 m) dal bordo dell'area valida comune",
+   "comando": "python scripts/genera_qualita.py --completo --chiave bordi.celle",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "bordi.0_2_celle",
+   "etichetta": "Distanza dal bordo 0–2 celle: celle",
+   "valore": 17432,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "celle valide a distanza dal bordo dell'area valida comune: 0–2 celle",
+   "comando": "python scripts/genera_qualita.py --completo --chiave bordi.0_2_celle",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "bordi.0_2_diverse_pct",
+   "etichetta": "Distanza dal bordo 0–2 celle: celle diverse",
+   "valore": 47.355438274437816,
+   "unita": "%",
+   "decimali": 1,
+   "origine": "celle valide a distanza dal bordo dell'area valida comune: 0–2 celle",
+   "comando": "python scripts/genera_qualita.py --completo --chiave bordi.0_2_diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "bordi.2_5_celle",
+   "etichetta": "Distanza dal bordo 2–5 celle: celle",
+   "valore": 26681,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "celle valide a distanza dal bordo dell'area valida comune: 2–5 celle",
+   "comando": "python scripts/genera_qualita.py --completo --chiave bordi.2_5_celle",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "bordi.2_5_diverse_pct",
+   "etichetta": "Distanza dal bordo 2–5 celle: celle diverse",
+   "valore": 44.33866796596829,
+   "unita": "%",
+   "decimali": 1,
+   "origine": "celle valide a distanza dal bordo dell'area valida comune: 2–5 celle",
+   "comando": "python scripts/genera_qualita.py --completo --chiave bordi.2_5_diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "bordi.5_20_celle",
+   "etichetta": "Distanza dal bordo 5–20 celle: celle",
+   "valore": 108707,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "celle valide a distanza dal bordo dell'area valida comune: 5–20 celle",
+   "comando": "python scripts/genera_qualita.py --completo --chiave bordi.5_20_celle",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "bordi.5_20_diverse_pct",
+   "etichetta": "Distanza dal bordo 5–20 celle: celle diverse",
+   "valore": 17.988721977425556,
+   "unita": "%",
+   "decimali": 1,
+   "origine": "celle valide a distanza dal bordo dell'area valida comune: 5–20 celle",
+   "comando": "python scripts/genera_qualita.py --completo --chiave bordi.5_20_diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "bordi.20_oltre_celle",
+   "etichetta": "Distanza dal bordo oltre 20 celle: celle",
+   "valore": 9135083,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "celle valide a distanza dal bordo dell'area valida comune: oltre 20 celle",
+   "comando": "python scripts/genera_qualita.py --completo --chiave bordi.20_oltre_celle",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "bordi.20_oltre_diverse_pct",
+   "etichetta": "Distanza dal bordo oltre 20 celle: celle diverse",
+   "valore": 4.253918656239905,
+   "unita": "%",
+   "decimali": 1,
+   "origine": "celle valide a distanza dal bordo dell'area valida comune: oltre 20 celle",
+   "comando": "python scripts/genera_qualita.py --completo --chiave bordi.20_oltre_diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "fonte1.celle",
+   "etichetta": "DTM 2m - ATA 2012 2013: celle",
+   "valore": 9262246,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "fonte del dato: DTM 2m - ATA 2012 2013 (2012-2013) (maschera HRDTM5m_Mask_20mres.gpkg, bordi generalizzati a 20 m)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave fonte1.celle",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "fonte1.area_pct",
+   "etichetta": "DTM 2m - ATA 2012 2013: quota dell'area",
+   "valore": 99.72375895829231,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "fonte del dato: DTM 2m - ATA 2012 2013 (2012-2013) (maschera HRDTM5m_Mask_20mres.gpkg, bordi generalizzati a 20 m)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave fonte1.area_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "fonte1.diverse_pct",
+   "etichetta": "DTM 2m - ATA 2012 2013: celle diverse",
+   "valore": 4.591748049015325,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "fonte del dato: DTM 2m - ATA 2012 2013 (2012-2013) (maschera HRDTM5m_Mask_20mres.gpkg, bordi generalizzati a 20 m)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave fonte1.diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "fonte1.oltre05_pct",
+   "etichetta": "DTM 2m - ATA 2012 2013: celle con |Δ| > 0,5 m",
+   "valore": 1.615742013330244,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "fonte del dato: DTM 2m - ATA 2012 2013 (2012-2013) (maschera HRDTM5m_Mask_20mres.gpkg, bordi generalizzati a 20 m)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave fonte1.oltre05_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "fonte2.celle",
+   "etichetta": "(fuori dalla maschera fonti): celle",
+   "valore": 24595,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "fonte del dato: (fuori dalla maschera fonti) (maschera HRDTM5m_Mask_20mres.gpkg, bordi generalizzati a 20 m)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave fonte2.celle",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "fonte2.area_pct",
+   "etichetta": "(fuori dalla maschera fonti): quota dell'area",
+   "valore": 0.2648068137662506,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "fonte del dato: (fuori dalla maschera fonti) (maschera HRDTM5m_Mask_20mres.gpkg, bordi generalizzati a 20 m)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave fonte2.area_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "fonte2.diverse_pct",
+   "etichetta": "(fuori dalla maschera fonti): celle diverse",
+   "valore": 9.461272616385445,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "fonte del dato: (fuori dalla maschera fonti) (maschera HRDTM5m_Mask_20mres.gpkg, bordi generalizzati a 20 m)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave fonte2.diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "fonte2.oltre05_pct",
+   "etichetta": "(fuori dalla maschera fonti): celle con |Δ| > 0,5 m",
+   "valore": 2.9477536084570035,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "fonte del dato: (fuori dalla maschera fonti) (maschera HRDTM5m_Mask_20mres.gpkg, bordi generalizzati a 20 m)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave fonte2.oltre05_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "fonte3.celle",
+   "etichetta": "TINITALY 1.1: celle",
+   "valore": 1062,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "fonte del dato: TINITALY 1.1 (maschera HRDTM5m_Mask_20mres.gpkg, bordi generalizzati a 20 m)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave fonte3.celle",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "fonte3.area_pct",
+   "etichetta": "TINITALY 1.1: quota dell'area",
+   "valore": 0.01143422794144168,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "fonte del dato: TINITALY 1.1 (maschera HRDTM5m_Mask_20mres.gpkg, bordi generalizzati a 20 m)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave fonte3.area_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "fonte3.diverse_pct",
+   "etichetta": "TINITALY 1.1: celle diverse",
+   "valore": 57.72128060263653,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "fonte del dato: TINITALY 1.1 (maschera HRDTM5m_Mask_20mres.gpkg, bordi generalizzati a 20 m)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave fonte3.diverse_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "fonte3.oltre05_pct",
+   "etichetta": "TINITALY 1.1: celle con |Δ| > 0,5 m",
+   "valore": 22.693032015065913,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "fonte del dato: TINITALY 1.1 (maschera HRDTM5m_Mask_20mres.gpkg, bordi generalizzati a 20 m)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave fonte3.oltre05_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "caso1.celle",
+   "etichetta": "Caso 1: celle del cluster",
+   "valore": 6079,
+   "unita": "celle",
+   "decimali": 0,
+   "origine": "caso 1: componente 8-vicini più grande con |d| > 5 m",
+   "comando": "python scripts/genera_qualita.py --completo --chiave caso1.celle",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "caso1.area_km2",
+   "etichetta": "Caso 1: area",
+   "valore": 0.151975,
+   "unita": "km²",
+   "decimali": 2,
+   "origine": "caso 1: componente 8-vicini più grande con |d| > 5 m",
+   "comando": "python scripts/genera_qualita.py --completo --chiave caso1.area_km2",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "caso1.media_d",
+   "etichetta": "Caso 1: Δ medio",
+   "valore": 36.31374528859473,
+   "unita": "m",
+   "decimali": 1,
+   "origine": "caso 1: componente 8-vicini più grande con |d| > 5 m: media di d",
+   "comando": "python scripts/genera_qualita.py --completo --chiave caso1.media_d",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "caso1.quota_x",
+   "etichetta": "Caso 1: quota media v1.1",
+   "valore": 213.47057109625055,
+   "unita": "m",
+   "decimali": 1,
+   "origine": "caso 1: componente 8-vicini più grande con |d| > 5 m: quota media v1.1",
+   "comando": "python scripts/genera_qualita.py --completo --chiave caso1.quota_x",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "caso1.quota_y",
+   "etichetta": "Caso 1: quota media v1.3",
+   "valore": 249.78431638484528,
+   "unita": "m",
+   "decimali": 1,
+   "origine": "caso 1: componente 8-vicini più grande con |d| > 5 m: quota media v1.3",
+   "comando": "python scripts/genera_qualita.py --completo --chiave caso1.quota_y",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "caso1.quota_dsm",
+   "etichetta": "Caso 1: quota media DSM 2013",
+   "valore": 201.8177181560951,
+   "unita": "m",
+   "decimali": 1,
+   "origine": "caso 1: componente 8-vicini più grande con |d| > 5 m: quota media DSM 2013 (EPSG:32633, 2 m, bilineare)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave caso1.quota_dsm",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "caso1.dsm_meno_x",
+   "etichetta": "Caso 1: DSM 2013 meno v1.1",
+   "valore": -11.652852940155421,
+   "unita": "m",
+   "decimali": 1,
+   "origine": "caso 1: componente 8-vicini più grande con |d| > 5 m: DSM 2013 meno v1.1",
+   "comando": "python scripts/genera_qualita.py --completo --chiave caso1.dsm_meno_x",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "caso1.dsm_meno_y",
+   "etichetta": "Caso 1: DSM 2013 meno v1.3",
+   "valore": -47.96659822875015,
+   "unita": "m",
+   "decimali": 1,
+   "origine": "caso 1: componente 8-vicini più grande con |d| > 5 m: DSM 2013 meno v1.3",
+   "comando": "python scripts/genera_qualita.py --completo --chiave caso1.dsm_meno_y",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "idro.flusso_diverso_pct",
+   "etichetta": "Celle con flusso diverso",
+   "valore": 4.262286115606504,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "pysheds (run_idro, area_min 0,25 km², rete = accumulo ≥ 1000 celle) su v1.1 originale e v1.3",
+   "comando": "python scripts/genera_qualita.py --completo --chiave idro.flusso_diverso_pct",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "idro.flusso_fattore2_pct",
+   "etichetta": "Celle con flusso diverso oltre un fattore 2",
+   "valore": 2.6916194107539666,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "pysheds (run_idro, area_min 0,25 km², rete = accumulo ≥ 1000 celle) su v1.1 originale e v1.3",
+   "comando": "python scripts/genera_qualita.py --completo --chiave idro.flusso_fattore2_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "idro.twi_oltre1_pct",
+   "etichetta": "Celle con |Δ TWI| > 1",
+   "valore": 2.0580349074224857,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "pysheds (run_idro, area_min 0,25 km², rete = accumulo ≥ 1000 celle) su v1.1 originale e v1.3",
+   "comando": "python scripts/genera_qualita.py --completo --chiave idro.twi_oltre1_pct",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "idro.rete_jaccard",
+   "etichetta": "Rete idrografica: somiglianza (Jaccard)",
+   "valore": 0.9597102782680537,
+   "unita": "",
+   "decimali": 4,
+   "origine": "pysheds (run_idro, area_min 0,25 km², rete = accumulo ≥ 1000 celle) su v1.1 originale e v1.3",
+   "comando": "python scripts/genera_qualita.py --completo --chiave idro.rete_jaccard",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "idro.bacini_accordo_pct",
+   "etichetta": "Bacini: celle nello stesso bacino",
+   "valore": 99.38532385743312,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "pysheds (run_idro, area_min 0,25 km², rete = accumulo ≥ 1000 celle) su v1.1 originale e v1.3, abbinamento a maggioranza",
+   "comando": "python scripts/genera_qualita.py --completo --chiave idro.bacini_accordo_pct",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "idro.bacini_a",
+   "etichetta": "Bacini della v1.1",
+   "valore": 74,
+   "unita": "bacini",
+   "decimali": 0,
+   "origine": "pysheds (run_idro, area_min 0,25 km², rete = accumulo ≥ 1000 celle) su v1.1 originale e v1.3",
+   "comando": "python scripts/genera_qualita.py --completo --chiave idro.bacini_a",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "idro.bacini_b",
+   "etichetta": "Bacini della v1.3",
+   "valore": 75,
+   "unita": "bacini",
+   "decimali": 0,
+   "origine": "pysheds (run_idro, area_min 0,25 km², rete = accumulo ≥ 1000 celle) su v1.1 originale e v1.3",
+   "comando": "python scripts/genera_qualita.py --completo --chiave idro.bacini_b",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "idro.vicino_flusso_diverso_pct",
+   "etichetta": "Flusso diverso vicino alle celle con DEM diverso",
+   "valore": 70.87124690955243,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "pysheds (run_idro, area_min 0,25 km², rete = accumulo ≥ 1000 celle) su v1.1 originale e v1.3 (zona vicino alle celle con DEM diverso, soglia 50 m)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave idro.vicino_flusso_diverso_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "idro.vicino_rete_jaccard",
+   "etichetta": "Rete: somiglianza vicino alle celle con DEM diverso",
+   "valore": 0.3508329947175945,
+   "unita": "",
+   "decimali": 3,
+   "origine": "pysheds (run_idro, area_min 0,25 km², rete = accumulo ≥ 1000 celle) su v1.1 originale e v1.3 (zona vicino)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave idro.vicino_rete_jaccard",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "idro.lontano_flusso_diverso_pct",
+   "etichetta": "Flusso diverso lontano dalle celle con DEM diverso",
+   "valore": 0.2292055850662964,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "pysheds (run_idro, area_min 0,25 km², rete = accumulo ≥ 1000 celle) su v1.1 originale e v1.3 (zona lontano alle celle con DEM diverso, soglia 50 m)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave idro.lontano_flusso_diverso_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "idro.lontano_rete_jaccard",
+   "etichetta": "Rete: somiglianza lontano dalle celle con DEM diverso",
+   "valore": 0.9970357749580275,
+   "unita": "",
+   "decimali": 3,
+   "origine": "pysheds (run_idro, area_min 0,25 km², rete = accumulo ≥ 1000 celle) su v1.1 originale e v1.3 (zona lontano)",
+   "comando": "python scripts/genera_qualita.py --completo --chiave idro.lontano_rete_jaccard",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "rumore.flusso_diverso_pct",
+   "etichetta": "Controllo di rumore: celle con flusso diverso",
+   "valore": 78.0462656082078,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "v1.1 + rumore bianco σ = 0,25 m (seme 42) contro v1.1: limite superiore pessimistico",
+   "comando": "python scripts/genera_qualita.py --completo --chiave rumore.flusso_diverso_pct",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "rumore.twi_oltre1_pct",
+   "etichetta": "Controllo di rumore: celle con |Δ TWI| > 1",
+   "valore": 52.52421999462065,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "v1.1 + rumore bianco σ = 0,25 m (seme 42) contro v1.1: limite superiore pessimistico",
+   "comando": "python scripts/genera_qualita.py --completo --chiave rumore.twi_oltre1_pct",
+   "test": "pytest tests/test_genera_qualita.py"
+  },
+  {
+   "chiave": "rumore.rete_jaccard",
+   "etichetta": "Controllo di rumore: rete, somiglianza",
+   "valore": 0.15000345214006128,
+   "unita": "",
+   "decimali": 3,
+   "origine": "v1.1 + rumore bianco σ = 0,25 m (seme 42) contro v1.1: limite superiore pessimistico",
+   "comando": "python scripts/genera_qualita.py --completo --chiave rumore.rete_jaccard",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  },
+  {
+   "chiave": "rumore.bacini_accordo_pct",
+   "etichetta": "Controllo di rumore: celle nello stesso bacino",
+   "valore": 84.61814047365644,
+   "unita": "%",
+   "decimali": 2,
+   "origine": "v1.1 + rumore bianco σ = 0,25 m (seme 42) contro v1.1: limite superiore pessimistico",
+   "comando": "python scripts/genera_qualita.py --completo --chiave rumore.bacini_accordo_pct",
+   "test": "pytest tests/test_genera_qualita.py · --verifica (atteso_spec.json)"
+  }
+ ]
+}

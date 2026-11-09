@@ -2,35 +2,29 @@
 <html lang="it">
 <head>
   <meta charset="utf-8">
-  <title>Palermo Hub — Confronto HR-DTM-5m v1.1 / v1.3</title>
+  <title>Palermo Hub — HR-DTM-5m v1.1 e v1.3: cosa cambia davvero</title>
   <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-  <meta name="description" content="Cosa cambia a Palermo tra la versione 1.1 e la 1.3 del modello digitale del terreno HR-DTM-5m: differenze di quota, di pendenza e fonti del dato.">
+  <meta name="description" content="A Palermo le versioni 1.1 e 1.3 del modello digitale del terreno HR-DTM-5m sono quasi identiche. Dove differiscono, i dati: ogni numero si rigenera dal dato grezzo.">
   <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
   <link rel="icon" href="img/favicon.png" type="image/png">
-  <link rel="canonical" href="https://palermohub.github.io/Palerm-DTM-5m/dtm_v13_app/">
-  <!-- Open Graph -->
+  <link rel="canonical" href="https://palermohub.opendatasicilia.it/HR-DTM-5m_differenze.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Palermo Hub">
   <meta property="og:locale" content="it_IT">
-  <meta property="og:url" content="https://palermohub.github.io/Palerm-DTM-5m/dtm_v13_app/">
-  <meta property="og:title" content="Palermo Hub — Cosa cambia tra HR-DTM-5m v1.1 e v1.3">
-  <meta property="og:description" content="Differenze di quota e pendenza tra le versioni 1.1 e 1.3 del modello digitale del terreno di Palermo a 5 metri. Mappa interattiva su dati aperti.">
-  <meta property="og:image" content="https://palermohub.github.io/Palerm-DTM-5m/dtm_v13_app/img/social_card.jpg">
+  <meta property="og:title" content="Palermo Hub — HR-DTM-5m v1.1 e v1.3: cosa cambia davvero">
+  <meta property="og:description" content="A Palermo le due versioni del modello digitale del terreno sono quasi identiche. Dove differiscono, ecco i dati.">
+  <meta property="og:image" content="https://palermohub.opendatasicilia.it/img/social_card.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Mappa delle differenze di quota tra DTM v1.1 e v1.3 di Palermo">
-  <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Palermo Hub — Cosa cambia tra HR-DTM-5m v1.1 e v1.3">
-  <meta name="twitter:description" content="Differenze di quota e pendenza tra le versioni 1.1 e 1.3 del modello digitale del terreno di Palermo a 5 metri.">
-  <meta name="twitter:image" content="https://palermohub.github.io/Palerm-DTM-5m/dtm_v13_app/img/social_card.jpg">
-  <meta name="twitter:image:alt" content="Mappa delle differenze di quota tra DTM v1.1 e v1.3 di Palermo">
+  <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/img/social_card.jpg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&display=swap">
-  <link rel="stylesheet" href="../css/maplibre-gl.css">
-  <link rel="stylesheet" href="css/app.css">
-  
+  <link rel="stylesheet" href="vendor/maplibre-gl.css">
+  <link rel="stylesheet" href="css/app.css?v=3db">
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KHR1GHDRQS"></script>
 <script>
@@ -40,8 +34,6 @@
 
   gtag('config', 'G-KHR1GHDRQS');
 </script>
-  
-  
 </head>
 <body>
 
@@ -54,47 +46,31 @@
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
   </button>
   <span class="cmp-tag cmp-l">v1.1</span><span class="cmp-tag cmp-r">v1.3</span>
+  <button id="cmp-close" class="pill" type="button">Chiudi il confronto</button>
 </div>
 
 <!-- toolbar sinistra -->
 <nav id="map-toolbar" aria-label="Strumenti mappa">
-
-  <!-- Home / reset vista -->
   <button class="tb-btn" id="tb-home" title="Vista iniziale">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 3L2 12h3v8h5v-5h4v5h5v-8h3L12 3z"/></svg>
     <span class="tb-lbl">Home</span>
   </button>
-
   <div class="tb-sep"></div>
-
-  <!-- Basemap selector -->
   <div class="tb-group" id="tb-basemaps" role="group" aria-label="Cartografia di base">
     <button class="tb-btn tb-radio active" data-basemap="osm" title="OpenFreeMap">OSM</button>
     <button class="tb-btn tb-radio" data-basemap="satellite" title="Google Satellite">SAT</button>
   </div>
-
   <div class="tb-sep"></div>
-
-  <!-- Carta tecnica 2K -->
+  <button class="tb-btn tb-toggle on" id="tb-diff" title="Mostra o nascondi le differenze v1.1 / v1.3" aria-pressed="true">Δ</button>
   <button class="tb-btn tb-toggle" id="tb-ctr" title="Carta tecnica regionale 2K" aria-pressed="false">CTR</button>
-
-  <!-- UPL confini quartieri -->
-  <button class="tb-btn tb-toggle on" id="tb-upl" title="Confini UPL / Quartieri" aria-pressed="true">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/>
-    </svg>
-    <span class="tb-lbl">UPL</span>
+  <button class="tb-btn tb-3d" id="tb-3d" title="Alterna vista 3D e piano" aria-pressed="false">
+    <span id="tb-3d-label">3D</span>
   </button>
-
   <div class="tb-sep"></div>
-
-  <!-- Fullscreen -->
   <button class="tb-btn" id="tb-fullscreen" title="Schermo intero">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M3 3h6v2H5v4H3V3zm12 0h6v6h-2V5h-4V3zM3 15h2v4h4v2H3v-6zm16 4h-4v2h6v-6h-2v4z"/></svg>
     <span class="tb-lbl">Full</span>
   </button>
-
-  <!-- Orientamento Nord -->
   <button class="tb-btn" id="tb-north" title="Reimposta orientamento Nord">
     <svg id="compass-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="none" style="transition:transform 0.15s linear;transform-origin:center center;">
       <polygon points="12,2 14.5,11 12,9.5 9.5,11" fill="currentColor"/>
@@ -103,8 +79,6 @@
     </svg>
     <span class="tb-lbl">Nord</span>
   </button>
-
-  <!-- Zoom -->
   <button class="tb-btn" id="tb-zin" title="Avvicina" aria-label="Avvicina">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
     <span class="tb-lbl">Zoom +</span>
@@ -112,13 +86,6 @@
   <button class="tb-btn" id="tb-zout" title="Allontana" aria-label="Allontana">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
     <span class="tb-lbl">Zoom −</span>
-  </button>
-
-  <div class="tb-sep"></div>
-
-  <!-- Toggle 3D / Piano -->
-  <button class="tb-btn tb-3d" id="tb-3d" title="Alterna vista 3D e piano" aria-pressed="false">
-    <span id="tb-3d-label">3D</span>
   </button>
 </nav>
 
@@ -129,167 +96,62 @@
   </button>
   <aside id="right-panel">
     <header id="titlebar">
-      <div class="tb-top"><div class="tb-kicker">HR-DTM-5m nuova release</div><div class="tb-date">Novembre 2026</div></div>
+      <div class="tb-top"><div class="tb-kicker">HR-DTM-5m · Palermo</div><div class="tb-date">Novembre 2026</div></div>
       <h1>Cosa cambia tra v1.1 e v1.3</h1>
     </header>
-    <div class="rp-tabs" role="tablist" aria-label="Sezioni del pannello">
-      <button class="rp-tab active" role="tab" id="tab-analisi" aria-selected="true" aria-controls="pane-analisi" data-pane="analisi">Analisi</button>
-      <button class="rp-tab" role="tab" id="tab-metodo" aria-selected="false" aria-controls="pane-metodo" data-pane="metodo" tabindex="-1">Dati e metodo</button>
-      <button class="rp-tab" role="tab" id="tab-credits" aria-selected="false" aria-controls="pane-credits" data-pane="credits" tabindex="-1">Credits</button>
-    </div>
-    <div class="rp-scroll" id="pane-analisi" role="tabpanel" aria-labelledby="tab-analisi">
+    <div class="rp-scroll" id="pane-analisi">
+      <div class="seg vista-switch" role="group" aria-label="Livello di dettaglio">
+        <button class="seg-btn active" type="button" data-vista-btn="panoramica" aria-pressed="true">Panoramica</button>
+        <button class="seg-btn" type="button" data-vista-btn="tecnico" aria-pressed="false">Tecnico</button>
+      </div>
 
-      <section class="rp-sec">
-        <div class="rp-label">Mappe</div>
-        <div id="cards" class="cards"></div>
-      </section>
+      <div id="tb-panel-3d" class="rp-3d" hidden>
+        <div class="rp-label">Vista 3D</div>
+        <label class="tbp-row" for="tbp-exag">
+          <span class="tbp-label">Esagerazione</span>
+          <input type="range" id="tbp-exag" min="0.5" max="5" step="0.1" value="1.5">
+          <span class="tbp-val" id="tbp-exag-val">1.5×</span>
+        </label>
+        <label class="tbp-row" for="tbp-opac">
+          <span class="tbp-label">Opacità rilievo</span>
+          <input type="range" id="tbp-opac" min="0" max="1" step="0.05" value="1">
+          <span class="tbp-val" id="tbp-opac-val">100%</span>
+        </label>
+      </div>
 
-      <section class="rp-sec" id="sec-controls">
-        <div class="rp-label">Opacità</div>
-        <div class="ctl-row"><input id="op-range" type="range" min="10" max="100" value="85" aria-label="Opacità del layer"><span id="op-val">85%</span></div>
-        <div id="mix-wrap" hidden>
-          <div class="rp-label" style="margin-top:10px">Confronto rilievo</div>
-          <div class="seg" role="group" aria-label="Tipo di confronto" style="margin-bottom:10px">
-            <button class="seg-btn active" data-cmp="fade">Dissolvenza</button>
-            <button class="seg-btn" data-cmp="slider">Slider</button>
-          </div>
-          <p class="note" id="cmp-note" hidden style="margin-top:0">Trascina la maniglia sulla mappa (o usa le frecce da tastiera): a sinistra la v1.1, a destra la v1.3. Nel ranking delle zone, il pulsante ⇆ apre il confronto già centrato su quell’area.</p>
-          <div id="fade-ctl">
-          <div class="mix-ends"><span>v1.1</span><span>v1.3</span></div>
-          <input id="mix-range" type="range" min="0" max="100" value="100" aria-label="Dissolvenza tra v1.1 e v1.3">
-          <button id="btn-blink" class="pill">Alterna v1.1 / v1.3</button>
-          </div>
-        </div>
-      </section>
+      <p id="avviso-dati" class="note" role="alert" hidden></p>
 
-      <section class="rp-sec" id="sec-3d" hidden>
-        <div class="rp-label">Terreno 3D</div>
-        <div class="seg" role="group" aria-label="Versione del DEM">
-          <button class="seg-btn active" data-dem="v13">DEM v1.3</button>
-          <button class="seg-btn" data-dem="v11">DEM v1.1</button>
-        </div>
-        <div class="ctl-row" style="margin-top:10px"><input id="ex-range" type="range" min="10" max="40" value="15" aria-label="Esagerazione verticale"><span id="ex-val">×1,5</span></div>
-        <div class="seg" role="group" aria-label="Aspetto del terreno" style="margin-top:10px">
-          <button class="seg-btn active" data-photo="off">Mappe</button>
-          <button class="seg-btn" data-photo="on">Foto satellitare</button>
-        </div>
-        <div id="shade-ctl" hidden><div class="rp-label" style="margin-top:10px">Ombreggiatura del rilievo</div><div class="ctl-row"><input id="shade-range" type="range" min="0" max="100" value="35" aria-label="Ombreggiatura del rilievo"><span id="shade-val">35%</span></div></div>
-        <p class="note">Le mappe si adagiano sul rilievo. Passa da DEM v1.1 a v1.3 per vedere le differenze di forma. Trascina con il tasto destro per inclinare e ruotare.</p>
-      </section>
+      <div id="vista-panoramica"></div>
+      <div id="vista-tecnico" hidden></div>
 
-      <section class="rp-sec" id="sec-legend">
-        <div class="rp-label" id="legend-title">Legenda</div>
-        <div id="legend"></div>
-        <p id="legend-note" class="note"></p>
-      </section>
-
-      <section class="rp-sec">
-        <div class="rp-label">In breve</div>
-        <div id="kpis" class="kpis"></div>
-      </section>
-
-      <section class="rp-sec">
-        <div class="rp-label">Zone con più variazione <span class="rp-sub">celle con |Δ quota| &gt; 2 m</span></div>
-        <div id="upl-list" class="upl-list"></div>
-        <button id="upl-more" class="pill">Mostra tutte le zone</button>
-      </section>
-
-      <section class="rp-sec">
-        <div class="rp-label">Quanto cambia con la quota</div>
-        <canvas id="chart-fasce" height="170" aria-label="Variazione per fascia di quota"></canvas>
-      </section>
-
-    </div>
-
-    <div class="rp-scroll" id="pane-metodo" role="tabpanel" aria-labelledby="tab-metodo" hidden>
-
-      <section class="rp-sec rp-credits">
-        <div class="rp-label">Dati e metodo</div>
-        <p>DTM: HR-DTM-5m, Panza et al. (2026), IRPI-CNR, CC BY 4.0 —
+      <details class="rp-sec rp-credits">
+        <summary class="rp-label">Credits e licenza</summary>
+        <p><strong>Dati.</strong> HR-DTM-5m Italia v1.3 e v1.1 — Panza, Muto, Rossi, Alvioli, Iovine, Marchesini (2026), IRPI-CNR, CC BY 4.0:
           <a href="https://zenodo.org/records/24009736" target="_blank" rel="noopener noreferrer">v1.3</a>,
-          <a href="https://zenodo.org/records/18872933" target="_blank" rel="noopener noreferrer">v1.1</a>.</p>
-        <p>Differenze calcolate sulla griglia della v1.1 (la v1.3 è sfasata di circa 3,5 m e viene ricampionata, bilineare). La pendenza v1.3 è calcolata sul DEM nativo. Area: confine comunale.</p>
-        <p>La maschera delle fonti è generalizzata a 20 m: i bordi sono approssimati.</p>
-      </section>
-
-      <section class="rp-sec rp-credits">
-        <div class="rp-label">Cosa cambia in v1.3</div>
-        <p>La v1.3 corregge la v1.2: le griglie regionali non erano allineate alla griglia nazionale a 5 m e producevano artefatti locali nel mosaico. Fonti di quota e metodo restano invariati; in più c'è la maschera delle fonti.</p>
-        <ul>
-          <li>Differenza media +0,13 m, deviazione standard 1,74 m.</li>
-          <li>|Δ| &gt; 0,5 m nel 23,8% delle celle, &gt; 2 m nel 2,2%, &gt; 5 m nello 0,5%.</li>
-          <li>Le differenze stanno sui versanti: 95° percentile di |Δ| ~0,4 m sotto 50 m di quota, 2,4 m tra 200 e 500 m. Solo 3 blocchi da 500 m su 1368 superano il 30% di celle con |Δ| &gt; 2 m.</li>
-          <li>Pendenza media quasi uguale: 11,44° (v1.1), 11,46° (v1.3).</li>
-          <li>Quota massima 1050,7 m (v1.1), 1050,3 m (v1.3).</li>
-        </ul>
-      </section>
-
-      <section class="rp-sec rp-credits">
-        <div class="rp-label">Cosa cambia a Palermo</div>
-        <p>Sul territorio comunale (159,5 km², 6,38 milioni di celle) il 76,2% delle celle cambia meno di 0,5 m. Il 15,5% sale di oltre 0,5 m e l'8,3% scende di oltre 0,5 m: nel complesso la v1.3 è un po' più alta (+0,13 m in media).</p>
-        <ul>
-          <li><strong>Città e costa: praticamente invariate.</strong> Sotto i 50 m di quota il 95% delle celle cambia meno di 0,4 m. In 39 zone UPL su 56 meno dello 0,5% delle celle supera i 2 m di differenza; in Uditore, Villa Tasca, Bonagia, Altarello e Patti–Villaggio Ruffini nessuna.</li>
-          <li><strong>Versanti e rilievi: qui si concentrano le differenze.</strong> Sulle montagne, tra 200 e 500 m, il 95° percentile di |Δ| sale a 2,4 m.</li>
-          <li><strong>Zone con più variazione</strong> (celle con |Δ| &gt; 2 m): Vergine Maria 10,1%, Partanna Mondello 7,6%, Arenella 6,3%, Montepellegrino 4,2%, Ciaculli–Croce Verde 3,7%, Borgo Nuovo 3,1%. Vergine Maria e Arenella sono piccole (circa 1 km²): contano poche celle.</li>
-          <li><strong>Segno diverso a seconda della zona:</strong> Montepellegrino scende in media (−0,27 m), Vergine Maria (+0,99 m), Ciaculli (+0,45 m) e Arenella (+0,43 m) salgono.</li>
-          <li><strong>Pendenza:</strong> media comunale quasi identica (11,44° contro 11,46°); il 81,5% delle celle cambia meno di 1°. Le zone con più Δ pendenza media sono Vergine Maria e Arenella (+0,2°).</li>
-        </ul>
-        <p>Le differenze non sono una misura di errore: la mappa non dice quale delle due versioni sia più vicina al terreno reale.</p>
-      </section>
-
-      <section class="rp-sec rp-credits">
-        <div class="rp-label">Limiti</div>
-        <ul>
-          <li>Griglia sfasata: le due versioni non si sovrappongono cella per cella senza ricampionare.</li>
-          <li>La rugosità cala da 1,89 a 1,16, ma in parte è un artefatto del ricampionamento bilineare: va rifatta sulla griglia nativa.</li>
-          <li>Il minimo della v1.3 è lievemente negativo (−0,15 m).</li>
-          <li>Maggiore accuratezza assoluta non dimostrata: manca un riferimento esterno. Gli autori privilegiano il realismo morfologico.</li>
-          <li>Fonti a Palermo: il 65% dell'estensione è LiDAR ATA 2012-2013 (2 m); TINITALY (10 m) non incide.</li>
-        </ul>
-      </section>
-
-    </div>
-
-    <div class="rp-scroll" id="pane-credits" role="tabpanel" aria-labelledby="tab-credits" hidden>
-
-      <section class="rp-sec rp-credits">
-        <div class="rp-label">Dati</div>
-        <ul>
-          <li><strong>HR-DTM-5m Italia v1.3 e v1.1</strong> — modello digitale del terreno a 5 m, Panza, Muto, Rossi, Alvioli, Iovine, Marchesini (2026), IRPI-CNR, CC BY 4.0. Include la maschera delle fonti (GPKG). <a href="https://zenodo.org/records/24009736" target="_blank" rel="noopener noreferrer">zenodo.org/records/24009736</a> (v1.3) · <a href="https://zenodo.org/records/18872933" target="_blank" rel="noopener noreferrer">zenodo.org/records/18872933</a> (v1.1)</li>
-          <li><strong>Limiti UPL e confine comunale</strong> — Comune di Palermo, dati aperti.</li>
-          <li><strong>Carta Tecnica Comunale 1:2.000, anno 2006</strong> — Comune di Palermo, mostrata come CTR; tile da <a href="https://siciliahub.github.io/Tiles/" target="_blank" rel="noopener noreferrer">SiciliaHub</a>.</li>
-          <li><strong>Cartografia di base</strong> — <a href="https://openfreemap.org/" target="_blank" rel="noopener noreferrer">OpenFreeMap</a>, © OpenMapTiles, © contributori <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>; immagini satellitari Google Satellite.</li>
-        </ul>
-      </section>
-
-      <section class="rp-sec rp-credits">
-        <div class="rp-label">Strumenti</div>
-        <ul>
-          <li><strong>GDAL / OGR</strong> (con NumPy e Pillow) — ricampionamento, pendenza, ombreggiatura, statistiche per zona, generazione dei tile.</li>
-          <li><strong>QGIS headless (WSL2)</strong> — esecuzione degli algoritmi di Processing e degli script PyQGIS senza interfaccia grafica, in ambiente conda-forge su WSL2.</li>
-          <li><strong>MapLibre GL JS 5.24</strong> — mappa web e vista 3D.</li>
-          <li><strong>Chart.js 4.4</strong> — grafico per fascia di quota.</li>
-        </ul>
-      </section>
-
-      <section class="rp-sec rp-credits">
-        <div class="rp-label">Sviluppo e tecnologia</div>
-        <p>Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitrano/" target="_blank" rel="noopener noreferrer">@gbvitrano</a> in collaborazione con <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude AI (Anthropic)</a>, che ha affiancato le scelte architetturali, l'ottimizzazione del codice e lo sviluppo delle funzionalità di visualizzazione geospaziale.</p>
-        <p>Elaborazione: novembre 2026 · @opendatasicilia</p>
-      </section>
-
-      <section class="rp-sec rp-credits">
-        <div class="rp-label">Licenza</div>
-        <p>I contenuti di questa applicazione sono rilasciati sotto licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener noreferrer"><strong>CC BY 4.0 – Attribuzione 4.0 Internazionale</strong></a>. Sei libero di condividere e adattare il materiale per qualsiasi scopo, anche commerciale, a condizione di citare adeguatamente la fonte.</p>
-        <p>Preprint del DTM: Muto, M., Panza, M., Rossi, M., Alvioli, M., Iovine, G., Marchesini, I. (2026). High-Resolution Digital Terrain Model for the Italian Territory. <em>EarthArXiv</em>. <a href="https://doi.org/10.31223/X5J18R" target="_blank" rel="noopener noreferrer">doi.org/10.31223/X5J18R</a></p>
-      </section>
-
+          <a href="https://zenodo.org/records/18872933" target="_blank" rel="noopener noreferrer">v1.1</a>.
+          Carta Tecnica Comunale 1:2.000 (2006), Comune di Palermo, tile da
+          <a href="https://siciliahub.github.io/Tiles/" target="_blank" rel="noopener noreferrer">SiciliaHub</a>.
+          Cartografia di base: <a href="https://openfreemap.org/" target="_blank" rel="noopener noreferrer">OpenFreeMap</a>,
+          © OpenMapTiles, © contributori <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>; immagini Google Satellite.</p>
+        <p><strong>Strumenti.</strong> GDAL, NumPy, SciPy, rasterio, pysheds, MapLibre GL JS.</p>
+        <p><strong>Sviluppo.</strong> Progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitrano/" target="_blank" rel="noopener noreferrer">@gbvitrano</a>
+          in collaborazione con <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude AI (Anthropic)</a> · @opendatasicilia</p>
+        <p><strong>Licenza.</strong> <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>.
+          Preprint del DTM: Muto et al. (2026), <a href="https://doi.org/10.31223/X5J18R" target="_blank" rel="noopener noreferrer">doi.org/10.31223/X5J18R</a></p>
+      </details>
     </div>
   </aside>
 </div>
 
 <!-- legenda in mappa -->
-<div id="map-legends"><div id="map-legend" class="map-legend" aria-live="polite"></div></div>
+<div id="map-legends">
+  <div id="map-legend-quota" class="map-legend">
+    <div class="map-legend-title">Quota (m s.l.m.)</div>
+    <div class="lg-quota-bar" style="background:linear-gradient(to right,rgb(168,201,160) 0%,rgb(205,222,170) 4.8%,rgb(232,224,160) 14.3%,rgb(214,188,130) 28.6%,rgb(186,150,110) 47.6%,rgb(160,128,104) 71.4%,rgb(235,232,228) 100%)"></div>
+    <div class="lg-quota-ticks"><span>0</span><span>150</span><span>300</span><span>500</span><span>750</span><span>1050</span></div>
+  </div>
+  <div id="map-legend" class="map-legend" aria-live="polite"></div>
+</div>
 
 <!-- Scala metrica -->
 <div id="map-scale">
@@ -315,8 +177,12 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"
         integrity="sha384-JUh163oCRItcbPme8pYnROHQMC6fNKTBWtRG3I3I0erJkzNgL7uxKlNwcrcFKeqF"
         crossorigin="anonymous"></script>
-<script src="../js/maplibre-gl.js"></script>
-<script src="../js/basemap-styles.js"></script>
-<script src="js/app.js"></script>
+<script src="vendor/maplibre-gl.js"></script>
+<script src="vendor/basemap-styles.js"></script>
+<script src="js/qualita-lib.js?v=3d8"></script>
+<script src="js/panoramica.js?v=3d4"></script>
+<script src="js/tecnico.js?v=3d6"></script>
+<script src="js/confronto.js?v=3d4"></script>
+<script src="js/app.js?v=3db"></script>
 </body>
 </html>
