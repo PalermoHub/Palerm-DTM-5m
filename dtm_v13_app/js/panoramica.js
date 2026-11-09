@@ -1,4 +1,4 @@
-// Vista Panoramica: il numero «95,2% identico» e tre casi concreti. Costruisce il pannello da data/qualita.json
+// Vista Panoramica: il numero «95,2% identico» e quattro casi concreti. Costruisce il pannello da data/qualita.json
 // (nessun calcolo, nessuna cifra scritta a mano) e contiene le funzioni pure del cursore prima/dopo.
 // Usabile nel browser (window.PanoramicaUI) e in Node (module.exports) per i test.
 (function (root, factory) {
@@ -45,11 +45,28 @@
     1: 'Il punto dove cambia di più',
     2: 'La zona più estesa',
     3: 'Ai margini dell\'area misurata',
+    4: 'Una fascia sul fianco di Monte Pellegrino',
   };
+
+  // Dove mettere il segnaposto di ciascun caso: caso 1 = centro del cluster, caso 2 = centro della regione principale,
+  // caso 3 = metà del lato ovest dell'area misurata (il bordo non ha un punto solo: è solo un'indicazione).
+  function posizioniCasi(q) {
+    const out = [];
+    const c1 = q && q.caso1, r1 = q && q.regioni && q.regioni[0];
+    const g = q && q.origine && q.origine.griglia && q.origine.griglia.bbox_wgs84;
+    const ok = x => typeof x === 'number' && isFinite(x);
+    if (c1 && ok(c1.lon) && ok(c1.lat)) out.push({ n: 1, lng: c1.lon, lat: c1.lat, titolo: TITOLI[1], bbox: bboxCaso(q, 1) });
+    if (r1 && ok(r1.lon) && ok(r1.lat)) out.push({ n: 2, lng: r1.lon, lat: r1.lat, titolo: TITOLI[2], bbox: bboxCaso(q, 2) });
+    if (Array.isArray(g) && g.every(ok)) out.push({ n: 3, lng: g[0], lat: (g[1] + g[3]) / 2, titolo: TITOLI[3], bbox: g });
+    const c4 = q && q.caso4;
+    if (c4 && ok(c4.lon) && ok(c4.lat) && Array.isArray(c4.bbox_wgs84)) out.push({ n: 4, lng: c4.lon, lat: c4.lat, titolo: TITOLI[4], bbox: c4.bbox_wgs84 });
+    return out;
+  }
 
   function bboxCaso(q, n) {
     if (n === 1) return q.caso1 && q.caso1.bbox_wgs84;
     if (n === 2) return q.regioni && q.regioni[0] && q.regioni[0].bbox_wgs84;
+    if (n === 4) return q.caso4 && q.caso4.bbox_wgs84;
     return q.origine && q.origine.griglia && q.origine.griglia.bbox_wgs84;
   }
 
@@ -91,8 +108,8 @@
       ' delle celle diverse sta nel 10% dei blocchi di mappa da 500 m più colpiti.');
     testa.append(grande, sotto, mappa, conc);
 
-    const intro = el('div', 'rp-label', 'Tre punti da guardare');
-    const casi = [1, 2, 3].map(n => {
+    const intro = el('div', 'rp-label', 'Quattro punti da guardare');
+    const casi = [1, 2, 3, 4].filter(n => !!bboxCaso(q, n)).map(n => {
       const box = el('div', 'caso-box');
       const b = el('button', 'caso');
       b.setAttribute('type', 'button');
@@ -123,5 +140,5 @@
     radice.replaceChildren(cose, testa, intro, ...casi, nota);
   }
 
-  return { distanzaM, vicinoAlCaso1, posizioneCursore, costruisciPanoramica };
+  return { posizioniCasi, bboxCaso, distanzaM, vicinoAlCaso1, posizioneCursore, costruisciPanoramica };
 });

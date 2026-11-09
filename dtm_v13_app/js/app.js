@@ -146,6 +146,35 @@ AppQualita.mostraSuMappa = function (bbox) {
   AppQualita.vaiA(bbox);
 };
 
+// Segnaposto numerati, gli stessi dei casi del pannello Panoramica
+const segnaposti = [];
+function metti3Segnaposti(q) {
+  segnaposti.splice(0).forEach(m => m.remove());
+  if (!window.PanoramicaLib) return;
+  for (const c of window.PanoramicaLib.posizioniCasi(q)) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'segnaposto'; b.textContent = String(c.n);
+    b.title = c.n + ' · ' + c.titolo; b.setAttribute('aria-label', 'Punto ' + c.n + ': ' + c.titolo);
+    b.dataset.caso = String(c.n);
+    b.addEventListener('click', e => { e.stopPropagation(); AppQualita.vaiA(c.bbox); });
+    segnaposti.push(new maplibregl.Marker({ element: b }).setLngLat([c.lng, c.lat]).addTo(map));
+  }
+}
+
+// Evidenziazione reciproca: segnaposto sulla mappa <-> box del caso nel pannello destro
+function evidenziaCaso(n, on) {
+  document.querySelectorAll('.segnaposto[data-caso="' + n + '"], .caso[data-caso="' + n + '"]')
+    .forEach(x => x.classList.toggle('evid', on));
+}
+document.addEventListener('mouseover', e => {
+  const t = e.target.closest && e.target.closest('.segnaposto, .caso');
+  if (t && t.dataset.caso) evidenziaCaso(t.dataset.caso, true);
+});
+document.addEventListener('mouseout', e => {
+  const t = e.target.closest && e.target.closest('.segnaposto, .caso');
+  if (t && t.dataset.caso && !t.contains(e.relatedTarget)) evidenziaCaso(t.dataset.caso, false);
+});
+
 function renderLegend(q) {
   const ml = el('map-legend');
   const voci = QualitaLib.legendaDiff(q);
@@ -253,6 +282,7 @@ map.on('load', async () => {
   const q = await caricaDati();
   if (!q) return;
   renderLegend(q); AppQualita.applicaDiff();
+  metti3Segnaposti(q);
   // le due viste sono costruite da js/panoramica.js e js/tecnico.js, se presenti
   if (window.PanoramicaUI) window.PanoramicaUI.costruisci(q, el('vista-panoramica'), AppQualita);
   if (window.TecnicoUI) window.TecnicoUI.costruisci(q, el('vista-tecnico'), AppQualita);

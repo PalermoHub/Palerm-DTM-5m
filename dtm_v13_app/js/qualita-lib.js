@@ -66,6 +66,7 @@
       return (r && r.bbox_wgs84) || null;
     }
     if (gruppo === 'caso1') return (q.caso1 && q.caso1.bbox_wgs84) || null;
+    if (gruppo === 'caso4') return (q.caso4 && q.caso4.bbox_wgs84) || null;
     // confronto e blocchi più colpiti: zoom sulla regione che raccoglie più blocchi con più del 50% di celle diverse
     // (l'unione di tutte le regioni darebbe uno zoom largo quanto la città, inutile)
     if (gruppo === 'confronto' || chiave === 'concentrazione.blocchi_sopra_50pct' || chiave === 'concentrazione.quota_top10') {
@@ -93,6 +94,12 @@
         ' delle celle cambia di più di mezzo metro. Nel resto della città le differenze crescono con la pendenza: ',
         { chiave: 'pendenza.10_20_diverse_pct' }, ' di celle diverse tra 10° e 20°, ',
         { chiave: 'pendenza.0_2_diverse_pct' }, ' in pianura.'];
+    }
+    if (n === 4) {
+      return ['Una fascia di ', { chiave: 'caso4.area_km2' }, ' sul fianco di Monte Pellegrino: le celle cambiano in più e in meno (da ',
+        { chiave: 'caso4.min_d' }, ' a ', { chiave: 'caso4.max_d', segno: true }, '), in media di ', { chiave: 'caso4.media_d' },
+        '. Il ', { chiave: 'caso4.pct_in_ata' }, ' sta nella stessa fonte laser 2012-2013 in entrambe le versioni, quindi non è un cambio di fonte. ',
+        'Il rilievo laser del 2013 non dice quale versione sia più vicina e la causa non è provata.'];
     }
     if (n === 3) {
       return ['Vicino al bordo dell\'area misurata la quota di celle diverse è più alta (', { chiave: 'bordi.0_2_diverse_pct' },

@@ -368,7 +368,8 @@ canvas[hidden] + .btn-png { display: none; }
 .num { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--ink); }
 .caso-box { margin-bottom: 10px; }
 .caso { display: block; width: 100%; text-align: left; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: #fff; cursor: pointer; font-family: inherit; color: var(--ink-2); }
-.caso:hover { border-color: var(--accent); }
+.caso:hover, .caso.evid { border-color: var(--accent); }
+.caso.evid { background: #fff7e0; box-shadow: 0 0 0 2px var(--accent); }
 .caso-t { display: block; font-size: 13px; color: var(--ink); margin-bottom: 4px; }
 .caso-txt { font-size: 12.5px; line-height: 1.5; color: var(--ink-3); }
 .caso-box .pill { margin-top: 6px; }
@@ -397,3 +398,7 @@ canvas[hidden] + .btn-png { display: none; }
 
 .tec-mappa { margin-top: 6px; padding: 4px 10px; font-size: 12px; font-weight: 700; color: var(--accent); background: transparent; border: 1px solid var(--accent); border-radius: 6px; cursor: pointer; }
 .tec-mappa:hover { background: var(--accent); color: #fff; }
+
+/* segnaposto dei tre casi sulla mappa */
+.segnaposto { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; background: var(--ink); color: #fff; font: 700 13px/1 'Titillium Web', sans-serif; display: grid; place-items: center; padding: 0; cursor: pointer; box-shadow: 0 1px 6px rgba(0,0,0,.45); }
+.segnaposto.evid, .segnaposto:hover, .segnaposto:focus-visible { background: var(--accent); outline: 2px solid #fff; }
