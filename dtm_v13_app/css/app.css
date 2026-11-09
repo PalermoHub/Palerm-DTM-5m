@@ -30,15 +30,11 @@ button { font-family: inherit; }
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 /* ── titolo ── */
-#titlebar {
-  position: absolute; left: 62px; top: 92px; z-index: 100;
-  background: var(--panel); backdrop-filter: blur(12px);
-  border: 1px solid var(--line); border-radius: 12px;
-  padding: 7px 14px 8px; box-shadow: var(--shadow);
-  pointer-events: none;
-}
-.tb-kicker { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
-#titlebar h1 { font-size: 16px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+#titlebar { flex: none; padding: 8px 16px 7px; background: var(--panel); }
+.tb-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.tb-kicker { font-size: 14px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+.tb-date { font-size: 11px; color: var(--ink-3); white-space: nowrap; }
+#titlebar h1 { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.2; margin-top: 1px; }
 
 /* ── toolbar ── */
 #map-toolbar {
@@ -304,10 +300,9 @@ input[type=range] { flex: 1; width: 100%; accent-color: var(--blue); }
 
 /* ── mobile: pannello come bottom sheet ── */
 @media (max-width: 720px) {
-  #titlebar { left: 56px; right: 8px; top: 88px; }
   #titlebar h1 { font-size: 14px; }
-  #map-legends { left: 8px; bottom: 34px; }
-  .map-legend { max-width: 200px; padding: 7px 10px; }
+  #map-legends { left: 64px; bottom: 34px; }  /* a destra della toolbar (56px), non sotto */
+  .map-legend { max-width: calc(100vw - 64px - 80px); padding: 7px 10px; }
   body:has(#rp-wrap.open) #ods-logo, body:has(#rp-wrap.open) #map-legends, body:has(#rp-wrap.open) #attrib-wrap, body:has(#rp-wrap.open) #map-scale { opacity: 0; pointer-events: none; transition: opacity .3s; }
   #map-scale.panel-open, #attrib-wrap.panel-open { right: 28px; }
   #ods-logo.panel-open { right: 20px; }
