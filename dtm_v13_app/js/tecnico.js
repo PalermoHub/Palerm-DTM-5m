@@ -95,8 +95,38 @@
       c.append(n.origine, el('br'), b);
       return c;
     };
-    const righeNum = Q.numeriMostrati(q).map(n => [n.chiave, n.testo, origineCella(n)]);
-    sNum.append(tabella(['Misura', 'Valore', 'Origine'], righeNum, 'numeri'));
+    // Prima i quattro punti della Panoramica (stessa numerazione dei segnaposto), poi i temi generali
+    const TEMI = {
+      p1: 'Punto 1 · Il punto dove cambia di più', p2: 'Punto 2 · La zona più estesa',
+      p3: 'Punto 3 · Ai margini dell\'area misurata', p4: 'Punto 4',
+      confronto: 'Confronto v1.1 / v1.3', concentrazione: 'Concentrazione delle differenze',
+      traslazione: 'Traslazione', pendenza: 'Pendenza', altreregioni: 'Altre regioni', fonte: 'Fonti del rilievo',
+      idro: 'Idrologia', rumore: 'Rumore'
+    };
+    const ORDINE = ['p1', 'p2', 'p3', 'p4', 'confronto', 'concentrazione', 'traslazione', 'pendenza', 'altreregioni', 'fonte', 'idro', 'rumore'];
+    const temaDi = chiave => {
+      const pre = chiave.split('.')[0];
+      if (pre === 'caso1') return 'p1';
+      if (pre === 'regione1') return 'p2';
+      if (pre === 'bordi') return 'p3';
+      if (pre === 'caso4') return 'p4';
+      if (/^regione\d+$/.test(pre)) return 'altreregioni';
+      return /^fonte\d+$/.test(pre) ? 'fonte' : pre;
+    };
+    const perTema = new Map();
+    for (const n of Q.numeriMostrati(q)) {
+      const t = temaDi(n.chiave);
+      if (!perTema.has(t)) perTema.set(t, []);
+      perTema.get(t).push([n.chiave, n.testo, origineCella(n)]);
+    }
+    const gruppi = new Map([...perTema].sort((x, y) => {
+      const i = ORDINE.indexOf(x[0]), j = ORDINE.indexOf(y[0]);
+      return (i < 0 ? 99 : i) - (j < 0 ? 99 : j);
+    }));
+    for (const [t, righe] of gruppi) {
+      sNum.append(el('div', 'tec-gruppo', (TEMI[t] || t) + ' · ' + righe.length));
+      sNum.append(tabella(['Misura', 'Valore', 'Origine'], righe, 'numeri'));
+    }
     parti.push(sNum);
 
     // 2) soglie e file di partenza

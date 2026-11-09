@@ -402,3 +402,5 @@ canvas[hidden] + .btn-png { display: none; }
 /* segnaposto dei tre casi sulla mappa */
 .segnaposto { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; background: var(--ink); color: #fff; font: 700 13px/1 'Titillium Web', sans-serif; display: grid; place-items: center; padding: 0; cursor: pointer; box-shadow: 0 1px 6px rgba(0,0,0,.45); }
 .segnaposto.evid, .segnaposto:hover, .segnaposto:focus-visible { background: var(--accent); outline: 2px solid #fff; }
+
+.tec-gruppo { margin: 14px 0 4px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2); border-bottom: 2px solid var(--accent); padding-bottom: 3px; }
