@@ -42,6 +42,7 @@
     // col cursore aperto si guardano i due rilievi: la mappa delle differenze resta nascosta
     // (e la legenda delle differenze non vale per i due rilievi: nascosta finché il cursore è aperto)
     root.AppQualita.confrontoAperto = si;
+    if (root.SwipeSat) root.SwipeSat.aggiorna();
     root.AppQualita.applicaDiff();
   }
 

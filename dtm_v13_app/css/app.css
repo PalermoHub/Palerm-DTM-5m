@@ -328,17 +328,20 @@ input[type=range] { flex: 1; width: 100%; accent-color: var(--blue); }
 /* ── confronto a slider (solo Rilievo) ── */
 .map-ov { position: absolute; inset: 0; z-index: 5; pointer-events: none; visibility: hidden; }
 .map-ov.on { visibility: visible; }
-#cmp { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
-#cmp[hidden] { display: none; }
-#cmp-line { position: absolute; top: 0; bottom: 0; width: 3px; margin-left: -1.5px; background: #fff; box-shadow: 0 0 0 1px rgba(26, 42, 80, .35); }
-#cmp-handle {
+#cmp, #swp { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
+#cmp[hidden], #swp[hidden] { display: none; }
+#cmp-line, #swp-line { position: absolute; top: 0; bottom: 0; width: 3px; margin-left: -1.5px; background: #fff; box-shadow: 0 0 0 1px rgba(26, 42, 80, .35); }
+#cmp-handle, #swp-handle {
   position: absolute; top: 50%; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%;
   background: #fff; color: var(--ink-2); border: 1px solid rgba(26, 42, 80, .35); box-shadow: 0 2px 8px rgba(26, 42, 80, .3);
   display: flex; align-items: center; justify-content: center; cursor: ew-resize; pointer-events: auto; touch-action: none; padding: 0;
 }
-#cmp-handle:hover, #cmp-handle:focus-visible { color: var(--accent); }
+#cmp-handle:hover, #cmp-handle:focus-visible, #swp-handle:hover, #swp-handle:focus-visible { color: var(--accent); }
 .cmp-tag { position: absolute; top: 150px; padding: 3px 10px; border-radius: 999px; background: rgba(255, 255, 255, .92); border: 1px solid var(--line); font-size: 12px; font-weight: 700; color: var(--ink-2); }
 .cmp-l { left: 62px; }
+#swp-opac { top: 186px; display: flex; align-items: center; gap: 8px; pointer-events: auto; }
+#swp-opac input { width: 110px; flex: none; }
+#swp-opac-val { min-width: 34px; text-align: right; font-variant-numeric: tabular-nums; }
 .cmp-r { right: 380px; }
 @media (max-width: 720px) { .cmp-l { left: 8px; } .cmp-r { right: 8px; } }
 

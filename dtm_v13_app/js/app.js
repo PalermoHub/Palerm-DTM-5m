@@ -88,6 +88,8 @@ function toast(msg) { const t = el('toast'); t.textContent = msg; t.hidden = fal
 
 // ── Dati e legenda ─────────────────────────────────────────
 const AppQualita = { vista: 'panoramica', dati: null, map, diffOn: true, confrontoAperto: false, selezione: new Set() };
+AppQualita.in3d = () => is3d;
+AppQualita.exag3d = () => exag3d;
 window.AppQualita = AppQualita;
 
 function avviso(testo) {
@@ -286,15 +288,18 @@ function bind3dPanel() {
     exag3d = parseFloat(e.target.value);
     el('tbp-exag-val').textContent = exag3d.toFixed(1) + '×';
     if (is3d) map.setTerrain({ source: 'terrain13', exaggeration: exag3d });
+    window.SwipeSat.terreno();
   });
   el('tbp-opac').addEventListener('input', e => {
     const v = parseFloat(e.target.value);
     el('tbp-opac-val').textContent = Math.round(v * 100) + '%';
     applyOpacita3d(v);
+    window.SwipeSat.opacita(v);
   });
 }
 function set3d(on) {
   is3d = on;
+  window.SwipeSat.aggiorna();
   el('tb-3d').classList.toggle('active', on);
   el('tb-3d').setAttribute('aria-pressed', String(on));
   el('tb-panel-3d').hidden = !on;
@@ -316,6 +321,7 @@ function bindUi() {
     el('map-legend-quota').hidden = sat;
     posIds.forEach(id => map.setLayoutProperty(id, 'visibility', sat ? 'none' : 'visible'));
     buildAttrib(b.dataset.basemap);
+    window.SwipeSat.aggiorna();
   }));
   el('tb-fullscreen').addEventListener('click', () => {
     if (document.fullscreenElement) document.exitFullscreen();
