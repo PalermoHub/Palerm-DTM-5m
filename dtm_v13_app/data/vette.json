@@ -1,0 +1,77 @@
+{
+ "fonte": "Quote: DTM v1.3 (massimo entro 300 m dal punto OSM). Nomi e posizioni: OpenStreetMap contributors.",
+ "vette": [
+  {
+   "nome": "Monte Cuccio",
+   "quota_m": 1050.7,
+   "osm_ele_m": 1050,
+   "nota": "Massiccio di Monte Cuccio, a ovest della Conca d'Oro",
+   "lon": 13.26551,
+   "lat": 38.11501,
+   "n": 1
+  },
+  {
+   "nome": "Monte Castellaccio",
+   "quota_m": 889.2,
+   "osm_ele_m": 887.8,
+   "nota": "Dorsale sopra Monreale",
+   "lon": 13.26258,
+   "lat": 38.15965,
+   "n": 2
+  },
+  {
+   "nome": "Monte Grifone",
+   "quota_m": 831.1,
+   "osm_ele_m": 832,
+   "nota": "Chiude la Conca d'Oro a sud-est",
+   "lon": 13.39224,
+   "lat": 38.06626,
+   "n": 3
+  },
+  {
+   "nome": "Monte Caputo",
+   "quota_m": 769.8,
+   "osm_ele_m": 764,
+   "nota": "Dorsale a sud di Boccadifalco",
+   "lon": 13.27461,
+   "lat": 38.08411,
+   "n": 4
+  },
+  {
+   "nome": "Pizzo Manolfo",
+   "quota_m": 762.7,
+   "osm_ele_m": 762,
+   "nota": "Retroterra di Mondello e Sferracavallo",
+   "lon": 13.27161,
+   "lat": 38.17708,
+   "n": 5
+  },
+  {
+   "nome": "Monte Santa Caterina",
+   "quota_m": 690.5,
+   "osm_ele_m": 690,
+   "nota": "Rilievi di Villabate e Belmonte Mezzagno",
+   "lon": 13.39818,
+   "lat": 38.05308,
+   "n": 6
+  },
+  {
+   "nome": "Monte Pellegrino",
+   "quota_m": 600.3,
+   "osm_ele_m": 594.4,
+   "nota": "Promontorio a nord della città",
+   "lon": 13.3538,
+   "lat": 38.16611,
+   "n": 7
+  },
+  {
+   "nome": "Pizzo Sella",
+   "quota_m": 558.4,
+   "osm_ele_m": 555,
+   "nota": "Costa di Capo Gallo",
+   "lon": 13.29955,
+   "lat": 38.2144,
+   "n": 8
+  }
+ ]
+}

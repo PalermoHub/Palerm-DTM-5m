@@ -9,7 +9,7 @@
     root.PanoramicaUI = {
       costruisci(q, radice, app) {
         lib.costruisciPanoramica(q, radice, {
-          vaiA: app.vaiA, toast: app.toast,
+          vaiA: app.vaiA, toast: app.toast, vette: app.vette,
           get confronto() { return root.ConfrontoCaso1; },
         }, root.document);
       },
@@ -41,6 +41,9 @@
   }
 
   // ── costruzione del pannello ─────────────────────────────
+  // I quattro punti si distinguono con le lettere A-D, così non si confondono con le vette numerate 1-8.
+  const lettera = n => 'ABCD'[n - 1] || String(n);
+
   const TITOLI = {
     1: 'Il punto dove cambia di più',
     2: 'La zona più estesa',
@@ -68,6 +71,53 @@
     if (n === 2) return q.regioni && q.regioni[0] && q.regioni[0].bbox_wgs84;
     if (n === 4) return q.caso4 && q.caso4.bbox_wgs84;
     return q.origine && q.origine.griglia && q.origine.griglia.bbox_wgs84;
+  }
+
+  // Stessa rampa della legenda «Quota» e delle tile del rilievo (scripts/genera_dem_tile.py), interpolata sulla quota.
+  const RAMPA = [[0, 168, 201, 160], [50, 205, 222, 170], [150, 232, 224, 160], [300, 214, 188, 130],
+    [500, 186, 150, 110], [750, 160, 128, 104], [1050, 235, 232, 228]];
+  function coloreQuota(m) {
+    const z = Math.max(RAMPA[0][0], Math.min(RAMPA[RAMPA.length - 1][0], m));
+    let i = 1; while (i < RAMPA.length - 1 && z > RAMPA[i][0]) i++;
+    const a = RAMPA[i - 1], b = RAMPA[i], t = (z - a[0]) / (b[0] - a[0]);
+    const c = [1, 2, 3].map(k => Math.round(a[k] + (b[k] - a[k]) * t));
+    const chiaro = (0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]) > 170;
+    return { css: 'rgb(' + c.join(',') + ')', testo: chiaro ? '#1a2a50' : '#fff' };
+  }
+
+  // Riquadro (ovest, sud, est, nord) di ~2 km attorno a una vetta, per portarci la mappa.
+  function bboxVetta(v, mezzo = 0.011) {
+    return [v.lon - mezzo, v.lat - mezzo * 0.8, v.lon + mezzo, v.lat + mezzo * 0.8];
+  }
+
+  // Classifica delle vette: barre proporzionali alla quota, la più alta a 100%, ognuna porta la mappa sulla vetta.
+  function costruisciVette(ctx, el) {
+    const v = ctx.vette && Array.isArray(ctx.vette.vette) ? ctx.vette.vette : [];
+    if (!v.length) return [];
+    const max = Math.max(...v.map(x => x.quota_m));
+    const fmt = x => Math.round(x).toLocaleString('it-IT');
+    const titolo = el('div', 'rp-label', 'Le vette attorno a Palermo');
+    const sotto = el('p', 'pan-sotto', 'I rilievi che chiudono la Conca d\'Oro, dalla cima più alta in giù (una per massiccio). Clicca per andarci.');
+    const lista = el('ol', 'vette');
+    for (const x of v) {
+      const li = el('li', 'vetta');
+      const b = el('button', 'vetta-b');
+      b.dataset.vetta = String(x.n);
+      b.setAttribute('type', 'button');
+      b.title = x.nota + ' · quota OSM ' + fmt(x.osm_ele_m) + ' m';
+      const nome = el('span', 'vetta-n'); nome.append(el('b', null, String(x.n)), ' ' + x.nome);
+      const barra = el('span', 'vetta-barra');
+      const riemp = el('span', 'vetta-riemp');
+      riemp.setAttribute('style', 'width:' + (x.quota_m / max * 100).toFixed(1) + '%;background:' + coloreQuota(x.quota_m).css);
+      barra.append(riemp);
+      const q = el('span', 'vetta-q', fmt(x.quota_m) + ' m');
+      b.append(nome, barra, q);
+      b.addEventListener('click', () => { if (ctx.vaiA) ctx.vaiA(bboxVetta(x)); });
+      li.append(b);
+      lista.append(li);
+    }
+    const nota = el('p', 'note', ctx.vette.fonte);
+    return [titolo, sotto, lista, nota];
   }
 
   function costruisciPanoramica(q, radice, ctx, doc) {
@@ -113,13 +163,13 @@
       const box = el('div', 'caso-box');
       const b = el('button', 'caso');
       b.setAttribute('type', 'button');
-      b.dataset.caso = String(n);
+      b.dataset.caso = lettera(n);
       const testo = el('span', 'caso-txt');
       testo.append(...Q.fraseCasoParti(q, n).map(p => {
         if (typeof p === 'string') return p;
         return num(p.chiave, p.segno, p.assoluto);
       }));
-      b.append(el('b', 'caso-t', n + ' · ' + TITOLI[n]), testo);
+      b.append(el('b', 'caso-t', lettera(n) + ' · ' + TITOLI[n]), testo);
       b.addEventListener('click', () => {
         const bb = bboxCaso(q, n);
         if (bb && ctx.vaiA) ctx.vaiA(bb);
@@ -137,8 +187,8 @@
 
     const nota = el('p', 'note',
       'Queste misure dicono dove le due versioni differiscono, non quale sia più vicina al terreno vero: per quello servirebbero quote misurate sul posto. Dettagli e comandi per rigenerare ogni numero nella vista Tecnico.');
-    radice.replaceChildren(cose, testa, intro, ...casi, nota);
+    radice.replaceChildren(cose, testa, intro, ...casi, ...costruisciVette(ctx, el), nota);
   }
 
-  return { posizioniCasi, bboxCaso, distanzaM, vicinoAlCaso1, posizioneCursore, costruisciPanoramica };
+  return { coloreQuota, lettera, bboxVetta, posizioniCasi, bboxCaso, distanzaM, vicinoAlCaso1, posizioneCursore, costruisciPanoramica };
 });

@@ -97,8 +97,8 @@
     };
     // Prima i quattro punti della Panoramica (stessa numerazione dei segnaposto), poi i temi generali
     const TEMI = {
-      p1: 'Punto 1 · Il punto dove cambia di più', p2: 'Punto 2 · La zona più estesa',
-      p3: 'Punto 3 · Ai margini dell\'area misurata', p4: 'Punto 4',
+      p1: 'Punto A · Il punto dove cambia di più', p2: 'Punto B · La zona più estesa',
+      p3: 'Punto C · Ai margini dell\'area misurata', p4: 'Punto D',
       confronto: 'Confronto v1.1 / v1.3', concentrazione: 'Concentrazione delle differenze',
       traslazione: 'Traslazione', pendenza: 'Pendenza', altreregioni: 'Altre regioni', fonte: 'Fonti del rilievo',
       idro: 'Idrologia', rumore: 'Rumore'

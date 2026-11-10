@@ -204,31 +204,50 @@ AppQualita.mostraSuMappa = function (bbox) {
 
 // Segnaposto numerati, gli stessi dei casi del pannello Panoramica
 const segnaposti = [];
+const lettera = n => (window.PanoramicaLib ? window.PanoramicaLib.lettera(n) : String(n));
+
+// Segnaposto delle vette (numeri 1-8, quadrati color siena), gli stessi della classifica nel pannello
+const segnapostiVette = [];
+function mettiVette(dati) {
+  segnapostiVette.splice(0).forEach(m => m.remove());
+  if (!dati || !window.PanoramicaLib) return;
+  for (const v of dati.vette) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'segnaposto vetta-pin'; b.textContent = String(v.n);
+    b.title = v.n + ' · ' + v.nome + ' ' + Math.round(v.quota_m) + ' m'; b.setAttribute('aria-label', 'Vetta ' + v.n + ': ' + v.nome);
+    b.dataset.vetta = String(v.n);
+    const col = window.PanoramicaLib.coloreQuota(v.quota_m);
+    b.style.background = col.css; b.style.color = col.testo;
+    b.addEventListener('click', e => { e.stopPropagation(); AppQualita.vaiA(window.PanoramicaLib.bboxVetta(v)); });
+    segnapostiVette.push(new maplibregl.Marker({ element: b }).setLngLat([v.lon, v.lat]).addTo(map));
+  }
+}
 function metti3Segnaposti(q) {
   segnaposti.splice(0).forEach(m => m.remove());
   if (!window.PanoramicaLib) return;
   for (const c of window.PanoramicaLib.posizioniCasi(q)) {
     const b = document.createElement('button');
-    b.type = 'button'; b.className = 'segnaposto'; b.textContent = String(c.n);
-    b.title = c.n + ' · ' + c.titolo; b.setAttribute('aria-label', 'Punto ' + c.n + ': ' + c.titolo);
-    b.dataset.caso = String(c.n);
+    b.type = 'button'; b.className = 'segnaposto'; b.textContent = lettera(c.n);
+    b.title = lettera(c.n) + ' · ' + c.titolo; b.setAttribute('aria-label', 'Punto ' + lettera(c.n) + ': ' + c.titolo);
+    b.dataset.caso = lettera(c.n);
     b.addEventListener('click', e => { e.stopPropagation(); AppQualita.vaiA(c.bbox); });
     segnaposti.push(new maplibregl.Marker({ element: b }).setLngLat([c.lng, c.lat]).addTo(map));
   }
 }
 
-// Evidenziazione reciproca: segnaposto sulla mappa <-> box del caso nel pannello destro
-function evidenziaCaso(n, on) {
-  document.querySelectorAll('.segnaposto[data-caso="' + n + '"], .caso[data-caso="' + n + '"]')
+// Evidenziazione reciproca: segnaposto sulla mappa <-> box del caso (A-D) o riga della vetta (1-8) nel pannello destro
+function evidenziaCaso(n, on, vetta) {
+  const k = vetta ? 'vetta' : 'caso';
+  document.querySelectorAll('.segnaposto[data-' + k + '="' + n + '"], .caso[data-' + k + '="' + n + '"], .vetta-b[data-' + k + '="' + n + '"]')
     .forEach(x => x.classList.toggle('evid', on));
 }
 document.addEventListener('mouseover', e => {
-  const t = e.target.closest && e.target.closest('.segnaposto, .caso');
-  if (t && t.dataset.caso) evidenziaCaso(t.dataset.caso, true);
+  const t = e.target.closest && e.target.closest('.segnaposto, .caso, .vetta-b');
+  if (t && (t.dataset.caso || t.dataset.vetta)) evidenziaCaso(t.dataset.caso || t.dataset.vetta, true, !t.dataset.caso);
 });
 document.addEventListener('mouseout', e => {
-  const t = e.target.closest && e.target.closest('.segnaposto, .caso');
-  if (t && t.dataset.caso && !t.contains(e.relatedTarget)) evidenziaCaso(t.dataset.caso, false);
+  const t = e.target.closest && e.target.closest('.segnaposto, .caso, .vetta-b');
+  if (t && (t.dataset.caso || t.dataset.vetta) && !t.contains(e.relatedTarget)) evidenziaCaso(t.dataset.caso || t.dataset.vetta, false, !t.dataset.caso);
 });
 
 function renderLegend(q) {
@@ -355,6 +374,8 @@ bindUi();
 map.on('load', async () => {
   const q = await caricaDati();
   if (!q) return;
+  try { AppQualita.vette = await (await fetch('data/vette.json')).json(); } catch (e) { AppQualita.vette = null; }
+  mettiVette(AppQualita.vette);
   renderLegend(q); coloraVettori(q); iniziaTooltipDiff(); AppQualita.applicaDiff();
   metti3Segnaposti(q);
   // le due viste sono costruite da js/panoramica.js e js/tecnico.js, se presenti

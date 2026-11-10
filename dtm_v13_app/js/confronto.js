@@ -49,7 +49,7 @@
   function apri() {
     const app = root.AppQualita, c = app.map.getCenter();
     if (!root.PanoramicaLib.vicinoAlCaso1(app.dati, { lng: c.lng, lat: c.lat })) {
-      app.toast('Il confronto è disponibile solo sul caso 1: premi il riquadro del caso 1 per andarci.');
+      app.toast('Il confronto è disponibile solo sul punto A: premi il riquadro del punto A per andarci.');
       return;
     }
     if (!ovA) {
