@@ -130,7 +130,7 @@
   function legendaDiff(q) {
     const p = q && q.palette_diff;
     if (!p || !Array.isArray(p.cols)) return [];
-    const classi = p.cols.map((c, i) => ({ colore: 'rgb(' + c.join(',') + ')', etichetta: p.etichette[i] }));
+    const classi = p.cols.map((c, i) => ({ colore: 'rgb(' + c.join(',') + ')', etichetta: p.etichette[i], classe: i }));
     // «identica» per prima: è il territorio che non cambia, sfondo su cui risaltano le differenze
     return p.identica ? [{ colore: 'rgb(' + p.identica.col.join(',') + ')', etichetta: p.identica.etichetta }, ...classi] : classi;
   }

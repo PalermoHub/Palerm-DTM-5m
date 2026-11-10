@@ -404,3 +404,18 @@ canvas[hidden] + .btn-png { display: none; }
 .segnaposto.evid, .segnaposto:hover, .segnaposto:focus-visible { background: var(--accent); outline: 2px solid #fff; }
 
 .tec-gruppo { margin: 14px 0 4px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2); border-bottom: 2px solid var(--accent); padding-bottom: 3px; }
+
+/* tooltip del valore Δ sulle celle vettoriali */
+.tip-diff .maplibregl-popup-content { padding: 6px 10px; font-size: 12px; line-height: 1.35; color: var(--ink); pointer-events: none; }
+.tip-diff strong { font-size: 14px; }
+.tip-diff .tip-riga { color: #5a6a98; font-size: 11px; }
+.tip-diff { pointer-events: none; }
+
+/* legenda come filtro */
+.map-legend .lg-row.filtrabile { cursor: pointer; border-radius: 4px; }
+.map-legend .lg-row.filtrabile:hover { background: rgba(37, 87, 214, .08); }
+.map-legend .lg-row.filtrabile:focus-visible { outline: 2px solid #2557d6; outline-offset: 1px; }
+.map-legend .lg-row.sel { font-weight: 700; color: var(--ink); background: rgba(37, 87, 214, .12); }
+.map-legend .lg-row.off { opacity: .4; }
+.lg-reset { margin: 6px 0 2px; padding: 3px 8px; font-size: 11px; border: 1px solid rgba(26, 42, 80, .25); border-radius: 6px; background: #fff; color: #2557d6; cursor: pointer; }
+.lg-reset[hidden] { display: none; }

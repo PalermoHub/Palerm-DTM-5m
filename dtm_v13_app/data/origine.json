@@ -1,0 +1,15 @@
+{
+ "file": "HRDTM5m",
+ "record": "https://zenodo.org/records/18872933",
+ "md5_sorgente": "0edd85d1e7cb50ff5f98cd8faa6b00d2",
+ "bbox": [
+  7108790.0,
+  4207540.0,
+  7127195.0,
+  4226900.0
+ ],
+ "crs": "EPSG:6875",
+ "md5_ritaglio": "8cf4ed7c67fb8845525c2989bb8faaa9",
+ "generato_il": "2026-11-09",
+ "script": "scripts/ritaglia_v11.py"
+}

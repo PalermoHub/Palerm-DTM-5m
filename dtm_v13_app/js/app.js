@@ -38,6 +38,8 @@ const map = new maplibregl.Map({
       dem: tms('tiles/dem_v13', { attribution: ATTR }),
       terrain13: { type: 'raster-dem', tiles: [`${BASE_URL}tiles/terrain_v13/{z}/{x}/{y}.png`], encoding: 'terrarium', tileSize: 256, minzoom: 8, maxzoom: 15, attribution: ATTR },
       diffcelle: tms('tiles/diff_celle', { attribution: ATTR }),
+      // celle con |Δ| > 0,5 m come vettori (scripts/genera_vettori.py): valore al passaggio del mouse
+      diffvett: { type: 'vector', tiles: [`${BASE_URL}tiles/diff_vett/{z}/{x}/{y}.pbf`], minzoom: 12, maxzoom: 15, attribution: ATTR },
     },
     layers: [
       ...posLayers,
@@ -45,6 +47,8 @@ const map = new maplibregl.Map({
       { id: 'ctr2k', type: 'raster', source: 'ctr2k', layout: { visibility: 'none' } },
       { id: 'dem', type: 'raster', source: 'dem', paint: { 'raster-opacity': 1, 'raster-fade-duration': 0 } },
       { id: 'diffcelle', type: 'raster', source: 'diffcelle', paint: { 'raster-opacity': 0.9, 'raster-fade-duration': 0 } },
+      { id: 'diffvett', type: 'fill', source: 'diffvett', 'source-layer': 'celle', minzoom: 12,
+        paint: { 'fill-color': '#aaaaaa', 'fill-opacity': 0.95, 'fill-antialias': false } },
     ],
   },
 });
@@ -83,7 +87,7 @@ function syncPanelPos(open) { ['map-scale', 'attrib-wrap', 'ods-logo'].forEach(i
 function toast(msg) { const t = el('toast'); t.textContent = msg; t.hidden = false; setTimeout(() => { t.hidden = true; }, 6000); }
 
 // ── Dati e legenda ─────────────────────────────────────────
-const AppQualita = { vista: 'panoramica', dati: null, map, diffOn: true, confrontoAperto: false };
+const AppQualita = { vista: 'panoramica', dati: null, map, diffOn: true, confrontoAperto: false, selezione: new Set() };
 window.AppQualita = AppQualita;
 
 function avviso(testo) {
@@ -108,6 +112,7 @@ async function caricaDati() {
     avviso('Dati non disponibili (' + motivo + '). Rigenera con scripts/genera_qualita.py.');
     el('map-legend').hidden = true;
     map.setLayoutProperty('diffcelle', 'visibility', 'none');
+    map.setLayoutProperty('diffvett', 'visibility', 'none');
     AppQualita.dati = null;
     return null;
   }
@@ -118,13 +123,62 @@ async function caricaDati() {
 // Differenze visibili solo se l'utente non le ha spente, ci sono i dati e il cursore del confronto è chiuso
 AppQualita.applicaDiff = function () {
   const on = AppQualita.diffOn && !!AppQualita.dati && !AppQualita.confrontoAperto;
-  map.setLayoutProperty('diffcelle', 'visibility', on ? 'visible' : 'none');
+  // con un filtro attivo il raster (non filtrabile) si nasconde: restano solo le celle vettoriali scelte
+  map.setLayoutProperty('diffcelle', 'visibility', on && AppQualita.selezione.size === 0 ? 'visible' : 'none');
+  map.setLayoutProperty('diffvett', 'visibility', on ? 'visible' : 'none');
+  if (!on) tooltipDiff.remove();
   const ml = el('map-legend');
   ml.hidden = !on || ml.children.length === 0;
   const b = el('tb-diff');
   b.classList.toggle('on', AppQualita.diffOn);
   b.setAttribute('aria-pressed', String(AppQualita.diffOn));
 };
+// ── Valore Δ al passaggio del mouse (celle vettoriali, da zoom 12) ──
+const tooltipDiff = new maplibregl.Popup({ closeButton: false, closeOnClick: false, className: 'tip-diff', offset: 8 });
+const fmtM = (v, segno) => (segno && v > 0 ? '+' : '') + v.toLocaleString('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' m';
+// colora le celle con la stessa palette della legenda (data/qualita.json → palette_diff)
+function coloraVettori(q) {
+  const p = q.palette_diff, expr = ['step', ['get', 'd'], `rgb(${p.cols[0].join(',')})`];
+  p.breaks.forEach((b, i) => expr.push(b, `rgb(${p.cols[i + 1].join(',')})`));
+  map.setPaintProperty('diffvett', 'fill-color', expr);
+}
+function iniziaTooltipDiff() {
+  map.on('mousemove', 'diffvett', e => {
+    const f = e.features && e.features[0];
+    if (!f) return;
+    map.getCanvas().style.cursor = 'crosshair';
+    const { d, a, b } = f.properties;
+    const box = document.createElement('div');
+    const t = document.createElement('strong'); t.textContent = fmtM(d, true);
+    const r = document.createElement('div'); r.className = 'tip-riga';
+    r.textContent = `v1.1 ${fmtM(a)} → v1.3 ${fmtM(b)}`;
+    box.append(t, r);
+    tooltipDiff.setLngLat(e.lngLat).setDOMContent(box).addTo(map);
+  });
+  map.on('mouseleave', 'diffvett', () => { map.getCanvas().style.cursor = ''; tooltipDiff.remove(); });
+}
+// ── Legenda come filtro: clic sulle classi per mostrare solo quelle (da zoom 12) ──
+function applicaFiltroClassi() {
+  const q = AppQualita.dati, sel = AppQualita.selezione;
+  if (!q) return;
+  const br = q.palette_diff.breaks;
+  const cond = i => {
+    const c = ['all'];
+    if (i > 0) c.push(['>=', ['get', 'd'], br[i - 1]]);
+    if (i < br.length) c.push(['<', ['get', 'd'], br[i]]);
+    return c;
+  };
+  map.setFilter('diffvett', sel.size ? ['any', ...[...sel].map(cond)] : null);
+  document.querySelectorAll('#map-legend .lg-row[data-classe]').forEach(r => {
+    const on = sel.has(+r.dataset.classe);
+    r.classList.toggle('sel', on);
+    r.classList.toggle('off', sel.size > 0 && !on);
+    r.setAttribute('aria-pressed', String(on));
+  });
+  const rip = el('lg-reset'); if (rip) rip.hidden = sel.size === 0;
+  AppQualita.applicaDiff();
+  if (sel.size && map.getZoom() < 12) toast('Il filtro per classe si vede da zoom 12: avvicinati alla mappa.');
+}
 AppQualita.caricaDati = caricaDati;
 AppQualita.toast = toast;
 // porta la mappa su un riquadro (ovest, sud, est, nord), lasciando libero il pannello a destra
@@ -187,10 +241,24 @@ function renderLegend(q) {
     if (v.etichetta === (q.palette_diff.identica || {}).etichetta && q.palette_diff.identica.alpha === 0) { sw.style.background = ''; sw.classList.add('none'); }
     const tx = document.createElement('span'); tx.textContent = v.etichetta;
     row.append(sw, tx);
+    // classi con celle vettoriali (colorate, non «identica» né «differenza piccola»): cliccabili come filtro
+    const k = v.classe;
+    if (k !== undefined && k !== 3) {
+      row.dataset.classe = String(k); row.classList.add('filtrabile');
+      row.setAttribute('role', 'button'); row.tabIndex = 0; row.setAttribute('aria-pressed', 'false');
+      row.title = 'Mostra solo questa classe';
+      const toggle = () => { const s = AppQualita.selezione; s.has(k) ? s.delete(k) : s.add(k); applicaFiltroClassi(); };
+      row.addEventListener('click', toggle);
+      row.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+    }
     return row;
   });
-  const nota = document.createElement('div'); nota.className = 'note'; nota.textContent = q.palette_diff.nota;
-  ml.replaceChildren(t, ...righe, nota);
+  const nota = document.createElement('div'); nota.className = 'note'; nota.textContent = q.palette_diff.nota + ' Da zoom 12: passa il mouse sulle celle per leggere i metri; clicca una classe per mostrare solo quella.';
+  const rip = document.createElement('button'); rip.type = 'button'; rip.id = 'lg-reset'; rip.className = 'lg-reset';
+  rip.textContent = 'Mostra tutte le classi'; rip.hidden = AppQualita.selezione.size === 0;
+  rip.addEventListener('click', () => { AppQualita.selezione.clear(); applicaFiltroClassi(); });
+  ml.replaceChildren(t, ...righe, rip, nota);
+  applicaFiltroClassi();
 }
 
 // ── Vista Panoramica / Tecnico ─────────────────────────────
@@ -281,7 +349,7 @@ bindUi();
 map.on('load', async () => {
   const q = await caricaDati();
   if (!q) return;
-  renderLegend(q); AppQualita.applicaDiff();
+  renderLegend(q); coloraVettori(q); iniziaTooltipDiff(); AppQualita.applicaDiff();
   metti3Segnaposti(q);
   // le due viste sono costruite da js/panoramica.js e js/tecnico.js, se presenti
   if (window.PanoramicaUI) window.PanoramicaUI.costruisci(q, el('vista-panoramica'), AppQualita);
